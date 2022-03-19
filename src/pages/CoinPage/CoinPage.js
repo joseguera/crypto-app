@@ -1,5 +1,6 @@
-const CoinPage = () => {
-    return <div>This is the Coin Page</div>
+const CoinPage = (props) => {
+    const coinName = props.match.params.id;
+    return <div>This is the {coinName} Page</div>
 }
 
 export default CoinPage;
