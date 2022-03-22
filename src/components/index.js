@@ -1,7 +1,7 @@
 export { default as CoinForm } from './CoinForm'
 export { default as CoinNavSummary } from './CoinNavSummary'
 export { default as CoinPageFooter } from './CoinPageFooter'
-export { default as CoinRow } from './CoinRow'
+export { default as CoinTable } from './CoinTable'
 export { default as CurrencyDropDown } from './CurrencyDropDown'
 export { default as Graph } from './Graph'
 export { default as LightDarkTheme } from './LightDarkTheme'
