@@ -23,12 +23,29 @@ class CoinTable extends React.Component {
     hasError: false,
   };
 
+  roundToZero(num) {
+    return +(Math.round(num + 'e+0') + 'e-0');
+  }
+
+  roundToTwo(num) {
+    return +(Math.round(num + 'e+2') + 'e-2');
+  }
+
+  formatCurrency(num) {
+    if (num < 1e3) return num;
+    if (num >= 1e3 && num < 1e6) return +(num / 1e3).toFixed(2) + "K";
+    if (num >= 1e6 && num < 1e9) return +(num / 1e6).toFixed(2) + "M";
+    if (num >= 1e9 && num < 1e12) return +(num / 1e9).toFixed(2) + "B";
+    if (num >= 1e12) return + (num / 1e12).toFixed(1) + "T";
+  };
+
   getCoins = async () => {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
+      console.log(data)
       this.setState({
         coins: data,
         isLoading: false
@@ -44,6 +61,12 @@ class CoinTable extends React.Component {
 
   render() {
     const { isLoading, coins } = this.state;
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0
+    })
 
     const hasCoins = !isLoading && coins;
     return (
@@ -77,12 +100,13 @@ class CoinTable extends React.Component {
                           (<Symbol>{coin.symbol}</Symbol>)
                         </Link>
                       </td>
-                      <td>{coin.current_price}</td>
-                      <td>{coin.price_change_percentage_1h_in_currency}</td>
-                      <td>{coin.price_change_percentage_24h_in_currency}</td>
-                      <td>{coin.price_change_percentage_7d_in_currency}</td>
-                      <td>{coin.market_cap_change_24h/coin.market_cap}</td>
-                      <td>{coin.circulating_supply/coin.total_supply}</td>
+                      <td>{formatter.format(this.roundToZero(coin.current_price))}</td>
+                      <td>{this.roundToTwo(coin.price_change_percentage_1h_in_currency)}%</td>
+                      <td>{this.roundToTwo(coin.price_change_percentage_24h_in_currency)}%</td>
+                      <td>{this.roundToTwo(coin.price_change_percentage_7d_in_currency)}%</td>
+                      <td><span>{this.formatCurrency(coin.market_cap_change_24h)}</span>{' '}<span>{this.formatCurrency(coin.market_cap)}</span></td>
+                      <td><span>{this.formatCurrency(coin.circulating_supply)}</span>{' '}<span>{this.formatCurrency(coin.total_supply)}</span></td>
+                      {/* this is where sparkline_in_7d graph will go */}
                       <td>{this.props.graph}</td>
                     </tr>
                   )
