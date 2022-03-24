@@ -8,22 +8,19 @@ const Table = styled.table`
   border-collapse: separate;
 `;
 
+const Icon = styled.img`
+  width: 20px;
+`;
+
+const Symbol = styled.span`
+  text-transform: uppercase;
+`;
+
 class CoinTable extends React.Component {
   state = {
     coins: null,
     isLoading: false,
     hasError: false,
-    id: 0,
-    image: "",
-    name: "",
-    symbol: "",
-    price: 0,
-    oneHourPercent: 0,
-    twentyFourHourPercent: 0,
-    sevenDayPercent: 0,
-    twentyHourVolMarketCap: 0,
-    CircTotalSupply: 0,
-    last7Days: 0,
   };
 
   getCoins = async () => {
@@ -32,48 +29,28 @@ class CoinTable extends React.Component {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
-      console.log(data);
       this.setState({
         coins: data,
-        id: data.id,
-        image: data.image,
-        name: data.name,
-        symbol: data.symbol,
-        price: data.current_price,
-        oneHourPercent: data.price_change_percentage_1h_in_currency,
-        twentyFourHourPercent: data.price_change_percentage_24h_in_currency,
-        sevenDayPercent: data.price_change_percentage_7d_in_currency,
-        twentyHourVolMarketCap: 0,
-        CircTotalSupply: 0,
-        last7Days: 0,
-        isLoading: false,
+        isLoading: false
       });
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state !== prevState) {
-  //     this.getCoins();
-  //   }
-  // }
-
   componentDidMount() {
     this.getCoins();
   }
 
   render() {
-    const { 
-      coins, isLoading, id, image, name, symbol, price, oneHourPercent, twentyFourHourPercent, sevenDayPercent, twentyHourVolMarketCap,
-      CircTotalSupply, last7Days
-     } = this.state;
-     const hasCoins = !isLoading && coins;
+    const { isLoading, coins } = this.state;
+
+    const hasCoins = !isLoading && coins;
     return (
       <div>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
-          <>
+        <>
           <Table>
             <thead>
               <tr>
@@ -89,22 +66,27 @@ class CoinTable extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <tr key={id}>
-                <td>{id}</td>
-                <td>
-                  <Link to={`/coinpage/${name}`}>
-                    <img src={image} alt={name} />
-                    {name} ({symbol})
-                  </Link>
-                </td>
-                <td>{price}</td>
-                <td>{oneHourPercent}</td>
-                <td>{twentyFourHourPercent}</td>
-                <td>{sevenDayPercent}</td>
-                <td></td>
-                <td></td>
-                <td>{this.props.graph}</td>
-              </tr>
+                {coins.map((coin) => {
+                  return (
+                    <tr>
+                      <td>{coin.market_cap_rank}</td>
+                      <td>
+                        <Link to={`/coinpage/${coin.name}`}>
+                          <Icon src={coin.image} alt={coin.name} />
+                          {coin.name} 
+                          (<Symbol>{coin.symbol}</Symbol>)
+                        </Link>
+                      </td>
+                      <td>{coin.current_price}</td>
+                      <td>{coin.price_change_percentage_1h_in_currency}</td>
+                      <td>{coin.price_change_percentage_24h_in_currency}</td>
+                      <td>{coin.price_change_percentage_7d_in_currency}</td>
+                      <td>{coin.market_cap_change_24h/coin.market_cap}</td>
+                      <td>{coin.circulating_supply/coin.total_supply}</td>
+                      <td>{this.props.graph}</td>
+                    </tr>
+                  )
+                })}
             </tbody>
           </Table>
         </>
