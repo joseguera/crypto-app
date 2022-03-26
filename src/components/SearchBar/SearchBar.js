@@ -1,8 +1,8 @@
 const SearchBar = (props) => {
     return (
-        <>
+        <div>
             <input placeholder="Search" />
-        </>
+        </div>
     )
 }
 

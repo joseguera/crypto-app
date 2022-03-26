@@ -5,11 +5,7 @@ import { Home, Portfolio, CoinPage } from "pages";
 
 export default class App extends React.Component {
   state = {
-    list: [
-      { value: "bitcoin", id: 0 },
-      { value: "dogecoin", id: 1 },
-      { value: "ethereum", id: 2 },
-    ],
+    
   };
   render() {
     return (

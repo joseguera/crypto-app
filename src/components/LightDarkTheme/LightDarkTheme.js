@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 const LightDarkTheme = (props) => {
   return (
-    <label>
-      <input type="checkbox" />
-      <span>Light/Dark</span>
-    </label>
+    <div>
+      <label>
+        <input type="checkbox" />
+        <span>Light/Dark</span>
+      </label>
+    </div>
   );
 };
 
