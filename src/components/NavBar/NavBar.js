@@ -17,7 +17,7 @@ const NavBar = (props) => {
     <>
       <NavDiv>
         <NavBarButtons />
-        <NavBarUtils />
+        <NavBarUtils currencyConverter={props.currencyConverter} />
       </NavDiv>
       <CoinNavSummary />
     </>

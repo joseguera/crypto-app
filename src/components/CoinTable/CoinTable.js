@@ -45,7 +45,6 @@ class CoinTable extends React.Component {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
-      console.log(data)
       this.setState({
         coins: data,
         isLoading: false
@@ -69,8 +68,10 @@ class CoinTable extends React.Component {
     })
 
     const hasCoins = !isLoading && coins;
+
     return (
       <div>
+        <p>{this.props.currencyName}</p>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
         <>

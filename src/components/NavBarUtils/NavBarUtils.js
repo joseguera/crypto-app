@@ -6,15 +6,16 @@ const UtilContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 350px;
 `;
 
-const NavBarUtils = () => {
+const NavBarUtils = (props) => {
   return (
     <UtilContainer>
       <SearchBar />
-      <CurrencyDropDown />
+      <CurrencyDropDown currencyConverter={props.currencyConverter} />
       <LightDarkTheme />
     </UtilContainer>
   );

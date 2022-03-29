@@ -14,7 +14,7 @@ const Home = (props) => {
       <Graph />
       <Graph />
       <h2>Your overview</h2>
-      <CoinTable list={props.list} graph={<Graph />}/>
+      <CoinTable currencyName={props.currencyName} graph={<Graph />}/>
     </MainDiv>
   );
 };
