@@ -12,13 +12,12 @@ export default class CurrencyDropDown extends React.Component {
 
   getCurrencyChange = (value) => {
     let currency = '';
-    if (value === 'USD') {
-      currency = this.state.currencies.rates.usd.name;
-    } else if (value === 'EUR') {
-      currency = this.state.currencies.rates.eur.name;
-
-    } else if (value === 'GBP') {
-      currency = this.state.currencies.rates.gbp.name;
+    if (value === 'usd') {
+      currency = this.state.currencies.rates[value].name;
+    } else if (value === 'eur') {
+      currency = this.state.currencies.rates[value].name;
+    } else if (value === 'gbp') {
+      currency = this.state.currencies.rates[value].name;
     }
     this.props.currencyConverter(currency);
   }
@@ -52,9 +51,9 @@ export default class CurrencyDropDown extends React.Component {
         {isLoading && <div>Loading...</div>}
         {hasCurrencies && (
           <select onChange={(e) => this.getCurrencyChange(e.target.value)} name="currency" id="currency">
-                  <option value="USD">USD</option>
-                  <option value="EUR">EUR</option>
-                  <option value="GBP">GBP</option>
+                  <option value="usd">USD</option>
+                  <option value="eur">EUR</option>
+                  <option value="gbp">GBP</option>
           </select>
         )}
       </div>

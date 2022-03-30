@@ -21,6 +21,7 @@ class CoinTable extends React.Component {
     coins: null,
     isLoading: false,
     hasError: false,
+    currencyName: 'US Dollar'
   };
 
   roundToZero(num) {
@@ -39,6 +40,16 @@ class CoinTable extends React.Component {
     if (num >= 1e12) return + (num / 1e12).toFixed(1) + "T";
   };
 
+  getCurrency = async () => {
+    try {
+      this.setState({
+        currencyName: this.props.currencyName
+      })
+    } catch (err) {
+      console.log("Location Error:", err);
+    }
+  }
+
   getCoins = async () => {
     try {
       this.setState({ isLoading: true });
@@ -47,12 +58,18 @@ class CoinTable extends React.Component {
       );
       this.setState({
         coins: data,
-        isLoading: false
+        isLoading: false,
       });
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.currencyName !== prevProps.currencyName) {
+      this.getCurrency()
+    }
+  }
 
   componentDidMount() {
     this.getCoins();
@@ -71,7 +88,7 @@ class CoinTable extends React.Component {
 
     return (
       <div>
-        <p>{this.props.currencyName}</p>
+        <p>{this.state.currencyName}</p>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
         <>
