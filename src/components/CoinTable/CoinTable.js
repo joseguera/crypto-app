@@ -21,7 +21,8 @@ class CoinTable extends React.Component {
     coins: null,
     isLoading: false,
     hasError: false,
-    currencyName: 'US Dollar'
+    currencyName: 'US Dollar',
+    currencyRate: this.props.currencyRate
   };
 
   roundToZero(num) {
@@ -43,7 +44,8 @@ class CoinTable extends React.Component {
   getCurrency = async () => {
     try {
       this.setState({
-        currencyName: this.props.currencyName
+        currencyName: this.props.currencyName,
+        currencyRate: this.props.currencyRate
       })
     } catch (err) {
       console.log("Location Error:", err);
@@ -66,7 +68,7 @@ class CoinTable extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.currencyName !== prevProps.currencyName) {
+    if (this.props.currencyName !== prevProps.currencyName && this.props.currencyRate !== prevProps.currencyRate) {
       this.getCurrency()
     }
   }
@@ -88,7 +90,7 @@ class CoinTable extends React.Component {
 
     return (
       <div>
-        <p>{this.state.currencyName}</p>
+        <p>{this.state.currencyName}: {this.state.currencyRate}</p>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
         <>
