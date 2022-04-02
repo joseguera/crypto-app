@@ -12,14 +12,23 @@ export default class CurrencyDropDown extends React.Component {
 
   getCurrencyChange = (value) => {
     let currency = '';
+    let rate = 0;
     if (value === 'usd') {
       currency = this.state.currencies.rates[value].name;
+      rate = this.state.currencies.rates[value].value;
     } else if (value === 'eur') {
       currency = this.state.currencies.rates[value].name;
+      rate = this.state.currencies.rates.usd.value / this.state.currencies.rates[value].value
+
     } else if (value === 'gbp') {
       currency = this.state.currencies.rates[value].name;
+      rate = this.state.currencies.rates.usd.value / this.state.currencies.rates[value].value;
     }
-    this.props.currencyConverter(currency);
+    this.setState({
+      currencyName: currency,
+      currencyRate: rate
+    })
+    this.props.currencyConverter(currency, rate);
   }
 
   getCurrency = async () => {
@@ -45,7 +54,7 @@ export default class CurrencyDropDown extends React.Component {
     const { isLoading, currencies } = this.state;
 
     const hasCurrencies = !isLoading && currencies;
-
+    console.log(this.state.currencyRate)
     return (
       <div>
         {isLoading && <div>Loading...</div>}
