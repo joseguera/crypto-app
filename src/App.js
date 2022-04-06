@@ -5,7 +5,7 @@ import { Home, Portfolio, CoinPage } from "pages";
 
 export default class App extends React.Component {
   state = {
-    currencyName: ""
+    currencyName: "usd"
   };
 
   currencyConverter = (value) => {
