@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-import { roundToNumber, formatCurrency } from "../../util/util";
 import styled from "styled-components";
+import { roundToNumber, formatCurrency } from "../../util/util";
 
 const Table = styled.table`
   border-spacing: 20px;
@@ -30,6 +30,7 @@ class CoinTable extends React.Component {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
+      this.props.getCryptoIcon(data);
       this.setState({
         coins: data,
         isLoading: false,
@@ -60,7 +61,7 @@ class CoinTable extends React.Component {
     });
 
     return (
-      <div>
+      <>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
           <Table>
@@ -126,7 +127,7 @@ class CoinTable extends React.Component {
             </tbody>
           </Table>
         )}
-      </div>
+      </>
     );
   }
 }
