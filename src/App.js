@@ -15,13 +15,14 @@ export default class App extends React.Component {
   };
 
   render() {
+    const { currencyName } = this.state;
     return (
       <Router>
         <div>
-          <NavBar currencyConverter={this.currencyConverter} />
+          <NavBar currencyConverter={this.currencyConverter} currencyName={currencyName} />
           <Switch>
             <Route exact path="/">
-              <Home currencyName={this.state.currencyName} />
+              <Home currencyName={currencyName} />
             </Route>
             <Route path="/portfolio" component={Portfolio} />
             <Route path="/coinpage/:id" component={CoinPage} />

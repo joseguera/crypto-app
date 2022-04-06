@@ -19,7 +19,7 @@ const NavBar = (props) => {
         <NavBarButtons />
         <NavBarUtils currencyConverter={props.currencyConverter} />
       </NavDiv>
-      <CoinNavSummary />
+      <CoinNavSummary currencyName={props.currencyName} />
     </>
   );
 };
