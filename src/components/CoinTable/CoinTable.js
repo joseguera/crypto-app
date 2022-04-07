@@ -21,7 +21,7 @@ class CoinTable extends React.Component {
   state = {
     coins: null,
     isLoading: false,
-    hasError: false
+    hasError: false,
   };
 
   getCoins = async () => {
@@ -61,76 +61,71 @@ class CoinTable extends React.Component {
 
     return (
       <div>
-        <>
-          {isLoading && <div>Loading...</div>}
-          {hasCoins && (
-            <Table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>1h%</th>
-                  <th>24h%</th>
-                  <th>7d%</th>
-                  <th>24h Volume/Market Cap</th>
-                  <th>Circulating/Total Supply</th>
-                  <th>Last 7d</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.coins.map((coin) => {
-                  return (
-                    <tr>
-                      <td>{coin.market_cap_rank}</td>
-                      <td>
-                        <Link to={`/coinpage/${coin.name}`}>
-                          <Icon src={coin.image} alt={coin.name} />
-                          {coin.name}(<Symbol>{coin.symbol}</Symbol>)
-                        </Link>
-                      </td>
-                      <td>
-                        {formatter.format(coin.current_price)}
-                      </td>
-                      <td>
-                        {roundToNumber(
-                          coin.price_change_percentage_1h_in_currency, 2
-                        )}
-                        %
-                      </td>
-                      <td>
-                        {roundToNumber(
-                          coin.price_change_percentage_24h_in_currency, 2
-                        )}
-                        %
-                      </td>
-                      <td>
-                        {roundToNumber(
-                          coin.price_change_percentage_7d_in_currency, 2
-                        )}
-                        %
-                      </td>
-                      <td>
-                        <span>
-                          {formatCurrency(coin.market_cap_change_24h)}
-                        </span>{" "}
-                        <span>{formatCurrency(coin.market_cap)}</span>
-                      </td>
-                      <td>
-                        <span>
-                          {formatCurrency(coin.circulating_supply)}
-                        </span>{" "}
-                        <span>{formatCurrency(coin.total_supply)}</span>
-                      </td>
-                      {/* this is where sparkline_in_7d graph will go */}
-                      <td>{this.props.graph}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          )}
-        </>
+        {isLoading && <div>Loading...</div>}
+        {hasCoins && (
+          <Table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>1h%</th>
+                <th>24h%</th>
+                <th>7d%</th>
+                <th>24h Volume/Market Cap</th>
+                <th>Circulating/Total Supply</th>
+                <th>Last 7d</th>
+              </tr>
+            </thead>
+            <tbody>
+              {coins.map((coin) => {
+                return (
+                  <tr key={coin.id}>
+                    <td>{coin.market_cap_rank}</td>
+                    <td>
+                      <Link to={`/coinpage/${coin.name}`}>
+                        <Icon src={coin.image} alt={coin.name} />
+                        {coin.name}(<Symbol>{coin.symbol}</Symbol>)
+                      </Link>
+                    </td>
+                    <td>{formatter.format(coin.current_price)}</td>
+                    <td>
+                      {roundToNumber(
+                        coin.price_change_percentage_1h_in_currency,
+                        2
+                      )}
+                      %
+                    </td>
+                    <td>
+                      {roundToNumber(
+                        coin.price_change_percentage_24h_in_currency,
+                        2
+                      )}
+                      %
+                    </td>
+                    <td>
+                      {roundToNumber(
+                        coin.price_change_percentage_7d_in_currency,
+                        2
+                      )}
+                      %
+                    </td>
+                    <td>
+                      <span>{formatCurrency(coin.total_volume)}</span>{" "}
+                      <span>{formatCurrency(coin.market_cap)}</span>
+                    </td>
+                    <td>
+                      <span>{formatCurrency(coin.circulating_supply)}</span>{" "}
+                      <span>{formatCurrency(coin.total_supply)}</span>
+                    </td>
+                    {/* this is where sparkline_in_7d graph will go */}
+                    <td>{this.props.graph}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        )}
       </div>
     );
   }
