@@ -30,7 +30,6 @@ class CoinTable extends React.Component {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
-      this.props.getCryptoIcon(data);
       this.setState({
         coins: data,
         isLoading: false,
