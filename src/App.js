@@ -15,11 +15,11 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { currencyName, btcIcon, ethIcon } = this.state;
+    const { currencyName } = this.state;
     return (
       <Router>
         <div>
-          <NavBar getCurrencyName={this.getCurrencyName} currencyName={currencyName} btcIcon={btcIcon} ethIcon={ethIcon} />
+          <NavBar getCurrencyName={this.getCurrencyName} currencyName={currencyName} />
           <Switch>
             <Route exact path="/">
               <Home currencyName={currencyName} />
