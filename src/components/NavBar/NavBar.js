@@ -19,7 +19,7 @@ const NavBar = (props) => {
         <NavBarButtons />
         <NavBarUtils getCurrencyName={props.getCurrencyName} />
       </NavDiv>
-      <CoinNavSummary currencyName={props.currencyName} btcIcon={props.btcIcon} ethIcon={props.ethIcon}/>
+      <CoinNavSummary currencyName={props.currencyName} />
     </>
   );
 };
