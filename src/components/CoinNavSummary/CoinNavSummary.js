@@ -54,8 +54,8 @@ export default class CoinNavSummary extends React.Component {
             <div>Coins {market.data.active_cryptocurrencies}</div>
             <div>Exchange {market.data.markets}</div>
             <div>&#x25CF; {formatCurrency(market.data.total_volume[currencyName])}</div>
-            <div><Icon src={this.props.btcIcon} alt="bitcoin-icon" /> {Math.round(market.data.market_cap_percentage.btc)}%</div>
-            <div><Icon src={this.props.ethIcon} alt="ethereum-icon" /> {Math.round(market.data.market_cap_percentage.eth)}%</div>
+            <div><Icon src="" alt="bitcoin-icon" /> {Math.round(market.data.market_cap_percentage.btc)}%</div>
+            <div><Icon src="" alt="ethereum-icon" /> {Math.round(market.data.market_cap_percentage.eth)}%</div>
           </SummaryHolder>
         )}
       </>
