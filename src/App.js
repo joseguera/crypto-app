@@ -6,26 +6,7 @@ import { Home, Portfolio, CoinPage } from "pages";
 export default class App extends React.Component {
   state = {
     currencyName: "usd",
-    btcIcon: '',
-    ethIcon: ''
   };
-
-  getCryptoIcon = (coinsObj) => {
-    let btc = '';
-    let eth = '';
-    for (const coin in coinsObj) {
-      if (coinsObj[coin].id === 'bitcoin') {
-        btc = coinsObj[coin].image
-      }
-      if (coinsObj[coin].id === 'ethereum') {
-        eth = coinsObj[coin].image
-      }
-    }
-    this.setState({
-      btcIcon: btc,
-      ethIcon: eth
-    });
-  }
 
   getCurrencyName = (value) => {
     this.setState({
@@ -41,7 +22,7 @@ export default class App extends React.Component {
           <NavBar getCurrencyName={this.getCurrencyName} currencyName={currencyName} btcIcon={btcIcon} ethIcon={ethIcon} />
           <Switch>
             <Route exact path="/">
-              <Home currencyName={currencyName} getCryptoIcon={this.getCryptoIcon} />
+              <Home currencyName={currencyName} />
             </Route>
             <Route path="/portfolio" component={Portfolio} />
             <Route path="/coinpage/:id" component={CoinPage} />
