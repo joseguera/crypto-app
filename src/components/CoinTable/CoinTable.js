@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-import { roundToNumber, formatCurrency } from "../../util/util";
 import styled from "styled-components";
+import { roundToNumber, formatCurrency } from "../../util/util";
 
 const Table = styled.table`
   border-spacing: 20px;
@@ -60,7 +60,7 @@ class CoinTable extends React.Component {
     });
 
     return (
-      <div>
+      <>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
           <Table>
@@ -126,7 +126,7 @@ class CoinTable extends React.Component {
             </tbody>
           </Table>
         )}
-      </div>
+      </>
     );
   }
 }

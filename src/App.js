@@ -5,12 +5,12 @@ import { Home, Portfolio, CoinPage } from "pages";
 
 export default class App extends React.Component {
   state = {
-    currencyName: "usd"
+    currencyName: "usd",
   };
 
-  currencyConverter = (value) => {
+  getCurrencyName = (value) => {
     this.setState({
-      currencyName: value,
+      currencyName: value
     });
   };
 
@@ -19,7 +19,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <div>
-          <NavBar currencyConverter={this.currencyConverter} currencyName={currencyName} />
+          <NavBar getCurrencyName={this.getCurrencyName} currencyName={currencyName} />
           <Switch>
             <Route exact path="/">
               <Home currencyName={currencyName} />

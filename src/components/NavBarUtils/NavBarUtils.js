@@ -15,7 +15,7 @@ const NavBarUtils = (props) => {
   return (
     <UtilContainer>
       <SearchBar />
-      <CurrencyDropDown currencyConverter={props.currencyConverter} />
+      <CurrencyDropDown getCurrencyName={props.getCurrencyName} />
       <LightDarkTheme />
     </UtilContainer>
   );

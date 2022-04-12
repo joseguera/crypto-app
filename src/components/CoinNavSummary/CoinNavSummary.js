@@ -1,5 +1,21 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
+import styled from 'styled-components';
+import { formatCurrency } from "../../util/util";
+
+const SummaryHolder = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+`;
+
+const Icon = styled.img`
+    width: 20px;
+    vertical-align: text-bottom;
+`;
 
 export default class CoinNavSummary extends React.Component {
   state = {
@@ -26,22 +42,23 @@ export default class CoinNavSummary extends React.Component {
   }
 
   render() {
-    const { market, isLoading } = this.state;
+    const { currencyName } = this.props;
+    const { market, isLoading } = this.state;  
     const hasMarketData = !isLoading && market;
-    console.log(this.props.currencyName)
+
     return (
-      <div>
+      <>
         {isLoading && <div>Loading...</div>}
         {hasMarketData && (
-          <div>
-            <div>Coins {this.state.market.data.active_cryptocurrencies}</div>
-            <div>Exchange {this.state.market.data.markets}</div>
-            <div>* {this.state.market.data.total_volume[this.props.currencyName]}</div>
-            <div>* {this.state.market.data.market_cap_percentage.btc}</div>
-            <div>* {this.state.market.data.market_cap_percentage.eth}</div>
-          </div>
+          <SummaryHolder>
+            <div>Coins {market.data.active_cryptocurrencies}</div>
+            <div>Exchange {market.data.markets}</div>
+            <div>&#x25CF; {formatCurrency(market.data.total_volume[currencyName])}</div>
+            <div><Icon src="" alt="bitcoin-icon" /> {Math.round(market.data.market_cap_percentage.btc)}%</div>
+            <div><Icon src="" alt="ethereum-icon" /> {Math.round(market.data.market_cap_percentage.eth)}%</div>
+          </SummaryHolder>
         )}
-      </div>
+      </>
     );
   }
 }
