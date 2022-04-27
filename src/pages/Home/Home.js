@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { CoinTable } from 'components';
-import { Graph } from 'components';
+import { CoinTable, Chart } from 'components';
 
 const MainDiv = styled.div`
   display: flex;
@@ -11,10 +10,10 @@ const Home = (props) => {
   return (
     <MainDiv>
       <h2>Your overview</h2>
-      <Graph />
-      <Graph />
+      <Chart />
       <h2>Your overview</h2>
-      <CoinTable currencyName={props.currencyName} graph={<Graph />}/>
+      <Chart />
+      <CoinTable currencyName={props.currencyName} chart={<Chart />}/>
     </MainDiv>
   );
 };

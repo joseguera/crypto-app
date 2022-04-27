@@ -2,7 +2,8 @@ import React from "react";
 import axios from "axios";
 import styled from 'styled-components';
 import { formatCurrency } from "../../util/util";
-import { bitcoin, ethereum } from "../../images"
+import bitcoin from "../../images/bitcoin.svg";
+import ethereum from "../../images/ethereum.svg";
 
 const SummaryHolder = styled.div`
     display: flex;
@@ -14,7 +15,7 @@ const SummaryHolder = styled.div`
 `;
 
 const Icon = styled.img`
-    width: 20px;
+    height: 20px;
     vertical-align: text-bottom;
 `;
 
@@ -22,7 +23,7 @@ export default class CoinNavSummary extends React.Component {
   state = {
     market: null,
     isLoading: false,
-    hasError: false,
+    hasError: false
   };
 
   getMarketData = async () => {

@@ -119,7 +119,7 @@ class CoinTable extends React.Component {
                       <span>{formatCurrency(coin.total_supply)}</span>
                     </td>
                     {/* this is where sparkline_in_7d graph will go */}
-                    <td>{this.props.graph}</td>
+                    <td>{this.props.chart}</td>
                   </tr>
                 );
               })}
