@@ -22,7 +22,7 @@ export default class CoinNavSummary extends React.Component {
   state = {
     market: null,
     isLoading: false,
-    hasError: false,
+    hasError: false
   };
 
   getMarketData = async () => {
@@ -31,7 +31,7 @@ export default class CoinNavSummary extends React.Component {
       const { data } = await axios(`https://api.coingecko.com/api/v3/global`);
       this.setState({
         market: data,
-        isLoading: false,
+        isLoading: false
       });
     } catch (err) {
       console.log("Location Error:", err);

@@ -1,18 +1,71 @@
-import styled from 'styled-components';
+import React from "react";
+import axios from "axios";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
-const Image = styled.img`
-    width: 150px;
-`
-
-const Graph = (props) => {
-  return (
-    <>
-      <Image
-        src="https://d1e00ek4ebabms.cloudfront.net/production/83159443-2aa6-4798-8237-38b9bae23726.png"
-        alt="crypto graph"
-      />
-    </>
-  );
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top"
+    },
+    title: {
+      display: true,
+      text: "Chart.js Line Chart"
+    }
+  }
 };
 
-export default Graph;
+export default class Graph extends React.Component {
+  state = {
+    graph: null,
+    isLoading: false,
+    hasError: false,
+    labels: [],
+    prices: [],
+  };
+
+  getGraphData = async () => {
+    try {
+      this.setState({ isLoading: true });
+      const { data } = await axios(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`);
+      const label = data.total_volumes.map((arr) => arr[0]);
+      const price = data.total_volumes.map((arr) => arr[1]);
+      this.setState({
+        labels: label,
+        prices: price,
+        isLoading: false,
+      });
+    } catch (err) {
+      console.log("Location Error:", err);
+    }
+  };
+
+  componentDidMount() {
+    this.getGraphData();
+  }
+
+  render() {
+    const data = {
+      labels: this.state.labels,
+      datasets: [
+        {
+          data: this.state.prices,
+          borderColor: "rgb(53, 162, 235)",
+          backgroundColor: "rgba(53, 162, 235, 0.5)",
+        },
+      ],
+    };
+
+    return <Line options={options} data={data} />;
+  }
+}
