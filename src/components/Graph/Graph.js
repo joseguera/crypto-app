@@ -38,8 +38,8 @@ export default class Graph extends React.Component {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily`);
-      const label = data.total_volumes.map((arr) => arr[0]);
-      const price = data.total_volumes.map((arr) => arr[1]);
+      const label = data.market_caps.map(arr => arr[0]);
+      const price = data.market_caps.map(arr => arr[1]);
       this.setState({
         graph: data,
         labels: label,
@@ -56,6 +56,7 @@ export default class Graph extends React.Component {
   }
 
   render() {
+    console.log(this.state.graph)
     const { graph, isLoading } = this.state;
     const hasGraph = !isLoading && graph;
 
@@ -63,6 +64,7 @@ export default class Graph extends React.Component {
       labels: this.state.labels,
       datasets: [
         {
+          label: this.state.labels,
           data: this.state.prices,
           borderColor: "rgb(53, 162, 235)",
           backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -73,9 +75,9 @@ export default class Graph extends React.Component {
     return (
     <>
       {isLoading && <div>Loading...</div>}
-      {hasGraph && (
-        // <Line options={options} data={data} />
-        <p>Hello</p>
+      {hasGraph && data.length && (
+        <Line options={options} data={data} />
+        // <p>Hello</p>
       )}
     </>
     );
