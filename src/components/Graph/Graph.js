@@ -31,7 +31,7 @@ export default class Graph extends React.Component {
     isLoading: false,
     hasError: false,
     labels: [],
-    prices: [],
+    prices: []
   };
 
   getGraphData = async () => {
@@ -41,6 +41,7 @@ export default class Graph extends React.Component {
       const label = data.total_volumes.map((arr) => arr[0]);
       const price = data.total_volumes.map((arr) => arr[1]);
       this.setState({
+        graph: data,
         labels: label,
         prices: price,
         isLoading: false,
@@ -55,6 +56,9 @@ export default class Graph extends React.Component {
   }
 
   render() {
+    const { graph, isLoading } = this.state;
+    const hasGraph = !isLoading && graph;
+
     const data = {
       labels: this.state.labels,
       datasets: [
@@ -66,6 +70,14 @@ export default class Graph extends React.Component {
       ],
     };
 
-    return <Line options={options} data={data} />;
+    return (
+    <>
+      {isLoading && <div>Loading...</div>}
+      {hasGraph && (
+        // <Line options={options} data={data} />
+        <p>Hello</p>
+      )}
+    </>
+    );
   }
 }
