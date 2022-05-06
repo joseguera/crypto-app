@@ -1,21 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { roundToNumber, formatCurrency } from "../../util/util";
-
-const Table = styled.table`
-  border-spacing: 20px;
-  border-collapse: separate;
-`;
-
-const Icon = styled.img`
-  width: 20px;
-`;
-
-const Symbol = styled.span`
-  text-transform: uppercase;
-`;
+import { Table, Icon, Symbol } from "./CoinTable.styles";
 
 class CoinTable extends React.Component {
   state = {

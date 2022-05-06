@@ -1,22 +1,8 @@
 import React from "react";
 import axios from "axios";
-import styled from 'styled-components';
 import { formatCurrency } from "../../util/util";
 import { bitcoin, ethereum } from "../../images"
-
-const SummaryHolder = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-`;
-
-const Icon = styled.img`
-    width: 20px;
-    vertical-align: text-bottom;
-`;
+import { SummaryHolder, Icon } from "./CoinNavSummary.styles";
 
 export default class CoinNavSummary extends React.Component {
   state = {
