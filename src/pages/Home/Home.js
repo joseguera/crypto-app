@@ -1,11 +1,6 @@
-import styled from 'styled-components';
 import { CoinTable } from 'components';
 import { Graph } from 'components';
-
-const MainDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import { MainDiv } from './Home.styles';
 
 const Home = (props) => {
   return (
