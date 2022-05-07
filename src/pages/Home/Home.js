@@ -6,10 +6,8 @@ const Home = (props) => {
   return (
     <MainDiv>
       <h2>Your overview</h2>
-      <Graph />
-      <Graph />
       <h2>Your overview</h2>
-      <CoinTable currencyName={props.currencyName} graph={<Graph />}/>
+      <CoinTable currencyName={props.currencyName} />
     </MainDiv>
   );
 };
