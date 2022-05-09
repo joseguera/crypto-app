@@ -3,7 +3,7 @@ import {
   NavBarUtils
 } from "components";
 import CoinNavSummary from "./../CoinNavSummary/CoinNavSummary";
-import { NavDiv } from "NavBar.styles";
+import { NavDiv } from "./NavBar.styles";
 
 const NavBar = (props) => {
   return (
