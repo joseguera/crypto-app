@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { roundToNumber, formatCurrency } from "../../util/util";
 import { TableGrid, Icon, Symbol } from "./CoinTable.styles";
@@ -8,7 +8,7 @@ class CoinTable extends React.Component {
   state = {
     coins: null,
     isLoading: false,
-    hasError: false,
+    hasError: false
   };
 
   getCoins = async () => {
