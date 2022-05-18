@@ -6,17 +6,20 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
+import { GraphGrid, GraphCell } from './Graph.style';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
@@ -30,7 +33,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart"
+      text: "Graph Name"
     }
   }
 };
@@ -41,55 +44,83 @@ export default class Graph extends React.Component {
     graph: null,
     labels: [],
     prices: [],
+    volumeLabels: [],
+    volumePrices: [],
     isLoading: false,
     hasError: false
   }
 
   getGraphData = async () => {
     const { data } = await axios(
-      "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30"
+      `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=30`
     );
-    const label = data.total_volumes.map((arr) => arr[0]);
-    const price = data.total_volumes.map((arr) => arr[1]);
+    const { labels, prices } = data['prices'].reduce((acc, [label, price]) => ({
+        labels: [...acc.labels, label],
+        prices: [...acc.prices, price]
+      }), {labels: [], prices:[]});
+    
+    const { volumeLabels, volumePrices } = data['total_volumes'].reduce((acc, [label, price]) => ({
+      volumeLabels: [...acc.volumeLabels, label],
+      volumePrices: [...acc.volumePrices, price]
+    }), {volumeLabels: [], volumePrices:[]});
+
     this.setState({
       graph: data,
-      labels: label,
-      prices: price,
+      labels,
+      prices,
+      volumeLabels,
+      volumePrices
     })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.currencyName !== prevProps.currencyName) {
+      this.getGraphData();
+    }
+    if (this.props.cryptoName !== prevProps.cryptoName) {
+      this.getGraphData();
+    }
   }
   
   componentDidMount() {
     this.getGraphData();
   }
 
-  render() {
-    const { graph, isLoading } = this.state;
-    const hasGraph = !isLoading && graph;
-    const data = {
-      labels: this.state.labels,
+  formatData = (label, price) => {
+    return {
+      labels: label,
       datasets: [
         {
-          data: this.state.prices,
+          data: price,
           borderColor: "rgb(53, 162, 235)",
           backgroundColor: "rgba(53, 162, 235, 0.5)"
         }
       ]
-    };
-
-    const hasData = () => {
-      if (data.labels.length !== 0 && data.datasets[0].data.length !== 0) {
-        return <Line options={options} data={data} />
-      }
     }
-      
-      
-      
-    
+  }
+  
+  hasData = () =>  this.state.labels.length && this.state.prices.length
+
+  render() {
+    const { graph, isLoading } = this.state;
+    const hasGraph = !isLoading && graph;
+    const priceData = this.formatData(this.state.labels, this.state.prices);
+    const volumeData = this.formatData(this.state.volumeLabels, this.state.volumePrices);
+    options.plugins.title.text = this.props.cryptoName;
+
     return (
       <>
         {isLoading && <div>Loading...</div>}
-        {hasGraph && hasData()}
-        
+        {hasGraph && this.hasData() && (
+          <GraphGrid>
+            <GraphCell>
+              <Line options={options} data={priceData} />
+            </GraphCell>
+            <GraphCell>
+              <Bar options={options} data={volumeData} />
+            </GraphCell>
+          </GraphGrid>
+        )} 
       </>
     );
   }
