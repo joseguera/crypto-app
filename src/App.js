@@ -6,6 +6,7 @@ import { Home, Portfolio, CoinPage } from "pages";
 export default class App extends React.Component {
   state = {
     currencyName: "usd",
+    cryptoName: "bitcoin"
   };
 
   getCurrencyName = (value) => {
@@ -14,18 +15,24 @@ export default class App extends React.Component {
     });
   };
 
+  getCryptoName = (value) => {
+    this.setState({
+      cryptoName: value
+    });
+  };
+
   render() {
-    const { currencyName } = this.state;
+    const { currencyName, cryptoName } = this.state;
     return (
       <Router>
         <div>
           <NavBar getCurrencyName={this.getCurrencyName} currencyName={currencyName} />
           <Switch>
             <Route exact path="/">
-              <Home currencyName={currencyName} />
+              <Home currencyName={currencyName} getCryptoName={this.getCryptoName} cryptoName={cryptoName} />
             </Route>
             <Route path="/portfolio" component={Portfolio} />
-            <Route path="/coinpage/:id" component={CoinPage} />
+            <Route path="/coinpage/:id" component={(props) => <CoinPage {...props} currencyName={currencyName} />}  />
           </Switch>
         </div>
       </Router>

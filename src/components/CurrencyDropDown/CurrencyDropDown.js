@@ -2,9 +2,6 @@ import React from "react";
 
 export default class CurrencyDropDown extends React.Component {
   state = {
-    currencies: null,
-    isLoading: false,
-    hasError: false,
     currencyName: "",
   };
 

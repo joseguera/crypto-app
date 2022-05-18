@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { roundToNumber, formatCurrency } from "../../util/util";
-import { TableGrid, Icon, Symbol } from "./CoinTable.styles";
+import { TableContent } from "components";
+import { TableGrid } from "./CoinTable.styles";
 
 class CoinTable extends React.Component {
   state = {
@@ -40,12 +39,6 @@ class CoinTable extends React.Component {
     const { coins, isLoading } = this.state;
     const hasCoins = !isLoading && coins;
 
-    const formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: this.props.currencyName,
-      minimumFractionDigits: 0,
-    });
-
     return (
       <>
         {isLoading && <div>Loading...</div>}
@@ -60,51 +53,7 @@ class CoinTable extends React.Component {
             <div>24h Volume/Market Cap</div>
             <div>Circulating/Total Supply</div>
             <div>7d</div>
-            {coins.map((coin) => {
-              return (
-                <>
-                  <div>{coin.market_cap_rank}</div>
-                  <div>
-                    <Link to={`/coinpage/${coin.name}`}>
-                      <Icon src={coin.image} alt={coin.name} />
-                      {coin.name}(<Symbol>{coin.symbol}</Symbol>)
-                    </Link>
-                  </div>
-                  <div>{formatter.format(coin.current_price)}</div>
-                  <div>
-                    {roundToNumber(
-                      coin.price_change_percentage_1h_in_currency,
-                      2
-                    )}
-                    %
-                  </div>
-                  <div>
-                    {roundToNumber(
-                      coin.price_change_percentage_24h_in_currency,
-                      2
-                    )}
-                    %
-                  </div>
-                  <div>
-                    {roundToNumber(
-                      coin.price_change_percentage_7d_in_currency,
-                      2
-                    )}
-                    %
-                  </div>
-                  <div>
-                    <span>{formatCurrency(coin.total_volume)}</span>{" "}
-                    <span>{formatCurrency(coin.market_cap)}</span>
-                  </div>
-                  <div>
-                    <span>{formatCurrency(coin.circulating_supply)}</span>{" "}
-                    <span>{formatCurrency(coin.total_supply)}</span>
-                  </div>
-                  {/* this is where sparkline_in_7d graph will go */}
-                  <div>Graph</div>
-                </>
-                );
-              })}
+            <TableContent coins={coins} currencyName={this.props.currencyName}/>
           </TableGrid>
         )}
       </>
