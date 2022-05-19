@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import { GraphGrid, GraphCell } from './Graph.style';
+import { timeConverter } from '../../util/numberUtil';
 
 ChartJS.register(
   CategoryScale,
@@ -25,15 +26,40 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+export const lineOptions = {
   responsive: true,
+  scales: {
+    myScale: {
+      axis: 'y',
+      display: false
+    }
+  },
   plugins: {
     legend: {
       position: "top"
     },
     title: {
       display: true,
-      text: "Graph Name"
+      text: 'Graph Name'
+    }
+  }
+};
+
+export const barOptions = {
+  responsive: true,
+  scales: {
+    myScale: {
+      axis: 'y',
+      display: false
+    }
+  },
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: 'Graph Name'
     }
   }
 };
@@ -54,13 +80,13 @@ export default class Graph extends React.Component {
     const { data } = await axios(
       `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=30`
     );
-    const { labels, prices } = data['prices'].reduce((acc, [label, price]) => ({
-        labels: [...acc.labels, label],
+    const { labels, prices } = data.prices.reduce((acc, [label, price]) => ({
+        labels: [...acc.labels, timeConverter(label)],
         prices: [...acc.prices, price]
       }), {labels: [], prices:[]});
     
-    const { volumeLabels, volumePrices } = data['total_volumes'].reduce((acc, [label, price]) => ({
-      volumeLabels: [...acc.volumeLabels, label],
+    const { volumeLabels, volumePrices } = data.total_volumes.reduce((acc, [label, price]) => ({
+      volumeLabels: [...acc.volumeLabels, timeConverter(label)],
       volumePrices: [...acc.volumePrices, price]
     }), {volumeLabels: [], volumePrices:[]});
 
@@ -106,7 +132,8 @@ export default class Graph extends React.Component {
     const hasGraph = !isLoading && graph;
     const priceData = this.formatData(this.state.labels, this.state.prices);
     const volumeData = this.formatData(this.state.volumeLabels, this.state.volumePrices);
-    options.plugins.title.text = this.props.cryptoName;
+    lineOptions.plugins.title.text = (this.props.cryptoName === 'bitcoin') ? 'BTC' : 'ETH';
+    barOptions.plugins.title.text = (this.props.cryptoName === 'bitcoin') ? 'BTC Volume' : 'ETH Volume';
 
     return (
       <>
@@ -114,10 +141,10 @@ export default class Graph extends React.Component {
         {hasGraph && this.hasData() && (
           <GraphGrid>
             <GraphCell>
-              <Line options={options} data={priceData} />
+              <Line options={lineOptions} data={priceData} />
             </GraphCell>
             <GraphCell>
-              <Bar options={options} data={volumeData} />
+              <Bar options={barOptions} data={volumeData} />
             </GraphCell>
           </GraphGrid>
         )} 

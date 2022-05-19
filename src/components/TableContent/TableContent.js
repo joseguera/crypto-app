@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { roundToNumber, formatCurrency } from "../../util/util";
+import { roundToNumber, formatCurrency } from '../../util/numberUtil';
 import { Icon, Symbol } from "./TableContent.styles";
 
 
