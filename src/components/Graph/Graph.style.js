@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
 export const GraphGrid = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center
+    display: grid;
+    grid-auto-flow: column;
     align-items: center;
-    width: 100%;
+    gap: 45px;
 `;
 
 export const GraphCell = styled.div`
-    flex-grow: 2;
+    justify-self: start;
+    width: 602px;
+    height: 359px;
+    padding: 13px;
+    position: relative;
+    border-radius: 10px;
+    background: white;
 `;
