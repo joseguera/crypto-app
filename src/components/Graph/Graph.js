@@ -28,40 +28,65 @@ ChartJS.register(
 
 export const lineOptions = {
   responsive: true,
-  scales: {
-    myScale: {
-      axis: 'y',
-      display: false
-    }
-  },
-  plugins: {
-    legend: {
-      position: "top"
-    },
-    title: {
-      display: true,
-      text: 'Graph Name'
-    }
-  }
-};
-
-export const barOptions = {
-  responsive: true,
-  scales: {
-    myScale: {
-      axis: 'y',
-      display: false
-    }
-  },
   plugins: {
     legend: {
       position: "top",
     },
     title: {
       display: true,
-      text: 'Graph Name'
-    }
-  }
+      text: "Graph Name",
+    },
+  },
+  scales: {
+    yAxis: {
+      axis: "y",
+      display: false,
+      },
+    xAxis: {
+      axis: "x",
+      grid: {
+        display: false,
+        drawTicks: false,
+        borderWidth: 0,
+      },
+      ticks: {
+        maxRotation: 0,
+        minRotation: 0,
+        // callback: function (value, index) {
+        //   return this.state.labels[index].slice(3, 5)
+        // },
+        autoSkip: true,
+        maxTicksLimit: 15,
+      },
+    },
+  },
+};
+
+export const barOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Graph Name",
+    },
+  },
+  scales: {
+    yAxis: {
+      axis: "y",
+      display: false,
+      },
+    xAxis: {
+      axis: "x",
+      grid: {
+        display: false,
+        drawTicks: false,
+        borderWidth: 0,
+      },
+    },
+  },
 };
 
 export default class Graph extends React.Component {
@@ -78,7 +103,7 @@ export default class Graph extends React.Component {
 
   getGraphData = async () => {
     const { data } = await axios(
-      `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=30`
+      `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=5`
     );
     const { labels, prices } = data.prices.reduce((acc, [label, price]) => ({
         labels: [...acc.labels, timeConverter(label)],
