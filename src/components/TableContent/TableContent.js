@@ -19,7 +19,7 @@ const TableContent = (props) => {
               <div>
                 <Link to={`/coinpage/${coin.name}`}>
                   <Icon src={coin.image} alt={coin.name} />
-                  {coin.name}(<Symbol>{coin.symbol}</Symbol>)
+                  {coin.name} (<Symbol>{coin.symbol}</Symbol>)
                 </Link>
               </div>
               <div>{formatter.format(coin.current_price)}</div>
