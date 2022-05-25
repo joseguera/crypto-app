@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Symbol } from "./CoinPage.styles";
+import { SummaryHolder, DataHolder, Data, Symbol } from "./CoinPage.styles";
 
 export default class CoinPage extends React.Component {
   state = {
@@ -44,28 +44,42 @@ export default class CoinPage extends React.Component {
         {hasCoinProfile && (
             <>
               <h2>Your Summary:</h2>
-              <div>
-                <img src={profile.image.small} alt={profile.name} />
-                <p>{profile.name} <Symbol>({profile.symbol})</Symbol></p>
-                <a href={profile.links.homepage[0]} target="_blank" rel="noreferrer">
-                  {profile.links.homepage[0].slice(8, -1)}
-                </a>
-              </div>
-              <div>
+              <SummaryHolder>
                 <div>
-                  <p>ATH:</p>
-                  <p>{profile.market_data.ath[currencyName]}</p>
-                  <p>{profile.market_data.ath_change_percentage[currencyName]}%</p>
-                  <p>{this.setDate(profile.market_data.ath_date[currencyName])}</p>
+                  <img src={profile.image.small} alt={profile.name} />
+                  <p>{profile.name} <Symbol>({profile.symbol})</Symbol></p>
+                  <a href={profile.links.homepage[0]} target="_blank" rel="noreferrer">
+                    {profile.links.homepage[0].slice(8, -1)}
+                  </a>
                 </div>
                 <div>
-                  <p>ATL:</p>
-                  <p>{profile.market_data.atl[currencyName]}</p>
-                  <p>{profile.market_data.atl_change_percentage[currencyName]}%</p>
-                  <p>{this.setDate(profile.market_data.atl_date[currencyName])}</p>
+                  <p>{profile.market_data.current_price[currencyName]}</p>
+                  <DataHolder>
+                    <Data>
+                      <p>ATH:</p>
+                      <p>{profile.market_data.ath[currencyName]}</p>
+                      <p>{profile.market_data.ath_change_percentage[currencyName]}%</p>
+                      <p>{this.setDate(profile.market_data.ath_date[currencyName])}</p>
+                    </Data>
+                    <Data>
+                      <p>ATL:</p>
+                      <p>{profile.market_data.atl[currencyName]}</p>
+                      <p>{profile.market_data.atl_change_percentage[currencyName]}%</p>
+                      <p>{this.setDate(profile.market_data.atl_date[currencyName])}</p>
+                    </Data>
+                  </DataHolder>
                 </div>
-              </div>
-              <div></div>
+                <div>
+                  <p><span>Market Cap:</span> ${profile.market_data.market_cap[currencyName]}</p>
+                  <p><span>Fully Diluted Valuation:</span> ${profile.market_data.fully_diluted_valuation[currencyName]}</p>
+                  <p><span>Volume 24h:</span> ${profile.market_data.total_volume[currencyName]}</p>
+                  <p><span>Volume/Market:</span> ${profile.market_data.market_cap[currencyName]}</p>
+                  {' '}
+                  <p><span>Total Volume:</span> ${profile.market_data.total_volume[currencyName]}</p>
+                  <p><span>Circulating Supply:</span> ${profile.market_data.circulating_supply}</p>
+                  <p><span>Max Supply:</span> ${profile.market_data.max_supply}</p>
+                </div>
+              </SummaryHolder>
               <h2>Description</h2>
                 <div>
                   <p>{profile.description.en}</p>
