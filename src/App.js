@@ -32,7 +32,7 @@ export default class App extends React.Component {
               <Home currencyName={currencyName} getCryptoName={this.getCryptoName} cryptoName={cryptoName} />
             </Route>
             <Route path="/portfolio" component={Portfolio} />
-            <Route path="/coinpage/:id" component={(props) => <CoinPage {...props} currencyName={currencyName} />}  />
+            <Route path="/coin/:id" component={(props) => <CoinPage {...props} currencyName={currencyName} />}  />
           </Switch>
         </div>
       </Router>

@@ -17,7 +17,7 @@ const TableContent = (props) => {
             <>
               <div>{coin.market_cap_rank}</div>
               <div>
-                <Link to={`/coinpage/${coin.name}`}>
+                <Link to={`/coin/${coin.id}`}>
                   <Icon src={coin.image} alt={coin.name} />
                   {coin.name} (<Symbol>{coin.symbol}</Symbol>)
                 </Link>
