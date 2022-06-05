@@ -195,7 +195,8 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import { GraphGrid, GraphCell } from './Graph.style';
-import { timeConverter } from '../../util/numberUtil';
+import { dateSetter } from '../../util/numberUtil';
+import { timeConverter } from './../../util/numberUtil';
 
 ChartJS.register(
   CategoryScale,
@@ -223,7 +224,7 @@ export const lineOptions = {
     yAxis: {
       axis: "y",
       display: false,
-      },
+    },
     xAxis: {
       axis: "x",
       grid: {
@@ -235,7 +236,13 @@ export const lineOptions = {
         maxRotation: 0,
         minRotation: 0,
         autoSkip: true,
-        maxTicksLimit: 15,
+        maxTicksLimit: 3,
+        padding: 10,
+        align: "start",
+        callback: function (val, index) {
+          // Hide the label of every 2nd dataset
+          return index % 2 === 0 ? this.getLabelForValue(val) : "";
+        },
       },
     },
   },
@@ -255,8 +262,8 @@ export const barOptions = {
   scales: {
     yAxis: {
       axis: "y",
-      display: false
-      },
+      display: false,
+    },
     xAxis: {
       axis: "x",
       grid: {
@@ -268,7 +275,13 @@ export const barOptions = {
         maxRotation: 0,
         minRotation: 0,
         autoSkip: true,
-        maxTicksLimit: 15,
+        maxTicksLimit: 3,
+        padding: 10,
+        align: "start",
+        callback: function (val, index) {
+          // Hide the label of every 2nd dataset
+          return index % 2 === 0 ? this.getLabelForValue(val) : "";
+        },
       },
     },
   },
@@ -289,7 +302,7 @@ export default class Graph extends React.Component {
   getGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=30`
+        `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=1`
       );
       const { labels, prices } = data.prices.reduce((acc, [label, price]) => ({
           labels: [...acc.labels, timeConverter(label)],
@@ -300,7 +313,6 @@ export default class Graph extends React.Component {
         volumeLabels: [...acc.volumeLabels, timeConverter(label)],
         volumePrices: [...acc.volumePrices, price]
       }), {volumeLabels: [], volumePrices:[]});
-  
       this.setState({
         graph: data,
         labels,
@@ -331,9 +343,11 @@ export default class Graph extends React.Component {
       labels: label,
       datasets: [
         {
+          label: "Sample Label",
           data: price,
+          fill: false,
           borderColor: "rgb(53, 162, 235)",
-          backgroundColor: "rgba(53, 162, 235, 0.5)"
+          backgroundColor: "rgba(53, 162, 235, 0.5)",
         }
       ]
     }
