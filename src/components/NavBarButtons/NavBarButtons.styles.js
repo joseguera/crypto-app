@@ -10,4 +10,5 @@ export const ButtonContainer = styled.div`
 
 export const Button = styled.button`
   width: 70px;
+  cursor: pointer;
 `;
