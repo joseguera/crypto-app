@@ -8,11 +8,19 @@ export const GraphGrid = styled.div`
 `;
 
 export const GraphCell = styled.div`
-    justify-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 602px;
     height: 359px;
     padding: 13px;
     position: relative;
     border-radius: 10px;
     background: white;
+`;
+
+export const DateButtonHolder = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 `;

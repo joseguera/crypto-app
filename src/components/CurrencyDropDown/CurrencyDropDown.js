@@ -1,4 +1,5 @@
 import React from "react";
+import { Select } from "./CurrencyDropDown.styles";
 
 export default class CurrencyDropDown extends React.Component {
   state = {
@@ -15,7 +16,7 @@ export default class CurrencyDropDown extends React.Component {
   render() {
     return (
       <div>
-        <select
+        <Select
           onChange={(e) => this.getCurrencyName(e.target.value)}
           name="currency"
           id="currency"
@@ -23,7 +24,7 @@ export default class CurrencyDropDown extends React.Component {
           <option value="usd">USD</option>
           <option value="eur">EUR</option>
           <option value="gbp">GBP</option>
-        </select>
+        </Select>
       </div>
     );
   }

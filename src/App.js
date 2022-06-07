@@ -6,33 +6,55 @@ import { Home, Portfolio, CoinPage } from "pages";
 export default class App extends React.Component {
   state = {
     currencyName: "usd",
-    cryptoName: "bitcoin"
+    cryptoName: "bitcoin",
+    dateRange: 1,
   };
 
-  getCurrencyName = (value) => {
+  getCurrencyName = (currencyName) => {
     this.setState({
-      currencyName: value
+      currencyName
     });
   };
 
-  getCryptoName = (value) => {
+  getCryptoName = (cryptoName) => {
     this.setState({
-      cryptoName: value
+      cryptoName
+    });
+  };
+
+  getDateRange = (dateRange) => {
+    this.setState({
+      dateRange
     });
   };
 
   render() {
-    const { currencyName, cryptoName } = this.state;
+    const { currencyName, cryptoName, dateRange } = this.state;
+  
     return (
       <Router>
         <div>
-          <NavBar getCurrencyName={this.getCurrencyName} currencyName={currencyName} />
+          <NavBar
+            getCurrencyName={this.getCurrencyName}
+            currencyName={currencyName}
+          />
           <Switch>
             <Route exact path="/">
-              <Home currencyName={currencyName} getCryptoName={this.getCryptoName} cryptoName={cryptoName} />
+              <Home
+                currencyName={currencyName}
+                getCryptoName={this.getCryptoName}
+                cryptoName={cryptoName}
+                getDateRange={this.getDateRange}
+                dateRange={dateRange}
+              />
             </Route>
             <Route path="/portfolio" component={Portfolio} />
-            <Route path="/coin/:id" component={(props) => <CoinPage {...props} currencyName={currencyName} />}  />
+            <Route
+              path="/coin/:id"
+              component={(props) => (
+                <CoinPage {...props} currencyName={currencyName} />
+              )}
+            />
           </Switch>
         </div>
       </Router>
