@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,12 +9,16 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import { DateButtons } from "components";
-import { GraphGrid, GraphCell, DateButtonHolder } from './Graph.style';
-import { timeConverter } from './../../util/numberUtil';
+import { DateButtons, GraphTitle } from "components";
+import {
+  GraphGrid,
+  GraphCell,
+  DateButtonHolder,
+} from "./Graph.styles";
+import { timeConverter } from "./../../util/numberUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -32,10 +36,10 @@ export const lineOptions = {
   plugins: {
     legend: {
       position: "top",
+      display: false,
     },
     title: {
-      display: true,
-      text: "Graph Name",
+      display: false,
     },
   },
   scales: {
@@ -54,13 +58,9 @@ export const lineOptions = {
         maxRotation: 0,
         minRotation: 0,
         autoSkip: true,
-        maxTicksLimit: 3,
+        maxTicksLimit: 7,
         padding: 10,
         align: "start",
-        callback: function (val, index) {
-          // Hide the label of every 2nd dataset
-          return index % 2 === 0 ? this.getLabelForValue(val) : "";
-        },
       },
     },
   },
@@ -71,10 +71,10 @@ export const barOptions = {
   plugins: {
     legend: {
       position: "top",
+      display: false,
     },
     title: {
-      display: true,
-      text: "Graph Name",
+      display: false,
     },
   },
   scales: {
@@ -93,54 +93,56 @@ export const barOptions = {
         maxRotation: 0,
         minRotation: 0,
         autoSkip: true,
-        maxTicksLimit: 3,
+        maxTicksLimit: 7,
         padding: 10,
         align: "start",
-        callback: function (val, index) {
-          // Hide the label of every 2nd dataset
-          return index % 2 === 0 ? this.getLabelForValue(val) : "";
-        },
       },
     },
   },
 };
 
+
 export default class Graph extends React.Component {
-  
-  state ={
+  state = {
     labels: [],
     prices: [],
     volumeLabels: [],
     volumePrices: [],
     isLoading: false,
-    hasError: false
-  }
+    hasError: false,
+  };
 
   getGraphData = async () => {
     try {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.props.dateRange}`
       );
-      const { labels, prices } = data.prices.reduce((acc, [label, price]) => ({
+      const { labels, prices } = data.prices.reduce(
+        (acc, [label, price]) => ({
           labels: [...acc.labels, timeConverter(label)],
-          prices: [...acc.prices, price]
-        }), {labels: [], prices:[]});
-      
-      const { volumeLabels, volumePrices } = data.total_volumes.reduce((acc, [label, price]) => ({
-        volumeLabels: [...acc.volumeLabels, timeConverter(label)],
-        volumePrices: [...acc.volumePrices, price]
-      }), {volumeLabels: [], volumePrices:[]});
-      
+          prices: [...acc.prices, price],
+        }),
+        { labels: [], prices: [] }
+      );
+
+      const { volumeLabels, volumePrices } = data.total_volumes.reduce(
+        (acc, [label, price]) => ({
+          volumeLabels: [...acc.volumeLabels, timeConverter(label)],
+          volumePrices: [...acc.volumePrices, price],
+        }),
+        { volumeLabels: [], volumePrices: [] }
+      );
+
       this.setState({
         labels,
         prices,
         volumeLabels,
-        volumePrices
-      })
+        volumePrices,
+      });
     } catch (err) {
       console.log("Location Error:", err);
     }
-  }
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currencyName !== prevProps.currencyName) {
@@ -153,7 +155,7 @@ export default class Graph extends React.Component {
       this.getGraphData();
     }
   }
-  
+
   componentDidMount() {
     this.getGraphData();
   }
@@ -163,25 +165,27 @@ export default class Graph extends React.Component {
       labels: label,
       datasets: [
         {
-          label: "Sample Label",
           data: price,
           fill: false,
           borderColor: "rgb(53, 162, 235)",
           backgroundColor: "rgba(53, 162, 235, 0.5)",
-        }
-      ]
-    }
-  }
-  
-  hasData = () =>  this.state.labels.length && this.state.prices.length
+        },
+      ],
+    };
+  };
+
+  hasData = () => this.state.labels.length && this.state.prices.length;
 
   render() {
     const { isLoading } = this.state;
     const hasGraph = !isLoading && this.state.labels && this.state.volumeLabels;
     const priceData = this.formatData(this.state.labels, this.state.prices);
-    const volumeData = this.formatData(this.state.volumeLabels, this.state.volumePrices);
-    lineOptions.plugins.title.text = (this.props.cryptoName === 'bitcoin') ? 'BTC' : 'ETH';
-    barOptions.plugins.title.text = (this.props.cryptoName === 'bitcoin') ? 'BTC Volume' : 'ETH Volume';
+    const volumeData = this.formatData(
+      this.state.volumeLabels,
+      this.state.volumePrices
+    );
+    const lineGraphTitle = this.props.cryptoName === "bitcoin" ? "BTC" : "ETH";
+    const barGraphTitle = this.props.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
     return (
       <>
@@ -189,25 +193,22 @@ export default class Graph extends React.Component {
         {hasGraph && this.hasData() && (
           <GraphGrid>
             <GraphCell>
-              <Line options={lineOptions} data={priceData} />
+              <GraphTitle cryptoName={lineGraphTitle} currencyName={this.props.currencyName} />
               <DateButtonHolder>
-                <DateButtons 
-                  getDateRange={this.props.getDateRange}
-                />
+                <DateButtons setDateRange={this.props.setDateRange} />
               </DateButtonHolder>
+              <Line options={lineOptions} data={priceData} />
             </GraphCell>
             <GraphCell>
-              <Bar options={barOptions} data={volumeData} />
+              <GraphTitle cryptoName={barGraphTitle} currencyName={this.props.currencyName} />
               <DateButtonHolder>
-                <DateButtons 
-                  getDateRange={this.props.getDateRange}
-                />
+                <DateButtons setDateRange={this.props.setDateRange} />
               </DateButtonHolder>
+              <Bar options={barOptions} data={volumeData} />
             </GraphCell>
           </GraphGrid>
-        )} 
+        )}
       </>
     );
   }
-
-};
+}

@@ -1,7 +1,4 @@
-import {
-  NavBarButtons,
-  NavBarUtils
-} from "components";
+import { NavBarButtons, NavBarUtils } from "components";
 import CoinNavSummary from "./../CoinNavSummary/CoinNavSummary";
 import { NavDiv } from "./NavBar.styles";
 
@@ -10,7 +7,7 @@ const NavBar = (props) => {
     <>
       <NavDiv>
         <NavBarButtons />
-        <NavBarUtils getCurrencyName={props.getCurrencyName} />
+        <NavBarUtils setCurrencyName={props.setCurrencyName} />
       </NavDiv>
       <CoinNavSummary currencyName={props.currencyName} />
     </>

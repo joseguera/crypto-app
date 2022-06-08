@@ -6,18 +6,18 @@ export default class CryptoDropDown extends React.Component {
     cryptoName: "",
   };
 
-  getCryptoName = (value) => {
+  setCryptoName = (value) => {
     this.setState({
       cryptoName: value,
     });
-    this.props.getCryptoName(value);
+    this.props.setCryptoName(value);
   };
 
   render() {
     return (
       <div>
         <Select
-          onChange={(e) => this.getCryptoName(e.target.value)}
+          onChange={(e) => this.setCryptoName(e.target.value)}
           name="crypto"
           id="crypto"
         >

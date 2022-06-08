@@ -10,41 +10,41 @@ export default class App extends React.Component {
     dateRange: 1,
   };
 
-  getCurrencyName = (currencyName) => {
+  setCurrencyName = (currencyName) => {
     this.setState({
-      currencyName
+      currencyName,
     });
   };
 
-  getCryptoName = (cryptoName) => {
+  setCryptoName = (cryptoName) => {
     this.setState({
-      cryptoName
+      cryptoName,
     });
   };
 
-  getDateRange = (dateRange) => {
+  setDateRange = (dateRange) => {
     this.setState({
-      dateRange
+      dateRange,
     });
   };
 
   render() {
     const { currencyName, cryptoName, dateRange } = this.state;
-  
+
     return (
       <Router>
         <div>
           <NavBar
-            getCurrencyName={this.getCurrencyName}
+            setCurrencyName={this.setCurrencyName}
             currencyName={currencyName}
           />
           <Switch>
             <Route exact path="/">
               <Home
                 currencyName={currencyName}
-                getCryptoName={this.getCryptoName}
+                setCryptoName={this.setCryptoName}
                 cryptoName={cryptoName}
-                getDateRange={this.getDateRange}
+                setDateRange={this.setDateRange}
                 dateRange={dateRange}
               />
             </Route>
