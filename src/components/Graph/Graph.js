@@ -12,7 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import { DateButtons, GraphTitle } from "components";
+import { CryptoDropDown, DateButtons, GraphTitle } from "components";
 import {
   GraphGrid,
   GraphCell,
@@ -104,6 +104,9 @@ export const barOptions = {
 
 export default class Graph extends React.Component {
   state = {
+    cryptoName: "bitcoin",
+    lineDateRange: 1,
+    barDateRange: 1,
     labels: [],
     prices: [],
     volumeLabels: [],
@@ -112,10 +115,10 @@ export default class Graph extends React.Component {
     hasError: false,
   };
 
-  getGraphData = async () => {
+  getLineGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.props.dateRange}`
+        `https://api.coingecko.com/api/v3/coins/${this.state.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.state.lineDateRange}`
       );
       const { labels, prices } = data.prices.reduce(
         (acc, [label, price]) => ({
@@ -123,6 +126,21 @@ export default class Graph extends React.Component {
           prices: [...acc.prices, price],
         }),
         { labels: [], prices: [] }
+      );
+
+      this.setState({
+        labels,
+        prices,
+      });
+    } catch (err) {
+      console.log("Location Error:", err);
+    }
+  };
+
+  getBarGraphData = async () => {
+    try {
+      const { data } = await axios(
+        `https://api.coingecko.com/api/v3/coins/${this.state.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.state.barDateRange}`
       );
 
       const { volumeLabels, volumePrices } = data.total_volumes.reduce(
@@ -134,8 +152,6 @@ export default class Graph extends React.Component {
       );
 
       this.setState({
-        labels,
-        prices,
         volumeLabels,
         volumePrices,
       });
@@ -146,19 +162,43 @@ export default class Graph extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currencyName !== prevProps.currencyName) {
-      this.getGraphData();
+      this.getLineGraphData();
+      this.getBarGraphData();
     }
-    if (this.props.cryptoName !== prevProps.cryptoName) {
-      this.getGraphData();
+    if (this.state.cryptoName !== prevState.cryptoName) {
+      this.getLineGraphData();
+      this.getBarGraphData();
     }
-    if (this.props.dateRange !== prevProps.dateRange) {
-      this.getGraphData();
+    if (this.state.lineDateRange !== prevState.lineDateRange) {
+      this.getLineGraphData();
+    }
+    if (this.state.barDateRange !== prevState.barDateRange) {
+      this.getBarGraphData();    
     }
   }
 
   componentDidMount() {
-    this.getGraphData();
+    this.getLineGraphData();
+    this.getBarGraphData();
   }
+
+  setCryptoName = (cryptoName) => {
+    this.setState({
+      cryptoName,
+    });
+  };
+
+  setLineDateRange = (dateRange) => {
+    this.setState({
+      lineDateRange: dateRange,
+    });
+  };
+
+  setBarDateRange = (dateRange) => {
+    this.setState({
+      barDateRange: dateRange,
+    });
+  };
 
   formatData = (label, price) => {
     return {
@@ -184,29 +224,43 @@ export default class Graph extends React.Component {
       this.state.volumeLabels,
       this.state.volumePrices
     );
-    const lineGraphTitle = this.props.cryptoName === "bitcoin" ? "BTC" : "ETH";
-    const barGraphTitle = this.props.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
+    const lineGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC" : "ETH";
+    const barGraphTitle =
+      this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
     return (
       <>
         {isLoading && <div>Loading...</div>}
         {hasGraph && this.hasData() && (
-          <GraphGrid>
-            <GraphCell>
-              <GraphTitle cryptoName={lineGraphTitle} currencyName={this.props.currencyName} />
-              <DateButtonHolder>
-                <DateButtons setDateRange={this.props.setDateRange} />
-              </DateButtonHolder>
-              <Line options={lineOptions} data={priceData} />
-            </GraphCell>
-            <GraphCell>
-              <GraphTitle cryptoName={barGraphTitle} currencyName={this.props.currencyName} />
-              <DateButtonHolder>
-                <DateButtons setDateRange={this.props.setDateRange} />
-              </DateButtonHolder>
-              <Bar options={barOptions} data={volumeData} />
-            </GraphCell>
-          </GraphGrid>
+          <>
+            <CryptoDropDown setCryptoName={this.setCryptoName} />
+            <GraphGrid>
+              <GraphCell>
+                <GraphTitle
+                  cryptoName={lineGraphTitle}
+                  currencyName={this.props.currencyName}
+                />
+                <DateButtonHolder>
+                  <DateButtons
+                    setDateRange={this.setLineDateRange}
+                  />
+                </DateButtonHolder>
+                <Line options={lineOptions} data={priceData} />
+              </GraphCell>
+              <GraphCell>
+                <GraphTitle
+                  cryptoName={barGraphTitle}
+                  currencyName={this.props.currencyName}
+                />
+                <DateButtonHolder>
+                  <DateButtons
+                    setDateRange={this.setBarDateRange}
+                  />
+                </DateButtonHolder>
+                <Bar options={barOptions} data={volumeData} />
+              </GraphCell>
+            </GraphGrid>
+          </>
         )}
       </>
     );

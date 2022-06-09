@@ -6,25 +6,11 @@ import { Home, Portfolio, CoinPage } from "pages";
 export default class App extends React.Component {
   state = {
     currencyName: "usd",
-    cryptoName: "bitcoin",
-    dateRange: 1,
   };
 
   setCurrencyName = (currencyName) => {
     this.setState({
       currencyName,
-    });
-  };
-
-  setCryptoName = (cryptoName) => {
-    this.setState({
-      cryptoName,
-    });
-  };
-
-  setDateRange = (dateRange) => {
-    this.setState({
-      dateRange,
     });
   };
 
@@ -42,10 +28,6 @@ export default class App extends React.Component {
             <Route exact path="/">
               <Home
                 currencyName={currencyName}
-                setCryptoName={this.setCryptoName}
-                cryptoName={cryptoName}
-                setDateRange={this.setDateRange}
-                dateRange={dateRange}
               />
             </Route>
             <Route path="/portfolio" component={Portfolio} />
