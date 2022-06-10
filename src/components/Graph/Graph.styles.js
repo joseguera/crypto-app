@@ -5,6 +5,7 @@ export const GraphGrid = styled.div`
     grid-auto-flow: column;
     align-items: center;
     gap: 45px;
+    margin: 20px;
 `;
 
 export const GraphCell = styled.div`

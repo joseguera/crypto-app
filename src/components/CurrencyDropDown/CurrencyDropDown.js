@@ -6,18 +6,18 @@ export default class CurrencyDropDown extends React.Component {
     currencyName: "",
   };
 
-  getCurrencyName = (value) => {
+  setCurrencyName = (value) => {
     this.setState({
       currencyName: value,
     });
-    this.props.getCurrencyName(value);
+    this.props.setCurrencyName(value);
   };
 
   render() {
     return (
       <div>
         <Select
-          onChange={(e) => this.getCurrencyName(e.target.value)}
+          onChange={(e) => this.setCurrencyName(e.target.value)}
           name="currency"
           id="currency"
         >
