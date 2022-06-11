@@ -13,6 +13,7 @@ export default class DateButtons extends React.Component {
 
   render() {
 
+
     return (
       <DateHolder>
         {Object.values(this.dateRanges).map((date) => {

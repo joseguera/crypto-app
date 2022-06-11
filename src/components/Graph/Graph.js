@@ -14,6 +14,7 @@ import {
 import { Line, Bar } from "react-chartjs-2";
 import { CryptoDropDown, DateButtons, GraphTitle } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder } from "./Graph.styles";
+
 import { timeConverter } from "./../../util/numberUtil";
 
 ChartJS.register(
@@ -169,6 +170,7 @@ export default class Graph extends React.Component {
     }
     if (this.state.barDateRange !== prevState.barDateRange) {
       this.getBarGraphData();
+
     }
   }
 
@@ -237,6 +239,7 @@ export default class Graph extends React.Component {
                 />
                 <DateButtonHolder>
                   <DateButtons setDateRange={this.setLineDateRange} />
+
                 </DateButtonHolder>
                 <Line options={lineOptions} data={priceData} />
               </GraphCell>
@@ -247,6 +250,7 @@ export default class Graph extends React.Component {
                 />
                 <DateButtonHolder>
                   <DateButtons setDateRange={this.setBarDateRange} />
+
                 </DateButtonHolder>
                 <Bar options={barOptions} data={volumeData} />
               </GraphCell>

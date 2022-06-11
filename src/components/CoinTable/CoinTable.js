@@ -54,6 +54,7 @@ class CoinTable extends React.Component {
             <div>Circulating/Total Supply</div>
             <div>Last 7d</div>
             <TableContent coins={coins} currencyName={this.props.currencyName}/>
+            
           </TableGrid>
         )}
       </>
