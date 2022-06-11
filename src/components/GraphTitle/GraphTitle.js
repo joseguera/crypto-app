@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import dayjs from "dayjs";
-import { formatCurrency, timeConverter } from "util/numberUtil";
+import { formatCurrency } from "util/numberUtil";
 import { ChartTitle, TitleText } from "./GraphTitle.styles";
 
 export default class GraphTitle extends React.Component {
