@@ -106,7 +106,7 @@ export default class CoinPage extends React.Component {
               <h2>Description</h2>
               <DescriptionHolder>
                 <div>
-                  <p>{profile.description.en}</p>
+                  <p dangerouslySetInnerHTML={{__html:profile.description.en}}></p>
                 </div>
                 <LinkHolder>
                   {profile.links.blockchain_site.length !== 0 && (
