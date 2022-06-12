@@ -15,7 +15,7 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { currencyName, cryptoName, dateRange } = this.state;
+    const { currencyName } = this.state;
 
     return (
       <Router>

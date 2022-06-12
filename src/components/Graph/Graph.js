@@ -13,11 +13,8 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import { CryptoDropDown, DateButtons, GraphTitle } from "components";
-import {
-  GraphGrid,
-  GraphCell,
-  DateButtonHolder,
-} from "./Graph.styles";
+import { GraphGrid, GraphCell, DateButtonHolder } from "./Graph.styles";
+
 import { timeConverter } from "./../../util/numberUtil";
 
 ChartJS.register(
@@ -101,7 +98,6 @@ export const barOptions = {
   },
 };
 
-
 export default class Graph extends React.Component {
   state = {
     cryptoName: "bitcoin",
@@ -173,7 +169,8 @@ export default class Graph extends React.Component {
       this.getLineGraphData();
     }
     if (this.state.barDateRange !== prevState.barDateRange) {
-      this.getBarGraphData();    
+      this.getBarGraphData();
+
     }
   }
 
@@ -241,9 +238,8 @@ export default class Graph extends React.Component {
                   currencyName={this.props.currencyName}
                 />
                 <DateButtonHolder>
-                  <DateButtons
-                    setDateRange={this.setLineDateRange}
-                  />
+                  <DateButtons setDateRange={this.setLineDateRange} />
+
                 </DateButtonHolder>
                 <Line options={lineOptions} data={priceData} />
               </GraphCell>
@@ -253,9 +249,8 @@ export default class Graph extends React.Component {
                   currencyName={this.props.currencyName}
                 />
                 <DateButtonHolder>
-                  <DateButtons
-                    setDateRange={this.setBarDateRange}
-                  />
+                  <DateButtons setDateRange={this.setBarDateRange} />
+
                 </DateButtonHolder>
                 <Bar options={barOptions} data={volumeData} />
               </GraphCell>

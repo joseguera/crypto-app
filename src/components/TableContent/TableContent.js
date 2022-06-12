@@ -1,8 +1,9 @@
 import React from "react";
-import { Fragment } from "react";
+
 import { Link } from "react-router-dom";
 import { roundToNumber, formatCurrency } from 'util/numberUtil';
 import { Icon, Symbol } from "./TableContent.styles";
+import { SmallGraph } from 'components';
 
 
 export default class TableContent extends React.Component {
@@ -17,7 +18,8 @@ export default class TableContent extends React.Component {
         <>
           {this.props.coins.map((coin) => {
             return (
-              <Fragment key={coin.id}>
+              <React.Fragment key={coin.name}>
+
                 <div>{coin.market_cap_rank}</div>
                 <div>
                   <Link to={`/coin/${coin.id}`}>
@@ -44,8 +46,9 @@ export default class TableContent extends React.Component {
                   <span>{formatCurrency(coin.circulating_supply)}</span>{" "}
                   <span>{formatCurrency(coin.total_supply)}</span>
                 </div>
-                <div>Graph</div>
-              </Fragment>
+                <SmallGraph graphData={coin.sparkline_in_7d.price} />
+              </React.Fragment>
+
             );
           })}
         </>

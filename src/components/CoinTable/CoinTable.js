@@ -52,8 +52,9 @@ class CoinTable extends React.Component {
             <div>7d%</div>
             <div>24h Volume/Market Cap</div>
             <div>Circulating/Total Supply</div>
-            <div>7d</div>
-            <TableContent coins={coins} currencyName={this.props.currencyName} />
+            <div>Last 7d</div>
+            <TableContent coins={coins} currencyName={this.props.currencyName}/>
+            
           </TableGrid>
         )}
       </>
