@@ -1,30 +1,67 @@
 import React from "react";
-import { Select } from "./CryptoDropDown.styles";
+import { DropDown, DropDownList } from "./CryptoDropDown.styles";
 
 export default class CryptoDropDown extends React.Component {
   state = {
-    cryptoName: "",
+    cryptoName: "Bitcoin",
+    open: false,
   };
 
-  setCryptoName = (value) => {
+  container = React.createRef();
+
+  handleDropDownClick = () => {
+    const { open } = this.state;
+    this.setState({
+      open: !open,
+    });
+  };
+
+  handleSelection = (value) => {
+    const cryptoName= value.toLowerCase();
+    const { open } = this.state;
     this.setState({
       cryptoName: value,
+      open: !open
     });
-    this.props.setCryptoName(value);
+    this.props.setCryptoName(cryptoName);
   };
 
+  handleClickOutside = (event) => {
+    if (
+      this.container &&
+      !this.container.current.contains(event.target)
+    ) {
+      this.setState({
+        open: false,
+      });
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
   render() {
+    const { open } = this.state;
     return (
-      <div>
-        <Select
-          onChange={(e) => this.setCryptoName(e.target.value)}
-          name="crypto"
-          id="crypto"
-        >
-          <option value="bitcoin">Bitcoin</option>
-          <option value="ethereum">Ethereum</option>
-        </Select>
-      </div>
+      <>
+        <DropDown className="container" ref={this.container}>
+          <div>
+            <div onClick={this.handleDropDownClick}>
+              {this.state.cryptoName} Overview
+            </div>
+            {open && (
+              <DropDownList>
+                <div id="Bitcoin" onClick={(e) => this.handleSelection(e.target.id)}>Bitcoin</div>
+                <div id="Ethereum" onClick={(e) => this.handleSelection(e.target.id)}>Ethereum</div>
+              </DropDownList>
+            )}
+          </div>
+        </DropDown>
+      </>
     );
   }
 }

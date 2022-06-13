@@ -1,4 +1,4 @@
-import { CoinTable, Graph, CryptoDropDown } from "components";
+import { CoinTable, Graph } from "components";
 import { MainDiv } from "./Home.styles";
 
 const Home = (props) => {

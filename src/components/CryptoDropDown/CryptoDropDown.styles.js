@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
-export const Select = styled.select`
+export const DropDown = styled.div`
     border: none;
     cursor: pointer;
-    margin-bottom: 20px;
+`;
+
+export const DropDownList = styled.div`
+    position: absolute;
+    z-index: 10;
+    background: grey
 `;
