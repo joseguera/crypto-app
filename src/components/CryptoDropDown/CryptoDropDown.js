@@ -9,26 +9,19 @@ export default class CryptoDropDown extends React.Component {
 
   container = React.createRef();
 
-  setCryptoName = (value) => {
-    this.setState({
-      cryptoName: value,
-    });
-    this.props.setCryptoName(value);
-  };
-
   handleDropDownClick = () => {
-    const status = this.state.open;
+    const { open } = this.state;
     this.setState({
-      open: !status,
+      open: !open,
     });
   };
 
   handleSelection = (value) => {
     const cryptoName= value.toLowerCase();
-    const status = this.state.open;
+    const { open } = this.state;
     this.setState({
       cryptoName: value,
-      open: !status
+      open: !open
     });
     this.props.setCryptoName(cryptoName);
   };
