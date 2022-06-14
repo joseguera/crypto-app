@@ -8,5 +8,6 @@ export const DropDown = styled.div`
 export const DropDownList = styled.div`
     position: absolute;
     z-index: 10;
-    background: grey
+    background: #2C2F36;
+    color: #FFFFFF;
 `;
