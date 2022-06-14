@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import dayjs from "dayjs";
 import { formatCurrency } from "util/numberUtil";
-import { ChartTitle, TitleText } from "./GraphTitle.styles";
+import { ChartTitle, TitleText, TitleAmount } from "./GraphTitle.styles";
 
 export default class GraphTitle extends React.Component {
   state = {
@@ -64,7 +64,7 @@ export default class GraphTitle extends React.Component {
         {hasMarketData && (
           <ChartTitle>
             <TitleText>{this.props.cryptoName}</TitleText>
-            <TitleText>{this.setCurrency(this.props.currencyName)}{formatCurrency(price, 2)}</TitleText>
+            <TitleAmount>{this.setCurrency(this.props.currencyName)}{formatCurrency(price, 2)}</TitleAmount>
             <TitleText>{this.timeConverter(lastUpdated)}</TitleText>
           </ChartTitle>
         )}

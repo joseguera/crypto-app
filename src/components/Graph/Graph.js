@@ -13,7 +13,7 @@ import {
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import { CryptoDropDown, DateButtons, GraphTitle } from "components";
-import { GraphGrid, GraphCell, DateButtonHolder } from "./Graph.styles";
+import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
 
 import { timeConverter } from "./../../util/numberUtil";
 
@@ -233,25 +233,29 @@ export default class Graph extends React.Component {
             <CryptoDropDown setCryptoName={this.setCryptoName} />
             <GraphGrid>
               <GraphCell>
-                <GraphTitle
-                  cryptoName={lineGraphTitle}
-                  currencyName={this.props.currencyName}
-                />
-                <DateButtonHolder>
-                  <DateButtons setDateRange={this.setLineDateRange} />
-
-                </DateButtonHolder>
-                <Line options={lineOptions} data={priceData} />
+                <GraphHeader>
+                  <GraphTitle
+                    cryptoName={lineGraphTitle}
+                    currencyName={this.props.currencyName}
+                  />
+                  <DateButtonHolder>
+                    <DateButtons setDateRange={this.setLineDateRange} />
+                  </DateButtonHolder>
+                </GraphHeader>
+                <ChartHolder>
+                  <Line options={lineOptions} data={priceData} />
+                </ChartHolder>
               </GraphCell>
               <GraphCell>
-                <GraphTitle
-                  cryptoName={barGraphTitle}
-                  currencyName={this.props.currencyName}
-                />
-                <DateButtonHolder>
-                  <DateButtons setDateRange={this.setBarDateRange} />
-
-                </DateButtonHolder>
+                <GraphHeader>
+                  <GraphTitle
+                    cryptoName={barGraphTitle}
+                    currencyName={this.props.currencyName}
+                  />
+                  <DateButtonHolder>
+                    <DateButtons setDateRange={this.setBarDateRange} />
+                  </DateButtonHolder>
+                </GraphHeader>
                 <Bar options={barOptions} data={volumeData} />
               </GraphCell>
             </GraphGrid>
