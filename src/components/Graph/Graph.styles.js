@@ -17,13 +17,14 @@ export const GraphCell = styled.div`
     padding: 13px;
     position: relative;
     border-radius: 10px;
-    background: white;
+    background-color: #191B1F;
 `;
 
 export const GraphHeader = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
 `;
 

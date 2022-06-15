@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
+import { MainApp } from "App.styles";
 
 export default class App extends React.Component {
   state = {
@@ -19,7 +20,7 @@ export default class App extends React.Component {
 
     return (
       <Router>
-        <div>
+        <MainApp>
           <NavBar
             setCurrencyName={this.setCurrencyName}
             currencyName={currencyName}
@@ -36,7 +37,7 @@ export default class App extends React.Component {
               )}
             />
           </Switch>
-        </div>
+        </MainApp>
       </Router>
     );
   }
