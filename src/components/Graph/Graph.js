@@ -256,7 +256,9 @@ export default class Graph extends React.Component {
                     <DateButtons setDateRange={this.setBarDateRange} />
                   </DateButtonHolder>
                 </GraphHeader>
-                <Bar options={barOptions} data={volumeData} />
+                <ChartHolder>
+                  <Bar options={barOptions} data={volumeData} />
+                </ChartHolder>
               </GraphCell>
             </GraphGrid>
           </>

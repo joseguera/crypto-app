@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import { roundToNumber, formatCurrency } from 'util/numberUtil';
-import { Icon, Symbol } from "./TableContent.styles";
+import { Icon, Symbol, LinkText } from "./TableContent.styles";
 import { SmallGraph } from 'components';
 
 
@@ -24,7 +24,7 @@ export default class TableContent extends React.Component {
                 <div>
                   <Link to={`/coin/${coin.id}`}>
                     <Icon src={coin.image} alt={coin.name} />
-                    {coin.name} (<Symbol>{coin.symbol}</Symbol>)
+                    <LinkText>{coin.name} (<Symbol>{coin.symbol}</Symbol>)</LinkText>
                   </Link>
                 </div>
                 <div>{this.formatter.format(coin.current_price)}</div>
