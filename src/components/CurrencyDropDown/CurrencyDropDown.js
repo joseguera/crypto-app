@@ -1,5 +1,5 @@
 import React from "react";
-import { DropDown, DropDownList, DownArrow, CurrencyButton, Symbol, CurrencySymbol, CurrencyName, CurrencyNameHolder } from "./CurrencyDropDown.styles";
+import { DropDown, DropDownList, DownArrow, CurrencyButton, Symbol, CurrencySymbol, CurrencyName, CurrencyNameHolder, CurrencyItem, CurrencyOptions } from "./CurrencyDropDown.styles";
 
 export default class CurrencyDropDown extends React.Component {
   state = {
@@ -63,6 +63,12 @@ export default class CurrencyDropDown extends React.Component {
     }
   } 
 
+  currencies = [
+    { name: 'USD', symbol: '$' },
+    { name: 'EUR', symbol: '€' },
+    { name: 'GBP', symbol: '£'  },
+  ];
+
   render() {
     const { open, currencyName } = this.state;
     return (
@@ -80,9 +86,20 @@ export default class CurrencyDropDown extends React.Component {
             </CurrencyButton>
             {open && (
               <DropDownList>
-                <div id='USD' onClick={(e) => this.handleSelection(e.target.id)}>USD</div>
-                <div id='EUR' onClick={(e) => this.handleSelection(e.target.id)}>EUR</div>
-                <div id='GBP' onClick={(e) => this.handleSelection(e.target.id)}>GBP</div>
+                <CurrencyOptions>
+                  {this.currencies.map((currency) => {
+                    return (
+                        <CurrencyItem onClick={(e) => this.handleSelection(currency.name)}>
+                          <Symbol>
+                            <CurrencySymbol>{this.setCurrencySymbol(currency.name)}</CurrencySymbol>
+                          </Symbol>
+                          <CurrencyNameHolder>
+                            <CurrencyName>{currency.name}</CurrencyName>
+                          </CurrencyNameHolder>
+                        </CurrencyItem>
+                    )
+                  })}
+                </CurrencyOptions>
               </DropDownList>
             )}
           </div>
