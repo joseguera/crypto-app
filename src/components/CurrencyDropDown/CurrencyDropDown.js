@@ -89,7 +89,7 @@ export default class CurrencyDropDown extends React.Component {
                 <CurrencyOptions>
                   {this.currencies.map((currency) => {
                     return (
-                        <CurrencyItem onClick={(e) => this.handleSelection(currency.name)}>
+                        <CurrencyItem onClick={() => this.handleSelection(currency.name)}>
                           <Symbol>
                             <CurrencySymbol>{this.setCurrencySymbol(currency.name)}</CurrencySymbol>
                           </Symbol>
