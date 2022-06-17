@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ThemeHolder = styled.div`
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
 `;
 
 export const ThemeIcon = styled.img`

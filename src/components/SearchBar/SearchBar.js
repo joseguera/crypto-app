@@ -1,8 +1,14 @@
+import searchLoopIcon from '../../images/Iconly-Broken-Search.svg';
+import { SearchBarStyle, LoopIcon, InputType } from './SearchBar.styles'
+
 const SearchBar = (props) => {
     return (
-        <div>
-            <input placeholder="Search" />
-        </div>
+        <>
+            <SearchBarStyle>
+                <LoopIcon src={searchLoopIcon} alt="Search" />
+                <InputType placeholder="Search..." />
+            </SearchBarStyle>
+        </>
     )
 }
 

@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { ButtonContainer, Button } from "./NavBarButtons.styles";
+import { ButtonContainer, Button, ButtonText, styledLink } from "./NavBarButtons.styles";
 
 const NavBarButtons = (props) => {
   return (
     <ButtonContainer>
-      <Link to="/">
-        <Button>Coins</Button>
+      <Link to="/" style={styledLink}>
+        <Button><ButtonText>Coins</ButtonText></Button>
       </Link>
-      <Link to="/portfolio">
-        <Button>Portfolio</Button>
+      <Link to="/portfolio" style={styledLink}>
+        <Button><ButtonText>Portfolio</ButtonText></Button>
       </Link>
     </ButtonContainer>
   );
