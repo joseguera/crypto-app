@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -8,9 +9,17 @@ export const ButtonContainer = styled.div`
   align-items: center;
 `;
 
-export const Button = styled.div`
+export const ButtonClicked = styled.div`
   cursor: pointer;
   background: #2C2F36;
+  border-radius: 10px;
+  padding: 8px 32px;
+  text-align: center;
+`;
+
+export const Button = styled.div`
+  cursor: pointer;
+  background: transparent;
   border-radius: 10px;
   padding: 8px 32px;
   text-align: center;
@@ -22,7 +31,8 @@ export const ButtonText = styled.h2`
   line-height: 0px;
 `;
 
-export const styledLink = {
-  textDecoration: "none",
-  color: "#FFFFFF"
-}
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #FFFFFF
+`;
+
