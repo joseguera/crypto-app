@@ -5,9 +5,33 @@ export const DateHolder = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width: 331px;
+  height: 43px;
 `;
 
 export const DateButton = styled.div`
   cursor: pointer;
+  height: 34px;
+  width: 34px;
+  color: #FFFFFF;
+  display: grid;
+  border-radius: 5px;
+  place-items: center;
+`;
+
+export const StyledButton = styled.div`
+  background-color: #00FF5F;
+  cursor: pointer;
+  height: 34px;
+  width: 34px;
+  color: #FFFFFF;
+  display: grid;
+  border-radius: 5px;
+  place-items: center;
+`;
+
+export const ButtonText = styled.p`
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 0px;
 `;
