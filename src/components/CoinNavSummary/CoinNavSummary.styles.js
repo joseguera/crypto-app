@@ -6,7 +6,7 @@ export const SummaryHolder = styled.div`
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
+    width: 60%;
 `;
 
 export const Icon = styled.img`
