@@ -23,7 +23,7 @@ export default class CoinPage extends React.Component {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.props.match.params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=false`
+        `https://api.coingecko.com/api/v3/coins/${this.props.match.params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
       );
       this.setState({
         profile: data,

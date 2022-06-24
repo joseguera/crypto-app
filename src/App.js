@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
 import { MainApp } from "App.styles";
+import "./App.css";
 
 export default class App extends React.Component {
   state = {

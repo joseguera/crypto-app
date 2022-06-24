@@ -12,4 +12,7 @@ export const NavDiv = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  align-items: center;
+  height: 86px;
+  width: 100%;
 `;
