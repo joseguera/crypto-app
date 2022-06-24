@@ -1,21 +1,37 @@
 import styled from "styled-components";
 
-export const ButtonContainer = styled.div`
+export const DateHolder = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
+  width: 331px;
+  height: 43px;
 `;
 
-export const Button = styled.div`
+export const DateButton = styled.div`
   cursor: pointer;
-  padding: 8px 32px;
-  text-align: center;
+  height: 34px;
+  width: 34px;
+  color: #FFFFFF;
+  display: grid;
+  border-radius: 5px;
+  place-items: center;
 `;
 
-export const ButtonText = styled.h2`
-  font-size: 23px;
-  font-weight: 800;
+export const StyledButton = styled.div`
+  background-color: #00FF5F;
+  cursor: pointer;
+  height: 34px;
+  width: 34px;
+  color: #FFFFFF;
+  display: grid;
+  border-radius: 5px;
+  place-items: center;
+`;
+
+export const ButtonText = styled.p`
+  font-size: 13px;
+  font-weight: bold;
   line-height: 0px;
 `;
