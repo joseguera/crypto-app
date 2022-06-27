@@ -1,48 +1,40 @@
 import React from "react";
-import { ButtonContainer, Button, ButtonClicked, ButtonText, StyledLink } from "./NavBarButtons.styles";
+import { ButtonContainer, Button, ButtonText } from "./NavBarButtons.styles";
+import { NavLink } from "react-router-dom";
+import "./NavBarButtons.css"
 
-export default class NavBarButtons extends React.Component {
-  state = {
-    active: 'coins',
-  }
+const NavBarButtons = () => {
 
-  setActive = (e) => {
-    this.setState({
-      active: e
-    })
-  } 
-  
-  render() {
-    const { active } = this.state;
     return (
       <ButtonContainer>
-        {active === "coins" ? (
-          <StyledLink to="/">
-            <ButtonClicked onClick={() => this.setActive("coins")}>
-              <ButtonText>Coins</ButtonText>
-            </ButtonClicked>
-          </StyledLink>
-        ) : (
-          <StyledLink to="/">
-            <Button onClick={() => this.setActive("coins")}>
-              <ButtonText>Coins</ButtonText>
-            </Button>
-          </StyledLink>
-        )}
-        {active === "portfolio" ? (
-          <StyledLink to="/portfolio">
-            <ButtonClicked onClick={() => this.setActive("portfolio")}>
-              <ButtonText>Portfolio</ButtonText>
-            </ButtonClicked>
-          </StyledLink>
-        ) : (
-          <StyledLink to="/portfolio">
-            <Button onClick={() => this.setActive("portfolio")}>
-              <ButtonText>Portfolio</ButtonText>
-            </Button>
-          </StyledLink>
-        )}
+        <NavLink
+          exact to="/"
+          style={(isActive) => ({
+           background : isActive ? "#2C2F36" : "",
+          })}
+          className="nav-link"
+        >
+          <Button>
+            <ButtonText>
+              Coins
+            </ButtonText>
+          </Button>
+        </NavLink>
+        <NavLink
+          to="/portfolio"
+          className="nav-link"
+          style={(isActive) => ({
+            background: isActive ? "#2C2F36" : "",
+          })}
+        >
+          <Button>
+            <ButtonText>
+              Portfolio
+            </ButtonText>
+          </Button>
+        </NavLink>
       </ButtonContainer>
     );
-  }
 };
+
+export default NavBarButtons;
