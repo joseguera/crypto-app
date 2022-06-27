@@ -1,16 +1,24 @@
 import { NavBarButtons, NavBarUtils } from "components";
 import CoinNavSummary from "./../CoinNavSummary/CoinNavSummary";
-import { NavDiv, NavBarDiv } from "./NavBar.styles";
+import { NavDiv, NavBarDiv, NavBarContainer } from "./NavBar.styles";
 
 const NavBar = (props) => {
   return (
-    <NavBarDiv>
-      <NavDiv>
-        <NavBarButtons />
-        <NavBarUtils setCurrencyName={props.setCurrencyName} />
-      </NavDiv>
+    <>
+    <NavBarContainer>
+      <NavBarDiv>
+        <NavDiv>
+          <NavBarButtons />
+          <NavBarUtils setCurrencyName={props.setCurrencyName} />
+        </NavDiv>
+      </NavBarDiv>
+    </NavBarContainer>
+    <NavBarDiv>    
       <CoinNavSummary currencyName={props.currencyName} />
     </NavBarDiv>
+    
+    </>
+
   );
 };
 

@@ -8,4 +8,6 @@ export const TableGrid = styled.div`
     row-gap: 10px;
     grid-template-areas:
         'main main main main main main main main main';
+    padding-right: 77px;
+    padding-left: 13px;
 `;
