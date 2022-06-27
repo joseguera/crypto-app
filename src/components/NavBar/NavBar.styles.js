@@ -16,4 +16,5 @@ export const NavDiv = styled.div`
   align-items: center;
   height: 86px;
   width: 100%;
+  background: #191B1F;
 `;
