@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const MainApp = styled.div`
+    margin: 0 auto;
     background-color: #1F2128;
     color: #FFFFFF;
 

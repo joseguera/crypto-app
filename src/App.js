@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
 import { MainApp } from "App.styles";
+import "./App.css";
 
 export default class App extends React.Component {
   state = {
@@ -26,9 +27,11 @@ export default class App extends React.Component {
             currencyName={currencyName}
           />
           <Switch>
-            <Route exact path="/">
-              <Home currencyName={currencyName} />
-            </Route>
+            <Route exact path="/"
+              component={(props) => (
+                <Home {...props} currencyName={currencyName} />
+              )}
+            />
             <Route path="/portfolio" component={Portfolio} />
             <Route
               path="/coin/:id"

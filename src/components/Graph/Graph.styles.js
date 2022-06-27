@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const GraphGrid = styled.div`
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    gap: 45px;
-    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 34px;
 `;
 
 export const GraphCell = styled.div`
