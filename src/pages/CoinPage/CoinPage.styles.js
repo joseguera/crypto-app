@@ -41,8 +41,9 @@ export const LinkHolder = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     width: 100%;
+    gap: 13px;
 `;
 
 export const DataList = styled.ul`
@@ -68,14 +69,36 @@ export const LinkContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: relative;
+    height: 41px;
+    padding: 0px 45px;
+    border-radius: 10px;
+    background: #191B1F;
 `;
 
 export const Site = styled.a`
     text-decoration: none;
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: rgb(25, 27, 31);
-    border-radius: 10px;
-    color: rgb(255, 255, 255);
+    color: #FFFFFF;
+    width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 13px;
 `;
+
+export const LinkIcon = styled.img`
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    left: 13px;
+`;
+
+export const CopyIcon = styled.img`
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    height: 16px;
+    width: 18px;
+    filter: grayscale(100%);
+`;
+

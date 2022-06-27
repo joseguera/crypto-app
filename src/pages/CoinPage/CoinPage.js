@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
-import { SummaryHolder, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site } from "./CoinPage.styles";
+import { SummaryHolder, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
+import linkIcon from "../../images/awesome-link.svg"
+import copyIcon from "../../images/feather-copy.svg"
+
 
 export default class CoinPage extends React.Component {
   constructor(props) {
@@ -113,9 +116,11 @@ export default class CoinPage extends React.Component {
                     profile.links.blockchain_site.slice(0, 3).map((site) => {
                       return (
                         <LinkContainer>
+                          <LinkIcon src={linkIcon} alt="link icon" />
                           <Site href={site} target="_blank" rel="noreferrer">
                             {site.slice(8)}
-                          </Site>
+                            <CopyIcon src={copyIcon} alt="copy icon" />
+                          </Site>                          
                         </LinkContainer>
                       )
                     })
