@@ -8,6 +8,12 @@ export const NavBarDiv = styled.div`
   align-items: center;
 `;
 
+export const NavBarContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  background: #191B1F;
+`;
+
 export const NavDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,5 +22,4 @@ export const NavDiv = styled.div`
   align-items: center;
   height: 86px;
   width: 100%;
-  background: #191B1F;
 `;
