@@ -7,10 +7,11 @@ import {
   LineElement,
   Title,
   Tooltip,
+  Filler,
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { GraphCointaner } from "./SmallGraph.styles";
+import { GraphCointaner } from "./CoinPageGraph.styles";
 
 ChartJS.register(
   CategoryScale,
@@ -19,6 +20,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
+  Filler,
   Legend
 );
 
@@ -64,31 +66,16 @@ export const options = {
   },
 };
 
-const SmallGraph = (props) => {
-  let graphData = [];
-  let graphIndex = [];
-
-  props.graphData.reduce((acc, curr, idx) => {
-    if (idx % 2 === 0 && idx % 3 === 0) {
-      graphData = [...acc, curr];
-    }
-    return graphData;
-  });
-
-  props.graphData.reduce((acc, curr, idx) => {
-    if (idx % 2 === 0 && idx % 3 === 0) {
-      graphIndex = [...acc, idx];
-    }
-    return graphIndex;
-  });
+const CoinPageGraph = (props) => {
 
   const data = {
-    labels: graphIndex,
+    labels: props.graphData,
     datasets: [
       {
-        data: graphData,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        fill: true,
+        data: props.graphData,
+        borderColor: "#2C2F36",
+        backgroundColor: "#1C1E24",
       },
     ],
   };
@@ -99,4 +86,4 @@ const SmallGraph = (props) => {
   );
 };
 
-export default SmallGraph;
+export default CoinPageGraph;
