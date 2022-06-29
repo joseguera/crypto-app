@@ -149,7 +149,7 @@ export default class CoinPageGraph extends React.Component {
           <>
             <CoinPageDateButtons setDateRange={this.setDateRange} />
             <GraphCointaner>
-              <Line options={options} data={graphData} />
+              <Line options={options} data={graphData} className="graph-style" />
             </GraphCointaner>
           </>
         )}
