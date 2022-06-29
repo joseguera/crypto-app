@@ -1,7 +1,7 @@
 import React from "react";
-import { DateHolder, DateButton, StyledButton, ButtonText } from "./DateButtons.styles";
+import { DateHolder, RadioButtonHolder, RadioButton, RadioButtonSelected, ButtonLabel } from "./CoinPageDateButtons.styles";
 
-export default class DateButtons extends React.Component {
+export default class CoinPageDateButtons extends React.Component {
   state = {
     dateRanges : {
       daily: { title: "1d", range: 1 },
@@ -49,13 +49,15 @@ export default class DateButtons extends React.Component {
         {Object.values(dateRanges).map((date) => {
           return (
             active === date.title ? (
-              <StyledButton key={date.range} onClick={() => this.setActive(date.title, date.range)}>
-                <ButtonText>{date.title}</ButtonText>
-              </StyledButton>
+              <RadioButtonHolder key={date.range} onClick={() => this.setActive(date.title, date.range)}>
+                <RadioButtonSelected type="radio"></RadioButtonSelected>
+                <ButtonLabel>{date.title}</ButtonLabel>
+              </RadioButtonHolder>
             ) : (
-              <DateButton key={date.range} onClick={() => this.setActive(date.title, date.range)}>
-                <ButtonText>{date.title}</ButtonText>
-              </DateButton>
+              <RadioButtonHolder key={date.range} onClick={() => this.setActive(date.title, date.range)}>
+                <RadioButton type="radio"></RadioButton>
+                <ButtonLabel>{date.title}</ButtonLabel>
+              </RadioButtonHolder>
             )
           )
         })}
