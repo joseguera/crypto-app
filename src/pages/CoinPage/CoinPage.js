@@ -63,7 +63,6 @@ export default class CoinPage extends React.Component {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
     const hasCoinProfile = !isLoading && profile;
-    console.log(profile)
     return (
       <>
         {isLoading && <div>Loading...</div>}
