@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { SummaryHolder, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon } from "./CoinPage.styles";
+import { CoinPageGraph } from 'components'
+import { CoinPageMain, SummaryHolder, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import linkIcon from "../../images/awesome-link.svg"
 import copyIcon from "../../images/feather-copy.svg"
@@ -62,12 +63,12 @@ export default class CoinPage extends React.Component {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
     const hasCoinProfile = !isLoading && profile;
-
+    console.log(profile)
     return (
       <>
         {isLoading && <div>Loading...</div>}
         {hasCoinProfile && (
-            <>
+            <CoinPageMain>
               <h2>Your Summary</h2>
               <SummaryHolder>
                 <div>
@@ -127,7 +128,8 @@ export default class CoinPage extends React.Component {
                   )}
                 </LinkHolder>
               </DescriptionHolder>
-            </>
+              <CoinPageGraph graphData={profile.market_data.sparkline_7d.price} />
+            </CoinPageMain>
           )
         }
       </>
