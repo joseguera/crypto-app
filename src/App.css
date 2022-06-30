@@ -4,3 +4,8 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 }
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}

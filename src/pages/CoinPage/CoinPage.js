@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { CoinPageGraph } from 'components'
-import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, MarketSummary, DataSummary, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
+import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoSite, MarketSummary, DataSummary, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import linkIcon from "../../images/awesome-link.svg"
 import copyIcon from "../../images/feather-copy.svg"
@@ -74,11 +74,16 @@ export default class CoinPage extends React.Component {
                 </PageTitle>
                 <SummaryContainer>
                   <CryptoSummary>
-                    <img src={profile.image.small} alt={profile.name} />
-                    <p>{profile.name} <Symbol>({profile.symbol})</Symbol></p>
-                    <a href={profile.links.homepage[0]} target="_blank" rel="noreferrer">
-                      {profile.links.homepage[0].slice(8, -1)}
-                    </a>
+                    <CryptoTitle>
+                      <img src={profile.image.small} alt={profile.name} />
+                      <p>{profile.name} <Symbol>({profile.symbol})</Symbol></p>
+                    </CryptoTitle>
+                    <CryptoSite>
+                      <LinkIcon src={linkIcon} alt="link icon" />
+                      <a href={profile.links.homepage[0]} target="_blank" rel="noreferrer">
+                        {profile.links.homepage[0].slice(8, -1)}
+                      </a>
+                    </CryptoSite>
                   </CryptoSummary>
                   <MarketSummary>
                     <p>{this.formatter.format(profile.market_data.current_price[currencyName])}</p>

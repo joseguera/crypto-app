@@ -36,6 +36,27 @@ export const CryptoSummary = styled.div`
     gap: 16px;
 `;
 
+export const CryptoTitle = styled.div`
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    height: 236px;
+    width: 206px;
+    display: grid;
+    place-items: center;
+    -webkit-box-align: center;
+`;
+
+export const CryptoSite = styled.div`
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    width: 100%;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
 export const MarketSummary = styled.div`
     background: rgb(25, 27, 31);
     border-radius: 10px;
