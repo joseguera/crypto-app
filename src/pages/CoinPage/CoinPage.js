@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { CoinPageGraph } from 'components'
-import { CoinPageMain, SummaryHolder, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon } from "./CoinPage.styles";
+import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, MarketSummary, DataSummary, DataHolder, Data, DescriptionHolder, LinkHolder, Symbol, DataList, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import linkIcon from "../../images/awesome-link.svg"
 import copyIcon from "../../images/feather-copy.svg"
@@ -68,46 +68,52 @@ export default class CoinPage extends React.Component {
         {isLoading && <div>Loading...</div>}
         {hasCoinProfile && (
             <CoinPageMain>
-              <h2>Your Summary</h2>
               <SummaryHolder>
-                <div>
-                  <img src={profile.image.small} alt={profile.name} />
-                  <p>{profile.name} <Symbol>({profile.symbol})</Symbol></p>
-                  <a href={profile.links.homepage[0]} target="_blank" rel="noreferrer">
-                    {profile.links.homepage[0].slice(8, -1)}
-                  </a>
-                </div>
-                <div>
-                  <p>{this.formatter.format(profile.market_data.current_price[currencyName])}</p>
-                  <p>{roundToNumber(profile.market_data.price_change_percentage_24h_in_currency[currencyName], 2) + `%`}</p>
-                  <DataHolder>
-                    <Data>
-                      <p>ATH:</p>
-                      <p>{this.formatter.format(profile.market_data.ath[currencyName])}</p>
-                      <p>{roundToNumber(profile.market_data.ath_change_percentage[currencyName], 2)}%</p>
-                      <p>{this.setDate(profile.market_data.ath_date[currencyName])}</p>
-                    </Data>
-                    <Data>
-                      <p>ATL:</p>
-                      <p>{this.formatter.format(profile.market_data.atl[currencyName])}</p>
-                      <p>{roundToNumber(profile.market_data.atl_change_percentage[currencyName], 2)}%</p>
-                      <p>{this.setDate(profile.market_data.atl_date[currencyName])}</p>
-                    </Data>
-                  </DataHolder>
-                </div>
-                <DataList>
-                  <DataItem><span>Market Cap: </span>{this.setCurrency(currencyName)}{formatCurrency(profile.market_data.market_cap[currencyName])}{' '}<span>{roundToNumber(profile.market_data.market_cap_change_percentage_24h_in_currency[currencyName], 2)}%</span></DataItem>
-                  <DataItem><span>Fully Diluted Valuation: </span>{this.setCurrency(currencyName)}{(profile.market_data.fully_diluted_valuation[currencyName]) ? formatCurrency(profile.market_data.fully_diluted_valuation[currencyName]) : '0.00'}</DataItem>
-                  <DataItem><span>Volume 24h:</span>{this.setCurrency(currencyName)}{formatCurrency(profile.market_data.total_volume[currencyName])}</DataItem>
-                  <DataItem><span>Volume / Market:</span> {roundToNumber(profile.market_data.total_volume[currencyName]/profile.market_data.market_cap[currencyName], 4)}</DataItem>
-                  <br />
-                  <DataItem><span>Total Volume:</span>{this.setCurrency(currencyName)}{formatCurrency(profile.market_data.total_volume[currencyName])}</DataItem>
-                  <DataItem><span>Circulating Supply:</span> {roundToNumber(profile.market_data.circulating_supply, 0)}{' '}<Symbol>{profile.symbol}</Symbol></DataItem>
-                  <DataItem><span>Max Supply:</span> {(profile.market_data.max_supply) ? profile.market_data.max_supply : 0}{' '}<Symbol>{profile.symbol}</Symbol></DataItem>
-                </DataList>
+                <PageTitle>
+                  <PageText>Your Summary</PageText>
+                </PageTitle>
+                <SummaryContainer>
+                  <CryptoSummary>
+                    <img src={profile.image.small} alt={profile.name} />
+                    <p>{profile.name} <Symbol>({profile.symbol})</Symbol></p>
+                    <a href={profile.links.homepage[0]} target="_blank" rel="noreferrer">
+                      {profile.links.homepage[0].slice(8, -1)}
+                    </a>
+                  </CryptoSummary>
+                  <MarketSummary>
+                    <p>{this.formatter.format(profile.market_data.current_price[currencyName])}</p>
+                    <p>{roundToNumber(profile.market_data.price_change_percentage_24h_in_currency[currencyName], 2) + `%`}</p>
+                    <DataHolder>
+                      <Data>
+                        <p>ATH:</p>
+                        <p>{this.formatter.format(profile.market_data.ath[currencyName])}</p>
+                        <p>{roundToNumber(profile.market_data.ath_change_percentage[currencyName], 2)}%</p>
+                        <p>{this.setDate(profile.market_data.ath_date[currencyName])}</p>
+                      </Data>
+                      <Data>
+                        <p>ATL:</p>
+                        <p>{this.formatter.format(profile.market_data.atl[currencyName])}</p>
+                        <p>{roundToNumber(profile.market_data.atl_change_percentage[currencyName], 2)}%</p>
+                        <p>{this.setDate(profile.market_data.atl_date[currencyName])}</p>
+                      </Data>
+                    </DataHolder>
+                  </MarketSummary>
+                  <DataSummary>
+                    <DataItem><span>Market Cap: </span>{this.setCurrency(currencyName)}{formatCurrency(profile.market_data.market_cap[currencyName])}{' '}<span>{roundToNumber(profile.market_data.market_cap_change_percentage_24h_in_currency[currencyName], 2)}%</span></DataItem>
+                    <DataItem><span>Fully Diluted Valuation: </span>{this.setCurrency(currencyName)}{(profile.market_data.fully_diluted_valuation[currencyName]) ? formatCurrency(profile.market_data.fully_diluted_valuation[currencyName]) : '0.00'}</DataItem>
+                    <DataItem><span>Volume 24h:</span>{this.setCurrency(currencyName)}{formatCurrency(profile.market_data.total_volume[currencyName])}</DataItem>
+                    <DataItem><span>Volume / Market:</span> {roundToNumber(profile.market_data.total_volume[currencyName]/profile.market_data.market_cap[currencyName], 4)}</DataItem>
+                    <br />
+                    <DataItem><span>Total Volume:</span>{this.setCurrency(currencyName)}{formatCurrency(profile.market_data.total_volume[currencyName])}</DataItem>
+                    <DataItem><span>Circulating Supply:</span> {roundToNumber(profile.market_data.circulating_supply, 0)}{' '}<Symbol>{profile.symbol}</Symbol></DataItem>
+                    <DataItem><span>Max Supply:</span> {(profile.market_data.max_supply) ? profile.market_data.max_supply : 0}{' '}<Symbol>{profile.symbol}</Symbol></DataItem>
+                  </DataSummary>
+                </SummaryContainer>
               </SummaryHolder>
-              <h2>Description</h2>
               <DescriptionHolder>
+                <div>
+                  <h2>Description</h2>
+                </div>
                 <div>
                   <p dangerouslySetInnerHTML={{__html:profile.description.en}}></p>
                 </div>
@@ -127,7 +133,10 @@ export default class CoinPage extends React.Component {
                   )}
                 </LinkHolder>
               </DescriptionHolder>
-              <CoinPageGraph cryptoName={profile.name.toLowerCase()} currencyName={this.props.currencyName} />
+              <GraphHolder>
+                <div>Currency Converter Placeholder</div>
+                <CoinPageGraph cryptoName={profile.name.toLowerCase()} currencyName={this.props.currencyName} />
+              </GraphHolder>
             </CoinPageMain>
           )
         }
