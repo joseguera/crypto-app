@@ -2,7 +2,7 @@ import styled from "styled-components";
 import plusIcon from '../../images/Iconly-Bulk-Plus.svg';
 
 export const CoinPageMain = styled.span`
-  margin: 0 auto;
+
 `;
 
 export const Symbol = styled.span`

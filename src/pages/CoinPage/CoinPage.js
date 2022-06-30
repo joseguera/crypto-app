@@ -63,7 +63,6 @@ export default class CoinPage extends React.Component {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
     const hasCoinProfile = !isLoading && profile;
-    console.log(profile)
     return (
       <>
         {isLoading && <div>Loading...</div>}
@@ -128,7 +127,7 @@ export default class CoinPage extends React.Component {
                   )}
                 </LinkHolder>
               </DescriptionHolder>
-              <CoinPageGraph graphData={profile.market_data.sparkline_7d.price} />
+              <CoinPageGraph cryptoName={profile.name.toLowerCase()} currencyName={this.props.currencyName} />
             </CoinPageMain>
           )
         }
