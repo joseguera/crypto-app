@@ -1,23 +1,83 @@
 import styled from "styled-components";
 import plusIcon from '../../images/Iconly-Bulk-Plus.svg';
 
-export const CoinPageMain = styled.span`
+export const CoinPageMain = styled.div`
+    display: grid;
+    justify-items: center;
+    gap: 22px;
+    color: rgb(255, 255, 255);
+`;
 
+export const SummaryHolder = styled.div`
+    margin-left: 10%;
+    margin-right: 10%;
+`;
+
+export const PageTitle = styled.div`
+    margin-top: 40px;
+    margin-bottom: 40px;
+`;
+
+export const PageText = styled.p`
+    font-size: 22px;
+    line-height: 0%;
+`;
+
+export const SummaryContainer = styled.div`
+    display: flex;
+    gap: 60px;
+    place-items: center;
+`;
+
+export const CryptoSummary = styled.div`
+    height: 303px;
+    width: 206px;
+    display: grid;
+    gap: 16px;
+`;
+
+export const CryptoTitle = styled.div`
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    height: 236px;
+    width: 206px;
+    display: grid;
+    place-items: center;
+    -webkit-box-align: center;
+`;
+
+export const CryptoSite = styled.div`
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    width: 100%;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+export const MarketSummary = styled.div`
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    height: 303px;
+    width: 370px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const DataSummary = styled.div`
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    height: 303px;
+    width: 437px;
 `;
 
 export const Symbol = styled.span`
   text-transform: uppercase;
 `;
 
-export const SummaryHolder = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-`;
 
 export const Data = styled.div`
     text-align: left;
@@ -105,4 +165,10 @@ export const CopyIcon = styled.img`
     width: 18px;
     filter: grayscale(100%);
 `;
+
+export const GraphHolder = styled.div`
+    color: #FFFFFF;
+`;
+
+
 
