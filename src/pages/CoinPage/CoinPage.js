@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { CoinPageGraph } from 'components'
-import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoSite, MarketSummary, MarketHolder, MarketPrice, Price, DataSummary, DataHolder, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
+import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, Price, DataSummary, DataHolder, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg"
 import linkIcon from "../../images/awesome-link.svg"
@@ -76,10 +76,16 @@ export default class CoinPage extends React.Component {
               <SummaryContainer>
                 <CryptoSummary>
                   <CryptoTitle>
-                    <img src={profile.image.small} alt={profile.name} />
-                    <p>
-                      {profile.name} <Symbol>({profile.symbol})</Symbol>
-                    </p>
+                    <CryptoContent>
+                      <CryptoIcon>
+                        <CryptoImg src={profile.image.small} alt={profile.name} />
+                      </CryptoIcon>
+                      <CryptoName>
+                      <CryptoText>
+                        {profile.name}&nbsp;<Symbol>({profile.symbol})</Symbol>
+                      </CryptoText>
+                      </CryptoName>
+                    </CryptoContent>
                   </CryptoTitle>
                   <CryptoSite>
                     <LinkIcon src={linkIcon} alt="link icon" />
