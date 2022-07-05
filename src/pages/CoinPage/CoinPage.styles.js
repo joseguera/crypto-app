@@ -62,9 +62,37 @@ export const MarketSummary = styled.div`
     border-radius: 10px;
     height: 303px;
     width: 370px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+`;
+
+export const MarketHolder = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 14px;
+`;
+
+export const MarketPrice = styled.div`
+    display: flex;
+    gap: 12px;
+`;
+
+export const Price = styled.div`
+    font-size: 30px;
+`;
+
+export const ProfitHolder = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`;
+
+export const Profit = styled.div`
+    font-size: 18px;
 `;
 
 export const DataSummary = styled.div`
@@ -85,20 +113,59 @@ export const Data = styled.div`
 
 export const DataHolder = styled.div`
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    width: 250px;
+    align-items: center;
+    gap: 10px;
 `;
 
 export const DescriptionHolder = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    justify-items: center;
+    width: 1133px;
+`;
+
+export const Description = styled.div`
+    justify-self: start;
+    margin-top: 16px;
+    margin-bottom: 32px;
+`;
+
+export const DescriptionTitle = styled.p`
+    font-size: 22px;
+    line-height: 0%;
+`;
+
+export const DescriptionBody = styled.div`
     width: 100%;
+    background: rgb(25, 27, 31);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 19px;
+    margin-left: 10%;
+    margin-right: 10%;
+`;
+
+export const DescriptionText = styled.div`
+    display: grid;
+    place-items: center;
+    padding: 4px 19px 34px;
+`;
+
+export const StackIcon = styled.img`
+    width: 19px;
+    height: 19px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+`;
+
+export const TextHolder = styled.div`
     text-align: center;
+    line-height: 150% !important;
+`;
+
+export const Text = styled.div`
+    text-align: center;
+    line-height: 150% !important;
 `;
 
 export const LinkHolder = styled.div`
