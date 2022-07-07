@@ -9,7 +9,7 @@ export const CoinPageMain = styled.div`
 `;
 
 export const SummaryHolder = styled.div`
-    margin-left: 10%;
+    margin-left: 12%;
     margin-right: 10%;
 `;
 
@@ -152,6 +152,8 @@ export const DescriptionHolder = styled.div`
     display: grid;
     justify-items: center;
     width: 1133px;
+    margin-left: 12%;
+    margin-right: 10%;
 `;
 
 export const Description = styled.div`
@@ -203,7 +205,7 @@ export const LinkHolder = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     gap: 13px;
 `;
