@@ -1,5 +1,6 @@
 import React from "react";
-import { DropDown, DropDownList, DownArrow, CurrencyButton, Symbol, CurrencySymbol, CurrencyName, CurrencyNameHolder, CurrencyItem, CurrencyOptions } from "./CurrencyDropDown.styles";
+import { DownArrow } from 'components';
+import { DropDown, DropDownList, CurrencyButton, Symbol, CurrencySymbol, CurrencyName, CurrencyNameHolder, CurrencyItem, CurrencyOptions } from "./CurrencyDropDown.styles";
 
 export default class CurrencyDropDown extends React.Component {
   state = {
@@ -81,7 +82,7 @@ export default class CurrencyDropDown extends React.Component {
               </Symbol>
               <CurrencyNameHolder>
                 <CurrencyName>{currencyName}</CurrencyName>
-                <DownArrow></DownArrow>
+                <DownArrow />
               </CurrencyNameHolder>
             </CurrencyButton>
             {open && (

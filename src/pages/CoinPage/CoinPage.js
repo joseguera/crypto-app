@@ -1,12 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { CoinPageGraph } from 'components'
-import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, Price, DataSummary, DataHolder, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
+import { CoinPageGraph, DownArrow } from 'components';
+import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, PriceChange, Price, PricePercent, DataSummary, DataHolder, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, ProfitAmount, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
-import stackIcon from "../../images/layer-group.svg"
-import linkIcon from "../../images/awesome-link.svg"
-import copyIcon from "../../images/feather-copy.svg"
-
+import stackIcon from "../../images/layer-group.svg";
+import linkIcon from "../../images/awesome-link.svg";
+import copyIcon from "../../images/feather-copy.svg";
 
 export default class CoinPage extends React.Component {
   constructor(props) {
@@ -101,22 +100,26 @@ export default class CoinPage extends React.Component {
                 <MarketSummary>
                   <MarketHolder>
                     <MarketPrice>
-                    <Price>
-                      {this.formatter.format(
-                        profile.market_data.current_price[currencyName]
-                      )}
-                    </Price>
+                      <Price>
+                        {this.formatter.format(
+                          profile.market_data.current_price[currencyName]
+                        )}
+                      </Price>
+                      <PriceChange>
+                        <DownArrow />
+                        <PricePercent>{roundToNumber(
+                        profile.market_data
+                          .price_change_percentage_24h_in_currency[currencyName],
+                        2
+                      ) + `%`}</PricePercent>
+                      </PriceChange>
                     </MarketPrice>
                   </MarketHolder>
                   <ProfitHolder>
                     <Profit>Profit: </Profit>
-                    <Profit>
-                      {roundToNumber(
-                        profile.market_data
-                          .price_change_percentage_24h_in_currency[currencyName],
-                        2
-                      ) + `%`}
-                    </Profit>
+                    <ProfitAmount>
+                      ${roundToNumber(profile.market_data.price_change_percentage_24h_in_currency[currencyName] * profile.market_data.current_price[currencyName] / 100, 2)}
+                    </ProfitAmount>
                   </ProfitHolder>
                   <StackIcon src={stackIcon} alt="stack image" />
                   <DataHolder>

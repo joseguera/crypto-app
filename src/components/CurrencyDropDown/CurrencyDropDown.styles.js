@@ -18,15 +18,6 @@ export const DropDownList = styled.div`
     text-align: center;
 `;
 
-export const DownArrow = styled.div`
-    width: 0px;
-    height: 0px;
-    margin-left: 5px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #00FF5F;
-`;
-
 export const CurrencyButton = styled.div`
     display: flex;
     flex-direction: row;

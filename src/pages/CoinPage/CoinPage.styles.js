@@ -5,12 +5,12 @@ export const CoinPageMain = styled.div`
     display: grid;
     justify-items: center;
     gap: 22px;
-    color: rgb(255, 255, 255);
+    color: #FFFFFF;
 `;
 
 export const SummaryHolder = styled.div`
-    margin-left: 12%;
-    margin-right: 10%;
+    margin-left: 178px;
+    margin-right: 151px;
 `;
 
 export const PageTitle = styled.div`
@@ -78,7 +78,7 @@ export const CryptoText = styled.p`
 `;
 
 export const CryptoSite = styled.div`
-    background: rgb(25, 27, 31);
+    background: #191B1F;
     border-radius: 10px;
     width: 100%;
     height: 52px;
@@ -89,7 +89,7 @@ export const CryptoSite = styled.div`
 `;
 
 export const MarketSummary = styled.div`
-    background: rgb(25, 27, 31);
+    background: #191B1F;
     border-radius: 10px;
     height: 303px;
     width: 370px;
@@ -112,8 +112,21 @@ export const MarketPrice = styled.div`
     gap: 12px;
 `;
 
-export const Price = styled.div`
+export const PriceChange = styled.span`
+    display: flex;
+    gap: 3px;
+    align-items: center;
+`;
+
+export const PricePercent = styled.span`
+    color: #00FF5F;
+    line-height: 0px;
+`;
+
+export const Price = styled.p`
     font-size: 30px;
+    line-height: 10%;
+    font-weight: 600;
 `;
 
 export const ProfitHolder = styled.div`
@@ -122,12 +135,17 @@ export const ProfitHolder = styled.div`
     gap: 5px;
 `;
 
-export const Profit = styled.div`
+export const Profit = styled.p`
     font-size: 18px;
+    line-height: 0px;
+`;
+
+export const ProfitAmount = styled.span`
+    color: #00FF5F;
 `;
 
 export const DataSummary = styled.div`
-    background: rgb(25, 27, 31);
+    background: #191B1F;
     border-radius: 10px;
     height: 303px;
     width: 437px;
@@ -137,16 +155,19 @@ export const Symbol = styled.span`
   text-transform: uppercase;
 `;
 
-
-export const Data = styled.div`
-    text-align: left;
-`;
-
 export const DataHolder = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+    width: 90%;
 `;
+
+export const Data = styled.div`
+    text-align: left;
+    line-height: 10px;
+`;
+
 
 export const DescriptionHolder = styled.div`
     display: grid;
@@ -169,7 +190,7 @@ export const DescriptionTitle = styled.p`
 
 export const DescriptionBody = styled.div`
     width: 100%;
-    background: rgb(25, 27, 31);
+    background: #191B1F;
     border-radius: 10px;
     display: grid;
     place-items: center;
