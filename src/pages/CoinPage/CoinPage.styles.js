@@ -158,16 +158,40 @@ export const Symbol = styled.span`
 export const DataHolder = styled.div`
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     gap: 10px;
     width: 90%;
 `;
 
-export const Data = styled.div`
-    text-align: left;
-    line-height: 10px;
+export const DataContainer = styled.div`
+    display: flex;
+    width: 250px;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
 `;
 
+export const DataValues = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const DataGroup = styled.div`
+    display: flex;
+    gap: 4px;
+`;
+
+export const DataLabel = styled.p`
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 0px;
+`;
+
+export const Data = styled.p`
+    font-size: 14px;
+    line-height: 0px;
+`;
 
 export const DescriptionHolder = styled.div`
     display: grid;
@@ -208,8 +232,8 @@ export const DescriptionText = styled.div`
 export const StackIcon = styled.img`
     width: 19px;
     height: 19px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 `;
 
 export const TextHolder = styled.div`
