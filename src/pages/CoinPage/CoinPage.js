@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { CoinPageGraph, DownArrow } from 'components';
-import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, PriceChange, Price, PricePercent, DataSummary, DataHolder, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, ProfitAmount, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
+import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, PriceChange, Price, PricePercent, DataSummary, DataHolder, DataContainer, DataValues, DataGroup, DataLabel, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, ProfitAmount, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 import linkIcon from "../../images/awesome-link.svg";
@@ -16,7 +16,7 @@ export default class CoinPage extends React.Component {
       minimumFractionDigits: 0,
     });
   }
-  
+
   state = {
     profile: null,
     isLoading: false,
@@ -46,18 +46,23 @@ export default class CoinPage extends React.Component {
 
   componentDidMount() {
     this.getCoinInfo();
-  };
+  }
 
   setDate = (dateString) => {
     const formatDate = new Date(dateString);
-    return formatDate.toLocaleDateString('en-US');
-  }
+    const hours = formatDate.getHours();
+    const minutes = formatDate.getMinutes();
+    const seconds = formatDate.getSeconds();
+
+    return `${formatDate.toLocaleDateString("en-US")}, 
+    ${(hours < 12) ? hours : hours - 12}:${(minutes < 10) ? "0" + minutes : minutes }:${(seconds < 10) ? "0" + seconds : seconds }`;
+  };
 
   setCurrency = (currency) => {
-    if (currency === 'usd') return '$';
-    if (currency === 'eur') return '€';
-    if (currency === 'gbp') return '£';
-  } 
+    if (currency === "usd") return "$";
+    if (currency === "eur") return "€";
+    if (currency === "gbp") return "£";
+  };
 
   render() {
     const { currencyName } = this.props;
@@ -77,12 +82,16 @@ export default class CoinPage extends React.Component {
                   <CryptoTitle>
                     <CryptoContent>
                       <CryptoIcon>
-                        <CryptoImg src={profile.image.small} alt={profile.name} />
+                        <CryptoImg
+                          src={profile.image.small}
+                          alt={profile.name}
+                        />
                       </CryptoIcon>
                       <CryptoName>
-                      <CryptoText>
-                        {profile.name}&nbsp;<Symbol>({profile.symbol})</Symbol>
-                      </CryptoText>
+                        <CryptoText>
+                          {profile.name}&nbsp;
+                          <Symbol>({profile.symbol})</Symbol>
+                        </CryptoText>
                       </CryptoName>
                     </CryptoContent>
                   </CryptoTitle>
@@ -107,66 +116,101 @@ export default class CoinPage extends React.Component {
                       </Price>
                       <PriceChange>
                         <DownArrow />
-                        <PricePercent>{roundToNumber(
-                        profile.market_data
-                          .price_change_percentage_24h_in_currency[currencyName],
-                        2
-                      ) + `%`}</PricePercent>
+                        <PricePercent>
+                          {roundToNumber(
+                            profile.market_data
+                              .price_change_percentage_24h_in_currency[
+                              currencyName
+                            ],
+                            2
+                          ) + `%`}
+                        </PricePercent>
                       </PriceChange>
                     </MarketPrice>
                   </MarketHolder>
                   <ProfitHolder>
                     <Profit>Profit: </Profit>
                     <ProfitAmount>
-                      ${roundToNumber(profile.market_data.price_change_percentage_24h_in_currency[currencyName] * profile.market_data.current_price[currencyName] / 100, 2)}
+                      $
+                      {roundToNumber(
+                        (profile.market_data
+                          .price_change_percentage_24h_in_currency[
+                          currencyName
+                        ] *
+                          profile.market_data.current_price[currencyName]) /
+                          100,
+                        2
+                      )}
                     </ProfitAmount>
                   </ProfitHolder>
                   <StackIcon src={stackIcon} alt="stack image" />
                   <DataHolder>
-                    <Data>
-                      <p>ATH:</p>
-                      <p>
-                        {this.formatter.format(
-                          profile.market_data.ath[currencyName]
-                        )}
-                      </p>
-                      <p>
-                        {roundToNumber(
-                          profile.market_data.ath_change_percentage[
-                            currencyName
-                          ],
-                          2
-                        )}
-                        %
-                      </p>
-                      <p>
-                        {this.setDate(
-                          profile.market_data.ath_date[currencyName]
-                        )}
-                      </p>
-                    </Data>
-                    <Data>
-                      <p>ATL:</p>
-                      <p>
-                        {this.formatter.format(
-                          profile.market_data.atl[currencyName]
-                        )}
-                      </p>
-                      <p>
-                        {roundToNumber(
-                          profile.market_data.atl_change_percentage[
-                            currencyName
-                          ],
-                          2
-                        )}
-                        %
-                      </p>
-                      <p>
-                        {this.setDate(
-                          profile.market_data.atl_date[currencyName]
-                        )}
-                      </p>
-                    </Data>
+                    <DataContainer>
+                      <DownArrow />
+                      <DataValues>
+                        <DataGroup>
+                          <DataLabel>All Time High:</DataLabel>
+                          <Data>
+                            {this.formatter.format(
+                              profile.market_data.ath[currencyName]
+                            )}
+                          </Data>
+                        </DataGroup>
+
+                        {/* Commented out to use later to figure out change in price 
+                        (thus determining whether arrow will point up or down) */}
+
+                        {/* <p>
+                          {roundToNumber(
+                            profile.market_data.ath_change_percentage[
+                              currencyName
+                            ],
+                            2
+                          )}
+                          %
+                        </p> */}
+                        <span>
+                          <Data>
+                            {this.setDate(
+                              profile.market_data.ath_date[currencyName]
+                            )}
+                          </Data>
+                        </span>
+                      </DataValues>
+                    </DataContainer>
+                    <DataContainer>
+                      <DownArrow />
+                      <DataValues>
+                        <DataGroup>
+                          <DataLabel>All Time Low:</DataLabel>
+                          <Data>
+                            {this.formatter.format(
+                              profile.market_data.atl[currencyName]
+                            )}
+                          </Data>
+                        </DataGroup>
+
+                        {/* Commented out to use later to figure out change in price 
+                          (thus determining whether arrow will point up or down) */}
+
+                        {/* <p>
+                          {roundToNumber(
+                            profile.market_data.atl_change_percentage[
+                              currencyName
+                            ],
+                            2
+                          )}
+                          %
+                        </p> */}
+                        <span>
+                          <Data>
+                            {this.setDate(
+                              profile.market_data.atl_date[currencyName]
+                            )}
+                          </Data>
+                        </span>
+                      </DataValues>
+                    </DataContainer>
                   </DataHolder>
                 </MarketSummary>
                 <DataSummary>
