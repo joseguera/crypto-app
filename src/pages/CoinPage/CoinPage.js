@@ -55,7 +55,8 @@ export default class CoinPage extends React.Component {
     const seconds = formatDate.getSeconds();
 
     return `${formatDate.toLocaleDateString("en-US")}, 
-    ${(hours < 12) ? hours : hours - 12}:${(minutes < 10) ? "0" + minutes : minutes }:${(seconds < 10) ? "0" + seconds : seconds }`;
+    ${(hours < 12) ? hours : hours - 12}:${(minutes < 10) ? "0" + minutes : minutes }:${(seconds < 10) ? "0" + seconds : seconds }
+    ${hours < 12 ? "AM" : "PM"}`;
   };
 
   setCurrency = (currency) => {
@@ -149,7 +150,7 @@ export default class CoinPage extends React.Component {
                   <StackIcon src={stackIcon} alt="stack image" />
                   <DataHolder>
                     <DataContainer>
-                      <DownArrowRed />
+                      <UpArrowGreen />
                       <DataValues>
                         <DataGroup>
                           <DataLabel>All Time High:</DataLabel>
