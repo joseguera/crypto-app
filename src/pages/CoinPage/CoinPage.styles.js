@@ -118,7 +118,12 @@ export const PriceChange = styled.span`
     align-items: center;
 `;
 
-export const PricePercent = styled.span`
+export const PercentDown = styled.span`
+    color: #FE1040;
+    line-height: 0px;
+`;
+
+export const PercentUp = styled.span`
     color: #00FF5F;
     line-height: 0px;
 `;
@@ -140,8 +145,12 @@ export const Profit = styled.p`
     line-height: 0px;
 `;
 
-export const ProfitAmount = styled.span`
+export const ProfitGain = styled.span`
     color: #00FF5F;
+`;
+
+export const ProfitLoss = styled.span`
+    color: #FE1040;
 `;
 
 export const DataSummary = styled.div`
