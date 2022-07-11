@@ -73,6 +73,13 @@ export const Currency = styled.p`
     line-height: 0px;
 `;
 
+export const Selected = styled.p`
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 0px;
+    color: #00FF5F;
+`;
+
 export const CurrencyName = styled.p`
     font-size: 12px;
     font-weight: bold;
