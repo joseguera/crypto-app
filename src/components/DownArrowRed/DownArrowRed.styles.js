@@ -6,5 +6,5 @@ export const DownwardArrow = styled.div`
     margin-left: 5px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid #00FF5F;
+    border-top: 5px solid #FE1040;
 `;

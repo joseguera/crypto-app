@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { CoinPageGraph, DownArrow } from 'components';
-import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, PriceChange, Price, PricePercent, DataSummary, DataHolder, DataContainer, DataValues, DataGroup, DataLabel, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, ProfitAmount, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
+import { CoinPageGraph, DownArrowRed, UpArrowGreen } from 'components';
+import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, PriceChange, Price, PercentDown, PercentUp, DataSummary, DataHolder, DataContainer, DataValues, DataGroup, DataLabel, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, ProfitGain, ProfitLoss, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 import linkIcon from "../../images/awesome-link.svg";
@@ -64,6 +64,29 @@ export default class CoinPage extends React.Component {
     if (currency === "gbp") return "£";
   };
 
+  getProfit = (priceChange24, currentPrice) => {
+    const profit = formatCurrency((priceChange24 * currentPrice) / 100).toFixed(2);
+    return (
+      (profit < 0) ? <ProfitLoss>$({Math.abs(profit)})</ProfitLoss> : <ProfitGain>${profit}</ProfitGain>
+    )
+  }
+
+  getPercentChange = (percent) => {
+    const percentChange = roundToNumber(percent, 2);
+    return (
+      (percentChange < 0) ? 
+        <>
+          <DownArrowRed />
+          <PercentDown>{percentChange}%</PercentDown>
+        </>
+      :
+        <>
+          <UpArrowGreen />
+          <PercentUp>{percentChange}%</PercentUp>
+        </>
+    )
+  }
+
   render() {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
@@ -115,38 +138,18 @@ export default class CoinPage extends React.Component {
                         )}
                       </Price>
                       <PriceChange>
-                        <DownArrow />
-                        <PricePercent>
-                          {roundToNumber(
-                            profile.market_data
-                              .price_change_percentage_24h_in_currency[
-                              currencyName
-                            ],
-                            2
-                          ) + `%`}
-                        </PricePercent>
+                        {this.getPercentChange(profile.market_data.price_change_percentage_24h_in_currency[currencyName])}
                       </PriceChange>
                     </MarketPrice>
                   </MarketHolder>
                   <ProfitHolder>
                     <Profit>Profit: </Profit>
-                    <ProfitAmount>
-                      $
-                      {roundToNumber(
-                        (profile.market_data
-                          .price_change_percentage_24h_in_currency[
-                          currencyName
-                        ] *
-                          profile.market_data.current_price[currencyName]) /
-                          100,
-                        2
-                      )}
-                    </ProfitAmount>
+                    {this.getProfit(profile.market_data.price_change_percentage_24h_in_currency[currencyName], profile.market_data.current_price[currencyName])}
                   </ProfitHolder>
                   <StackIcon src={stackIcon} alt="stack image" />
                   <DataHolder>
                     <DataContainer>
-                      <DownArrow />
+                      <DownArrowRed />
                       <DataValues>
                         <DataGroup>
                           <DataLabel>All Time High:</DataLabel>
@@ -156,19 +159,6 @@ export default class CoinPage extends React.Component {
                             )}
                           </Data>
                         </DataGroup>
-
-                        {/* Commented out to use later to figure out change in price 
-                        (thus determining whether arrow will point up or down) */}
-
-                        {/* <p>
-                          {roundToNumber(
-                            profile.market_data.ath_change_percentage[
-                              currencyName
-                            ],
-                            2
-                          )}
-                          %
-                        </p> */}
                         <span>
                           <Data>
                             {this.setDate(
@@ -179,7 +169,7 @@ export default class CoinPage extends React.Component {
                       </DataValues>
                     </DataContainer>
                     <DataContainer>
-                      <DownArrow />
+                      <DownArrowRed />
                       <DataValues>
                         <DataGroup>
                           <DataLabel>All Time Low:</DataLabel>
@@ -189,19 +179,6 @@ export default class CoinPage extends React.Component {
                             )}
                           </Data>
                         </DataGroup>
-
-                        {/* Commented out to use later to figure out change in price 
-                          (thus determining whether arrow will point up or down) */}
-
-                        {/* <p>
-                          {roundToNumber(
-                            profile.market_data.atl_change_percentage[
-                              currencyName
-                            ],
-                            2
-                          )}
-                          %
-                        </p> */}
                         <span>
                           <Data>
                             {this.setDate(
