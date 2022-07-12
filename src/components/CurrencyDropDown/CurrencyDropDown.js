@@ -1,6 +1,6 @@
 import React from "react";
-import { DownArrow } from 'components';
-import { DropDown, DropDownList, CurrencyButton, Symbol, CurrencySymbol, CurrencyName, CurrencyNameHolder, CurrencyItem, CurrencyOptions } from "./CurrencyDropDown.styles";
+import { DownArrow, UpArrowGreen } from 'components';
+import { DropDown, DropDownHolder, DropDownList, Symbol, Currency, Selected, CurrencyNameHolder, CurrencyItemHolder, CurrencyItem, CurrencyOptions } from "./CurrencyDropDown.styles";
 
 export default class CurrencyDropDown extends React.Component {
   state = {
@@ -75,35 +75,41 @@ export default class CurrencyDropDown extends React.Component {
     return (
       <>
         <DropDown className="container" ref={this.container}>
-          <div>
-            <CurrencyButton onClick={this.handleDropDownClick}>
-              <Symbol>
-                <CurrencySymbol>{this.setCurrencySymbol(currencyName)}</CurrencySymbol>
-              </Symbol>
-              <CurrencyNameHolder>
-                <CurrencyName>{currencyName}</CurrencyName>
-                <DownArrow />
-              </CurrencyNameHolder>
-            </CurrencyButton>
+          <DropDownHolder onClick={this.handleDropDownClick}>
+            <Symbol>
+              <Currency>
+                {this.setCurrencySymbol(currencyName)}
+              </Currency>
+            </Symbol>
+            <CurrencyNameHolder>
+              <Currency>{currencyName}</Currency>
+              {!open ? <DownArrow /> : <UpArrowGreen />}
+            </CurrencyNameHolder>
             {open && (
               <DropDownList>
                 <CurrencyOptions>
                   {this.currencies.map((currency) => {
                     return (
-                        <CurrencyItem onClick={() => this.handleSelection(currency.name)}>
+                      <CurrencyItemHolder
+                        onClick={() => this.handleSelection(currency.name)}
+                      >
+                        <CurrencyItem>
                           <Symbol>
-                            <CurrencySymbol>{this.setCurrencySymbol(currency.name)}</CurrencySymbol>
+                            <Currency>
+                              {this.setCurrencySymbol(currency.name)}
+                            </Currency>
                           </Symbol>
                           <CurrencyNameHolder>
-                            <CurrencyName>{currency.name}</CurrencyName>
+                            {currencyName === currency.name ? <Selected>{currency.name}</Selected> : <Currency>{currency.name}</Currency>}
                           </CurrencyNameHolder>
                         </CurrencyItem>
-                    )
+                      </CurrencyItemHolder>
+                    );
                   })}
                 </CurrencyOptions>
               </DropDownList>
             )}
-          </div>
+          </DropDownHolder>
         </DropDown>
       </>
     );

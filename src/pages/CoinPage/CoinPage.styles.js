@@ -189,6 +189,8 @@ export const DataValues = styled.div`
 export const DataGroup = styled.div`
     display: flex;
     gap: 4px;
+    justify-content: center;
+
 `;
 
 export const DataLabel = styled.p`
