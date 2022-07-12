@@ -81,6 +81,6 @@ export const Selected = styled.p`
 `;
 
 export const CurrencyName = styled.p`
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 `;
