@@ -323,7 +323,22 @@ export const CopyIcon = styled.img`
 `;
 
 export const GraphHolder = styled.div`
-    color: #FFFFFF;
+    display: grid;
+    place-items: center;
+`;
+
+export const ConverterHolder = styled.div`
+    
+`;
+
+export const GraphContainer = styled.div`
+    display: grid;
+    justify-items: center;
+`;
+
+export const CoinPageGraph = styled.div`
+    width: 1519px;
+    height: 220px;
 `;
 
 
