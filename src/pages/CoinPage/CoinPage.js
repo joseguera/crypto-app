@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { CoinPageGraph, DownArrowRed, UpArrowGreen } from "components";
+import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen } from "components";
 import {
   CoinPageMain,
   SummaryHolder,
@@ -354,7 +354,7 @@ export default class CoinPage extends React.Component {
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>
-              <ConverterHolder>Currency Converter Placeholder</ConverterHolder>
+              <CryptoExchange />
               <GraphContainer>
                 <CoinPageGraph
                   cryptoName={profile.name.toLowerCase()}
