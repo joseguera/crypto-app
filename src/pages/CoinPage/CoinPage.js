@@ -1,7 +1,57 @@
 import React from "react";
 import axios from "axios";
-import { CoinPageGraph, DownArrowRed, UpArrowGreen } from 'components';
-import { CoinPageMain, SummaryHolder, PageTitle, PageText, SummaryContainer, CryptoSummary, CryptoTitle, CryptoContent, CryptoIcon, CryptoImg, CryptoName, CryptoText, CryptoSite, MarketSummary, MarketHolder, MarketPrice, PriceChange, Price, PercentDown, PercentUp, DataSummary, DataHolder, DataContainer, DataValues, DataGroup, DataLabel, Data, DescriptionHolder, Description, DescriptionTitle, DescriptionBody, DescriptionText, StackIcon, TextHolder, Text, ProfitHolder, Profit, ProfitGain, ProfitLoss, LinkHolder, Symbol, DataItem, LinkContainer, Site, LinkIcon, CopyIcon, GraphHolder } from "./CoinPage.styles";
+import { CoinPageGraph, DownArrowRed, UpArrowGreen } from "components";
+import {
+  CoinPageMain,
+  SummaryHolder,
+  PageTitle,
+  PageText,
+  SummaryContainer,
+  CryptoSummary,
+  CryptoTitle,
+  CryptoContent,
+  CryptoIcon,
+  CryptoImg,
+  CryptoName,
+  CryptoText,
+  CryptoSite,
+  MarketSummary,
+  MarketHolder,
+  MarketPrice,
+  PriceChange,
+  Price,
+  PercentDown,
+  PercentUp,
+  DataSummary,
+  DataHolder,
+  DataContainer,
+  DataValues,
+  DataGroup,
+  DataLabel,
+  Data,
+  DescriptionHolder,
+  Description,
+  DescriptionTitle,
+  DescriptionBody,
+  DescriptionText,
+  StackIcon,
+  TextHolder,
+  Text,
+  ProfitHolder,
+  Profit,
+  ProfitGain,
+  ProfitLoss,
+  LinkHolder,
+  Symbol,
+  DataItem,
+  LinkContainer,
+  Site,
+  LinkIcon,
+  CopyIcon,
+  GraphHolder,
+  ConverterHolder,
+  GraphContainer
+} from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 import linkIcon from "../../images/awesome-link.svg";
@@ -55,7 +105,9 @@ export default class CoinPage extends React.Component {
     const seconds = formatDate.getSeconds();
 
     return `${formatDate.toLocaleDateString("en-US")}, 
-    ${(hours < 12) ? hours : hours - 12}:${(minutes < 10) ? "0" + minutes : minutes }:${(seconds < 10) ? "0" + seconds : seconds }
+    ${hours < 12 ? hours : hours - 12}:${
+      minutes < 10 ? "0" + minutes : minutes
+    }:${seconds < 10 ? "0" + seconds : seconds}
     ${hours < 12 ? "AM" : "PM"}`;
   };
 
@@ -66,27 +118,30 @@ export default class CoinPage extends React.Component {
   };
 
   getProfit = (priceChange24, currentPrice) => {
-    const profit = formatCurrency((priceChange24 * currentPrice) / 100).toFixed(2);
-    return (
-      (profit < 0) ? <ProfitLoss>$({Math.abs(profit)})</ProfitLoss> : <ProfitGain>${profit}</ProfitGain>
-    )
-  }
+    const profit = formatCurrency((priceChange24 * currentPrice) / 100).toFixed(
+      2
+    );
+    return profit < 0 ? (
+      <ProfitLoss>$({Math.abs(profit)})</ProfitLoss>
+    ) : (
+      <ProfitGain>${profit}</ProfitGain>
+    );
+  };
 
   getPercentChange = (percent) => {
     const percentChange = roundToNumber(percent, 2);
-    return (
-      (percentChange < 0) ? 
-        <>
-          <DownArrowRed />
-          <PercentDown>{percentChange}%</PercentDown>
-        </>
-      :
-        <>
-          <UpArrowGreen />
-          <PercentUp>{percentChange}%</PercentUp>
-        </>
-    )
-  }
+    return percentChange < 0 ? (
+      <>
+        <DownArrowRed />
+        <PercentDown>{percentChange}%</PercentDown>
+      </>
+    ) : (
+      <>
+        <UpArrowGreen />
+        <PercentUp>{percentChange}%</PercentUp>
+      </>
+    );
+  };
 
   render() {
     const { currencyName } = this.props;
@@ -139,13 +194,22 @@ export default class CoinPage extends React.Component {
                         )}
                       </Price>
                       <PriceChange>
-                        {this.getPercentChange(profile.market_data.price_change_percentage_24h_in_currency[currencyName])}
+                        {this.getPercentChange(
+                          profile.market_data
+                            .price_change_percentage_24h_in_currency[
+                            currencyName
+                          ]
+                        )}
                       </PriceChange>
                     </MarketPrice>
                   </MarketHolder>
                   <ProfitHolder>
                     <Profit>Profit: </Profit>
-                    {this.getProfit(profile.market_data.price_change_percentage_24h_in_currency[currencyName], profile.market_data.current_price[currencyName])}
+                    {this.getProfit(
+                      profile.market_data
+                        .price_change_percentage_24h_in_currency[currencyName],
+                      profile.market_data.current_price[currencyName]
+                    )}
                   </ProfitHolder>
                   <StackIcon src={stackIcon} alt="stack image" />
                   <DataHolder>
@@ -290,11 +354,15 @@ export default class CoinPage extends React.Component {
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>
-              <div>Currency Converter Placeholder</div>
-              <CoinPageGraph
-                cryptoName={profile.name.toLowerCase()}
-                currencyName={this.props.currencyName}
-              />
+              <ConverterHolder>Currency Converter Placeholder</ConverterHolder>
+              <GraphContainer>
+                <CoinPageGraph
+                  cryptoName={profile.name.toLowerCase()}
+                  currencyName={this.props.currencyName}
+                />
+
+              </GraphContainer>
+              
             </GraphHolder>
           </CoinPageMain>
         )}

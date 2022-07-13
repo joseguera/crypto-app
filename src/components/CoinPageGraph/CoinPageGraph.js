@@ -108,6 +108,8 @@ export default class CoinPageGraph extends React.Component {
           fill: true,
           borderColor: "#2C2F36",
           backgroundColor: "#1C1E24",
+          pointHoverRadius: 5,
+         pointHoverBackgroundColor: "#00FF5F"
         },
       ],
     };
@@ -143,7 +145,7 @@ export default class CoinPageGraph extends React.Component {
     const hasGraph = !isLoading && this.state.prices;
 
     return (
-      <GraphDataHolder>
+      <>
         {isLoading && <div>Loading...</div>}
         {hasGraph && this.hasData() && (
           <>
@@ -153,7 +155,7 @@ export default class CoinPageGraph extends React.Component {
             </GraphCointaner>
           </>
         )}
-      </GraphDataHolder>
+      </>
     );
   }
 }
