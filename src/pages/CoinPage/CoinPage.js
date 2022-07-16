@@ -49,7 +49,6 @@ import {
   LinkIcon,
   CopyIcon,
   GraphHolder,
-  ConverterHolder,
   GraphContainer
 } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
@@ -354,11 +353,11 @@ export default class CoinPage extends React.Component {
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>
-              <CryptoExchange />
+              <CryptoExchange cryptoName={profile.symbol} currencyName={currencyName} currentPrice={profile.market_data.current_price[currencyName]} />
               <GraphContainer>
                 <CoinPageGraph
                   cryptoName={profile.name.toLowerCase()}
-                  currencyName={this.props.currencyName}
+                  currencyName={currencyName}
                 />
 
               </GraphContainer>

@@ -13,18 +13,18 @@ export const DateButton = styled.div`
   cursor: pointer;
   height: 34px;
   width: 34px;
-  color: #FFFFFF;
+  color: #ffffff;
   display: grid;
   border-radius: 5px;
   place-items: center;
 `;
 
 export const StyledButton = styled.div`
-  background-color: #00FF5F;
+  background-color: #06d554;
   cursor: pointer;
   height: 34px;
   width: 34px;
-  color: #FFFFFF;
+  color: #ffffff;
   display: grid;
   border-radius: 5px;
   place-items: center;
