@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen } from "components";
+import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar } from "components";
 import {
   CoinPageMain,
   SummaryHolder,
@@ -318,6 +318,7 @@ export default class CoinPage extends React.Component {
                       : 0}{" "}
                     <Symbol>{profile.symbol}</Symbol>
                   </DataItem>
+                  <ProgressBar />
                 </DataSummary>
               </SummaryContainer>
             </SummaryHolder>
