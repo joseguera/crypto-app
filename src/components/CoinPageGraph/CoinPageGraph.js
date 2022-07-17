@@ -109,7 +109,7 @@ export default class CoinPageGraph extends React.Component {
           borderColor: "#2C2F36",
           backgroundColor: "#1C1E24",
           pointHoverRadius: 5,
-         pointHoverBackgroundColor: "#00FF5F"
+          pointHoverBackgroundColor: "#06D554",
         },
       ],
     };
@@ -151,7 +151,11 @@ export default class CoinPageGraph extends React.Component {
           <>
             <CoinPageDateButtons setDateRange={this.setDateRange} />
             <GraphCointaner>
-              <Line options={options} data={graphData} className="graph-style" />
+              <Line
+                options={options}
+                data={graphData}
+                className="graph-style"
+              />
             </GraphCointaner>
           </>
         )}
