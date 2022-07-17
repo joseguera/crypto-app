@@ -13,17 +13,28 @@ import {
 import exchangeIcon from "../../images/Icon-awesome-exchange-alt.svg";
 
 export default class CryptoExchange extends React.Component {
+  
   state = {
     inputValue: 1,
-  }
-
-  handleChange = (e) => {
-    this.setState({ inputValue: e.target.value })
+    fiatValue: this.props.currentPrice
   }
 
   currencyName = this.props.currencyName.toUpperCase();
   cryptoName = this.props.cryptoName.toUpperCase();
-  currentPrice = this.props.currentPrice;
+  currentPrice = roundToNumber(this.props.currentPrice, 2);
+
+  handleCryptoChange = (e) => {
+    const crypto = e.target.value;
+    const fiat = crypto * this.currentPrice;
+    const fiatTotal = (fiat > 1000) ? formatCurrency(fiat) : fiat.toFixed(2);
+    this.setState({ inputValue: crypto, fiatValue: fiatTotal })
+  }
+
+  handleFiatChange = (e) => {
+    const fiat = e.target.value;
+    const cryptoTotal = roundToNumber(fiat / this.currentPrice, 6);
+    this.setState({ inputValue: cryptoTotal, fiatValue: fiat })
+  }
 
   setCurrencySymbol = (currency) => {
     if (currency === 'USD') { 
@@ -37,15 +48,8 @@ export default class CryptoExchange extends React.Component {
     }
   } 
 
-  getExchange = (price) => {
-    const rate = this.state.inputValue;
-    const currencyRate = price * rate
-    
-    return (currencyRate > 1000) ? formatCurrency(currencyRate) : roundToNumber(currencyRate, 2);
-  }
-
   render() {
-    const { inputValue } = this.state;
+    const { inputValue, fiatValue } = this.state;
 
     return (
       <ExchangeHolder>
@@ -55,10 +59,11 @@ export default class CryptoExchange extends React.Component {
           </CurrencyName>
           <CurrencyInput>
             <InputField
-              onChange={this.handleChange}
+              onChange={this.handleCryptoChange}
               value={inputValue}
               type="text"
               name="crypto-currency"
+              autoComplete="off"
             />
           </CurrencyInput>
         </ExchangeCurrency>
@@ -70,10 +75,11 @@ export default class CryptoExchange extends React.Component {
           <CurrencyInput>
             <CurrencySymbol>{this.setCurrencySymbol(this.currencyName)}</CurrencySymbol>
             <InputField 
-              onChange={this.handleChange}
-              value={this.getExchange(this.currentPrice)}
+              onChange={this.handleFiatChange}
+              value={fiatValue}
               type="text"
               name="fiat-currency"
+              autoComplete="off"
             />
           </CurrencyInput>
         </ExchangeCurrency>
