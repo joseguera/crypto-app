@@ -117,9 +117,8 @@ export default class CoinPage extends React.Component {
   };
 
   getProfit = (priceChange24, currentPrice) => {
-    const profit = formatCurrency((priceChange24 * currentPrice) / 100).toFixed(
-      2
-    );
+    const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2)
+    const profit = formatCurrency(profitPercent);
     return profit < 0 ? (
       <ProfitLoss>$({Math.abs(profit)})</ProfitLoss>
     ) : (
@@ -318,7 +317,7 @@ export default class CoinPage extends React.Component {
                       : 0}{" "}
                     <Symbol>{profile.symbol}</Symbol>
                   </DataItem>
-                  <ProgressBar />
+                  <ProgressBar priceChange24hPercent={profile.market_data.price_change_percentage_24h_in_currency[currencyName]} />
                 </DataSummary>
               </SummaryContainer>
             </SummaryHolder>

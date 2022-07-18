@@ -11,9 +11,16 @@ export const ProgressBarLabel = styled.span`
     justify-content: space-between;
 `;
 
-export const LabelText = styled.p`
+export const LabelTextStart = styled.p`
     font-size: 15px;
     line-height: 0;
+    color: #FEE158;
+`;
+
+export const LabelTextEnd = styled.p`
+    font-size: 15px;
+    line-height: 0;
+    color: #FE8C01;
 `;
 
 export const ProgressBarContainer = styled.div`
@@ -26,7 +33,6 @@ export const ProgressBarContainer = styled.div`
 `;
 
 export const ProgressLevel = styled.div`
-    width: 50%;
     height: 100%;
     border-radius: 50px;
     background: #FEE158;
