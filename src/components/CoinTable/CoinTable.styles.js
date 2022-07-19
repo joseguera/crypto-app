@@ -10,4 +10,9 @@ export const TableGrid = styled.div`
         'main main main main main main main main main';
     padding-right: 77px;
     padding-left: 13px;
+    background: #191B1F;
+    border-radius: 10px;
+    width: 100%;
+    padding: 17px;
+
 `;
