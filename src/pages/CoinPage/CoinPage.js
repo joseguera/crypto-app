@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen } from "components";
+import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar } from "components";
 import {
   CoinPageMain,
   SummaryHolder,
@@ -22,7 +22,11 @@ import {
   Price,
   PercentDown,
   PercentUp,
-  DataSummary,
+  DataSummaryHolder,
+  DataSummaryContainer,
+  MarketDataOne,
+  MarketDataTwo,
+  MarketDataThree,
   DataHolder,
   DataContainer,
   DataValues,
@@ -44,6 +48,9 @@ import {
   LinkHolder,
   Symbol,
   DataItem,
+  PlusIcon,
+  Item,
+  ItemTitle,
   LinkContainer,
   Site,
   LinkIcon,
@@ -117,9 +124,8 @@ export default class CoinPage extends React.Component {
   };
 
   getProfit = (priceChange24, currentPrice) => {
-    const profit = formatCurrency((priceChange24 * currentPrice) / 100).toFixed(
-      2
-    );
+    const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2)
+    const profit = formatCurrency(profitPercent);
     return profit < 0 ? (
       <ProfitLoss>$({Math.abs(profit)})</ProfitLoss>
     ) : (
@@ -167,7 +173,15 @@ export default class CoinPage extends React.Component {
                       </CryptoIcon>
                       <CryptoName>
                         <CryptoText>
-                          {profile.name}&nbsp;
+                          {profile.name}
+                          {profile.name.length > 7 ? (
+                            <>
+                              <br />
+                              <br />
+                            </>
+                          ) : (
+                            " "
+                          )}
                           <Symbol>({profile.symbol})</Symbol>
                         </CryptoText>
                       </CryptoName>
@@ -254,71 +268,126 @@ export default class CoinPage extends React.Component {
                     </DataContainer>
                   </DataHolder>
                 </MarketSummary>
-                <DataSummary>
-                  <DataItem>
-                    <span>Market Cap: </span>
-                    {this.setCurrency(currencyName)}
-                    {formatCurrency(
-                      profile.market_data.market_cap[currencyName]
-                    )}{" "}
-                    <span>
-                      {roundToNumber(
-                        profile.market_data
-                          .market_cap_change_percentage_24h_in_currency[
-                          currencyName
-                        ],
-                        2
-                      )}
-                      %
-                    </span>
-                  </DataItem>
-                  <DataItem>
-                    <span>Fully Diluted Valuation: </span>
-                    {this.setCurrency(currencyName)}
-                    {profile.market_data.fully_diluted_valuation[currencyName]
-                      ? formatCurrency(
-                          profile.market_data.fully_diluted_valuation[
+                <DataSummaryHolder>
+                  <DataSummaryContainer>
+                    <MarketDataOne>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                          <ItemTitle>Market Cap:</ItemTitle>
+                          <div>
+                            {this.setCurrency(currencyName)}
+                            {formatCurrency(
+                              profile.market_data.market_cap[currencyName]
+                            )}
+                          </div>
+                          <ItemTitle>
+                            {roundToNumber(
+                              profile.market_data
+                                .market_cap_change_percentage_24h_in_currency[
+                                currencyName
+                              ],
+                              2
+                            )}
+                            %
+                          </ItemTitle>
+                        </Item>
+                      </DataItem>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                          <ItemTitle>Fully Diluted Valuation: </ItemTitle>
+                          <div>
+                            {this.setCurrency(currencyName)}
+                            {profile.market_data.fully_diluted_valuation[
+                              currencyName
+                            ]
+                              ? formatCurrency(
+                                  profile.market_data.fully_diluted_valuation[
+                                    currencyName
+                                  ]
+                                )
+                              : "0.00"}
+                          </div>
+                        </Item>
+                      </DataItem>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                          <ItemTitle>Volume 24h:</ItemTitle>
+                          <div>
+                            {this.setCurrency(currencyName)}
+                            {formatCurrency(
+                              profile.market_data.total_volume[currencyName]
+                            )}
+                          </div>
+                        </Item>
+                      </DataItem>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                          <ItemTitle>Volume / Market:</ItemTitle>{" "}
+                          <div>
+                            {roundToNumber(
+                            profile.market_data.total_volume[currencyName] /
+                              profile.market_data.market_cap[currencyName],
+                            4
+                          )}
+                          </div>
+                        </Item>
+                      </DataItem>
+                    </MarketDataOne>
+                    <MarketDataTwo>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                          <ItemTitle>Total Volume:</ItemTitle>
+                          <div>
+                            {this.setCurrency(currencyName)}
+                            {formatCurrency(
+                              profile.market_data.total_volume[currencyName]
+                            )}
+                          </div>
+                        </Item>
+                      </DataItem>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                        <ItemTitle>Circulating Supply:</ItemTitle>{" "}
+                        <div>
+                          {roundToNumber(
+                            profile.market_data.circulating_supply,
+                            0
+                          )}
+                        </div>
+                        <Symbol>{profile.symbol}</Symbol>
+                        </Item>
+                      </DataItem>
+                      <DataItem>
+                        <PlusIcon />
+                        <Item>
+                          <ItemTitle>Max Supply:</ItemTitle>{" "}
+                          <div>
+                            {profile.market_data.max_supply
+                              ? profile.market_data.max_supply
+                              : 0}
+                          </div>
+                          <Symbol>{profile.symbol}</Symbol>
+                        </Item>
+                      </DataItem>
+                    </MarketDataTwo>
+                    <MarketDataThree>
+                      <ProgressBar
+                        priceChange24hPercent={
+                          profile.market_data
+                            .price_change_percentage_24h_in_currency[
                             currencyName
                           ]
-                        )
-                      : "0.00"}
-                  </DataItem>
-                  <DataItem>
-                    <span>Volume 24h:</span>
-                    {this.setCurrency(currencyName)}
-                    {formatCurrency(
-                      profile.market_data.total_volume[currencyName]
-                    )}
-                  </DataItem>
-                  <DataItem>
-                    <span>Volume / Market:</span>{" "}
-                    {roundToNumber(
-                      profile.market_data.total_volume[currencyName] /
-                        profile.market_data.market_cap[currencyName],
-                      4
-                    )}
-                  </DataItem>
-                  <br />
-                  <DataItem>
-                    <span>Total Volume:</span>
-                    {this.setCurrency(currencyName)}
-                    {formatCurrency(
-                      profile.market_data.total_volume[currencyName]
-                    )}
-                  </DataItem>
-                  <DataItem>
-                    <span>Circulating Supply:</span>{" "}
-                    {roundToNumber(profile.market_data.circulating_supply, 0)}{" "}
-                    <Symbol>{profile.symbol}</Symbol>
-                  </DataItem>
-                  <DataItem>
-                    <span>Max Supply:</span>{" "}
-                    {profile.market_data.max_supply
-                      ? profile.market_data.max_supply
-                      : 0}{" "}
-                    <Symbol>{profile.symbol}</Symbol>
-                  </DataItem>
-                </DataSummary>
+                        }
+                      />
+                    </MarketDataThree>
+                  </DataSummaryContainer>
+                </DataSummaryHolder>
               </SummaryContainer>
             </SummaryHolder>
             <DescriptionHolder>
@@ -353,15 +422,17 @@ export default class CoinPage extends React.Component {
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>
-              <CryptoExchange cryptoName={profile.symbol} currencyName={currencyName} currentPrice={profile.market_data.current_price[currencyName]} />
+              <CryptoExchange
+                cryptoName={profile.symbol}
+                currencyName={currencyName}
+                currentPrice={profile.market_data.current_price[currencyName]}
+              />
               <GraphContainer>
                 <CoinPageGraph
                   cryptoName={profile.name.toLowerCase()}
                   currencyName={currencyName}
                 />
-
               </GraphContainer>
-              
             </GraphHolder>
           </CoinPageMain>
         )}
