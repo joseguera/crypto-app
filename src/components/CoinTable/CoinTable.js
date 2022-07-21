@@ -6,9 +6,16 @@ import { TableGrid } from "./CoinTable.styles";
 class CoinTable extends React.Component {
   state = {
     coins: null,
-    pointsDown: true,
     isLoading: false,
-    hasError: false
+    hasError: false,
+    filterSelection : {
+      marketCapRank: { id: 1, title: "#", upArrow: false },
+      name: { id: 2, title: "Name", upArrow: false },
+      price: { id: 3, title: "Price", upArrow: false },
+      hour: { id: 4, title: "1h%", upArrow: false },
+      day: { id: 5, title: "24h%", upArrow: false },
+      week: { id: 6, title: "7d%", upArrow: false }
+    },
   };
 
   getCoins = async () => {
@@ -26,10 +33,16 @@ class CoinTable extends React.Component {
     }
   };
 
-  setFilterArrowDirection = () => {
-    const click = this.state.pointsDown;
+  setFilterArrowDirection = (id) => {
+    const filter = Object.values(this.state.filterSelection).map((filter) => {
+      if (filter.id === id) {
+        return { ...filter, upArrow: !filter.upArrow }
+      } else {
+        return filter
+      }
+    })
     this.setState({
-      pointsDown: !click
+      filterSelection: filter
     })
   }
 
@@ -44,7 +57,7 @@ class CoinTable extends React.Component {
   }
 
   render() {
-    const { coins, isLoading, pointsDown } = this.state;
+    const { coins, isLoading, filterSelection } = this.state;
     const hasCoins = !isLoading && coins;
 
     return (
@@ -52,19 +65,30 @@ class CoinTable extends React.Component {
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
           <TableGrid>
-            <div onClick={this.setFilterArrowDirection}>#{' '}
-              {(pointsDown) ? <FilterArrowDown /> : <FilterArrowUp />}
-            </div>
-            <div onClick={this.setFilterArrowDirection}>Name{' '}{(pointsDown) ? <FilterArrowDown /> : <FilterArrowUp />}</div>
-            <div onClick={this.setFilterArrowDirection}>Price{' '}{(pointsDown) ? <FilterArrowDown /> : <FilterArrowUp />}</div>
-            <div onClick={this.setFilterArrowDirection}>1h%{' '}{(pointsDown) ? <FilterArrowDown /> : <FilterArrowUp />}</div>
-            <div onClick={this.setFilterArrowDirection}>24h%{' '}{(pointsDown) ? <FilterArrowDown /> : <FilterArrowUp />}</div>
-            <div onClick={this.setFilterArrowDirection}>7d%{' '}{(pointsDown) ? <FilterArrowDown /> : <FilterArrowUp />}</div>
+            {Object.values(filterSelection).map((filter) => {
+              return filter.upArrow ? (
+                <div
+                  id={filter.id}
+                  onClick={() => this.setFilterArrowDirection(filter.id)}
+                >
+                  {filter.title}{' '}{<FilterArrowUp />}
+                </div>
+              ) : (
+                <div
+                  id={filter.id}
+                  onClick={() => this.setFilterArrowDirection(filter.id)}
+                >
+                  {filter.title}{' '}{<FilterArrowDown />}
+                </div>
+              );
+            })}
             <div>24h Volume/Market Cap</div>
             <div>Circulating/Total Supply</div>
             <div>Last 7d</div>
-            <TableContent coins={coins} currencyName={this.props.currencyName}/>
-            
+            <TableContent
+              coins={coins}
+              currencyName={this.props.currencyName}
+            />
           </TableGrid>
         )}
       </>
