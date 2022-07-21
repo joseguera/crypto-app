@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { roundToNumber, formatCurrency } from 'util/numberUtil';
 import { Icon, Symbol, LinkText, styledLink } from "./TableContent.styles";
-import { SmallGraph } from 'components';
-
+import { SmallGraph, FilterArrowDown, FilterArrowUp } from 'components';
 
 export default class TableContent extends React.Component {
     formatter = new Intl.NumberFormat("en-US", {
