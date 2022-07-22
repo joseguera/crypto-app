@@ -23,3 +23,17 @@ export const LabelTextEnd = styled.p`
     color: #FE8C01;
 `;
 
+export const ProgressBarContainer = styled.div`
+    background: #FE8C01;
+    width: 100%;
+    height: 8px;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 0.5px solid #191b1f;
+`;
+
+export const ProgressLevel = styled.div`
+    height: 100%;
+    border-radius: 50px;
+    background: #FEE158;
+`;

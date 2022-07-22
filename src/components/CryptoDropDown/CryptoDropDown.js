@@ -1,5 +1,5 @@
 import React from "react";
-import { DropDown, DropDownList } from "./CryptoDropDown.styles";
+import { DropDownHolder, DropDown, CryptoTitle, Arrow, DropDownList, ListItem } from "./CryptoDropDown.styles";
 
 export default class CryptoDropDown extends React.Component {
   state = {
@@ -48,19 +48,20 @@ export default class CryptoDropDown extends React.Component {
     const { open } = this.state;
     return (
       <>
-        <DropDown className="container" ref={this.container}>
-          <div>
-            <div onClick={this.handleDropDownClick}>
-              {this.state.cryptoName} Overview
-            </div>
+        <div className="container" ref={this.container}>
+          <DropDownHolder>
+            <DropDown onClick={this.handleDropDownClick}>
+              <CryptoTitle>{this.state.cryptoName}&nbsp;Overview</CryptoTitle>
+              <Arrow />
+            </DropDown>
             {open && (
               <DropDownList>
-                <div id="Bitcoin" onClick={(e) => this.handleSelection(e.target.id)}>Bitcoin</div>
-                <div id="Ethereum" onClick={(e) => this.handleSelection(e.target.id)}>Ethereum</div>
+                <ListItem id="Bitcoin" onClick={(e) => this.handleSelection(e.target.id)}>Bitcoin</ListItem>
+                <ListItem id="Ethereum" onClick={(e) => this.handleSelection(e.target.id)}>Ethereum</ListItem>
               </DropDownList>
             )}
-          </div>
-        </DropDown>
+          </DropDownHolder>
+        </div>
       </>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
-import { ProgressBarHolder, ProgressBarLabel, LabelTextStart, LabelTextEnd, ProgressBarContainer, ProgressLevel } from './ProgressBar.styles'
+import { Bar } from 'components'
+import { ProgressBarHolder, ProgressBarLabel, LabelTextStart, LabelTextEnd } from './ProgressBar.styles'
 import { roundToNumber } from "util/numberUtil";
 
 const ProgressBar = (props) => {
@@ -12,11 +13,9 @@ const ProgressBar = (props) => {
             <ProgressBarHolder>
                 <ProgressBarLabel>
                     <LabelTextStart>&#x25CF; {percentChange}%</LabelTextStart>
-                    <LabelTextEnd>&#x25CF; {100 - percentChange}%</LabelTextEnd>
+                    <LabelTextEnd>&#x25CF; {(percentChange < 0) ? 100 : 100 - percentChange}%</LabelTextEnd>
                 </ProgressBarLabel>
-                <ProgressBarContainer>
-                    <ProgressLevel style={percentStyle}></ProgressLevel>
-                </ProgressBarContainer>
+                <Bar percentStyle={percentStyle} />
             </ProgressBarHolder>
         </>
     )

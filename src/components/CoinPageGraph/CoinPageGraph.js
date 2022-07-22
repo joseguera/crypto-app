@@ -13,8 +13,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { CoinPageDateButtons } from "components";
-import { timeConverter, formatCurrency } from "util/numberUtil";
-import { GraphCointaner, GraphDataHolder } from "./CoinPageGraph.styles";
+import { timeConverter } from "util/numberUtil";
+import { GraphCointaner } from "./CoinPageGraph.styles";
 
 ChartJS.register(
   CategoryScale,
