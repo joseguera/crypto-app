@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { TableContent, FilterArrowDown, FilterArrowUp } from "components";
-import { TableGrid } from "./CoinTable.styles";
+import { TableGrid, TableHeader } from "./CoinTable.styles";
 
 class CoinTable extends React.Component {
   state = {
@@ -67,19 +67,21 @@ class CoinTable extends React.Component {
           <TableGrid>
             {Object.values(filterSelection).map((filter) => {
               return filter.upArrow ? (
-                <div
+                <TableHeader
+                  key={filter.id}
                   id={filter.id}
                   onClick={() => this.setFilterArrowDirection(filter.id)}
                 >
                   {filter.title}{' '}{<FilterArrowUp />}
-                </div>
+                </TableHeader>
               ) : (
-                <div
+                <TableHeader
+                  key={filter.id}
                   id={filter.id}
                   onClick={() => this.setFilterArrowDirection(filter.id)}
                 >
                   {filter.title}{' '}{<FilterArrowDown />}
-                </div>
+                </TableHeader>
               );
             })}
             <div>24h Volume/Market Cap</div>

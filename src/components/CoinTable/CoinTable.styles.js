@@ -16,3 +16,9 @@ export const TableGrid = styled.div`
     padding: 17px;
 
 `;
+
+export const TableHeader = styled.div`
+   &:hover {
+    cursor: pointer;
+   }
+`;

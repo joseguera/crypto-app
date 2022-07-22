@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { roundToNumber, formatCurrency } from 'util/numberUtil';
+import { roundToNumber} from 'util/numberUtil';
 import { Icon, Symbol, LinkText, styledLink } from "./TableContent.styles";
-import { SmallGraph, FilterArrowDown, FilterArrowUp } from 'components';
+import { SmallGraph, ProgressBarTable } from 'components';
 
 export default class TableContent extends React.Component {
     formatter = new Intl.NumberFormat("en-US", {
@@ -37,12 +37,10 @@ export default class TableContent extends React.Component {
                   {roundToNumber(coin.price_change_percentage_7d_in_currency, 2)}%
                 </div>
                 <div>
-                  <span>{formatCurrency(coin.total_volume)}</span>{" "}
-                  <span>{formatCurrency(coin.market_cap)}</span>
+                  <ProgressBarTable currency={this.props.currencyName} values={ { "first" : coin.total_volume, "second": coin.market_cap } } />
                 </div>
                 <div>
-                  <span>{formatCurrency(coin.circulating_supply)}</span>{" "}
-                  <span>{formatCurrency(coin.total_supply)}</span>
+                  <ProgressBarTable currency={this.props.currencyName} values={ { "first" : coin.circulating_supply, "second": coin.total_supply } } />
                 </div>
                 <SmallGraph graphData={coin.sparkline_in_7d.price} />
               </React.Fragment>
