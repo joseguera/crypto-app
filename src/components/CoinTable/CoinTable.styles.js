@@ -14,7 +14,6 @@ export const TableGrid = styled.div`
     border-radius: 10px;
     width: 100%;
     padding: 17px;
-
 `;
 
 export const TableHeader = styled.div`

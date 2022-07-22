@@ -8,13 +8,33 @@ class CoinTable extends React.Component {
     coins: null,
     isLoading: false,
     hasError: false,
-    filterSelection : {
-      marketCapRank: { id: 1, title: "#", upArrow: false },
-      name: { id: 2, title: "Name", upArrow: false },
-      price: { id: 3, title: "Price", upArrow: false },
-      hour: { id: 4, title: "1h%", upArrow: false },
-      day: { id: 5, title: "24h%", upArrow: false },
-      week: { id: 6, title: "7d%", upArrow: false }
+    filterSelection: {
+      marketCapRank: {
+        id: 1,
+        title: "#",
+        prop: "market_cap_rank",
+        upArrow: false,
+      },
+      name: { id: 2, title: "Name", prop: "name", upArrow: false },
+      price: { id: 3, title: "Price", prop: "current_price", upArrow: false },
+      hour: {
+        id: 4,
+        title: "1h%",
+        prop: "price_change_percentage_1h_in_currency",
+        upArrow: false,
+      },
+      day: {
+        id: 5,
+        title: "24h%",
+        prop: "price_change_percentage_24h_in_currency",
+        upArrow: false,
+      },
+      week: {
+        id: 6,
+        title: "7d%",
+        prop: "price_change_percentage_7d_in_currency",
+        upArrow: false,
+      },
     },
   };
 
@@ -34,17 +54,41 @@ class CoinTable extends React.Component {
   };
 
   setFilterArrowDirection = (id) => {
+    let filteredCoins = [];
     const filter = Object.values(this.state.filterSelection).map((filter) => {
       if (filter.id === id) {
-        return { ...filter, upArrow: !filter.upArrow }
+        filteredCoins = this.getFilteredCoins(filter.prop, filter.upArrow);
+        return { ...filter, upArrow: !filter.upArrow };
       } else {
-        return filter
+        return { ...filter, upArrow: false };
       }
-    })
+    });
     this.setState({
-      filterSelection: filter
-    })
-  }
+      coins: filteredCoins,
+      filterSelection: filter,
+    });
+  };
+
+  getFilteredCoins = (list, direction) => {
+    if (list === "market_cap_rank") {
+      return (direction) ? this.state.coins.sort((a, b) => a.market_cap_rank > b.market_cap_rank ? 1 : -1) : this.state.coins.sort((a, b) => b.market_cap_rank > a.market_cap_rank ? 1 : -1);
+    }
+    if (list === "name") {
+      return (direction) ? this.state.coins.sort((a, b) => (a.name > b.name ? 1 : -1)) : this.state.coins.sort((a, b) => (b.name > a.name ? 1 : -1));
+    }
+    if (list === "current_price") {
+      return (direction) ? this.state.coins.sort((a, b) => a.current_price > b.current_price ? 1 : -1) : this.state.coins.sort((a, b) => b.current_price > a.current_price ? 1 : -1);
+    }
+    if (list === "price_change_percentage_1h_in_currency") {
+      return (direction) ? this.state.coins.sort((a, b) => a.price_change_percentage_1h_in_currency > b.price_change_percentage_1h_in_currency ? 1 : -1) : this.state.coins.sort((a, b) => b.price_change_percentage_1h_in_currency > a.price_change_percentage_1h_in_currency ? 1 : -1);
+    }
+    if (list === "price_change_percentage_24h_in_currency") {
+      return (direction) ? this.state.coins.sort((a, b) => a.price_change_percentage_24h_in_currency > b.price_change_percentage_24h_in_currency ? 1 : -1) : this.state.coins.sort((a, b) => b.price_change_percentage_24h_in_currency > a.price_change_percentage_24h_in_currency ? 1 : -1);
+    }
+    if (list === "price_change_percentage_7d_in_currency") {
+      return (direction) ? this.state.coins.sort((a, b) => a.price_change_percentage_7d_in_currency > b.price_change_percentage_7d_in_currency ? 1 : -1) : this.state.coins.sort((a, b) => b.price_change_percentage_7d_in_currency > a.price_change_percentage_7d_in_currency ? 1 : -1);
+    }
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currencyName !== prevProps.currencyName) {
@@ -72,7 +116,7 @@ class CoinTable extends React.Component {
                   id={filter.id}
                   onClick={() => this.setFilterArrowDirection(filter.id)}
                 >
-                  {filter.title}{' '}{<FilterArrowUp />}
+                  {filter.title} {<FilterArrowUp />}
                 </TableHeader>
               ) : (
                 <TableHeader
@@ -80,7 +124,7 @@ class CoinTable extends React.Component {
                   id={filter.id}
                   onClick={() => this.setFilterArrowDirection(filter.id)}
                 >
-                  {filter.title}{' '}{<FilterArrowDown />}
+                  {filter.title} {<FilterArrowDown />}
                 </TableHeader>
               );
             })}
