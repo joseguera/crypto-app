@@ -70,24 +70,13 @@ class CoinTable extends React.Component {
   };
 
   getFilteredCoins = (list, direction) => {
-    if (list === "market_cap_rank") {
-      return (direction) ? this.state.coins.sort((a, b) => a.market_cap_rank > b.market_cap_rank ? 1 : -1) : this.state.coins.sort((a, b) => b.market_cap_rank > a.market_cap_rank ? 1 : -1);
-    }
-    if (list === "name") {
-      return (direction) ? this.state.coins.sort((a, b) => (a.name > b.name ? 1 : -1)) : this.state.coins.sort((a, b) => (b.name > a.name ? 1 : -1));
-    }
-    if (list === "current_price") {
-      return (direction) ? this.state.coins.sort((a, b) => a.current_price > b.current_price ? 1 : -1) : this.state.coins.sort((a, b) => b.current_price > a.current_price ? 1 : -1);
-    }
-    if (list === "price_change_percentage_1h_in_currency") {
-      return (direction) ? this.state.coins.sort((a, b) => a.price_change_percentage_1h_in_currency > b.price_change_percentage_1h_in_currency ? 1 : -1) : this.state.coins.sort((a, b) => b.price_change_percentage_1h_in_currency > a.price_change_percentage_1h_in_currency ? 1 : -1);
-    }
-    if (list === "price_change_percentage_24h_in_currency") {
-      return (direction) ? this.state.coins.sort((a, b) => a.price_change_percentage_24h_in_currency > b.price_change_percentage_24h_in_currency ? 1 : -1) : this.state.coins.sort((a, b) => b.price_change_percentage_24h_in_currency > a.price_change_percentage_24h_in_currency ? 1 : -1);
-    }
-    if (list === "price_change_percentage_7d_in_currency") {
-      return (direction) ? this.state.coins.sort((a, b) => a.price_change_percentage_7d_in_currency > b.price_change_percentage_7d_in_currency ? 1 : -1) : this.state.coins.sort((a, b) => b.price_change_percentage_7d_in_currency > a.price_change_percentage_7d_in_currency ? 1 : -1);
-    }
+    return this.state.coins.sort((a, b) => {
+      const first = a[list];
+      const second = b[list];
+      console.log(first, second);
+      const value = direction ? first > second : second > first;
+        return value ? 1 : -1;
+    });
   };
 
   componentDidUpdate(prevProps, prevState) {
