@@ -56,8 +56,8 @@ import {
   LinkContainer,
   Site,
   LinkIcon,
-  CopyButton,
   CopyIcon,
+  CopyButton,
   GraphHolder,
   GraphContainer
 } from "./CoinPage.styles";
@@ -65,6 +65,7 @@ import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 import linkIcon from "../../images/awesome-link.svg";
 import copyIcon from "../../images/feather-copy.svg";
+import "./CoinPage.css";
 
 export default class CoinPage extends React.Component {
   constructor(props) {
@@ -85,11 +86,21 @@ export default class CoinPage extends React.Component {
   ButtonRef1 = {};
   ButtonRef2 = {};
   ButtonRef3 = {};
+  
+  SpanRef1 = {};
+  SpanRef2 = {};
+  SpanRef3 = {};
 
   buttonRefs = [
     this.ButtonRef1 = React.createRef(),
     this.ButtonRef2 = React.createRef(),
     this.ButtonRef3 = React.createRef()
+  ];
+
+  spanRefs = [
+    this.SpanRef1 = React.createRef(),
+    this.SpanRef2 = React.createRef(),
+    this.SpanRef3 = React.createRef()
   ];
 
   getCoinInfo = async () => {
@@ -161,10 +172,20 @@ export default class CoinPage extends React.Component {
     );
   };
 
-  copyToClipboard = (currentRef) => {
+  copyToClipboard = (currentRef, currentSpan) => {
     let copyText = currentRef.current.alt;
     navigator.clipboard.writeText(copyText);
+
+    if (currentSpan === this.SpanRef1 || currentSpan === this.SpanRef2 || currentSpan === this.SpanRef3) {
+      currentSpan.current.childNodes[0].textContent = "Copied";
+    }
   };
+
+  outFunction = (currentSpan) => {
+    if (currentSpan === this.SpanRef1 || currentSpan === this.SpanRef2 || currentSpan === this.SpanRef3) {
+      currentSpan.current.childNodes[0].textContent = "Click to Copy";
+    }
+  }
 
   render() {
     const { currencyName } = this.props;
@@ -432,7 +453,7 @@ export default class CoinPage extends React.Component {
               </DescriptionBody>
               <LinkHolder>
                 {profile.links.blockchain_site.length !== 0 &&
-                  _.zipWith(profile.links.blockchain_site.slice(0, 3), this.buttonRefs, (site, ref) => {
+                  _.zipWith(profile.links.blockchain_site.slice(0, 3), this.buttonRefs, this.spanRefs, (site, ref, tooltip) => {
                     return (
                       <LinkContainer key={site}>
                         <Site href={site} target="_blank" rel="noreferrer">
@@ -441,14 +462,18 @@ export default class CoinPage extends React.Component {
                         <Site href={site} target="_blank" rel="noreferrer">
                           {site.slice(8)}
                         </Site>
-                        <CopyIcon
-                          onClick={() => this.copyToClipboard(ref)}
-                          ref={ref}
-                          src={copyIcon}
-                          alt={site}
-                        />
+                        <CopyButton
+                          className="tooltip"
+                          onClick={() => this.copyToClipboard(ref, tooltip)}
+                          onMouseOut={() => this.outFunction(tooltip)}
+                        >
+                          <span class="tooltiptext" ref={tooltip}>
+                            Click to Copy
+                          </span>
+                          <CopyIcon ref={ref} src={copyIcon} alt={site} />
+                        </CopyButton>
                       </LinkContainer>
-                )})}
+                    );})}
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>

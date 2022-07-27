@@ -355,9 +355,7 @@ export const LinkIcon = styled.img`
 export const CopyButton = styled.div`
   height: 16px;
   width: 18px;
-  &:hover {
-    cursor: pointer;
-  }
+
 `;
 
 export const CopyIcon = styled.img`
