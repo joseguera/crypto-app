@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import _ from 'lodash';
 import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar } from "components";
 import {
   CoinPageMain,
@@ -15,6 +16,7 @@ import {
   CryptoName,
   CryptoText,
   CryptoSite,
+  LinkCryptoIcon,
   MarketSummary,
   MarketHolder,
   MarketPrice,
@@ -54,6 +56,7 @@ import {
   LinkContainer,
   Site,
   LinkIcon,
+  CopyButton,
   CopyIcon,
   GraphHolder,
   GraphContainer
@@ -78,6 +81,16 @@ export default class CoinPage extends React.Component {
     isLoading: false,
     hasError: false,
   };
+
+  ButtonRef1 = {};
+  ButtonRef2 = {};
+  ButtonRef3 = {};
+
+  buttonRefs = [
+    this.ButtonRef1 = React.createRef(),
+    this.ButtonRef2 = React.createRef(),
+    this.ButtonRef3 = React.createRef()
+  ];
 
   getCoinInfo = async () => {
     try {
@@ -124,7 +137,7 @@ export default class CoinPage extends React.Component {
   };
 
   getProfit = (priceChange24, currentPrice) => {
-    const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2)
+    const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2);
     const profit = formatCurrency(profitPercent);
     return profit < 0 ? (
       <ProfitLoss>$({Math.abs(profit)})</ProfitLoss>
@@ -146,6 +159,11 @@ export default class CoinPage extends React.Component {
         <PercentUp>{percentChange}%</PercentUp>
       </>
     );
+  };
+
+  copyToClipboard = (currentRef) => {
+    let copyText = currentRef.current.alt;
+    navigator.clipboard.writeText(copyText);
   };
 
   render() {
@@ -188,7 +206,13 @@ export default class CoinPage extends React.Component {
                     </CryptoContent>
                   </CryptoTitle>
                   <CryptoSite>
-                    <LinkIcon src={linkIcon} alt="link icon" />
+                    <a
+                      href={profile.links.homepage[0]}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <LinkCryptoIcon src={linkIcon} alt="link icon" />
+                    </a>
                     <a
                       href={profile.links.homepage[0]}
                       target="_blank"
@@ -329,10 +353,10 @@ export default class CoinPage extends React.Component {
                           <ItemTitle>Volume / Market:</ItemTitle>{" "}
                           <div>
                             {roundToNumber(
-                            profile.market_data.total_volume[currencyName] /
-                              profile.market_data.market_cap[currencyName],
-                            4
-                          )}
+                              profile.market_data.total_volume[currencyName] /
+                                profile.market_data.market_cap[currencyName],
+                              4
+                            )}
                           </div>
                         </Item>
                       </DataItem>
@@ -353,14 +377,14 @@ export default class CoinPage extends React.Component {
                       <DataItem>
                         <PlusIcon />
                         <Item>
-                        <ItemTitle>Circulating Supply:</ItemTitle>{" "}
-                        <div>
-                          {roundToNumber(
-                            profile.market_data.circulating_supply,
-                            0
-                          )}
-                        </div>
-                        <Symbol>{profile.symbol}</Symbol>
+                          <ItemTitle>Circulating Supply:</ItemTitle>{" "}
+                          <div>
+                            {roundToNumber(
+                              profile.market_data.circulating_supply,
+                              0
+                            )}
+                          </div>
+                          <Symbol>{profile.symbol}</Symbol>
                         </Item>
                       </DataItem>
                       <DataItem>
@@ -408,17 +432,23 @@ export default class CoinPage extends React.Component {
               </DescriptionBody>
               <LinkHolder>
                 {profile.links.blockchain_site.length !== 0 &&
-                  profile.links.blockchain_site.slice(0, 3).map((site) => {
+                  _.zipWith(profile.links.blockchain_site.slice(0, 3), this.buttonRefs, (site, ref) => {
                     return (
-                      <LinkContainer>
-                        <LinkIcon src={linkIcon} alt="link icon" />
+                      <LinkContainer key={site}>
+                        <Site href={site} target="_blank" rel="noreferrer">
+                          <LinkIcon src={linkIcon} alt="link icon" />
+                        </Site>
                         <Site href={site} target="_blank" rel="noreferrer">
                           {site.slice(8)}
-                          <CopyIcon src={copyIcon} alt="copy icon" />
                         </Site>
+                        <CopyIcon
+                          onClick={() => this.copyToClipboard(ref)}
+                          ref={ref}
+                          src={copyIcon}
+                          alt={site}
+                        />
                       </LinkContainer>
-                    );
-                  })}
+                )})}
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>

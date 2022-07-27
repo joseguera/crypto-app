@@ -73,7 +73,6 @@ class CoinTable extends React.Component {
     return this.state.coins.sort((a, b) => {
       const first = a[list];
       const second = b[list];
-      console.log(first, second);
       const value = direction ? first > second : second > first;
         return value ? 1 : -1;
     });

@@ -65,6 +65,7 @@ export const CryptoImg = styled.img`
   width: 35px;
 `;
 
+
 export const CryptoName = styled.span`
   width: 150px;
   text-align: center;
@@ -86,6 +87,14 @@ export const CryptoSite = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+`;
+
+export const LinkCryptoIcon = styled.img`
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  left: 13px;
+  bottom: 20px;
 `;
 
 export const MarketSummary = styled.div`
@@ -330,7 +339,6 @@ export const LinkContainer = styled.div`
 export const Site = styled.a`
   text-decoration: none;
   color: #ffffff;
-  width: 120px;
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 13px;
@@ -341,6 +349,15 @@ export const LinkIcon = styled.img`
   height: 11px;
   position: absolute;
   left: 13px;
+  bottom: 15px;
+`;
+
+export const CopyButton = styled.div`
+  height: 16px;
+  width: 18px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const CopyIcon = styled.img`
@@ -350,6 +367,9 @@ export const CopyIcon = styled.img`
   height: 16px;
   width: 18px;
   filter: grayscale(100%);
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const GraphHolder = styled.div`
