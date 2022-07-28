@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { GraphCointaner } from "./SmallGraph.styles";
+import { LabelTextStart } from './../ProgressBarTable/ProgressBarTable.styles';
 
 ChartJS.register(
   CategoryScale,
@@ -87,11 +88,18 @@ const SmallGraph = (props) => {
     datasets: [
       {
         data: graphData,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(254, 16, 64)",
+        backgroundColor: "rgba(254, 16, 64, 1)",
       },
     ],
   };
+
+  const lastItem = props.graphData[props.graphData.length - 1];
+  const secondLastItem = props.graphData[props.graphData.length - 2];
+
+  data.datasets[0].borderColor = (secondLastItem - lastItem > 0) ? "rgb(0, 252, 42)" : data.datasets[0].borderColor;
+  data.datasets[0].backgroundColor = (secondLastItem - lastItem > 0) ? "rgba(0, 252, 42, 1)" : data.datasets[0].backgroundColor;
+
   return (
     <GraphCointaner>
       <Line options={options} data={data} />
