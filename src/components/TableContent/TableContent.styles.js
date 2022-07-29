@@ -10,6 +10,12 @@ export const Symbol = styled.span`
   text-transform: uppercase;
 `;
 
+export const PercentCell = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
 export const styledLink = {
   textDecoration: "none"
 }
