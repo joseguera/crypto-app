@@ -30,6 +30,11 @@ ChartJS.register(
 
 export const lineOptions = {
   responsive: true,
+  elements: {
+    point: {
+      radius: 0,
+    },
+  },
   plugins: {
     legend: {
       position: "top",
@@ -110,6 +115,8 @@ export default class Graph extends React.Component {
     isLoading: false,
     hasError: false,
   };
+
+  lineChartRef = React.createRef();
 
   getLineGraphData = async () => {
     try {
@@ -203,9 +210,9 @@ export default class Graph extends React.Component {
       datasets: [
         {
           data: price,
-          fill: false,
+          fill: true,
           borderColor: "rgb(53, 162, 235)",
-          backgroundColor: "rgba(53, 162, 235, 0.5)",
+          backgroundColor: "darkblue",
         },
       ],
     };
@@ -222,10 +229,10 @@ export default class Graph extends React.Component {
       this.state.volumePrices
     );
     const lineGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC" : "ETH";
-    const barGraphTitle =
-      this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
+    const barGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
     return (
+    
       <>
         {isLoading && <div>Loading...</div>}
         {hasGraph && this.hasData() && (
@@ -243,7 +250,7 @@ export default class Graph extends React.Component {
                   </DateButtonHolder>
                 </GraphHeader>
                 <ChartHolder>
-                  <Line options={lineOptions} data={priceData} />
+                  <Line ref={this.lineChartRef} options={lineOptions} data={priceData} />
                 </ChartHolder>
               </GraphCell>
               <GraphCell>

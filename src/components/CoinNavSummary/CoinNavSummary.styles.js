@@ -14,6 +14,12 @@ export const SummaryHolder = styled.div`
     border-bottom-right-radius: 10px;
 `;
 
+export const TotalHolder = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`;
+
 export const IconHolder = styled.div`
     display: flex;
     align-items: center;

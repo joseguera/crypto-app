@@ -15,3 +15,7 @@ export const formatCurrency = (num) => {
 export const timeConverter = (t) => {
     return dayjs(t).$d.toLocaleDateString('en-us', { month:"short", day:"numeric"});
 }
+
+export const UnixConverter = (t) => {
+    return dayjs.unix(t).$d.toLocaleDateString('en-us', { month:"short", day:"numeric"});
+}
