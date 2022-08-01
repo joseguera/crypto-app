@@ -473,7 +473,7 @@ export default class CoinPage extends React.Component {
                           <CopyIcon ref={ref} src={copyIcon} alt={site} />
                         </CopyButton>
                       </LinkContainer>
-                    );})}
+                    )})}
               </LinkHolder>
             </DescriptionHolder>
             <GraphHolder>

@@ -211,6 +211,8 @@ export default class Graph extends React.Component {
     });
   };
 
+  // Commented only because I'm using this functionality to implement gradient backgrounds for the Graphs
+
   // chartData = (e) => {
   //   const ctx = this.canvasRef.linechart.chart_instance.chart.ctx
   //   const gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
