@@ -173,7 +173,7 @@ export default class CoinPage extends React.Component {
   };
 
   copyToClipboard = (currentRef, currentSpan) => {
-    let copyText = currentRef.current.alt;
+    const copyText = currentRef.current.alt;
     navigator.clipboard.writeText(copyText);
 
     if (currentSpan === this.SpanRef1 || currentSpan === this.SpanRef2 || currentSpan === this.SpanRef3) {
