@@ -17,58 +17,19 @@ import {
 } from "components";
 
 export default class TableContent extends React.Component {
+
   formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: this.props.currencyName,
     minimumFractionDigits: 0,
   });
 
-  setPriceChangePercentageInStorage = () => {
-    
-    const hour1 = this.props.coins.map((coin) => coin.price_change_percentage_1h_in_currency);
-    const hour24 = this.props.coins.map((coin) => coin.price_change_percentage_24h_in_currency);
-    const day7 = this.props.coins.map((coin) => coin.price_change_percentage_7d_in_currency);
-
-    window.localStorage.setItem("1_hour", JSON.stringify(hour1));
-    window.localStorage.setItem("24_hours", JSON.stringify(hour24));
-    window.localStorage.setItem("7_days", JSON.stringify(day7));
-  };
-
-  componentDidMount() {
-    let pastDate = localStorage.getItem("date");
-    let today = new Date();
-    if (!pastDate) {
-      localStorage.setItem("pastDate", new Date());
-    } else {
-      return today;
-    }
-    const date1 = Date.parse(today);
-    const date2 = Date.parse(pastDate);
-    console.log(date1, date2)
-    const diffTime = Math.abs(date2 - date1);
-    const diffMinutes = diffTime / (1000 * 60);
-    if (diffMinutes > 5) {
-      this.setPriceChangePercentageInStorage();
-      pastDate = today;
-    }
-  }
 
   render() {
-    const oneHour = localStorage.getItem("1_hour");
-    //clean up array string
-    const hour = oneHour.slice(1).slice(0, -1)
-    const hourArray = hour.split(",");
-    const hourIntArray = hourArray.map((string) => parseFloat(string))
-
-
-    const twentyFourHours = localStorage.getItem("24_hours");
-    const sevenDays = localStorage.getItem("7_days");
-    console.log(hourIntArray);
 
     return (
       <>
-        {_.zipWith(this.props.coins, oneHour, twentyFourHours, sevenDays, (coin, hour, day, week) => {
-          this.setPriceChangePercentageInStorage();
+        {this.props.coins.map((coin) => {
           return (
             <React.Fragment key={coin.name}>
               <div>{coin.market_cap_rank}</div>
@@ -82,7 +43,7 @@ export default class TableContent extends React.Component {
               </div>
               <div>{this.formatter.format(coin.current_price)}</div>
               <PercentCell>
-                {coin.price_change_percentage_1h_in_currency > hour ? (
+                {coin.price_change_percentage_1h_in_currency > 0 ? (
                   <UpArrowGreen />
                 ) : (
                   <DownArrowRed />
@@ -97,7 +58,7 @@ export default class TableContent extends React.Component {
               </PercentCell>
               <PercentCell>
                 {coin.price_change_percentage_24h_in_currency >
-                day ? (
+                0 ? (
                   <UpArrowGreen />
                 ) : (
                   <DownArrowRed />
@@ -106,7 +67,7 @@ export default class TableContent extends React.Component {
                 %
               </PercentCell>
               <PercentCell>
-                {coin.price_change_percentage_7d_in_currency > week ? (
+                {coin.price_change_percentage_7d_in_currency > 0 ? (
                   <UpArrowGreen />
                 ) : (
                   <DownArrowRed />

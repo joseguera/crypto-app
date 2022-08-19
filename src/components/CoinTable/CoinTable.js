@@ -4,6 +4,7 @@ import { TableContent, FilterArrowDown, FilterArrowUp } from "components";
 import { TableGrid, TableHeader } from "./CoinTable.styles";
 
 class CoinTable extends React.Component {
+  
   state = {
     coins: null,
     isLoading: false,
@@ -78,6 +79,7 @@ class CoinTable extends React.Component {
     });
   };
 
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currencyName !== prevProps.currencyName) {
       this.getCoins();
@@ -88,10 +90,13 @@ class CoinTable extends React.Component {
     this.getCoins();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
   render() {
     const { coins, isLoading, filterSelection } = this.state;
     const hasCoins = !isLoading && coins;
-
     return (
       <>
         {isLoading && <div>Loading...</div>}
