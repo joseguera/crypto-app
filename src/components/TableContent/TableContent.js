@@ -8,6 +8,7 @@ import {
   LinkText,
   styledLink,
   PercentCell,
+  TableLine
 } from "./TableContent.styles";
 import {
   SmallGraph,
@@ -90,6 +91,7 @@ export default class TableContent extends React.Component {
                 />
               </div>
               <SmallGraph graphData={coin.sparkline_in_7d.price} />
+              <TableLine />
             </React.Fragment>
           );
         })}
