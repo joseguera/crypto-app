@@ -116,7 +116,7 @@ export default class Graph extends React.Component {
     hasError: false,
   };
 
-  lineChartRef = React.createRef();
+  canvasRef = React.createRef();
 
   getLineGraphData = async () => {
     try {
@@ -130,7 +130,6 @@ export default class Graph extends React.Component {
         }),
         { labels: [], prices: [] }
       );
-
       this.setState({
         labels,
         prices,
@@ -139,6 +138,7 @@ export default class Graph extends React.Component {
       console.log("Location Error:", err);
     }
   };
+
 
   getBarGraphData = async () => {
     try {
@@ -181,9 +181,16 @@ export default class Graph extends React.Component {
     }
   }
 
+
   componentDidMount() {
     this.getLineGraphData();
     this.getBarGraphData();
+    const canvas = this.canvasRef.current;
+
+    if (canvas) {
+      console.log('CanvasRenderingContext2D', canvas.ctx);
+      console.log('HTMLCanvasElement', canvas.canvas);
+    }
   }
 
   setCryptoName = (cryptoName) => {
@@ -203,6 +210,35 @@ export default class Graph extends React.Component {
       barDateRange: dateRange,
     });
   };
+
+  // Commented only because I'm using this functionality to implement gradient backgrounds for the Graphs
+
+  // chartData = (e) => {
+  //   const ctx = this.canvasRef.linechart.chart_instance.chart.ctx
+  //   const gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+  //   let borderColor = "";
+  //   // if (prices[0] > prices[prices.length - 1]) {
+  //   //   borderColor = "rgba(254, 16, 64, 1)";
+  //   //   gradientFill.addColorStop(0, "rgba(254, 16, 64, .5)");
+  //   //   gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+  //   // } else {
+  //     borderColor = "rgba(0, 255, 95, 1)";
+  //     gradientFill.addColorStop(0, "rgba(0, 255, 95, .5)");
+  //     gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+  //   // }
+  //   return {
+  //     labels: this.state.labels,
+  //     datasets: [
+  //       {
+  //         data: this.state.prices,
+  //         tension: 0.4,
+  //         borderColor: borderColor,
+  //         fill: true,
+  //         backgroundColor: gradientFill,
+  //       },
+  //     ],
+  //   };
+  // };
 
   formatData = (label, price) => {
     return {
@@ -232,7 +268,6 @@ export default class Graph extends React.Component {
     const barGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
     return (
-    
       <>
         {isLoading && <div>Loading...</div>}
         {hasGraph && this.hasData() && (
@@ -250,7 +285,11 @@ export default class Graph extends React.Component {
                   </DateButtonHolder>
                 </GraphHeader>
                 <ChartHolder>
-                  <Line ref={this.lineChartRef} options={lineOptions} data={priceData} />
+                  <Line options={lineOptions} 
+                    data={priceData} 
+                    // data={this.chartData} 
+                    ref={this.canvasRef}
+                  />
                 </ChartHolder>
               </GraphCell>
               <GraphCell>

@@ -34,7 +34,6 @@ export default class CoinNavSummary extends React.Component {
     const { currencyName } = this.props;
     const { market, isLoading } = this.state;  
     const hasMarketData = !isLoading && market;
-    const day = 24*60*60;
 
     return (
       <>
@@ -46,7 +45,7 @@ export default class CoinNavSummary extends React.Component {
             <TotalHolder>
               <div>&#x25CF;</div> 
               <div>{formatCurrency(market.data.total_market_cap[currencyName])}</div>
-              {(market.data.total_market_cap[currencyName] && market.data.updated_at - day > market.data.total_market_cap[currencyName] && market.data.updated_at) ? <DownArrowRed /> : <UpArrowGreen />}
+              {(market.data.market_cap_change_percentage_24h_usd < 0) ? <DownArrowRed /> : <UpArrowGreen />}
             </TotalHolder>
             <TotalHolder>
               <div>&#x25CF;</div> 
