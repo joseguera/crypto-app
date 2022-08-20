@@ -352,12 +352,6 @@ export const LinkIcon = styled.img`
   bottom: 15px;
 `;
 
-export const CopyButton = styled.div`
-  height: 16px;
-  width: 18px;
-
-`;
-
 export const CopyIcon = styled.img`
   position: absolute;
   right: 12px;

@@ -462,7 +462,7 @@ export default class CoinPage extends React.Component {
                         <Site href={site} target="_blank" rel="noreferrer">
                           {site.slice(8)}
                         </Site>
-                        <CopyButton
+                        <div
                           className="tooltip"
                           onClick={() => this.copyToClipboard(ref, tooltip)}
                           onMouseOut={() => this.outFunction(tooltip)}
@@ -471,7 +471,7 @@ export default class CoinPage extends React.Component {
                             Click to Copy
                           </span>
                           <CopyIcon ref={ref} src={copyIcon} alt={site} />
-                        </CopyButton>
+                        </div>
                       </LinkContainer>
                     )})}
               </LinkHolder>
