@@ -12,7 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import { CryptoDropDown, DateButtons, GraphTitle } from "components";
+import { LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
 
 import { timeConverter } from "./../../util/numberUtil";
@@ -27,46 +27,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-export const lineOptions = {
-  responsive: true,
-  elements: {
-    point: {
-      radius: 0,
-    },
-  },
-  plugins: {
-    legend: {
-      position: "top",
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-  scales: {
-    yAxis: {
-      axis: "y",
-      display: false,
-    },
-    xAxis: {
-      axis: "x",
-      grid: {
-        display: false,
-        drawTicks: false,
-        borderWidth: 0,
-      },
-      ticks: {
-        maxRotation: 0,
-        minRotation: 0,
-        autoSkip: true,
-        maxTicksLimit: 7,
-        padding: 10,
-        align: "start",
-      },
-    },
-  },
-};
 
 export const barOptions = {
   responsive: true,
@@ -115,8 +75,6 @@ export default class Graph extends React.Component {
     isLoading: false,
     hasError: false,
   };
-
-  canvasRef = React.createRef();
 
   getLineGraphData = async () => {
     try {
@@ -185,12 +143,6 @@ export default class Graph extends React.Component {
   componentDidMount() {
     this.getLineGraphData();
     this.getBarGraphData();
-    const canvas = this.canvasRef.current;
-
-    if (canvas) {
-      console.log('CanvasRenderingContext2D', canvas.ctx);
-      console.log('HTMLCanvasElement', canvas.canvas);
-    }
   }
 
   setCryptoName = (cryptoName) => {
@@ -211,35 +163,6 @@ export default class Graph extends React.Component {
     });
   };
 
-  // Commented only because I'm using this functionality to implement gradient backgrounds for the Graphs
-
-  // chartData = (e) => {
-  //   const ctx = this.canvasRef.linechart.chart_instance.chart.ctx
-  //   const gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
-  //   let borderColor = "";
-  //   // if (prices[0] > prices[prices.length - 1]) {
-  //   //   borderColor = "rgba(254, 16, 64, 1)";
-  //   //   gradientFill.addColorStop(0, "rgba(254, 16, 64, .5)");
-  //   //   gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
-  //   // } else {
-  //     borderColor = "rgba(0, 255, 95, 1)";
-  //     gradientFill.addColorStop(0, "rgba(0, 255, 95, .5)");
-  //     gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
-  //   // }
-  //   return {
-  //     labels: this.state.labels,
-  //     datasets: [
-  //       {
-  //         data: this.state.prices,
-  //         tension: 0.4,
-  //         borderColor: borderColor,
-  //         fill: true,
-  //         backgroundColor: gradientFill,
-  //       },
-  //     ],
-  //   };
-  // };
-
   formatData = (label, price) => {
     return {
       labels: label,
@@ -257,7 +180,7 @@ export default class Graph extends React.Component {
   hasData = () => this.state.labels.length && this.state.prices.length;
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, labels, prices } = this.state;
     const hasGraph = !isLoading && this.state.labels && this.state.volumeLabels;
     const priceData = this.formatData(this.state.labels, this.state.prices);
     const volumeData = this.formatData(
@@ -285,11 +208,11 @@ export default class Graph extends React.Component {
                   </DateButtonHolder>
                 </GraphHeader>
                 <ChartHolder>
-                  <Line options={lineOptions} 
+                  {/* <Line options={lineOptions} 
                     data={priceData} 
-                    // data={this.chartData} 
                     ref={this.canvasRef}
-                  />
+                  /> */}
+                  <LineGraph labels={labels} prices={prices} />
                 </ChartHolder>
               </GraphCell>
               <GraphCell>
