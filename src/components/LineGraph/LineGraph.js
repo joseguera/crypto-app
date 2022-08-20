@@ -64,10 +64,9 @@ export const lineOptions = {
 };
 
 function createDarkGradient(ctx) {
-  const gradient = ctx.createLinearGradient(0, 0, 200, 0);
-  gradient.addColorStop(0, "#00FF5F8F");
-  gradient.addColorStop(0.7, "black");
-  gradient.addColorStop(1, "pink");
+  const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+  gradient.addColorStop(0, "rgba(254, 16, 64, .5)");
+  gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
   return gradient;
 }
 
@@ -98,7 +97,7 @@ export default function App(props) {
             {
               data: props.prices,
               backgroundColor: createDarkGradient(chart.ctx),
-              borderColor: "#00FF5F8F",
+              borderColor: "rgba(254, 16, 64, 1)",
               fill: {
                 target: "origin"
               }
