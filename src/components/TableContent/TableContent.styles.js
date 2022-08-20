@@ -39,3 +39,8 @@ export const LinkText = styled.span`
     color: white;
   }
 `;
+
+export const TableLine = styled.span`
+  border-top: 1px solid #707070;
+  grid-column: 1 / 10;
+`;
