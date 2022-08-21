@@ -66,7 +66,7 @@ export const lineOptions = {
 export default function App(props) {
 
   console.log(props.labels, props.prices);
-  const initialRandomNums = {
+  const initialData = {
   labels: props.labels,
   datasets: [
     {
@@ -78,16 +78,16 @@ export default function App(props) {
     }
   ]
 };
-  const [randomNums, setRandomNums] = useState(initialRandomNums);
+  const [data, setData] = useState(initialData);
   const [borderColor, setBorderColor] = useState("rgba(75,192,192,1)")
   const chartRef = useRef(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function getRandomNums(cRef) {
+  async function getData(cRef) {
     try {
       const chart = cRef?.current;
       if (chart) {
-        const newRandomNums = {
+        const newData = {
           labels: props.labels,
           datasets: [
             {
@@ -100,7 +100,7 @@ export default function App(props) {
             }
           ]
         };
-        setRandomNums(newRandomNums);
+        setData(newData);
       }
     } catch (err) {
       console.log("fetch error: ", err.message);
@@ -122,10 +122,10 @@ export default function App(props) {
   }
 
   useEffect(() => {
-    getRandomNums(chartRef);
-  }, [getRandomNums]);
+    getData(chartRef);
+  }, [getData]);
 
-  const lineChart = <Line ref={chartRef} data={randomNums} options={lineOptions} />;
+  const lineChart = <Line ref={chartRef} data={data} options={lineOptions} />;
 
   return <div className="App">{lineChart}</div>;
 }

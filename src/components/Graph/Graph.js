@@ -1,16 +1,5 @@
 import React from "react";
 import axios from "axios";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 
 import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
