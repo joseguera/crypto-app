@@ -11,8 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line, Bar } from "react-chartjs-2";
-import { LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
+import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
 
 import { timeConverter } from "./../../util/numberUtil";
@@ -180,7 +179,7 @@ export default class Graph extends React.Component {
   hasData = () => this.state.labels.length && this.state.prices.length;
 
   render() {
-    const { isLoading, labels, prices } = this.state;
+    const { isLoading, labels, prices, volumeLabels, volumePrices } = this.state;
     const hasGraph = !isLoading && this.state.labels && this.state.volumeLabels;
     const priceData = this.formatData(this.state.labels, this.state.prices);
     const volumeData = this.formatData(
@@ -226,7 +225,7 @@ export default class Graph extends React.Component {
                   </DateButtonHolder>
                 </GraphHeader>
                 <ChartHolder>
-                  <Bar options={barOptions} data={volumeData} />
+                  <BarGraph labels={volumeLabels} prices={volumePrices} />
                 </ChartHolder>
               </GraphCell>
             </GraphGrid>

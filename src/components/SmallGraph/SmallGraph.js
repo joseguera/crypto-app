@@ -88,6 +88,7 @@ const SmallGraph = (props) => {
     datasets: [
       {
         data: graphData,
+        tension: 0.4,
         borderColor: "rgb(254, 16, 64)",
         backgroundColor: "rgba(254, 16, 64, 1)",
       },
