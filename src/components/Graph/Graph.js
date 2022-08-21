@@ -11,56 +11,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+
 import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
 
 import { timeConverter } from "./../../util/numberUtil";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const barOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-  scales: {
-    yAxis: {
-      axis: "y",
-      display: false,
-    },
-    xAxis: {
-      axis: "x",
-      grid: {
-        display: false,
-        drawTicks: false,
-        borderWidth: 0,
-      },
-      ticks: {
-        maxRotation: 0,
-        minRotation: 0,
-        autoSkip: true,
-        maxTicksLimit: 7,
-        padding: 10,
-        align: "start",
-      },
-    },
-  },
-};
 
 export default class Graph extends React.Component {
   state = {
@@ -138,7 +93,6 @@ export default class Graph extends React.Component {
     }
   }
 
-
   componentDidMount() {
     this.getLineGraphData();
     this.getBarGraphData();
@@ -162,30 +116,11 @@ export default class Graph extends React.Component {
     });
   };
 
-  formatData = (label, price) => {
-    return {
-      labels: label,
-      datasets: [
-        {
-          data: price,
-          fill: true,
-          borderColor: "rgb(53, 162, 235)",
-          backgroundColor: "darkblue",
-        },
-      ],
-    };
-  };
-
   hasData = () => this.state.labels.length && this.state.prices.length;
 
   render() {
     const { isLoading, labels, prices, volumeLabels, volumePrices } = this.state;
     const hasGraph = !isLoading && this.state.labels && this.state.volumeLabels;
-    const priceData = this.formatData(this.state.labels, this.state.prices);
-    const volumeData = this.formatData(
-      this.state.volumeLabels,
-      this.state.volumePrices
-    );
     const lineGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC" : "ETH";
     const barGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
@@ -207,10 +142,6 @@ export default class Graph extends React.Component {
                   </DateButtonHolder>
                 </GraphHeader>
                 <ChartHolder>
-                  {/* <Line options={lineOptions} 
-                    data={priceData} 
-                    ref={this.canvasRef}
-                  /> */}
                   <LineGraph labels={labels} prices={prices} />
                 </ChartHolder>
               </GraphCell>
@@ -226,6 +157,7 @@ export default class Graph extends React.Component {
                 </GraphHeader>
                 <ChartHolder>
                   <BarGraph labels={volumeLabels} prices={volumePrices} />
+
                 </ChartHolder>
               </GraphCell>
             </GraphGrid>
