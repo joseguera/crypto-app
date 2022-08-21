@@ -8,10 +8,11 @@ export const TableGrid = styled.div`
     row-gap: 10px;
     grid-template-areas:
         'main main main main main main main main main';
-    padding: 17px;
     background: #191B1F;
     border-radius: 10px;
     width: 1256px;
+    padding: 17px;
+
 `;
 
 export const TableHeader = styled.div`
