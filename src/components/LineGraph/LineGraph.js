@@ -63,14 +63,6 @@ export const lineOptions = {
   },
 };
 
-function createDarkGradient(ctx) {
-  const gradient = ctx.createLinearGradient(0, 0, 200, 0);
-  gradient.addColorStop(0, "#00FF5F8F");
-  gradient.addColorStop(0.7, "black");
-  gradient.addColorStop(1, "pink");
-  return gradient;
-}
-
 export default function App(props) {
 
   console.log(props.labels, props.prices);
@@ -79,6 +71,7 @@ export default function App(props) {
   datasets: [
     {
       data: props.prices,
+      tension: 0.4,
       fill: true,
       backgroundColor: "rgba(75,192,192,0.2)",
       borderColor: "rgba(75,192,192,1)"
@@ -86,8 +79,10 @@ export default function App(props) {
   ]
 };
   const [randomNums, setRandomNums] = useState(initialRandomNums);
+  const [borderColor, setBorderColor] = useState("rgba(75,192,192,1)")
   const chartRef = useRef(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function getRandomNums(cRef) {
     try {
       const chart = cRef?.current;
@@ -98,7 +93,7 @@ export default function App(props) {
             {
               data: props.prices,
               backgroundColor: createDarkGradient(chart.ctx),
-              borderColor: "#00FF5F8F",
+              borderColor: borderColor,
               fill: {
                 target: "origin"
               }
@@ -110,6 +105,20 @@ export default function App(props) {
     } catch (err) {
       console.log("fetch error: ", err.message);
     }
+  }
+
+  function createDarkGradient(ctx) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+    if (props.prices[0] > props.prices[props.prices.length - 1]) {
+      setBorderColor("rgba(254, 16, 64, 1)");
+      gradient.addColorStop(0, "rgba(254, 16, 64, .5)");
+      gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+    } else {
+      setBorderColor("rgba(0, 255, 95, 1)");
+      gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
+      gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+    }
+    return gradient;
   }
 
   useEffect(() => {
