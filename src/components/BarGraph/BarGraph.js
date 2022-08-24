@@ -59,7 +59,6 @@ export const barOptions = {
   };
 
 export default function App(props) {
-  console.log(props.labels, props.prices);
   const initialData = {
     labels: props.labels,
     datasets: [
