@@ -1,21 +1,10 @@
 import React from "react";
-
 import { ThemeProvider } from "styled-components";
 import {
   light,
   dark
 } from "./components/styles/Theme.styled";
-
 import { GlobalStyles } from "./components/styles/Global";
-import { Header } from "./components/styles/Header.styled";
-import { Footer } from "./components/styles/Footer.styled";
-import Quotes from "./components/styles/Quotes";
-
-import {
-  ThemeContainer,
-  ThemeButton,
-} from "./components/styles/ThemeSwitching.styled";
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
@@ -46,23 +35,13 @@ export default class App extends React.Component {
     return (
       <Router>
         <ThemeProvider theme={selectedTheme}>
+          <GlobalStyles />
           <MainApp>
-            <GlobalStyles />
-            <div className="App">
-              <h1>Theme Switching</h1>
-              <Header>Game of Thrones Quotes</Header>
-              <Quotes />
-              <Footer>
-                <p>
-                  Made with love by{" "}
-                  <a href="http://bio.link/timonwa">Timonwa</a>
-                </p>
-              </Footer>
-            </div>
             <NavBar
               setCurrencyName={this.setCurrencyName}
               currencyName={currencyName}
               handleThemeChange={this.handleThemeChange}
+              selectedTheme={selectedTheme}
             />
             <Switch>
               <Route

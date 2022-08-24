@@ -8,7 +8,7 @@ const NavBar = (props) => {
     <NavBarContainer>
       <NavBarDiv>
         <NavDiv>
-          <NavBarButtons />
+          <NavBarButtons selectedTheme={props.selectedTheme} />
           <NavBarUtils setCurrencyName={props.setCurrencyName} handleThemeChange={props.handleThemeChange} />
         </NavDiv>
       </NavBarDiv>

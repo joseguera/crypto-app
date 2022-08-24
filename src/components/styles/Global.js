@@ -2,19 +2,19 @@ import * as theme from "./Theme.styled";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
-    font-family: monospace;
+    margin: 0px !important;
+    padding: 0px;
+    max-width: 100%;
     overflow-x: hidden;
+  }
+
+  a {
+    color: ${({ theme }) => theme.colors.link};
+    text-decoration: none;
   }
   
   // theme buttons color
@@ -23,11 +23,5 @@ body {
   }
   .dark {
     background-color: ${theme.dark.colors.header};
-  }
-
-  
-  // active theme
-  .active{
-      border: 3px solid ${({ theme }) => theme.colors.border};
   }
 `
