@@ -98,8 +98,8 @@ const SmallGraph = (props) => {
   const lastItem = props.graphData[props.graphData.length - 1];
   const secondLastItem = props.graphData[props.graphData.length - 2];
 
-  data.datasets[0].borderColor = (secondLastItem - lastItem > 0) ? "rgb(0, 252, 42)" : data.datasets[0].borderColor;
-  data.datasets[0].backgroundColor = (secondLastItem - lastItem > 0) ? "rgba(0, 252, 42, 1)" : data.datasets[0].backgroundColor;
+  data.datasets[0].borderColor = (secondLastItem - lastItem > 0) ? "rgb(6, 213, 84)" : data.datasets[0].borderColor;
+  data.datasets[0].backgroundColor = (secondLastItem - lastItem > 0) ? "rgb(6, 213, 84, 1)" : data.datasets[0].backgroundColor;
 
   return (
     <GraphCointaner>

@@ -15,7 +15,7 @@ export const GraphCell = styled.div`
     padding: 13px;
     position: relative;
     border-radius: 10px;
-    background-color: #191B1F;
+    background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const GraphHeader = styled.div`
@@ -33,8 +33,6 @@ export const DateButtonHolder = styled.div`
     align-items: center;
     width: 331px;
     height: 43px;
-    background: #2C2F36;
-    color: #FFFFFF;
     border-radius: 10px
 `;
 

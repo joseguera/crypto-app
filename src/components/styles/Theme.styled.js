@@ -7,8 +7,8 @@ export const light = {
       text: "#2C2F36",
       loopIcon: 0,
       menuHover: "#E0DED7",
-      progressBarFill: "#83808B",
-      progressBarBackground: "#F09242",
+      progressBarFill: "#005A9C",
+      progressBarBackground: "#EF3E42",
       border: "hsl(0, 0%, 87%)",
       buttonFill: "#F7F7F7",
       barFill: "#2C2F36"
