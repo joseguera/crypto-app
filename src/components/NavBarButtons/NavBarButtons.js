@@ -1,16 +1,22 @@
 import React from "react";
+import * as theme from "../styles/Theme.styled";
 import { ButtonContainer, Button, ButtonText } from "./NavBarButtons.styles";
 import { NavLink } from "react-router-dom";
 import "./NavBarButtons.css"
 
-const NavBarButtons = () => {
+const NavBarButtons = (props) => {
+
+    const buttonBackground = (props.selectedTheme.name === "light-theme") ? theme.light.colors.buttonFill : theme.dark.colors.buttonFill;
+    const buttonText = (props.selectedTheme.name === "light-theme") ? theme.light.colors.text : theme.dark.colors.text;
 
     return (
+      
       <ButtonContainer>
         <NavLink
           exact to="/"
           style={(isActive) => ({
-           background : isActive ? "#2C2F36" : "",
+           background : isActive ? buttonBackground : "",
+           color: isActive ? buttonText : ""
           })}
           className="nav-link"
         >
@@ -24,7 +30,8 @@ const NavBarButtons = () => {
           to="/portfolio"
           className="nav-link"
           style={(isActive) => ({
-            background: isActive ? "#2C2F36" : "",
+            background : isActive ? buttonBackground : "",
+            color: isActive ? buttonText : ""
           })}
         >
           <Button>

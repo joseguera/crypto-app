@@ -8,4 +8,5 @@ export const ThemeHolder = styled.div`
 export const ThemeIcon = styled.img`
     width: 100%;
     height: 100%;
+    cursor: pointer;
 `;

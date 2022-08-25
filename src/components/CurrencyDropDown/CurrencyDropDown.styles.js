@@ -6,7 +6,7 @@ export const DropDown = styled.div`
   height: 50px;
   width: 108px;
   position: relative;
-  background: #2c2f36;
+  background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
 `;
 
@@ -23,7 +23,7 @@ export const DropDownList = styled.div`
   position: absolute;
   top: 50px;
   width: 108px;
-  background: #2c2f36;
+  background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
   z-index: 10;
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
@@ -56,7 +56,7 @@ export const CurrencyNameHolder = styled.div`
 `;
 
 export const Symbol = styled.div`
-  color: #06d554;
+  color: #1AD761;
   display: grid;
   justify-items: center;
   align-content: center;
@@ -67,17 +67,25 @@ export const Symbol = styled.div`
   background: #191b1f;
 `;
 
+export const CurrencySymbol = styled.p`
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 0px;
+  color: #1AD761;
+`;
+
 export const Currency = styled.p`
   font-size: 14px;
   font-weight: bold;
   line-height: 0px;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Selected = styled.p`
   font-size: 14px;
   font-weight: bold;
   line-height: 0px;
-  color: #06d554;
+  color: #1AD761;
 `;
 
 export const CurrencyName = styled.p`

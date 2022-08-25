@@ -59,8 +59,7 @@ export const barOptions = {
   };
 
 export default function App(props) {
-  console.log(props.labels, props.prices);
-  const initialRandomNums = {
+  const initialData = {
     labels: props.labels,
     datasets: [
       {
@@ -72,15 +71,15 @@ export default function App(props) {
       },
     ],
   };
-  const [randomNums, setRandomNums] = useState(initialRandomNums);
+  const [data, setData] = useState(initialData);
   const chartRef = useRef(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function getRandomNums(cRef) {
+  async function getData(cRef) {
     try {
       const chart = cRef?.current;
       if (chart) {
-        const newRandomNums = {
+        const newData = {
           labels: props.labels,
           datasets: [
             {
@@ -94,7 +93,7 @@ export default function App(props) {
             },
           ],
         };
-        setRandomNums(newRandomNums);
+        setData(newData);
       }
     } catch (err) {
       console.log("fetch error: ", err.message);
@@ -109,11 +108,11 @@ export default function App(props) {
   }
 
   useEffect(() => {
-    getRandomNums(chartRef);
-  }, [getRandomNums]);
+    getData(chartRef);
+  }, [getData]);
 
   const barChart = (
-    <Bar ref={chartRef} data={randomNums} options={barOptions} />
+    <Bar ref={chartRef} data={data} options={barOptions} />
   );
 
   return <div className="App">{barChart}</div>;
