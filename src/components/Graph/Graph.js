@@ -146,7 +146,6 @@ export default class Graph extends React.Component {
                 </GraphHeader>
                 <ChartHolder>
                   <BarGraph labels={volumeLabels} prices={volumePrices} />
-
                 </ChartHolder>
               </GraphCell>
             </GraphGrid>

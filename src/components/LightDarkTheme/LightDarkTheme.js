@@ -16,8 +16,8 @@ export default class LightDarkTheme extends React.Component {
 
   render() {
     return (
-      <ThemeHolder>
-        <ThemeIcon src={themeDark} alt='light-dark theme' onClick={this.handleThemeChange}/>
+      <ThemeHolder onClick={this.handleThemeChange}>
+        <ThemeIcon src={themeDark} alt='light-dark theme'/>
       </ThemeHolder>
     );
   }
