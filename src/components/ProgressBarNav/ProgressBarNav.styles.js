@@ -12,6 +12,6 @@ export const ProgressBarHolder = styled.div`
 export const ProgressBarLevel = styled.div`
     height: 100%;
     border-radius: 50px;
-    background: #ffffff;
+    background: ${({ theme }) => theme.colors.barFill};
 `;
 

@@ -1,14 +1,17 @@
+import React from "react";
 import { SearchBarStyle, LoopIcon, InputType } from "./SearchBar.styles";
+import searchIcon from "../../images/Search.svg"
 
-const SearchBar = (props) => {
-  return (
-    <>
-      <SearchBarStyle>
-        <LoopIcon></LoopIcon>
-        <InputType placeholder="Search..." />
-      </SearchBarStyle>
-    </>
-  );
+export default class SearchBar extends React.Component {
+
+  render() {
+    return (
+      <>
+        <SearchBarStyle>
+          <LoopIcon src={searchIcon} alt='light-dark theme' />
+          <InputType placeholder="Search..." />
+        </SearchBarStyle>
+      </>
+    );
+  }
 };
-
-export default SearchBar;

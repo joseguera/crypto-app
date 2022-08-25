@@ -6,12 +6,13 @@ export const NavBarDiv = styled.div`
   width: 90%;
   margin: 0 auto;
   align-items: center;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const NavBarContainer = styled.div`
   width: 100%;
   margin: 0 auto;
-  background: #191B1F;
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 export const NavDiv = styled.div`

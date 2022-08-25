@@ -23,7 +23,7 @@ export const Arrow = styled.div`
     height: 0px;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-top: 4px solid #FFFFFF;
+    border-top: 4px solid ${({ theme }) => theme.colors.text};
 `;
 
 export const DropDownList = styled.div`
@@ -32,7 +32,7 @@ export const DropDownList = styled.div`
     left: 75.96px;
     display: flex;
     flex-direction: column;
-    background: #2C2F36;
+    background: ${({ theme }) => theme.colors.buttonFill};
     padding: 8px;
     border-radius: 10px;
     place-items: center;
@@ -46,6 +46,6 @@ export const ListItem = styled.div`
     padding: 2px 2px 2px 8px;
     border-radius: 10px;
     &:hover {
-        background: #1f2128;
+        background: ${({ theme }) => theme.colors.menuHover};
     }
 `;

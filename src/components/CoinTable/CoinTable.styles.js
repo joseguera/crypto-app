@@ -8,7 +8,7 @@ export const TableGrid = styled.div`
     row-gap: 10px;
     grid-template-areas:
         'main main main main main main main main main';
-    background: #191B1F;
+    background: ${({ theme }) => theme.colors.background};;
     border-radius: 10px;
     width: 1256px;
     padding: 17px;
