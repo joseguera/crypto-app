@@ -13,7 +13,7 @@ body {
   }
 
   a {
-    color: ${({ theme }) => theme.colors.link};
+    color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
   }
   

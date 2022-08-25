@@ -14,17 +14,17 @@ export const ProgressBarLabel = styled.span`
 export const LabelTextStart = styled.p`
     font-size: 15px;
     line-height: 0;
-    color: #FEE158;
+    color: ${({ theme }) => theme.colors.progressBarFill};
 `;
 
 export const LabelTextEnd = styled.p`
     font-size: 15px;
     line-height: 0;
-    color: #FE8C01;
+    color: ${({ theme }) => theme.colors.progressBarBackground};
 `;
 
 export const ProgressBarContainer = styled.div`
-    background: #FE8C01;
+    background: ${({ theme }) => theme.colors.progressBarBackground};
     width: 100%;
     height: 8px;
     border-radius: 50px;
@@ -35,5 +35,5 @@ export const ProgressBarContainer = styled.div`
 export const ProgressLevel = styled.div`
     height: 100%;
     border-radius: 50px;
-    background: #FEE158;
+    background: ${({ theme }) => theme.colors.progressBarFill};
 `;

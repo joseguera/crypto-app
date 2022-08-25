@@ -11,13 +11,11 @@ export const SearchBarStyle = styled.div`
     position: relative;
 `;
 
-export const LoopIcon = styled.span`
-    background-image: url(${({ theme }) => theme.colors.loopIcon});
+export const LoopIcon = styled.img`
     margin-left: 20px;
-    margin-top: 2.75px;
-    height: 25px;
-    width: 25px;
-    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    filter: invert(${({ theme }) => theme.colors.loopIcon}%)
 `;
 
 export const InputType = styled.input`
