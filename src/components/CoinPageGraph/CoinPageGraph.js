@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import * as theme from "../styles/Theme.styled";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,6 +16,7 @@ import { Line } from "react-chartjs-2";
 import { CoinPageDateButtons } from "components";
 import { timeConverter } from "util/numberUtil";
 import { GraphCointaner } from "./CoinPageGraph.styles";
+import './CoinPageGraph.css'
 
 ChartJS.register(
   CategoryScale,
@@ -100,14 +102,18 @@ export default class CoinPageGraph extends React.Component {
   };
 
   formatData = (price, label) => {
+    let backgroundColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphFill : theme.light.colors.lineGraphFill;
+    let borderColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphBorder : theme.light.colors.lineGraphBorder;
+
     return {
       labels: label,
       datasets: [
         {
           data: price,
           fill: true,
-          borderColor: "#2C2F36",
-          backgroundColor: "#1C1E24",
+          tension: 0.4,
+          borderColor: borderColor,
+          backgroundColor: backgroundColor,
           pointHoverRadius: 5,
           pointHoverBackgroundColor: "#06D554",
         },
@@ -140,6 +146,7 @@ export default class CoinPageGraph extends React.Component {
   }
 
   render() {
+    console.log(this.props.selectedTheme)
     const graphData = this.formatData(this.state.prices, this.state.labels);
     const { isLoading } = this.state;
     const hasGraph = !isLoading && this.state.prices;

@@ -9,6 +9,8 @@ export const light = {
       menuHover: "#E0DED7",
       progressBarFill: "#005A9C",
       progressBarBackground: "#EF3E42",
+      lineGraphBorder: "#D3D0C9",
+      lineGraphFill: "#F4F3F1",
       border: "hsl(0, 0%, 87%)",
       buttonFill: "#F7F7F7",
       barFill: "#2C2F36"
@@ -26,6 +28,8 @@ export const light = {
       menuHover: "#1F2128",
       progressBarFill: "#FE8C01",
       progressBarBackground: "#FEE158",
+      lineGraphBorder: "#2C2F36",
+      lineGraphFill: "#1C1E24",
       border: "hsl(0, 0%, 78%)",
       buttonFill: "#2C2F36",
       barFill: "#F7F7F7"

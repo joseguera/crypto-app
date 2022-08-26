@@ -14,12 +14,12 @@ export const ProgressBarLabel = styled.span`
 export const LabelTextStart = styled.p`
     font-size: 15px;
     line-height: 0;
-    color: #FEE158;
+    color: ${({ theme }) => theme.colors.progressBarFill};
 `;
 
 export const LabelTextEnd = styled.p`
     font-size: 15px;
     line-height: 0;
-    color: #FE8C01;
+    color: ${({ theme }) => theme.colors.progressBarBackground};;
 `;
 

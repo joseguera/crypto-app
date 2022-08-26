@@ -4,7 +4,7 @@ export const ProgressBarContainer = styled.div`
     width: 250px;
     height: 8px;
     border-radius: 50px;
-    background: #FE8C01;
+    background: ${({ theme }) => theme.colors.progressBarBackground};
     overflow: hidden;
     border: 0.5px solid #191B1F;
 `;
@@ -12,5 +12,5 @@ export const ProgressBarContainer = styled.div`
 export const ProgressLevel = styled.div`
     height: 100%;
     border-radius: 50px;
-    background: #FEE158;
+    background: ${({ theme }) => theme.colors.progressBarFill};
 `;

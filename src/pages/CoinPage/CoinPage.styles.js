@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import plusIcon from "../../images/Iconly-Bulk-Plus.svg";
+import { ReactComponent as SVGCopyIcon } from "../../images/feather-copy.svg";
 
 export const CoinPageMain = styled.div`
   display: grid;
   justify-items: center;
   gap: 22px;
-  color: #ffffff;
 `;
 
 export const SummaryHolder = styled.div`
@@ -37,7 +37,7 @@ export const CryptoSummary = styled.div`
 `;
 
 export const CryptoTitle = styled.div`
-  background: #191b1f;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 236px;
   width: 206px;
@@ -52,7 +52,7 @@ export const CryptoContent = styled.div`
 `;
 
 export const CryptoIcon = styled.div`
-  background: #2c2f36;
+  background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
   width: 83px;
   height: 83px;
@@ -79,7 +79,7 @@ export const CryptoText = styled.p`
 `;
 
 export const CryptoSite = styled.div`
-  background: #191b1f;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   width: 100%;
   height: 52px;
@@ -95,10 +95,11 @@ export const LinkCryptoIcon = styled.img`
   position: absolute;
   left: 13px;
   bottom: 20px;
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
 `;
 
 export const MarketSummary = styled.div`
-  background: #191b1f;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 303px;
   width: 370px;
@@ -163,7 +164,7 @@ export const ProfitLoss = styled.span`
 `;
 
 export const DataSummaryHolder = styled.div`
-  background: #191B1F;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 303px;
   width: 437px;
@@ -253,7 +254,7 @@ export const DescriptionTitle = styled.p`
 
 export const DescriptionBody = styled.div`
   width: 100%;
-  background: #191b1f;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   display: grid;
   place-items: center;
@@ -273,6 +274,7 @@ export const StackIcon = styled.img`
   height: 19px;
   margin-top: 15px;
   margin-bottom: 15px;
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
 `;
 
 export const TextHolder = styled.div`
@@ -333,12 +335,11 @@ export const LinkContainer = styled.div`
   height: 41px;
   padding: 0px 45px;
   border-radius: 10px;
-  background: #191b1f;
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 export const Site = styled.a`
   text-decoration: none;
-  color: #ffffff;
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 13px;
@@ -350,15 +351,19 @@ export const LinkIcon = styled.img`
   position: absolute;
   left: 13px;
   bottom: 15px;
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
 `;
 
-export const CopyIcon = styled.img`
+export const CopyIcon = styled(SVGCopyIcon)`
   position: absolute;
   right: 12px;
   top: 12px;
   height: 16px;
   width: 18px;
-  filter: grayscale(100%);
+  & path {
+    stroke: ${({ theme }) => theme.colors.text};
+    fill: transparent;
+  }
   &:hover {
     cursor: pointer;
   }

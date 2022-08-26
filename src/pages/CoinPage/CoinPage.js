@@ -57,15 +57,14 @@ import {
   Site,
   LinkIcon,
   CopyIcon,
-  CopyButton,
   GraphHolder,
   GraphContainer
 } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 import linkIcon from "../../images/awesome-link.svg";
-import copyIcon from "../../images/feather-copy.svg";
 import "./CoinPage.css";
+import { Tooltip } from "chart.js";
 
 export default class CoinPage extends React.Component {
   constructor(props) {
@@ -470,7 +469,8 @@ export default class CoinPage extends React.Component {
                           <span className="tooltiptext" ref={tooltip}>
                             Click to Copy
                           </span>
-                          <CopyIcon ref={ref} src={copyIcon} alt={site} />
+                          <CopyIcon />
+                          {/* <CopyIcon className="module" ref={ref} src={copyIcon} alt={site} /> */}
                         </div>
                       </LinkContainer>
                     )})}
@@ -486,6 +486,7 @@ export default class CoinPage extends React.Component {
                 <CoinPageGraph
                   cryptoName={profile.name.toLowerCase()}
                   currencyName={currencyName}
+                  selectedTheme={this.props.selectedTheme}
                 />
               </GraphContainer>
             </GraphHolder>
