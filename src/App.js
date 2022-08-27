@@ -47,9 +47,6 @@ export default class App extends React.Component {
                 exact
                 path="/"
                 render={(props) => <Home {...props} currencyName={currencyName} />}
-                // component={(props) => (
-                //   <Home {...props} currencyName={currencyName} />
-                // )}
               />
               <Route path="/portfolio" component={Portfolio} />
               <Route
