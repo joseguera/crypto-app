@@ -36,7 +36,6 @@ export default class SearchBar extends React.Component {
       const { data } = await axios(
         `https://crypto-app-server.herokuapp.com/coins/${this.state.inputValue}`
       );
-      console.log(data);
       this.setState({
         cryptoList: data,
         isLoading: false,

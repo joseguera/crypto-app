@@ -63,8 +63,10 @@ import {
 import { roundToNumber, formatCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 import linkIcon from "../../images/awesome-link.svg";
+import copyIconDark from "../../images/feather-copy-dark.svg";
+import copyIconLight from "../../images/feather-copy-light.svg";
+
 import "./CoinPage.css";
-import { Tooltip } from "chart.js";
 
 export default class CoinPage extends React.Component {
   constructor(props) {
@@ -190,6 +192,7 @@ export default class CoinPage extends React.Component {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
     const hasCoinProfile = !isLoading && profile;
+    let copyIconColor = (this.props.selectedTheme.name === "dark-theme") ? copyIconDark : copyIconLight;
     return (
       <>
         {isLoading && <div>Loading...</div>}
@@ -459,7 +462,7 @@ export default class CoinPage extends React.Component {
                           <LinkIcon src={linkIcon} alt="link icon" />
                         </Site>
                         <Site href={site} target="_blank" rel="noreferrer">
-                          {site.slice(8)}
+                          {(site === null) ? "" : site.slice(8)}
                         </Site>
                         <div
                           className="tooltip"
@@ -469,8 +472,7 @@ export default class CoinPage extends React.Component {
                           <span className="tooltiptext" ref={tooltip}>
                             Click to Copy
                           </span>
-                          <CopyIcon />
-                          {/* <CopyIcon className="module" ref={ref} src={copyIcon} alt={site} /> */}
+                          <CopyIcon ref={ref} src={copyIconColor} alt={site} />
                         </div>
                       </LinkContainer>
                     )})}

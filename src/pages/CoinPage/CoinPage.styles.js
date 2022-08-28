@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import plusIcon from "../../images/Iconly-Bulk-Plus.svg";
-import { ReactComponent as SVGCopyIcon } from "../../images/feather-copy.svg";
 
 export const CoinPageMain = styled.div`
   display: grid;
@@ -343,6 +342,7 @@ export const Site = styled.a`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 13px;
+  max-width: 150px;
 `;
 
 export const LinkIcon = styled.img`
@@ -354,16 +354,13 @@ export const LinkIcon = styled.img`
   filter: invert(${({ theme }) => theme.colors.loopIcon}%)
 `;
 
-export const CopyIcon = styled(SVGCopyIcon)`
+export const CopyIcon = styled.img`
   position: absolute;
   right: 12px;
   top: 12px;
   height: 16px;
   width: 18px;
-  & path {
-    stroke: ${({ theme }) => theme.colors.text};
-    fill: transparent;
-  }
+  filter: grayscale(100%);
   &:hover {
     cursor: pointer;
   }
