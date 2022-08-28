@@ -58,7 +58,7 @@ export const barOptions = {
     },
   };
 
-export default function App(props) {
+export default function BarGraph(props) {
   const initialData = {
     labels: props.labels,
     datasets: [
@@ -109,11 +109,12 @@ export default function App(props) {
 
   useEffect(() => {
     getData(chartRef);
-  }, [getData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.labels, props.prices]);
 
   const barChart = (
     <Bar ref={chartRef} data={data} options={barOptions} />
   );
 
-  return <div className="App">{barChart}</div>;
+  return <div className="BarGraph">{barChart}</div>;
 }

@@ -63,7 +63,7 @@ export const lineOptions = {
   },
 };
 
-export default function App(props) {
+export default function LineGraph(props) {
 
   const initialData = {
   labels: props.labels,
@@ -92,7 +92,7 @@ export default function App(props) {
             {
               data: props.prices,
               backgroundColor: createDarkGradient(chart.ctx),
-              borderColor: borderColor,
+              borderColor: getBorderColor(),
               fill: {
                 target: "origin"
               }
@@ -106,14 +106,24 @@ export default function App(props) {
     }
   }
 
+  const getBorderColor = () => {
+    let borderColor = "";
+    if (props.prices[0] > props.prices[props.prices.length - 1]) {
+      borderColor = "rgba(254, 16, 64, 1)";
+    } else {
+      borderColor = "rgba(0, 255, 95, 1)";
+    }
+    return borderColor;
+  };
+
   function createDarkGradient(ctx) {
     const gradient = ctx.createLinearGradient(0, 0, 0, 350);
     if (props.prices[0] > props.prices[props.prices.length - 1]) {
-      setBorderColor("rgba(254, 16, 64, 1)");
+      // setBorderColor("rgba(254, 16, 64, 1)");
       gradient.addColorStop(0, "rgba(254, 16, 64, .5)");
       gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
     } else {
-      setBorderColor("rgba(0, 255, 95, 1)");
+      // setBorderColor("rgba(0, 255, 95, 1)");
       gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
       gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
     }
@@ -122,9 +132,10 @@ export default function App(props) {
 
   useEffect(() => {
     getData(chartRef);
-  }, [getData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.prices, props.labels]);
 
   const lineChart = <Line ref={chartRef} data={data} options={lineOptions} />;
 
-  return <div className="App">{lineChart}</div>;
+  return <div className="LineGraph">{lineChart}</div>;
 }
