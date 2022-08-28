@@ -13,6 +13,7 @@ export const ExchangeCurrency = styled.div`
 export const ExchangeIcon = styled.img`
   width: 20px;
   height: 14px;
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
 `;
 
 export const CurrencyName = styled.div`
@@ -35,7 +36,7 @@ export const CurrencyLabel = styled.p`
 export const CurrencyInput = styled.div`
   width: 198px;
   height: 36px;
-  background: #2c2f36;
+  background: ${({ theme }) => theme.colors.background};
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -53,15 +54,14 @@ export const InputField = styled.input`
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: #ffffff;
   &:focus {
     outline: none;
   }
   &::placeholder {
-    color: #ffffff;
+    color: ${({ theme }) => theme.colors.text};
   }
   &[type='text'] {
-    color: #ffffff;
+    color: ${({ theme }) => theme.colors.text};
   }
    { 
     font-size: 16px; 

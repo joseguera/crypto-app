@@ -11,7 +11,6 @@ export const DateButton = styled.div`
   cursor: pointer;
   height: 34px;
   width: 34px;
-  color: #FFFFFF;
   display: grid;
   border-radius: 5px;
   place-items: center;
@@ -26,9 +25,9 @@ export const RadioButtonHolder = styled.div`
 export const RadioButtonSelected = styled.div`
     height: 22px;
     width: 22px;
-    border: 1px solid rgb(0, 255, 95);
+    border: 1px solid #06d554;
     border-radius: 50%;
-    background: rgb(0, 255, 95);
+    background: #06d554;
     box-shadow: rgb(0 255 95 / 25%) 0px 0px 0px 5px;
     cursor: pointer;
 `;

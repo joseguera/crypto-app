@@ -51,9 +51,7 @@ export default class App extends React.Component {
               <Route path="/portfolio" component={Portfolio} />
               <Route
                 path="/coin/:id"
-                component={(props) => (
-                  <CoinPage {...props} currencyName={currencyName} />
-                )}
+                render={(props) => <CoinPage {...props} currencyName={currencyName} selectedTheme={selectedTheme} />}
               />
             </Switch>
           </MainApp>
