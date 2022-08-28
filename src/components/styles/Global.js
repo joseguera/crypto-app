@@ -10,6 +10,8 @@ body {
     padding: 0px;
     max-width: 100%;
     overflow-x: hidden;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
   }
 
   a {

@@ -34,3 +34,32 @@ export const InputType = styled.input`
         color: ${({ theme }) => theme.colors.text};
     }
 `;
+
+export const DropDownList = styled.div`
+    position: absolute;
+    top: 50px;
+    left: 0.02px;
+    display: flex;
+    flex-direction: column;
+    background: ${({ theme }) => theme.colors.buttonFill};
+    padding: 8px;
+    border-radius: 10px;
+    place-items: center;
+    gap: 2px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
+    z-index: 10;
+`;
+
+export const ListItem = styled.div`
+    width: 100%;
+    padding: 2px 2px 2px 8px;
+    border-radius: 5px;
+    &:hover {
+        background: ${({ theme }) => theme.colors.menuHover};
+        cursor: pointer;
+    }
+`;
+
+export const NoResults = styled.span`
+  color: #FE1040;
+`;

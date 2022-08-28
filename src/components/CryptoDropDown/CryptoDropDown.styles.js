@@ -44,8 +44,9 @@ export const DropDownList = styled.div`
 export const ListItem = styled.div`
     width: 100%;
     padding: 2px 2px 2px 8px;
-    border-radius: 10px;
+    border-radius: 5px;
     &:hover {
         background: ${({ theme }) => theme.colors.menuHover};
+        cursor: pointer;
     }
 `;
