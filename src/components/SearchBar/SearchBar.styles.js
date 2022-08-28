@@ -37,6 +37,7 @@ export const InputType = styled.input`
 
 export const DropDownList = styled.div`
     position: absolute;
+    width: 392.5px;
     top: 50px;
     left: 0.02px;
     display: flex;
@@ -51,13 +52,32 @@ export const DropDownList = styled.div`
 `;
 
 export const ListItem = styled.div`
-    width: 100%;
-    padding: 2px 2px 2px 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    padding: 8px;
     border-radius: 5px;
     &:hover {
         background: ${({ theme }) => theme.colors.menuHover};
         cursor: pointer;
     }
+`;
+
+export const SubOne = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+`;
+
+export const SubTwo = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const NoResults = styled.span`

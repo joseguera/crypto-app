@@ -6,15 +6,24 @@ import {
   InputType,
   DropDownList,
   ListItem,
-  NoResults
+  NoResults,
+  SubOne,
+  SubTwo,
 } from "./SearchBar.styles";
 import searchIcon from "../../images/Search.svg";
+import { Link } from "react-router-dom";
 
 export default class SearchBar extends React.Component {
   state = {
     inputValue: "",
     cryptoList: [
-      { id: 0, name: "Please type in the cryptocurrency to search..." },
+      {
+        id: null,
+        name: "Please type in the cryptocurrency to search...",
+        thumb: "",
+        symbol: null,
+        market_cap_rank: null,
+      },
     ],
     open: false,
     isLoading: false,
@@ -50,7 +59,15 @@ export default class SearchBar extends React.Component {
     this.setState({
       inputValue: e.target.value,
       open: !open,
-      cryptoList: [{ id: 0, name: list }],
+      cryptoList: [
+        {
+          id: null,
+          thumb: "",
+          symbol: null,
+          market_cap_rank: null,
+          name: list,
+        },
+      ],
     });
   };
 
@@ -59,7 +76,6 @@ export default class SearchBar extends React.Component {
     const value = this.state.inputValue;
 
     this.setState({ inputValue: value });
-    // this.props.handleSubmit(value);
   };
 
   cryptoContainer = React.createRef();
@@ -72,13 +88,11 @@ export default class SearchBar extends React.Component {
   };
 
   handleSelection = (value) => {
-    const cryptoName = value.toLowerCase();
     const { open } = this.state;
     this.setState({
       cryptoName: value,
       open: !open,
     });
-    // this.props.setCryptoName(cryptoName);
   };
 
   handleClickOutside = (event) => {
@@ -134,13 +148,24 @@ export default class SearchBar extends React.Component {
               ) : (
                 cryptoList.map((cryptoItem) => {
                   return (
-                    <ListItem
-                      id={cryptoItem.id}
-                      key={cryptoItem.id}
-                      onClick={(e) => this.handleSelection(e.target.id)}
-                    >
-                      {cryptoItem.name}
-                    </ListItem>
+                    <Link to={`/coin/${cryptoItem.api_symbol}`} style={{ "width": "100%" }}>
+                      <ListItem
+                        id={cryptoItem.id}
+                        key={cryptoItem.id}
+                        onClick={(e) => this.handleSelection(e.target.id)}
+                      >
+                        <SubOne>
+                          <div>
+                            <img src={cryptoItem.thumb} alt={cryptoItem.id} />
+                          </div>
+                          <div>{cryptoItem.name}</div>
+                          <div>{cryptoItem.market_cap_rank}</div>
+                        </SubOne>
+                        <SubTwo>
+                          <div>{cryptoItem.symbol}</div>
+                        </SubTwo>
+                      </ListItem>
+                    </Link>
                   );
                 })
               )}
