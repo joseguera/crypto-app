@@ -17,7 +17,7 @@ export const Button = styled.div`
 
 export const ButtonText = styled.h2`
   font-size: 23px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 0px;
 `;
 
