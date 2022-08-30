@@ -16,15 +16,7 @@ import { Link } from "react-router-dom";
 export default class SearchBar extends React.Component {
   state = {
     inputValue: "",
-    cryptoList: [
-      {
-        id: null,
-        name: "Please type in the cryptocurrency to search...",
-        thumb: "",
-        symbol: null,
-        market_cap_rank: null,
-      },
-    ],
+    cryptoList: [],
     open: false,
     isLoading: false,
     hasError: false,
@@ -46,27 +38,11 @@ export default class SearchBar extends React.Component {
   };
 
   handleChange = (e) => {
-    const { open, cryptoList } = this.state;
-    let list;
-    if (e.target.value.length < 1) {
-      list = "Please type in the cryptocurrency to search...";
-    } else if (cryptoList.length < 0) {
-      list = "Not found. Please try searching another term";
-    } else {
-      list = "Loading...";
-    }
+    const { open } = this.state;
+    
     this.setState({
       inputValue: e.target.value,
       open: !open,
-      cryptoList: [
-        {
-          id: null,
-          thumb: "",
-          symbol: null,
-          market_cap_rank: null,
-          name: list,
-        },
-      ],
     });
   };
 
@@ -125,7 +101,13 @@ export default class SearchBar extends React.Component {
 
   render() {
     const { open, inputValue, cryptoList } = this.state;
-
+    let list;
+    if (inputValue.length < 1) {
+      list = "Please type in the cryptocurrency to search...";
+    } else {
+      list = "Loading...";
+    }
+  
     return (
       <div className="container" ref={this.cryptoContainer}>
         <SearchBarStyle>
@@ -139,10 +121,14 @@ export default class SearchBar extends React.Component {
           {open && (
             <DropDownList>
               {cryptoList.length === 0 ? (
-                <ListItem onClick={(e) => this.handleSelection(e.target.id)}>
-                  <NoResults>
-                    Not found. Please try another search term
-                  </NoResults>
+                <ListItem>
+                  {(inputValue > 0 && cryptoList.length === 0) ? 
+                    <NoResults key={0}>
+                      Not found. Please try searching another term
+                    </NoResults>
+                  :
+                    <span key={0}>{list}</span>
+                  }
                 </ListItem>
               ) : (
                 cryptoList.map((cryptoItem) => {

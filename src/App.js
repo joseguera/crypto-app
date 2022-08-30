@@ -20,13 +20,26 @@ export default class App extends React.Component {
     this.setState({
       currencyName,
     });
+    localStorage.setItem("current-currency", JSON.stringify(currencyName));
   };
 
   handleThemeChange = (theme) => {
     let themeColor; 
     (theme === "dark") ? themeColor = dark : themeColor = light;
     this.setState({ selectedTheme: themeColor });
+    localStorage.setItem("current-theme", JSON.stringify(themeColor));
   };
+
+  componentDidMount() {
+    const currentTheme = JSON.parse(localStorage.getItem("current-theme"));
+    if (currentTheme) {
+      this.setState({ selectedTheme: currentTheme });
+    }
+    const currentCurrency = JSON.parse(localStorage.getItem("current-currency"));
+    if (currentCurrency) {
+      this.setState({ currencyName: currentCurrency });
+    }
+  }
 
   render() {
     const { currencyName, selectedTheme } = this.state;
