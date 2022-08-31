@@ -122,7 +122,7 @@ export default class SearchBar extends React.Component {
             <DropDownList>
               {cryptoList.length === 0 ? (
                 <ListItem>
-                  {(inputValue > 0 && cryptoList.length === 0) ? 
+                  {(inputValue.length > 0 && cryptoList.length === 0) ? 
                     <NoResults key={0}>
                       Not found. Please try searching another term
                     </NoResults>

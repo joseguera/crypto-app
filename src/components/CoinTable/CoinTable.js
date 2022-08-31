@@ -1,12 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { TableContent, FilterArrowDown, FilterArrowUp } from "components";
+import { TableFilters, TableContent, FilterArrowDown, FilterArrowUp } from "components";
 import { TableGrid, TableHeader } from "./CoinTable.styles";
 
 class CoinTable extends React.Component {
   
   state = {
     coins: null,
+    category: "",
     isLoading: false,
     hasError: false,
     filterSelection: {
@@ -43,7 +44,12 @@ class CoinTable extends React.Component {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+        (this.state.category.length > 0) ? (
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&category=${this.state.category}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+
+        ) : (
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+        )
       );
       this.setState({
         coins: data,
@@ -70,6 +76,10 @@ class CoinTable extends React.Component {
     });
   };
 
+  setCategory = (category) => {
+    this.setState({ category })
+  }
+
   getFilteredCoins = (list, direction) => {
     return this.state.coins.sort((a, b) => {
       const first = a[list];
@@ -82,6 +92,9 @@ class CoinTable extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currencyName !== prevProps.currencyName) {
+      this.getCoins();
+    }
+    if (this.state.category !== prevState.category) {
       this.getCoins();
     }
   }
@@ -102,6 +115,7 @@ class CoinTable extends React.Component {
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
           <TableGrid>
+            <TableFilters setCategory={this.setCategory} />
             {Object.values(filterSelection).map((filter) => {
               return filter.upArrow ? (
                 <TableHeader
