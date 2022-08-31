@@ -8,7 +8,7 @@ export default class TableFilters extends React.Component {
             <TableFiltersHolder>
                 <TableFilterCategories>
                     <CategoryHolder>
-                        <Categories setCategory={this.props.setCategory} />
+                        <Categories setCategory={this.props.setCategory} category={this.props.category} />
                     </CategoryHolder>
                     <ShowRowsHolder>
                         Show Rows (Dropdown)

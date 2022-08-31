@@ -9,7 +9,7 @@ export default class Categories extends React.Component {
       NFTs: { name: "NFTs", category: "non-fungible-tokens-nft" },
       Metaverse: { name: "Metaverse", category: "metaverse" }
     },
-    active: "cryptocurrency",
+    active: this.props.category,
   };
 
   setActive = (category) => {
