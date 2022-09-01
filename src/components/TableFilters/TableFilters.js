@@ -1,6 +1,6 @@
 import React from "react";
-import { Categories } from 'components';
-import { TableFiltersHolder, TableFilterCategories, CategoryHolder, ShowRowsHolder } from './TableFilters.styles';
+import { Categories, RowsDropDown } from 'components';
+import { TableFiltersHolder, TableFilterCategories, CategoryHolder } from './TableFilters.styles';
 
 export default class TableFilters extends React.Component {
     render() {
@@ -10,9 +10,9 @@ export default class TableFilters extends React.Component {
                     <CategoryHolder>
                         <Categories setCategory={this.props.setCategory} category={this.props.category} />
                     </CategoryHolder>
-                    <ShowRowsHolder>
-                        Show Rows (Dropdown)
-                    </ShowRowsHolder>
+                    <CategoryHolder>
+                        <RowsDropDown setRowQuantity={this.props.setRowQuantity} rowNumber={this.props.rowNumber} />
+                    </CategoryHolder>
                 </TableFilterCategories>
             </TableFiltersHolder>
         )

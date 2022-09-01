@@ -7,7 +7,8 @@ class CoinTable extends React.Component {
   
   state = {
     coins: null,
-    category: "",
+    category: { name: "", prop: "" },
+    rowNumber: 25,
     isLoading: false,
     hasError: false,
     filterSelection: {
@@ -41,12 +42,9 @@ class CoinTable extends React.Component {
   };
 
   getCoins = async () => {
-    const apiWithCategory = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&category=${this.state.category}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-    const apiNoCategory = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-
     try {
       this.setState({ isLoading: true });
-      const { data } = await axios( this.state.category.length > 0 ? apiWithCategory : apiNoCategory );
+      const { data } = await axios( `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}${this.state.category.prop}&order=market_cap_desc&per_page=${this.state.rowNumber}&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d` );
       this.setState({
         coins: data,
         isLoading: false,
@@ -73,7 +71,11 @@ class CoinTable extends React.Component {
   };
 
   setCategory = (category) => {
-    this.setState({ category })
+    this.setState({ category: { name: category, prop: `&category=${category}` } })
+  }
+
+  setRowQuantity = (rowNumber) => {
+    this.setState({ rowNumber })
   }
 
   getFilteredCoins = (list, direction) => {
@@ -93,6 +95,9 @@ class CoinTable extends React.Component {
     if (this.state.category !== prevState.category) {
       this.getCoins();
     }
+    if (this.state.rowNumber !== prevState.rowNumber) {
+      this.getCoins();
+    }
   }
 
   componentDidMount() {
@@ -104,14 +109,14 @@ class CoinTable extends React.Component {
   }
 
   render() {
-    const { coins, isLoading, filterSelection, category } = this.state;
+    const { coins, isLoading, filterSelection, category, rowNumber } = this.state;
     const hasCoins = !isLoading && coins;
     return (
       <>
         {isLoading && <div>Loading...</div>}
         {hasCoins && (
           <TableGrid>
-            <TableFilters setCategory={this.setCategory} category={category} />
+            <TableFilters setCategory={this.setCategory} category={category.name} setRowQuantity={this.setRowQuantity} rowNumber={rowNumber} />
             {Object.values(filterSelection).map((filter) => {
               return filter.upArrow ? (
                 <TableHeader

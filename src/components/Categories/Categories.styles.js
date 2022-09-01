@@ -6,6 +6,10 @@ export const CategoryHolder = styled.div`
   flex-wrap: wrap;
 `;
 
+export const CategoryTitle = styled.div`
+
+`;
+
 export const CategoryButton = styled.div`
   background: ${({ theme }) => theme.colors.buttonFill};
   cursor: pointer;
