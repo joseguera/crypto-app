@@ -12,11 +12,14 @@ export const TableGrid = styled.div`
     border-radius: 10px;
     width: 1256px;
     padding: 17px;
-
 `;
 
 export const TableHeader = styled.div`
    &:hover {
     cursor: pointer;
    }
+`;
+
+export const TableHeadings = styled.div`
+  grid-column: 1 / 10;
 `;

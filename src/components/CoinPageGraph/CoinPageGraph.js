@@ -146,7 +146,6 @@ export default class CoinPageGraph extends React.Component {
   }
 
   render() {
-    console.log(this.props.selectedTheme)
     const graphData = this.formatData(this.state.prices, this.state.labels);
     const { isLoading } = this.state;
     const hasGraph = !isLoading && this.state.prices;

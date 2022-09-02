@@ -2,6 +2,10 @@ import * as theme from "./Theme.styled";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+* {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
 
 body {
     background-color: ${({ theme }) => theme.colors.background};
@@ -10,8 +14,6 @@ body {
     padding: 0px;
     max-width: 100%;
     overflow-x: hidden;
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
   }
 
   a {
