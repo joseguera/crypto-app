@@ -9,6 +9,8 @@ import {
   styledLink,
   PercentCell,
   TableLine,
+  Wrapper,
+  InnerWrapper
 } from "./TableContent.styles";
 import {
   SmallGraph,
@@ -16,6 +18,7 @@ import {
   DownArrowRed,
   UpArrowGreen,
 } from "components";
+import "./TableContent.css"
 
 export default class TableContent extends React.Component {
   state = {
@@ -41,6 +44,10 @@ export default class TableContent extends React.Component {
                 <div>{coin.market_cap_rank}</div>
                 <div>
                   <Link to={`/coin/${coin.id}`} style={styledLink}>
+                    {/* <div className="skeleton"></div> */}
+                    <Wrapper>
+                      <InnerWrapper />
+                    </Wrapper>
                     <Icon src={coin.image} alt={coin.name} />
                     <LinkText>
                       {coin.name} (<Symbol>{coin.symbol}</Symbol>)
