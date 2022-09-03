@@ -12,6 +12,7 @@ class CoinTable extends React.Component {
   state = {
     coins: null,
     category: { name: "", prop: "" },
+    isLoading: false,
     hasError: false,
     filterSelection: {
       marketCapRank: {
@@ -47,7 +48,7 @@ class CoinTable extends React.Component {
     try {
       this.setState({ isLoading: true });
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}${this.state.category.prop}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}${this.state.category.prop}&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
       this.setState({
         coins: data,
@@ -107,7 +108,7 @@ class CoinTable extends React.Component {
   }
 
   render() {
-    const { coins, filterSelection, category, rowNumber } = this.state;
+    const { coins, filterSelection, category, rowNumber, isLoading } = this.state;
     return (
       <>
         <TableGrid>
@@ -139,7 +140,7 @@ class CoinTable extends React.Component {
           <div>24h Volume/Market Cap</div>
           <div>Circulating/Total Supply</div>
           <div>Last 7d</div>
-          <TableContent coins={coins} currencyName={this.props.currencyName} />
+          <TableContent coins={coins} currencyName={this.props.currencyName} isLoading={isLoading} />
         </TableGrid>
       </>
     );

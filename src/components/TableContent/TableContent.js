@@ -9,8 +9,6 @@ import {
   styledLink,
   PercentCell,
   TableLine,
-  Wrapper,
-  InnerWrapper
 } from "./TableContent.styles";
 import {
   SmallGraph,
@@ -18,13 +16,9 @@ import {
   DownArrowRed,
   UpArrowGreen,
 } from "components";
-import "./TableContent.css"
+import LoadingTableRow from "components/loading-animations/LoadingTableRow/LoadingTableRow";
 
 export default class TableContent extends React.Component {
-  state = {
-    isLoading: false,
-  }
-
   formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: this.props.currencyName,
@@ -32,22 +26,18 @@ export default class TableContent extends React.Component {
   });
 
   render() {
-    const { isLoading } = this.state;
-    const hasCoins = !isLoading && this.props.coins;
+    const { isLoading, coins } = this.props;
+    const hasCoins = !isLoading && coins;
+    const loaders = Array.apply(null, Array(25)).map(function () {});
     return (
       <>
-        {isLoading && <div>Loading...</div>}
-        {hasCoins &&
+        {hasCoins ? (
           this.props.coins.map((coin) => {
             return (
               <React.Fragment key={coin.name}>
                 <div>{coin.market_cap_rank}</div>
                 <div>
                   <Link to={`/coin/${coin.id}`} style={styledLink}>
-                    {/* <div className="skeleton"></div> */}
-                    <Wrapper>
-                      <InnerWrapper />
-                    </Wrapper>
                     <Icon src={coin.image} alt={coin.name} />
                     <LinkText>
                       {coin.name} (<Symbol>{coin.symbol}</Symbol>)
@@ -115,7 +105,10 @@ export default class TableContent extends React.Component {
                 <TableLine />
               </React.Fragment>
             );
-          })}
+          })
+        ) : (
+          loaders.map((index) => <LoadingTableRow key={index} />)
+        )}
       </>
     );
   }
