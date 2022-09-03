@@ -43,6 +43,10 @@ export const CurrencyItem = styled.div`
   place-items: center;
   gap: 15px;
   border-radius: 10px;
+  &:hover {
+    background: ${({ theme }) => theme.colors.menuHover};
+    cursor: pointer;
+  }
 `;
 
 export const CurrencyOptions = styled.div`

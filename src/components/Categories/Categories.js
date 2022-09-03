@@ -1,5 +1,5 @@
 import React from "react";
-import { CategoryHolder, CategoryButton, StyledButton, ButtonText } from "./Categories.styles";
+import { CategoryHolder, CategoryTitle, CategoryButton, StyledButton, ButtonText } from "./Categories.styles";
 
 export default class Categories extends React.Component {
   state = {
@@ -38,6 +38,7 @@ export default class Categories extends React.Component {
 
     return (
       <CategoryHolder>
+        <CategoryTitle><ButtonText>Filter By:</ButtonText></CategoryTitle>
         {Object.values(categories).map((category) => {
           return active === category.category ? (
             <StyledButton

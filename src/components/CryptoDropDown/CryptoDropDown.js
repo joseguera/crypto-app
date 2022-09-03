@@ -52,7 +52,7 @@ export default class CryptoDropDown extends React.Component {
           <DropDownHolder>
             <DropDown onClick={this.handleDropDownClick}>
               <CryptoTitle>{this.state.cryptoName}&nbsp;Overview</CryptoTitle>
-              <Arrow />
+              {!open ? <Arrow /> : <Arrow style={{ "transform": "rotateX(180deg)" }} />}
             </DropDown>
             {open && (
               <DropDownList>

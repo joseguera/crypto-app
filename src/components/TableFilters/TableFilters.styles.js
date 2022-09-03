@@ -22,9 +22,3 @@ export const CategoryHolder = styled.div`
   gap: 12px;
   flex-wrap: wrap;
 `;
-
-export const ShowRowsHolder = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-`;
