@@ -16,12 +16,9 @@ import {
   DownArrowRed,
   UpArrowGreen,
 } from "components";
+import LoadingTableRow from "components/loading-animations/LoadingTableRow/LoadingTableRow";
 
 export default class TableContent extends React.Component {
-  state = {
-    isLoading: false,
-  }
-
   formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: this.props.currencyName,
@@ -29,12 +26,12 @@ export default class TableContent extends React.Component {
   });
 
   render() {
-    const { isLoading } = this.state;
-    const hasCoins = !isLoading && this.props.coins;
+    const { isLoading, coins } = this.props;
+    const hasCoins = !isLoading && coins;
+    const loaders = Array.apply(null, Array(25)).map(function () {});
     return (
       <>
-        {isLoading && <div>Loading...</div>}
-        {hasCoins &&
+        {hasCoins ? (
           this.props.coins.map((coin) => {
             return (
               <React.Fragment key={coin.name}>
@@ -108,7 +105,10 @@ export default class TableContent extends React.Component {
                 <TableLine />
               </React.Fragment>
             );
-          })}
+          })
+        ) : (
+          loaders.map((index) => <LoadingTableRow key={index} />)
+        )}
       </>
     );
   }

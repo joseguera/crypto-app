@@ -13,7 +13,9 @@ export const light = {
       lineGraphFill: "#F4F3F1",
       border: "hsl(0, 0%, 87%)",
       buttonFill: "#F7F7F7",
-      barFill: "#2C2F36"
+      barFill: "#2C2F36",
+      shimer1: "#E0DED7",
+      shimer2: "#F7F7F7"
     },
   };
   
@@ -32,6 +34,8 @@ export const light = {
       lineGraphFill: "#1C1E24",
       border: "hsl(0, 0%, 78%)",
       buttonFill: "#2C2F36",
-      barFill: "#F7F7F7"
-    },
+      barFill: "#F7F7F7",
+      shimer1: "#1F2128",
+      shimer2: "#2c2f36"
+    }
   };

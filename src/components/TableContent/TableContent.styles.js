@@ -17,8 +17,8 @@ export const PercentCell = styled.div`
 `;
 
 export const styledLink = {
-  textDecoration: "none"
-}
+  textDecoration: "none",
+};
 
 export const LinkText = styled.span`
   &:hover {
@@ -30,6 +30,6 @@ export const LinkText = styled.span`
 `;
 
 export const TableLine = styled.span`
-  border-top: 1px solid #DCDCDC;
+  border-top: 1px solid #dcdcdc;
   grid-column: 1 / 10;
 `;

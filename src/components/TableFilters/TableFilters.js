@@ -1,5 +1,5 @@
 import React from "react";
-import { Categories, RowsDropDown } from 'components';
+import { Categories } from 'components';
 import { TableFiltersHolder, TableFilterCategories, CategoryHolder } from './TableFilters.styles';
 
 export default class TableFilters extends React.Component {
@@ -9,9 +9,6 @@ export default class TableFilters extends React.Component {
                 <TableFilterCategories>
                     <CategoryHolder>
                         <Categories setCategory={this.props.setCategory} category={this.props.category} />
-                    </CategoryHolder>
-                    <CategoryHolder>
-                        <RowsDropDown setRowQuantity={this.props.setRowQuantity} rowNumber={this.props.rowNumber} />
                     </CategoryHolder>
                 </TableFilterCategories>
             </TableFiltersHolder>
