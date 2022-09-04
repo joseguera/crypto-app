@@ -69,15 +69,6 @@ import copyIconLight from "../../images/feather-copy-light.svg";
 import "./CoinPage.css";
 
 export default class CoinPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: this.props.currencyName,
-      minimumFractionDigits: 0,
-    });
-  }
-
   state = {
     profile: null,
     isLoading: false,
@@ -142,19 +133,24 @@ export default class CoinPage extends React.Component {
     ${hours < 12 ? "AM" : "PM"}`;
   };
 
+  currencies = {
+    usd: "$",
+    eur: "€",
+    gbp: "£"
+  }
+
   setCurrency = (currency) => {
-    if (currency === "usd") return "$";
-    if (currency === "eur") return "€";
-    if (currency === "gbp") return "£";
-  };
+    return this.currencies[currency]
+  }
 
   getProfit = (priceChange24, currentPrice) => {
+    const { currencyName } = this.props;
     const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2);
     const profit = formatCurrency(profitPercent);
     return profit < 0 ? (
-      <ProfitLoss>$({Math.abs(profit)})</ProfitLoss>
+      <ProfitLoss>{this.setCurrency(currencyName)}({Math.abs(profit)})</ProfitLoss>
     ) : (
-      <ProfitGain>${profit}</ProfitGain>
+      <ProfitGain>{this.setCurrency(currencyName)}{profit}</ProfitGain>
     );
   };
 
@@ -249,9 +245,8 @@ export default class CoinPage extends React.Component {
                   <MarketHolder>
                     <MarketPrice>
                       <Price>
-                        {this.formatter.format(
-                          profile.market_data.current_price[currencyName]
-                        )}
+                        {this.setCurrency(currencyName)}
+                        {profile.market_data.current_price[currencyName]}
                       </Price>
                       <PriceChange>
                         {this.getPercentChange(
@@ -279,9 +274,8 @@ export default class CoinPage extends React.Component {
                         <DataGroup>
                           <DataLabel>All Time High:</DataLabel>
                           <Data>
-                            {this.formatter.format(
-                              profile.market_data.ath[currencyName]
-                            )}
+                            {this.setCurrency(currencyName)}
+                            {profile.market_data.ath[currencyName]}
                           </Data>
                         </DataGroup>
                         <span>
@@ -299,9 +293,8 @@ export default class CoinPage extends React.Component {
                         <DataGroup>
                           <DataLabel>All Time Low:</DataLabel>
                           <Data>
-                            {this.formatter.format(
-                              profile.market_data.atl[currencyName]
-                            )}
+                            {this.setCurrency(currencyName)}
+                            {profile.market_data.atl[currencyName]}
                           </Data>
                         </DataGroup>
                         <span>

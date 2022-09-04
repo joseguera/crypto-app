@@ -32,6 +32,7 @@ export default class CurrencyDropDown extends React.Component {
       open: !open
     });
     this.props.setCurrencyName(currencyName);
+    localStorage.setItem("selected-currency", JSON.stringify(currencyName.toUpperCase()));
   };
 
   handleClickOutside = (event) => {
@@ -47,7 +48,12 @@ export default class CurrencyDropDown extends React.Component {
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
+    const currentCurrency = JSON.parse(localStorage.getItem("selected-currency"));
+    if (currentCurrency) {
+      this.setState({ currencyName: currentCurrency });
+    }
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
