@@ -7,7 +7,7 @@ export const GraphCointaner = styled.div`
 `;
 
 export const GraphDataHolder = styled.div`
-    display: grid;
-    justify-items: center;
-    margin: 0 auto;
+  display: grid;
+  justify-items: center;
+  margin: 0 auto;
 `;
