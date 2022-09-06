@@ -102,7 +102,7 @@ export default class CoinPageGraph extends React.Component {
   };
 
   formatData = (price, label) => {
-    let backgroundColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphFill : theme.light.colors.lineGraphFill;
+    let backgroundColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.appBackground : theme.light.colors.appBackground;
     let borderColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphBorder : theme.light.colors.lineGraphBorder;
 
     return {

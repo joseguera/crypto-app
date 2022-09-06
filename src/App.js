@@ -6,7 +6,7 @@ import {
 } from "./components/styles/Theme.styled";
 import { GlobalStyles } from "./components/styles/Global";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { NavBar } from "components";
+import { NavBar, Footer } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
 import { MainApp } from "App.styles";
 
@@ -67,6 +67,7 @@ export default class App extends React.Component {
                 render={(props) => <CoinPage {...props} currencyName={currencyName} selectedTheme={selectedTheme} />}
               />
             </Switch>
+            <Footer />
           </MainApp>
         </ThemeProvider>
       </Router>

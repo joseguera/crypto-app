@@ -111,7 +111,7 @@ export default class SearchBar extends React.Component {
     return (
       <div className="container" ref={this.cryptoContainer}>
         <SearchBarStyle>
-          <LoopIcon src={searchIcon} alt="light-dark theme" />
+          <LoopIcon src={searchIcon} alt="search bar" />
           <InputType
             placeholder="Search..."
             onChange={this.handleChange}
