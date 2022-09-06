@@ -1,7 +1,11 @@
 import React from "react";
-import { FooterHolder, ImageLink, IconImage } from "./Footer.styles";
+import { FooterHolder, ImageLink, IconImage, MobileIconImage } from "./Footer.styles";
 import github from '../../images/github.svg'
 import linkedIn from '../../images/linkedin.svg'
+import overview from "../../images/mobile/overview-light-mobile.svg"
+import portfolio from "../../images/mobile/portfolio-light-mobile.svg"
+import summary from "../../images/mobile/summary-light-mobile.svg"
+import search from "../../images/mobile/search-light-mobile.svg"
 
 const Footer = (props) => {
   return (
@@ -12,6 +16,18 @@ const Footer = (props) => {
         </ImageLink>
         <ImageLink href="https://www.linkedin.com/in/jose-oseguera-dev/" target="_blank" rel="noreferrer">
           <IconImage src={linkedIn} alt="linkedIn" />
+        </ImageLink>
+        <ImageLink>
+            <MobileIconImage src={overview} alt="Overview" />
+        </ImageLink>
+        <ImageLink>
+            <MobileIconImage src={portfolio} alt="Portfolio" />
+        </ImageLink>
+        <ImageLink>
+            <MobileIconImage src={summary} alt="Summary" />
+        </ImageLink>
+        <ImageLink>
+            <MobileIconImage src={search} alt="Search" />
         </ImageLink>
       </FooterHolder>
     </>
