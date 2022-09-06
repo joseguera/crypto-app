@@ -19,7 +19,6 @@ export default class CryptoExchange extends React.Component {
     fiatValue: this.props.currentPrice
   }
 
-  currencyName = this.props.currencyName.toUpperCase();
   cryptoName = this.props.cryptoName.toUpperCase();
   currentPrice = roundToNumber(this.props.currentPrice, 2);
 
@@ -36,17 +35,15 @@ export default class CryptoExchange extends React.Component {
     this.setState({ inputValue: cryptoTotal, fiatValue: fiat })
   }
 
-  setCurrencySymbol = (currency) => {
-    if (currency === 'USD') { 
-      return '$'
-    }
-    if (currency === 'EUR') { 
-      return '€' 
-    }
-    if (currency === 'GBP') {
-      return '£' 
-    }
-  } 
+  currencies = {
+    usd: "$",
+    eur: "€",
+    gbp: "£"
+  }
+
+  setCurrency = (currency) => {
+    return this.currencies[currency]
+  }
 
   render() {
     const { inputValue, fiatValue } = this.state;
@@ -70,10 +67,10 @@ export default class CryptoExchange extends React.Component {
         <ExchangeIcon src={exchangeIcon} alt="arrow icon" />
         <ExchangeCurrency>
           <CurrencyName>
-            <CurrencyLabel>{this.currencyName}</CurrencyLabel>
+            <CurrencyLabel>{this.props.currencyName.toUpperCase()}</CurrencyLabel>
           </CurrencyName>
           <CurrencyInput>
-            <CurrencySymbol>{this.setCurrencySymbol(this.currencyName)}</CurrencySymbol>
+            <CurrencySymbol>{this.setCurrency(this.props.currencyName)}</CurrencySymbol>
             <InputField 
               onChange={this.handleFiatChange}
               value={fiatValue}

@@ -19,11 +19,16 @@ import {
 import LoadingTableRow from "components/loading-animations/LoadingTableRow/LoadingTableRow";
 
 export default class TableContent extends React.Component {
-  formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: this.props.currencyName,
-    minimumFractionDigits: 0,
-  });
+  
+  currencies = {
+    usd: "$",
+    eur: "€",
+    gbp: "£"
+  }
+
+  setCurrency = (currency) => {
+    return this.currencies[currency]
+  }
 
   render() {
     const { isLoading, coins } = this.props;
@@ -44,7 +49,7 @@ export default class TableContent extends React.Component {
                     </LinkText>
                   </Link>
                 </div>
-                <div>{this.formatter.format(coin.current_price)}</div>
+                <div>{this.setCurrency(this.props.currencyName)}{coin.current_price}</div>
                 <PercentCell>
                   {coin.price_change_percentage_1h_in_currency > 0 ? (
                     <UpArrowGreen />

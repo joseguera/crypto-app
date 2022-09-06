@@ -44,7 +44,7 @@ export default class GraphTitle extends React.Component {
     gbp: "£"
   }
 
-  getCurrency = (currency) => {
+  setCurrency = (currency) => {
     return this.currencies[currency]
   } 
 
@@ -68,7 +68,7 @@ export default class GraphTitle extends React.Component {
         {hasMarketData && (
           <ChartTitle>
             <TitleText>{this.props.cryptoName}</TitleText>
-            <TitleAmount>{this.getCurrency(this.props.currencyName)}{formatCurrency(price, 2)}</TitleAmount>
+            <TitleAmount>{this.setCurrency(this.props.currencyName)}{formatCurrency(price, 2)}</TitleAmount>
             <TitleText>{this.timeConverter(lastUpdated)}</TitleText>
           </ChartTitle>
         )}

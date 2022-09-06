@@ -30,6 +30,16 @@ export default class CoinNavSummary extends React.Component {
     this.getMarketData();
   }
 
+  currencies = {
+    usd: "$",
+    eur: "€",
+    gbp: "£"
+  }
+
+  setCurrency = (currency) => {
+    return this.currencies[currency]
+  }
+
   render() {
     const { currencyName } = this.props;
     const { market, isLoading } = this.state;  
@@ -44,12 +54,12 @@ export default class CoinNavSummary extends React.Component {
             <div>Exchange {market.data.markets}</div>
             <TotalHolder>
               <div>&#x25CF;</div> 
-              <div>{formatCurrency(market.data.total_market_cap[currencyName])}</div>
+              <div>{this.setCurrency(this.props.currencyName)}{formatCurrency(market.data.total_market_cap[currencyName])}</div>
               {(market.data.market_cap_change_percentage_24h_usd < 0) ? <DownArrowRed /> : <UpArrowGreen />}
             </TotalHolder>
             <TotalHolder>
               <div>&#x25CF;</div> 
-              <div>{formatCurrency(market.data.total_volume[currencyName])}</div>
+              <div>{this.setCurrency(this.props.currencyName)}{formatCurrency(market.data.total_volume[currencyName])}</div>
             </TotalHolder>
             <IconHolder><Icon src={bitcoin} alt="bitcoin-icon" /> {roundToNumber(market.data.market_cap_percentage.btc, 0)}%{' '}<ProgressBarNav percent={`${market.data.market_cap_percentage.btc}%`} /></IconHolder>
             <IconHolder><Icon src={ethereum} alt="ethereum-icon" /> {roundToNumber(market.data.market_cap_percentage.eth, 0)}%{' '}<ProgressBarNav percent={`${market.data.market_cap_percentage.eth}%`} /></IconHolder>
