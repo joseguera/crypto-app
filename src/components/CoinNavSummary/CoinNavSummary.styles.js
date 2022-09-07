@@ -1,32 +1,83 @@
-import styled from 'styled-components';
-
+import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const SummaryHolder = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    width: 60%;
-    background: ${({ theme }) => theme.colors.background};
-    height: 50px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  background: ${({ theme }) => theme.colors.background};
+  height: 50px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `;
 
-export const TotalHolder = styled.div`
+export const CoinsExchange = styled.div`
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: inline-block;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: inline-block;
+  }
+`;
+
+export const ProgressBarVol = styled.div`
+  @media only screen and ${breakpoint.device.xs} {
+    display: inline-block;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: none;
+  }
+`;
+
+export const VolumeDot = styled.div`
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: inline-block;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: inline-block;
+  }
+`;
+
+export const TotalMarketCapHolder = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.sm} {
     display: flex;
-    align-items: center;
-    gap: 5px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: flex;
+  }
+`;
+
+export const TotalVolumeHolder = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const IconHolder = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const Icon = styled.img`
-    width: 20px;
-    vertical-align: text-bottom;
+  width: 20px;
+  vertical-align: text-bottom;
 `;
