@@ -1,9 +1,7 @@
 import React from "react";
 import axios from "axios";
-
-import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
+import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle, SideArrow } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
-
 import { timeConverter } from "./../../util/numberUtil";
 
 export default class Graph extends React.Component {
@@ -120,6 +118,7 @@ export default class Graph extends React.Component {
           <>
             <CryptoDropDown setCryptoName={this.setCryptoName} />
             <GraphGrid>
+              <SideArrow direction="left" />
               <GraphCell>
                 <GraphHeader>
                   <GraphTitle
@@ -148,6 +147,7 @@ export default class Graph extends React.Component {
                   <BarGraph labels={volumeLabels} prices={volumePrices} />
                 </ChartHolder>
               </GraphCell>
+              <SideArrow direction="right" />
             </GraphGrid>
           </>
         )}

@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const GraphGrid = styled.div`
     display: flex;
     flex-direction: row;
+    flex-flow: column wrap;
     column-gap: 34px;
+    @media only screen and ${breakpoint.device.xs} {
+        gap: 15px;
+    }
 `;
 
 export const GraphCell = styled.div`
