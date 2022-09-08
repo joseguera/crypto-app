@@ -1,6 +1,6 @@
 import React from "react";
 import * as theme from "../styles/Theme.styled";
-import { ButtonContainer, Button, ButtonText } from "./NavBarButtons.styles";
+import { ButtonContainer, Button, ButtonText,OverviewContainer } from "./NavBarButtons.styles";
 import { NavLink } from "react-router-dom";
 import "./NavBarButtons.css"
 
@@ -10,7 +10,8 @@ const NavBarButtons = (props) => {
     const buttonText = (props.selectedTheme.name === "light-theme") ? theme.light.colors.text : theme.dark.colors.text;
 
     return (
-      
+      <>
+      <OverviewContainer><h2>Overview</h2></OverviewContainer>
       <ButtonContainer>
         <NavLink
           exact to="/"
@@ -41,6 +42,7 @@ const NavBarButtons = (props) => {
           </Button>
         </NavLink>
       </ButtonContainer>
+      </>
     );
 };
 

@@ -4,7 +4,7 @@ import { ProgressBarNav, UpArrowGreen, DownArrowRed } from 'components';
 import { formatCurrency, roundToNumber } from "../../util/numberUtil";
 import ethereum from "../../images/ethereum.webp"
 import bitcoin from "../../images/bitcoin.webp"
-import { SummaryHolder, TotalHolder, IconHolder, Icon } from "./CoinNavSummary.styles";
+import { SummaryHolder, CoinsExchange, TotalMarketCapHolder, TotalVolumeHolder, IconHolder, Icon, ProgressBarVol, VolumeDot } from "./CoinNavSummary.styles";
 
 export default class CoinNavSummary extends React.Component {
   state = {
@@ -50,17 +50,20 @@ export default class CoinNavSummary extends React.Component {
         {isLoading && <div>Loading...</div>}
         {hasMarketData && (
           <SummaryHolder>
-            <div>Coins {market.data.active_cryptocurrencies}</div>
-            <div>Exchange {market.data.markets}</div>
-            <TotalHolder>
+            <CoinsExchange>Coins {market.data.active_cryptocurrencies}</CoinsExchange>
+            <CoinsExchange>Exchange {market.data.markets}</CoinsExchange>
+            <TotalMarketCapHolder>
               <div>&#x25CF;</div> 
               <div>{this.setCurrency(this.props.currencyName)}{formatCurrency(market.data.total_market_cap[currencyName])}</div>
               {(market.data.market_cap_change_percentage_24h_usd < 0) ? <DownArrowRed /> : <UpArrowGreen />}
-            </TotalHolder>
-            <TotalHolder>
-              <div>&#x25CF;</div> 
+            </TotalMarketCapHolder>
+            <TotalVolumeHolder>
+              <VolumeDot>&#x25CF;</VolumeDot> 
               <div>{this.setCurrency(this.props.currencyName)}{formatCurrency(market.data.total_volume[currencyName])}</div>
-            </TotalHolder>
+              <ProgressBarVol>
+                <ProgressBarNav />
+              </ProgressBarVol>
+            </TotalVolumeHolder>
             <IconHolder><Icon src={bitcoin} alt="bitcoin-icon" /> {roundToNumber(market.data.market_cap_percentage.btc, 0)}%{' '}<ProgressBarNav percent={`${market.data.market_cap_percentage.btc}%`} /></IconHolder>
             <IconHolder><Icon src={ethereum} alt="ethereum-icon" /> {roundToNumber(market.data.market_cap_percentage.eth, 0)}%{' '}<ProgressBarNav percent={`${market.data.market_cap_percentage.eth}%`} /></IconHolder>
           </SummaryHolder>

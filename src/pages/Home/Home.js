@@ -6,7 +6,7 @@ const Home = (props) => {
     <MainDiv>
       <Graph currencyName={props.currencyName} />
       <h2>Your Overview</h2>
-      {/* <CoinTable currencyName={props.currencyName} /> */}
+      <CoinTable currencyName={props.currencyName} />
     </MainDiv>
   );
 };
