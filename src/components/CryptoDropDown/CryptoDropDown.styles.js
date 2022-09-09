@@ -8,7 +8,12 @@ export const DropDownHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     margin-left: 45px;
   }
-
+  @media only screen and ${breakpoint.device.sm} {
+    margin-left: 0px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    margin-left: 0px;
+  }
 `;
 
 export const DropDown = styled.div`
@@ -46,6 +51,12 @@ export const DropDownList = styled.div`
   z-index: 10;
   @media only screen and ${breakpoint.device.xs} {
     left: 64.5px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    left: 75.96px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    left: 75.96px;
   }
 `;
 

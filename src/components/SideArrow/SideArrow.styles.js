@@ -9,6 +9,13 @@ export const NextArrow = styled.div`
   border-color: transparent rgb(255, 255, 255) transparent transparent;
   display: none;
   @media only screen and ${breakpoint.device.xs} {
-    display: block;
+    display: inline-block;
+    cursor: pointer;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: none;
   }
 `;

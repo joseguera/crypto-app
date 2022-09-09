@@ -1,12 +1,21 @@
 import React from "react";
-import { NextArrow } from './SideArrow.styles';
+import { NextArrow } from "./SideArrow.styles";
 
 const SideArrow = (props) => {
-    return (
-        <>
-            {(props.direction === "left") ? <NextArrow /> : <NextArrow style={{ "transform" : "rotate(180deg)" }} /> }
-        </>
-    )
-}
+  const switchGraph = () => {
+    props.switchGraph();
+  };
+
+  const direction = { transform: "rotate(180deg)" };
+
+  return (
+    <>
+      <NextArrow
+        onClick={() => switchGraph()}
+        style={props.direction === "right" ? direction : {}}
+      />
+    </>
+  );
+};
 
 export default SideArrow;
