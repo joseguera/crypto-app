@@ -43,9 +43,7 @@ display: flex;
 export const GraphCell = styled.div`
   flex-direction: column;
   align-items: center;
-  width: 602px;
-  height: 359px;
-  padding: 13px;
+  padding: 20px;
   position: relative;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.background};
@@ -54,11 +52,11 @@ export const GraphCell = styled.div`
     height: 215px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 602px;
+    width: 588px;
     height: 359px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    width: 602px;
+    width: 588px;
     height: 359px;
   }
 `;
