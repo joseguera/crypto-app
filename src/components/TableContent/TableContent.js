@@ -107,12 +107,12 @@ export default class TableContent extends React.Component {
                   />
                 </div>
                 <SmallGraph graphData={coin.sparkline_in_7d.price} />
-                <TableLine />
+                <TableLine key={coin.id} />
               </React.Fragment>
             );
           })
         ) : (
-          loaders.map((index) => <LoadingTableRow key={index} />)
+          loaders.map((el, index) => <LoadingTableRow key={index} />)
         )}
       </>
     );

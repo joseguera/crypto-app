@@ -1,11 +1,11 @@
 import { CoinTable, Graph } from "components";
-import { MainDiv } from "./Home.styles";
+import { MainDiv, Overview } from "./Home.styles";
 
 const Home = (props) => {
   return (
     <MainDiv>
       <Graph currencyName={props.currencyName} />
-      <h2>Your Overview</h2>
+      <Overview><h2>Overview</h2></Overview>
       <CoinTable currencyName={props.currencyName} />
     </MainDiv>
   );

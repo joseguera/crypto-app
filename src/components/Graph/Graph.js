@@ -1,9 +1,7 @@
 import React from "react";
 import axios from "axios";
-
-import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle } from "components";
+import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle, SideArrow } from "components";
 import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
-
 import { timeConverter } from "./../../util/numberUtil";
 
 export default class Graph extends React.Component {
@@ -15,6 +13,8 @@ export default class Graph extends React.Component {
     prices: [],
     volumeLabels: [],
     volumePrices: [],
+    lineGraph: true,
+    barGraph: false,
     isLoading: false,
     hasError: false,
   };
@@ -57,7 +57,7 @@ export default class Graph extends React.Component {
 
       this.setState({
         volumeLabels,
-        volumePrices,
+        volumePrices
       });
     } catch (err) {
       console.log("Location Error:", err);
@@ -105,13 +105,24 @@ export default class Graph extends React.Component {
     });
   };
 
+  switchGraph = () => {
+    const { lineGraph, barGraph } = this.state;
+    this.setState({ 
+      lineGraph: !lineGraph,
+      barGraph: !barGraph
+    })
+  }
+
   hasData = () => this.state.labels.length && this.state.prices.length;
 
   render() {
-    const { isLoading, labels, prices, volumeLabels, volumePrices } = this.state;
+    const { isLoading, labels, prices, volumeLabels, volumePrices, lineGraph, barGraph } = this.state;
     const hasGraph = !isLoading && this.state.labels && this.state.volumeLabels;
     const lineGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC" : "ETH";
     const barGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
+
+    const showLineGraph = (lineGraph) ? "visible" : "not-visible";
+    const showBarGraph = (barGraph) ? "visible" : "not-visible";
 
     return (
       <>
@@ -120,7 +131,8 @@ export default class Graph extends React.Component {
           <>
             <CryptoDropDown setCryptoName={this.setCryptoName} />
             <GraphGrid>
-              <GraphCell>
+              <SideArrow direction="left" switchGraph={this.switchGraph}/>
+              <GraphCell className={showLineGraph}>
                 <GraphHeader>
                   <GraphTitle
                     cryptoName={lineGraphTitle}
@@ -134,7 +146,7 @@ export default class Graph extends React.Component {
                   <LineGraph labels={labels} prices={prices} />
                 </ChartHolder>
               </GraphCell>
-              <GraphCell>
+              <GraphCell className={showBarGraph}>
                 <GraphHeader>
                   <GraphTitle
                     cryptoName={barGraphTitle}
@@ -148,6 +160,7 @@ export default class Graph extends React.Component {
                   <BarGraph labels={volumeLabels} prices={volumePrices} />
                 </ChartHolder>
               </GraphCell>
+              <SideArrow direction="right" switchGraph={this.switchGraph} />
             </GraphGrid>
           </>
         )}
