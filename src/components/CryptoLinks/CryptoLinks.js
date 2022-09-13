@@ -39,7 +39,6 @@ const CryptoLinks = (props) => {
     <LinkHolder>
       {props.siteLinks &&
         linkArray.slice(0, arrayLength).map((site, index) => {
-          console.log(linkArray);
           return (
             <LinkContainer key={site}>
               <Site href={site} target="_blank" rel="noreferrer">
@@ -69,7 +68,6 @@ const CryptoLinks = (props) => {
             </LinkContainer>
           );
         })}
-      ;
     </LinkHolder>
   );
 };

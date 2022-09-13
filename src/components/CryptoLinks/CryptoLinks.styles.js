@@ -29,6 +29,7 @@ export const Site = styled.a`
   overflow: hidden;
   font-size: 13px;
   max-width: 150px;
+  white-space: nowrap
 `;
 
 export const LinkIcon = styled.img`
