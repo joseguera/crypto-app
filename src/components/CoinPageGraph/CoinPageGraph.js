@@ -165,7 +165,7 @@ export default class CoinPageGraph extends React.Component {
             </GraphCointaner>
           </>
         ) : (
-          <NoGraph>No Graph to display</NoGraph>
+          <NoGraph>No Graph to Display</NoGraph>
         )
       }
       </>
