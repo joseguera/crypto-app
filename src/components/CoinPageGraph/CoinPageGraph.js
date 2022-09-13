@@ -15,7 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { CoinPageDateButtons } from "components";
 import { timeConverter } from "util/numberUtil";
-import { GraphCointaner } from "./CoinPageGraph.styles";
+import { GraphCointaner, NoGraph } from "./CoinPageGraph.styles";
 import './CoinPageGraph.css'
 
 ChartJS.register(
@@ -153,7 +153,7 @@ export default class CoinPageGraph extends React.Component {
     return (
       <>
         {isLoading && <div>Loading...</div>}
-        {hasGraph && this.hasData() && (
+        {hasGraph && this.hasData() ? (
           <>
             <CoinPageDateButtons setDateRange={this.setDateRange} />
             <GraphCointaner>
@@ -164,7 +164,10 @@ export default class CoinPageGraph extends React.Component {
               />
             </GraphCointaner>
           </>
-        )}
+        ) : (
+          <NoGraph>No Graph to Display</NoGraph>
+        )
+      }
       </>
     );
   }

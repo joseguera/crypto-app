@@ -1,21 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar, CryptoLinks } from "components";
+import { CryptoSummary, CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar, CryptoLinks } from "components";
 import {
   CoinPageMain,
   SummaryHolder,
   PageTitle,
   PageText,
   SummaryContainer,
-  CryptoSummary,
-  CryptoTitle,
-  CryptoContent,
-  CryptoIcon,
-  CryptoImg,
-  CryptoName,
-  CryptoText,
-  CryptoSite,
-  LinkCryptoIcon,
   MarketSummary,
   MarketHolder,
   MarketPrice,
@@ -55,7 +46,6 @@ import {
   GraphContainer
 } from "./CoinPage.styles";
 import { roundToNumber, formatCurrency, setCurrency, setDate } from "util/numberUtil";
-import linkIcon from "../../images/awesome-link.svg";
 import stackIcon from "../../images/layer-group.svg";
 
 export default class CoinPage extends React.Component {
@@ -131,48 +121,7 @@ export default class CoinPage extends React.Component {
                 <PageText>Your Summary</PageText>
               </PageTitle>
               <SummaryContainer>
-                <CryptoSummary>
-                  <CryptoTitle>
-                    <CryptoContent>
-                      <CryptoIcon>
-                        <CryptoImg
-                          src={profile.image.small}
-                          alt={profile.name}
-                        />
-                      </CryptoIcon>
-                      <CryptoName>
-                        <CryptoText>
-                          {profile.name}
-                          {profile.name.length > 7 ? (
-                            <>
-                              <br />
-                              <br />
-                            </>
-                          ) : (
-                            " "
-                          )}
-                          <Symbol>({profile.symbol})</Symbol>
-                        </CryptoText>
-                      </CryptoName>
-                    </CryptoContent>
-                  </CryptoTitle>
-                  <CryptoSite>
-                    <a
-                      href={profile.links.homepage[0]}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <LinkCryptoIcon src={linkIcon} alt="link icon" />
-                    </a>
-                    <a
-                      href={profile.links.homepage[0]}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {profile.links.homepage[0].slice(8, -1)}
-                    </a>
-                  </CryptoSite>
-                </CryptoSummary>
+                <CryptoSummary profile={profile} />
                 <MarketSummary>
                   <MarketHolder>
                     <MarketPrice>
