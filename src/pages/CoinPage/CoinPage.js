@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
-import _ from 'lodash';
-import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar } from "components";
+import { CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar, CryptoLinks } from "components";
 import {
   CoinPageMain,
   SummaryHolder,
@@ -47,26 +46,17 @@ import {
   Profit,
   ProfitGain,
   ProfitLoss,
-  LinkHolder,
   Symbol,
   DataItem,
   PlusIcon,
   Item,
   ItemTitle,
-  LinkContainer,
-  Site,
-  LinkIcon,
-  CopyIcon,
   GraphHolder,
   GraphContainer
 } from "./CoinPage.styles";
-import { roundToNumber, formatCurrency } from "util/numberUtil";
-import stackIcon from "../../images/layer-group.svg";
+import { roundToNumber, formatCurrency, setCurrency, setDate } from "util/numberUtil";
 import linkIcon from "../../images/awesome-link.svg";
-import copyIconDark from "../../images/feather-copy-dark.svg";
-import copyIconLight from "../../images/feather-copy-light.svg";
-
-import "./CoinPage.css";
+import stackIcon from "../../images/layer-group.svg";
 
 export default class CoinPage extends React.Component {
   state = {
@@ -74,26 +64,6 @@ export default class CoinPage extends React.Component {
     isLoading: false,
     hasError: false,
   };
-
-  ButtonRef1 = {};
-  ButtonRef2 = {};
-  ButtonRef3 = {};
-  
-  SpanRef1 = {};
-  SpanRef2 = {};
-  SpanRef3 = {};
-
-  buttonRefs = [
-    this.ButtonRef1 = React.createRef(),
-    this.ButtonRef2 = React.createRef(),
-    this.ButtonRef3 = React.createRef()
-  ];
-
-  spanRefs = [
-    this.SpanRef1 = React.createRef(),
-    this.SpanRef2 = React.createRef(),
-    this.SpanRef3 = React.createRef()
-  ];
 
   getCoinInfo = async () => {
     try {
@@ -120,37 +90,14 @@ export default class CoinPage extends React.Component {
     this.getCoinInfo();
   }
 
-  setDate = (dateString) => {
-    const formatDate = new Date(dateString);
-    const hours = formatDate.getHours();
-    const minutes = formatDate.getMinutes();
-    const seconds = formatDate.getSeconds();
-
-    return `${formatDate.toLocaleDateString("en-US")}, 
-    ${hours < 12 ? hours : hours - 12}:${
-      minutes < 10 ? "0" + minutes : minutes
-    }:${seconds < 10 ? "0" + seconds : seconds}
-    ${hours < 12 ? "AM" : "PM"}`;
-  };
-
-  currencies = {
-    usd: "$",
-    eur: "€",
-    gbp: "£"
-  }
-
-  setCurrency = (currency) => {
-    return this.currencies[currency]
-  }
-
   getProfit = (priceChange24, currentPrice) => {
     const { currencyName } = this.props;
     const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2);
     const profit = formatCurrency(profitPercent);
     return profit < 0 ? (
-      <ProfitLoss>{this.setCurrency(currencyName)}({Math.abs(profit)})</ProfitLoss>
+      <ProfitLoss>{setCurrency(currencyName)}({Math.abs(profit)})</ProfitLoss>
     ) : (
-      <ProfitGain>{this.setCurrency(currencyName)}{profit}</ProfitGain>
+      <ProfitGain>{setCurrency(currencyName)}{profit}</ProfitGain>
     );
   };
 
@@ -169,26 +116,11 @@ export default class CoinPage extends React.Component {
     );
   };
 
-  copyToClipboard = (currentRef, currentSpan) => {
-    const copyText = currentRef.current.alt;
-    navigator.clipboard.writeText(copyText);
-
-    if (currentSpan === this.SpanRef1 || currentSpan === this.SpanRef2 || currentSpan === this.SpanRef3) {
-      currentSpan.current.childNodes[0].textContent = "Copied";
-    }
-  };
-
-  outFunction = (currentSpan) => {
-    if (currentSpan === this.SpanRef1 || currentSpan === this.SpanRef2 || currentSpan === this.SpanRef3) {
-      currentSpan.current.childNodes[0].textContent = "Click to Copy";
-    }
-  }
-
   render() {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
     const hasCoinProfile = !isLoading && profile;
-    let copyIconColor = (this.props.selectedTheme.name === "dark-theme") ? copyIconDark : copyIconLight;
+
     return (
       <>
         {isLoading && <div>Loading...</div>}
@@ -245,7 +177,7 @@ export default class CoinPage extends React.Component {
                   <MarketHolder>
                     <MarketPrice>
                       <Price>
-                        {this.setCurrency(currencyName)}
+                        {setCurrency(currencyName)}
                         {profile.market_data.current_price[currencyName]}
                       </Price>
                       <PriceChange>
@@ -274,13 +206,13 @@ export default class CoinPage extends React.Component {
                         <DataGroup>
                           <DataLabel>All Time High:</DataLabel>
                           <Data>
-                            {this.setCurrency(currencyName)}
+                            {setCurrency(currencyName)}
                             {profile.market_data.ath[currencyName]}
                           </Data>
                         </DataGroup>
                         <span>
                           <Data>
-                            {this.setDate(
+                            {setDate(
                               profile.market_data.ath_date[currencyName]
                             )}
                           </Data>
@@ -293,13 +225,13 @@ export default class CoinPage extends React.Component {
                         <DataGroup>
                           <DataLabel>All Time Low:</DataLabel>
                           <Data>
-                            {this.setCurrency(currencyName)}
+                            {setCurrency(currencyName)}
                             {profile.market_data.atl[currencyName]}
                           </Data>
                         </DataGroup>
                         <span>
                           <Data>
-                            {this.setDate(
+                            {setDate(
                               profile.market_data.atl_date[currencyName]
                             )}
                           </Data>
@@ -316,7 +248,7 @@ export default class CoinPage extends React.Component {
                         <Item>
                           <ItemTitle>Market Cap:</ItemTitle>
                           <div>
-                            {this.setCurrency(currencyName)}
+                            {setCurrency(currencyName)}
                             {formatCurrency(
                               profile.market_data.market_cap[currencyName]
                             )}
@@ -338,7 +270,7 @@ export default class CoinPage extends React.Component {
                         <Item>
                           <ItemTitle>Fully Diluted Valuation: </ItemTitle>
                           <div>
-                            {this.setCurrency(currencyName)}
+                            {setCurrency(currencyName)}
                             {profile.market_data.fully_diluted_valuation[
                               currencyName
                             ]
@@ -356,7 +288,7 @@ export default class CoinPage extends React.Component {
                         <Item>
                           <ItemTitle>Volume 24h:</ItemTitle>
                           <div>
-                            {this.setCurrency(currencyName)}
+                            {setCurrency(currencyName)}
                             {formatCurrency(
                               profile.market_data.total_volume[currencyName]
                             )}
@@ -383,7 +315,7 @@ export default class CoinPage extends React.Component {
                         <Item>
                           <ItemTitle>Total Volume:</ItemTitle>
                           <div>
-                            {this.setCurrency(currencyName)}
+                            {setCurrency(currencyName)}
                             {formatCurrency(
                               profile.market_data.total_volume[currencyName]
                             )}
@@ -446,30 +378,7 @@ export default class CoinPage extends React.Component {
                   </TextHolder>
                 </DescriptionText>
               </DescriptionBody>
-              <LinkHolder>
-                {profile.links.blockchain_site.length !== 0 &&
-                  _.zipWith(profile.links.blockchain_site.slice(0, 3), this.buttonRefs, this.spanRefs, (site, ref, tooltip) => {
-                    return (
-                      <LinkContainer key={site}>
-                        <Site href={site} target="_blank" rel="noreferrer">
-                          <LinkIcon src={linkIcon} alt="link icon" />
-                        </Site>
-                        <Site href={site} target="_blank" rel="noreferrer">
-                          {(site === null) ? "" : site.slice(8)}
-                        </Site>
-                        <div
-                          className="tooltip"
-                          onClick={() => this.copyToClipboard(ref, tooltip)}
-                          onMouseOut={() => this.outFunction(tooltip)}
-                        >
-                          <span className="tooltiptext" ref={tooltip}>
-                            Click to Copy
-                          </span>
-                          <CopyIcon ref={ref} src={copyIconColor} alt={site} />
-                        </div>
-                      </LinkContainer>
-                    )})}
-              </LinkHolder>
+              <CryptoLinks siteLinks={profile.links.blockchain_site} selectedTheme={this.props.selectedTheme} />
             </DescriptionHolder>
             <GraphHolder>
               <CryptoExchange

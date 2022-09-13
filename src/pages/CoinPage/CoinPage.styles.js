@@ -64,7 +64,6 @@ export const CryptoImg = styled.img`
   width: 35px;
 `;
 
-
 export const CryptoName = styled.span`
   width: 150px;
   text-align: center;
@@ -94,7 +93,7 @@ export const LinkCryptoIcon = styled.img`
   position: absolute;
   left: 13px;
   bottom: 20px;
-  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%);
 `;
 
 export const MarketSummary = styled.div`
@@ -170,21 +169,17 @@ export const DataSummaryHolder = styled.div`
 `;
 
 export const DataSummaryContainer = styled.div`
-    margin-left: 38px;
-    margin-top: 23px;
+  margin-left: 38px;
+  margin-top: 23px;
 `;
 
 export const MarketDataOne = styled.div`
-    margin-bottom: 19px;
+  margin-bottom: 19px;
 `;
 
-export const MarketDataTwo = styled.div`
-    
-`;
+export const MarketDataTwo = styled.div``;
 
-export const MarketDataThree = styled.div`
-    
-`;
+export const MarketDataThree = styled.div``;
 
 export const Symbol = styled.span`
   text-transform: uppercase;
@@ -273,7 +268,7 @@ export const StackIcon = styled.img`
   height: 19px;
   margin-top: 15px;
   margin-bottom: 15px;
-  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%);
 `;
 
 export const TextHolder = styled.div`
@@ -286,84 +281,32 @@ export const Text = styled.div`
   line-height: 150% !important;
 `;
 
-export const LinkHolder = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  gap: 13px;
-`;
-
 export const DataItem = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 28px;
 `;
 
 export const Item = styled.div`
-    display: flex;
-    gap: 4px;
+  display: flex;
+  gap: 4px;
 `;
 
 export const ItemTitle = styled.div`
-    font-weight: 600;
+  font-weight: 600;
 `;
 
 export const PlusIcon = styled.div`
-    height: 20px;
-    width: 20px;
-    border-radius: 7px;
-    background-image: url(${plusIcon});
-    background-repeat: no-repeat;
-    background-position: center; 
-    display: grid;
-    justify-items: center;
-    align-content: center;
-`;
-
-export const LinkContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 275px;
-  height: 41px;
-  padding: 0px 45px;
-  border-radius: 10px;
-  background: ${({ theme }) => theme.colors.background};
-`;
-
-export const Site = styled.a`
-  text-decoration: none;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: 13px;
-  max-width: 150px;
-`;
-
-export const LinkIcon = styled.img`
-  width: 11px;
-  height: 11px;
-  position: absolute;
-  left: 13px;
-  bottom: 15px;
-  filter: invert(${({ theme }) => theme.colors.loopIcon}%)
-`;
-
-export const CopyIcon = styled.img`
-  position: absolute;
-  right: 12px;
-  top: 12px;
-  height: 16px;
-  width: 18px;
-  filter: grayscale(100%);
-  &:hover {
-    cursor: pointer;
-  }
+  height: 20px;
+  width: 20px;
+  border-radius: 7px;
+  background-image: url(${plusIcon});
+  background-repeat: no-repeat;
+  background-position: center;
+  display: grid;
+  justify-items: center;
+  align-content: center;
 `;
 
 export const GraphHolder = styled.div`
@@ -382,4 +325,3 @@ export const CoinPageGraph = styled.div`
   width: 1519px;
   height: 220px;
 `;
-
