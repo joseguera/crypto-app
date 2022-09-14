@@ -46,3 +46,7 @@ export const setDate = (dateString) => {
   }:${seconds < 10 ? "0" + seconds : seconds}
     ${hours < 12 ? "AM" : "PM"}`;
 };
+
+export const setToSciNotation = (decimal, roundNum) => {
+  return Number.parseFloat(decimal).toExponential(roundNum);
+}
