@@ -1,10 +1,15 @@
 import styled from "styled-components";
-import NoGraphImage from "../../images/NoGraph.svg"
+import NoGraphImage from "../../images/NoGraph.svg";
 
 export const GraphCointaner = styled.div`
   width: 1519px;
   height: 220px;
   margin-left: -16px;
+  .graph-style {
+    width: 1526.8px !important;
+    display: block;
+    height: 230px !important;
+  }
 `;
 
 export const GraphDataHolder = styled.div`
@@ -22,5 +27,5 @@ export const NoGraph = styled.div`
   margin-top: 20px;
   font-size: 22px;
   font-weight: 600;
-  background-image:url(${NoGraphImage})
+  background-image: url(${NoGraphImage});
 `;
