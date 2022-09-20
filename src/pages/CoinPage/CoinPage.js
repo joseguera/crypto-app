@@ -1,30 +1,17 @@
 import React from "react";
 import axios from "axios";
-import { CryptoSummary, CryptoExchange, CoinPageGraph, DownArrowRed, UpArrowGreen, ProgressBar, CryptoLinks } from "components";
+import { CryptoSummary, CryptoMarketSummary, CryptoExchange, CoinPageGraph, ProgressBar, CryptoLinks } from "components";
 import {
   CoinPageMain,
   SummaryHolder,
   PageTitle,
   PageText,
   SummaryContainer,
-  MarketSummary,
-  MarketHolder,
-  MarketPrice,
-  PriceChange,
-  Price,
-  PercentDown,
-  PercentUp,
   DataSummaryHolder,
   DataSummaryContainer,
   MarketDataOne,
   MarketDataTwo,
   MarketDataThree,
-  DataHolder,
-  DataContainer,
-  DataValues,
-  DataGroup,
-  DataLabel,
-  Data,
   DescriptionHolder,
   Description,
   DescriptionTitle,
@@ -33,10 +20,6 @@ import {
   StackIcon,
   TextHolder,
   Text,
-  ProfitHolder,
-  Profit,
-  ProfitGain,
-  ProfitLoss,
   Symbol,
   DataItem,
   PlusIcon,
@@ -45,7 +28,7 @@ import {
   GraphHolder,
   GraphContainer
 } from "./CoinPage.styles";
-import { roundToNumber, formatCurrency, setCurrency, setDate } from "util/numberUtil";
+import { roundToNumber, formatCurrency, setCurrency } from "util/numberUtil";
 import stackIcon from "../../images/layer-group.svg";
 
 export default class CoinPage extends React.Component {
@@ -80,32 +63,6 @@ export default class CoinPage extends React.Component {
     this.getCoinInfo();
   }
 
-  getProfit = (priceChange24, currentPrice) => {
-    const { currencyName } = this.props;
-    const profitPercent = ((priceChange24 * currentPrice) / 100).toFixed(2);
-    const profit = formatCurrency(profitPercent);
-    return profit < 0 ? (
-      <ProfitLoss>{setCurrency(currencyName)}({Math.abs(profit)})</ProfitLoss>
-    ) : (
-      <ProfitGain>{setCurrency(currencyName)}{profit}</ProfitGain>
-    );
-  };
-
-  getPercentChange = (percent) => {
-    const percentChange = roundToNumber(percent, 2);
-    return percentChange < 0 ? (
-      <>
-        <DownArrowRed />
-        <PercentDown>{percentChange}%</PercentDown>
-      </>
-    ) : (
-      <>
-        <UpArrowGreen />
-        <PercentUp>{percentChange}%</PercentUp>
-      </>
-    );
-  };
-
   render() {
     const { currencyName } = this.props;
     const { profile, isLoading } = this.state;
@@ -122,73 +79,7 @@ export default class CoinPage extends React.Component {
               </PageTitle>
               <SummaryContainer>
                 <CryptoSummary profile={profile} />
-                <MarketSummary>
-                  <MarketHolder>
-                    <MarketPrice>
-                      <Price>
-                        {setCurrency(currencyName)}
-                        {profile.market_data.current_price[currencyName]}
-                      </Price>
-                      <PriceChange>
-                        {this.getPercentChange(
-                          profile.market_data
-                            .price_change_percentage_24h_in_currency[
-                            currencyName
-                          ]
-                        )}
-                      </PriceChange>
-                    </MarketPrice>
-                  </MarketHolder>
-                  <ProfitHolder>
-                    <Profit>Profit: </Profit>
-                    {this.getProfit(
-                      profile.market_data
-                        .price_change_percentage_24h_in_currency[currencyName],
-                      profile.market_data.current_price[currencyName]
-                    )}
-                  </ProfitHolder>
-                  <StackIcon src={stackIcon} alt="stack image" />
-                  <DataHolder>
-                    <DataContainer>
-                      <UpArrowGreen />
-                      <DataValues>
-                        <DataGroup>
-                          <DataLabel>All Time High:</DataLabel>
-                          <Data>
-                            {setCurrency(currencyName)}
-                            {profile.market_data.ath[currencyName]}
-                          </Data>
-                        </DataGroup>
-                        <span>
-                          <Data>
-                            {setDate(
-                              profile.market_data.ath_date[currencyName]
-                            )}
-                          </Data>
-                        </span>
-                      </DataValues>
-                    </DataContainer>
-                    <DataContainer>
-                      <DownArrowRed />
-                      <DataValues>
-                        <DataGroup>
-                          <DataLabel>All Time Low:</DataLabel>
-                          <Data>
-                            {setCurrency(currencyName)}
-                            {profile.market_data.atl[currencyName]}
-                          </Data>
-                        </DataGroup>
-                        <span>
-                          <Data>
-                            {setDate(
-                              profile.market_data.atl_date[currencyName]
-                            )}
-                          </Data>
-                        </span>
-                      </DataValues>
-                    </DataContainer>
-                  </DataHolder>
-                </MarketSummary>
+                <CryptoMarketSummary currencyName={this.props.currencyName} profile={profile} />
                 <DataSummaryHolder>
                   <DataSummaryContainer>
                     <MarketDataOne>
