@@ -16,7 +16,6 @@ import { Line } from "react-chartjs-2";
 import { CoinPageDateButtons } from "components";
 import { timeConverter } from "util/numberUtil";
 import { GraphCointaner, NoGraph } from "./CoinPageGraph.styles";
-import './CoinPageGraph.css'
 
 ChartJS.register(
   CategoryScale,
