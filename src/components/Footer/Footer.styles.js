@@ -9,6 +9,16 @@ export const FooterHolder = styled.div`
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.colors.appBackground};
+  @media only screen and ${breakpoint.device.xs} {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+  }
 `;
 
 export const ImageLink = styled.a`
@@ -24,7 +34,7 @@ export const IconImage = styled.img`
     display: none;
   }
   @media only screen and ${breakpoint.device.sm} {
-    display: inline-block;
+    display: none;
   }
   @media only screen and ${breakpoint.device.lg} {
     display: inline-block;
@@ -37,7 +47,7 @@ export const MobileIconImage = styled.img`
     display: inline-block;
   }
   @media only screen and ${breakpoint.device.sm} {
-    display: none;
+    display: inline-block;
   }
   @media only screen and ${breakpoint.device.lg} {
     display: none;
