@@ -19,6 +19,9 @@ export const FooterHolder = styled.div`
     left: 0px;
     bottom: 0px;
   }
+  @media only screen and ${breakpoint.device.lg} {
+    position: static;
+  }
 `;
 
 export const ImageLink = styled.a`
