@@ -1,12 +1,22 @@
 import styled from "styled-components";
+import breakpoint from "../styles/breakpoints";
 
 export const NavBarDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 1291px;
   margin: 0 auto;
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
+  @media only screen and ${breakpoint.device.xs} {
+    width: 90%;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 90%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1291px;
+  }
 `;
 
 export const NavBarContainer = styled.div`
@@ -19,7 +29,8 @@ export const NavDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 5px;
   align-items: center;
   height: 86px;
   width: 100%;

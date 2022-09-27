@@ -5,7 +5,7 @@ export const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 25px;
-  width: 90%;
+  width: 1291px;
   margin: 0 auto;
 `;
 
