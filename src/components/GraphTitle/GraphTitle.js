@@ -1,78 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
-import { formatCurrency } from "util/numberUtil";
+import { formatCurrency, setCurrency } from "util/numberUtil";
 import { ChartTitle, TitleText, TitleAmount } from "./GraphTitle.styles";
 
-export default class GraphTitle extends React.Component {
-  state = {
-    marketData: null,
-    currentPrice: 0,
-    totalVolume: 0,
-    lastUpdated: "",
-    isLoading: false,
-    hasError: false,
-  };
+export default function GraphTitle(props) {
+  const [marketData, setMarketData] = useState(null);
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const [totalVolume, setTotalVolume] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
-  getMarketData = async () => {
-    this.setState({ isLoading: true });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  async function getMarketData() {
+    setIsLoading(true);
     const { data } = await axios(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${this.props.currencyName}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${props.currencyName}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
     );
-    this.setState({
-      marketData: data,
-      currentPrice: data[0].current_price,
-      totalVolume: data[0].total_volume,
-      lastUpdated: data[0].last_updated,
-      isLoading: false,
+    setMarketData(data);
+    setCurrentPrice(data[0].current_price);
+    setTotalVolume(data[0].total_volume);
+    setLastUpdated(data[0].last_updated);
+    setIsLoading(false);
+  }
+
+  const timeConverter = (t) => {
+    return dayjs(t).$d.toLocaleDateString("en-us", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.currencyName !== prevProps.currencyName) {
-      this.getMarketData();
-    }
-  }
+  const hasMarketData = !isLoading && marketData;
+  const price =
+    props.cryptoName === "BTC Volume" || props.cryptoName === "ETH Volume"
+      ? totalVolume
+      : currentPrice;
 
-  componentDidMount() {
-    this.getMarketData();
-  }
+  useEffect(() => {
+    getMarketData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.currencyName]);
 
-  currencies = {
-    usd: "$",
-    eur: "€",
-    gbp: "£"
-  }
-
-  setCurrency = (currency) => {
-    return this.currencies[currency]
-  } 
-
-  timeConverter = (t) => {
-    return dayjs(t).$d.toLocaleDateString('en-us', { year: "numeric", month:"short", day:"numeric"});
-  }
-
-  render() {
-    const { marketData, isLoading, currentPrice, totalVolume, lastUpdated } =
-      this.state;
-    const hasMarketData = !isLoading && marketData;
-    const price =
-      this.props.cryptoName === "BTC Volume" ||
-      this.props.cryptoName === "ETH Volume"
-        ? totalVolume
-        : currentPrice;
-
-    return (
-      <>
-        {isLoading && <div>Loading...</div>}
-        {hasMarketData && (
-          <ChartTitle>
-            <TitleText>{this.props.cryptoName}</TitleText>
-            <TitleAmount>{this.setCurrency(this.props.currencyName)}{formatCurrency(price, 2)}</TitleAmount>
-            <TitleText>{this.timeConverter(lastUpdated)}</TitleText>
-          </ChartTitle>
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {isLoading && <div>Loading...</div>}
+      {hasMarketData && (
+        <ChartTitle>
+          <TitleText>{props.cryptoName}</TitleText>
+          <TitleAmount>
+            {setCurrency(props.currencyName)}
+            {formatCurrency(price, 2)}
+          </TitleAmount>
+          <TitleText>{timeConverter(lastUpdated)}</TitleText>
+        </ChartTitle>
+      )}
+    </>
+  );
 }

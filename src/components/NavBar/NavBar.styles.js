@@ -4,7 +4,6 @@ import breakpoint from "../styles/breakpoints";
 export const NavBarDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1291px;
   margin: 0 auto;
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
@@ -29,7 +28,7 @@ export const NavDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 5px;
   align-items: center;
   height: 86px;
