@@ -2,7 +2,6 @@ import React from "react";
 import * as theme from "../styles/Theme.styled";
 import { ButtonContainer, Button, ButtonText,OverviewContainer } from "./NavBarButtons.styles";
 import { NavLink } from "react-router-dom";
-import "./NavBarButtons.css"
 
 const NavBarButtons = (props) => {
 

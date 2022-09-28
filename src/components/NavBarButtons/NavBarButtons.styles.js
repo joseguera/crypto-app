@@ -22,6 +22,10 @@ export const ButtonContainer = styled.div`
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
+  .nav-link {
+    text-decoration: none;
+    border-radius: 10px;
+  }
   @media only screen and ${breakpoint.device.xs} {
     display: none;
   }

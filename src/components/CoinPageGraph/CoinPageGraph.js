@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as theme from "../styles/Theme.styled";
 import {
@@ -70,19 +70,17 @@ export const options = {
   },
 };
 
-export default class CoinPageGraph extends React.Component {
-  state = {
-    dateRange: 1,
-    labels: [],
-    prices: [],
-    isLoading: false,
-    hasError: false,
-  };
+export default function CoinPageGraph(props) {
+  const [dateRange, setDateRange] = useState(1);
+  const [labels, setLabels] = useState([]);
+  const [prices, setPrices] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError] = useState(false);
 
-  getGraphData = async () => {
+  const getGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.props.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.state.dateRange}`
+        `https://api.coingecko.com/api/v3/coins/${props.cryptoName}/market_chart?vs_currency=${props.currencyName}&days=${dateRange}`
       );
       const { labels, prices } = data.prices.reduce(
         (acc, [label, price]) => ({
@@ -91,18 +89,16 @@ export default class CoinPageGraph extends React.Component {
         }),
         { labels: [], prices: [] }
       );
-      this.setState({
-        labels,
-        prices,
-      });
+      setLabels(labels);
+      setPrices(prices);
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
 
-  formatData = (price, label) => {
-    let backgroundColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.appBackground : theme.light.colors.appBackground;
-    let borderColor = (this.props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphBorder : theme.light.colors.lineGraphBorder;
+  const formatData = (price, label) => {
+    let backgroundColor = (props.selectedTheme.name === "dark-theme") ? theme.dark.colors.appBackground : theme.light.colors.appBackground;
+    let borderColor = (props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphBorder : theme.light.colors.lineGraphBorder;
 
     return {
       labels: label,
@@ -120,41 +116,26 @@ export default class CoinPageGraph extends React.Component {
     };
   };
 
-  setDateRange = (dateRange) => {
-    this.setState({
-      dateRange,
-    });
+  const setRange = (dateRange) => {
+    setDateRange(dateRange);
   };
 
-  hasData = () => this.state.prices.length;
+  const hasData = () => prices.length;
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.currencyName !== prevProps.currencyName) {
-      this.getGraphData();
-    }
-    if (this.props.cryptoName !== prevProps.cryptoName) {
-      this.getGraphData();
-    }
-    if (this.state.dateRange !== prevState.dateRange) {
-      this.getGraphData();
-    }
-  }
+  useEffect(() => {
+    getGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.currencyName, props.cryptoName, dateRange]);
 
-  componentDidMount() {
-    this.getGraphData();
-  }
-
-  render() {
-    const graphData = this.formatData(this.state.prices, this.state.labels);
-    const { isLoading } = this.state;
-    const hasGraph = !isLoading && this.state.prices;
+    const graphData = formatData(prices, labels);
+    const hasGraph = !isLoading && prices;
 
     return (
       <>
         {isLoading && <div>Loading...</div>}
-        {hasGraph && this.hasData() ? (
+        {hasGraph && hasData() ? (
           <>
-            <CoinPageDateButtons setDateRange={this.setDateRange} />
+            <CoinPageDateButtons setDateRange={setRange} />
             <GraphCointaner>
               <Line
                 options={options}
@@ -169,5 +150,4 @@ export default class CoinPageGraph extends React.Component {
       }
       </>
     );
-  }
 }

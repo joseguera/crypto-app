@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { CategoryHolder, CategoryTitle, CategoryButton, ButtonText } from "./Categories.styles";
 
 export default function Categories(props) {
@@ -8,9 +8,11 @@ export default function Categories(props) {
     const selected = Object.values(categories).map(select => {
       if (select.name === name) {
         return select.active = !select.active
+      } else {
+        return select.active = false
       }
     })
-    setCategories({ ...categories, selected });
+    setCategories({ ...categories, name: { name: name, category: category, selected } });
     props.setCategory(category);
   }
 

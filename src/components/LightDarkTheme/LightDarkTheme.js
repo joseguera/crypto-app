@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import themeDark from '../../images/theme-switch-dark.svg'
 import { ThemeHolder, ThemeIcon } from './LightDarkTheme.styles';
 
-export default class LightDarkTheme extends React.Component {
-  state = {
-    selectedTheme: "light",
-  }
+export default function LightDarkTheme(props) {
+  const [selectedTheme, setSelectedTheme] = useState("light")
 
-  handleThemeChange = () => {
-    let theme = this.state.selectedTheme;
+  const handleThemeChange = () => {
+    let theme = selectedTheme;
     (theme === "dark") ? theme = "light" : theme = "dark";
-    this.setState({ selectedTheme: theme });
-    this.props.handleThemeChange(this.state.selectedTheme)
+    setSelectedTheme(theme);
+    props.handleThemeChange(selectedTheme)
   };
 
-  render() {
     return (
-      <ThemeHolder onClick={this.handleThemeChange}>
+      <ThemeHolder onClick={handleThemeChange}>
         <ThemeIcon src={themeDark} alt='light-dark theme'/>
       </ThemeHolder>
     );
-  }
 };
 
