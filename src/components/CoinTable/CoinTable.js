@@ -76,8 +76,9 @@ class CoinTable extends React.Component {
   };
 
   setCategory = (category) => {
+    const property = (category === "") ? "" : `&category=${category}`;
     this.setState({
-      category: { name: category, prop: `&category=${category}` },
+      category: { name: category, prop: property },
     });
   };
 

@@ -2,29 +2,65 @@ import styled from "styled-components";
 import breakpoint from "../styles/breakpoints";
 
 export const FooterHolder = styled.div`
-  height: 75px;
-  width: 100%;
+  // height: 75px;
   display: flex;
-  gap: 25px;
-  align-items: center;
+  width: 100%;
+  -webkit-box-align: end;
+  align-items: end;
+`;
+
+export const DesktopFooter = styled.div`
+  height: 75px;
   justify-content: center;
+  align-items: center;
   background: ${({ theme }) => theme.colors.appBackground};
+  width: 100%;
+  gap: 25px;
   @media only screen and ${breakpoint.device.xs} {
     position: fixed;
     left: 0px;
     bottom: 0px;
+    display: none;
   }
   @media only screen and ${breakpoint.device.sm} {
     position: fixed;
     left: 0px;
     bottom: 0px;
+    display: none;
   }
   @media only screen and ${breakpoint.device.lg} {
     position: static;
+    display: flex;
+  }
+`;
+
+export const MobileFooter = styled.div`
+  height: 75px;
+  justify-content: center;
+  align-items: center;
+  background: ${({ theme }) => theme.colors.appBackground};
+  width: 100%;
+  gap: 25px;
+  @media only screen and ${breakpoint.device.xs} {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    display: flex;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    display: flex;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    position: static;
+    display: none;
   }
 `;
 
 export const ImageLink = styled.a`
+  padding-top: 8px;
   &:hover {
     cursor: pointer;
   }

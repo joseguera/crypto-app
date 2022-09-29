@@ -1,59 +1,32 @@
-import React from "react";
-import { CategoryHolder, CategoryTitle, CategoryButton, StyledButton, ButtonText } from "./Categories.styles";
+import React, { useState } from "react";
+import { CategoryHolder, CategoryTitle, CategoryButton, ButtonText } from "./Categories.styles";
 
-export default class Categories extends React.Component {
-  state = {
-    categories: {
-      cryptocurrency: { name: "Cryptocurrency", category: "cryptocurrency"},
-      DeFi: { name: "DeFi", category: "decentralized-finance-defi" },
-      NFTs: { name: "NFTs", category: "non-fungible-tokens-nft" },
-      Metaverse: { name: "Metaverse", category: "metaverse" }
-    },
-    active: this.props.category,
-  };
+export default function Categories(props) {
+  const [categories, setCategories] = useState({ Cryptocurrency: { name: "Cryptocurrency", category: "cryptocurrency", active: false }, DeFi: { name: "DeFi", category: "decentralized-finance-defi", active: false }, NFTs: { name: "NFTs", category: "non-fungible-tokens-nft", active: false }, Metaverse: { name: "Metaverse", category: "metaverse", active: false } })
 
-  setActive = (category) => {
-    const { cryptocurrency, DeFi, NFTs, Metaverse } = this.state.categories;
-    let styled;
-    if (category === cryptocurrency.category) {
-      styled = cryptocurrency.category;
-    }
-    if (category === DeFi.category) {
-      styled = DeFi.category;
-    }
-    if (category === NFTs.category) {
-      styled = NFTs.category;
-    }
-    if (category === Metaverse.category) {
-      styled = Metaverse.category;
-    }
-    this.setState({
-      active: styled,
-    });
-    this.props.setCategory(styled);
-  };
-
-  render() {
-    const { categories, active } = this.state;
+  const setActiveCategory = (category, name) => {
+    const selected = Object.values(categories).map(select => {
+      if (select.name === name) {
+        return select.active = !select.active
+      } else {
+        return select.active = false
+      }
+    })
+    setCategories({ ...categories, name: { name: name, category: category, selected } });
+    props.setCategory(category);
+  }
 
     return (
       <CategoryHolder>
         <CategoryTitle><ButtonText>Filter By:</ButtonText></CategoryTitle>
         {Object.values(categories).map((category) => {
-          return active === category.category ? (
-            <StyledButton
-              key={category.category}
-              onClick={() => this.setActive(category.category)}
-            >
-              <ButtonText>{category.name}</ButtonText>
-            </StyledButton>
-          ) : (
-            <CategoryButton key={category.category} onClick={() => this.setActive(category.category)}>
+          return (
+            <CategoryButton style={{ "backgroundColor" : (category.active) ? "#06d554" : "#2C2F36" }} key={category.category} onClick={() => setActiveCategory(category.category, category.name)}>
               <ButtonText>{category.name}</ButtonText>
             </CategoryButton>
-          );
-        })}
+          )
+          })}
       </CategoryHolder>
     );
-  }
+
 }

@@ -1,48 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ProgressBarNav, UpArrowGreen, DownArrowRed } from 'components';
-import { formatCurrency, roundToNumber } from "../../util/numberUtil";
+import { formatCurrency, roundToNumber, setCurrency } from "../../util/numberUtil";
 import ethereum from "../../images/ethereum.webp"
 import bitcoin from "../../images/bitcoin.webp"
 import { SummaryHolder, CoinsExchange, TotalMarketCapHolder, TotalVolumeHolder, IconHolder, Icon, ProgressBarVol, VolumeDot } from "./CoinNavSummary.styles";
 
-export default class CoinNavSummary extends React.Component {
-  state = {
-    market: null,
-    isLoading: false,
-    hasError: false,
-  };
+export default function CoinNavSummary(props) {
+  const [market, setMarket] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
-  getMarketData = async () => {
+  const getMarketData = async () => {
     try {
-      this.setState({ isLoading: true });
+      setIsLoading(true);
       const { data } = await axios(`https://api.coingecko.com/api/v3/global`);
-      this.setState({
-        market: data,
-        isLoading: false,
-      });
+      setMarket(data);
+      setIsLoading(false);
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
 
-  componentDidMount() {
-    this.getMarketData();
-  }
+  useEffect(() => {
+    getMarketData();
+  }, []);
 
-  currencies = {
-    usd: "$",
-    eur: "€",
-    gbp: "£"
-  }
-
-  setCurrency = (currency) => {
-    return this.currencies[currency]
-  }
-
-  render() {
-    const { currencyName } = this.props;
-    const { market, isLoading } = this.state;  
+    const { currencyName } = props;
     const hasMarketData = !isLoading && market;
 
     return (
@@ -54,12 +38,12 @@ export default class CoinNavSummary extends React.Component {
             <CoinsExchange>Exchange {market.data.markets}</CoinsExchange>
             <TotalMarketCapHolder>
               <div>&#x25CF;</div> 
-              <div>{this.setCurrency(this.props.currencyName)}{formatCurrency(market.data.total_market_cap[currencyName])}</div>
+              <div>{setCurrency(props.currencyName)}{formatCurrency(market.data.total_market_cap[currencyName])}</div>
               {(market.data.market_cap_change_percentage_24h_usd < 0) ? <DownArrowRed /> : <UpArrowGreen />}
             </TotalMarketCapHolder>
             <TotalVolumeHolder>
               <VolumeDot>&#x25CF;</VolumeDot> 
-              <div>{this.setCurrency(this.props.currencyName)}{formatCurrency(market.data.total_volume[currencyName])}</div>
+              <div>{setCurrency(props.currencyName)}{formatCurrency(market.data.total_volume[currencyName])}</div>
               <ProgressBarVol>
                 <ProgressBarNav />
               </ProgressBarVol>
@@ -70,5 +54,4 @@ export default class CoinNavSummary extends React.Component {
         )}
       </>
     );
-  }
 }
