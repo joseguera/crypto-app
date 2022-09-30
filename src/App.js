@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import {
   light,
@@ -10,39 +10,32 @@ import { NavBar, Footer } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
 import { MainApp } from "App.styles";
 
-export default class App extends React.Component {
-  state = {
-    currencyName: "usd",
-    selectedTheme: dark
-  };
+export default function App() {
+  const [currencyName, setCurrency] = useState("usd");
+  const [selectedTheme, setSelectedTheme] = useState(dark);
 
-  setCurrencyName = (currencyName) => {
-    this.setState({
-      currencyName,
-    });
+  const setCurrencyName = (currencyName) => {
+    setCurrency(currencyName)
     localStorage.setItem("current-currency", JSON.stringify(currencyName));
   };
 
-  handleThemeChange = (theme) => {
+  const handleThemeChange = (theme) => {
     let themeColor; 
     (theme === "dark") ? themeColor = dark : themeColor = light;
-    this.setState({ selectedTheme: themeColor });
+    setSelectedTheme(themeColor);
     localStorage.setItem("current-theme", JSON.stringify(themeColor));
   };
 
-  componentDidMount() {
+  useEffect(() => {
     const currentTheme = JSON.parse(localStorage.getItem("current-theme"));
     if (currentTheme) {
-      this.setState({ selectedTheme: currentTheme });
+      setSelectedTheme(currentTheme);
     }
     const currentCurrency = JSON.parse(localStorage.getItem("current-currency"));
     if (currentCurrency) {
-      this.setState({ currencyName: currentCurrency });
+      setCurrency(currentCurrency);
     }
-  }
-
-  render() {
-    const { currencyName, selectedTheme } = this.state;
+  }, [])
 
     return (
       <Router>
@@ -50,9 +43,9 @@ export default class App extends React.Component {
           <GlobalStyles />
           <MainApp>
             <NavBar
-              setCurrencyName={this.setCurrencyName}
+              setCurrencyName={setCurrencyName}
               currencyName={currencyName}
-              handleThemeChange={this.handleThemeChange}
+              handleThemeChange={handleThemeChange}
               selectedTheme={selectedTheme}
             />
             <Switch>
@@ -72,5 +65,4 @@ export default class App extends React.Component {
         </ThemeProvider>
       </Router>
     );
-  }
 }

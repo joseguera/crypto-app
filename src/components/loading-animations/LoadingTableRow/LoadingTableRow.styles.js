@@ -46,7 +46,7 @@ export const PriceSkeleton = styled(InnerWrapper)`
 `;
 
 export const PercentSkeleton = styled(InnerWrapper)`
-  width: 215px;
+  width: 216px;
 `;
 
 export const GraphSkeleton = styled(InnerWrapper)`

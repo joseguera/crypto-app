@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   CryptoSummary,
@@ -20,41 +20,30 @@ import {
   GraphContainer,
 } from "./CoinPage.styles";
 
-export default class CoinPage extends React.Component {
-  state = {
-    profile: null,
-    isLoading: false,
-    hasError: false,
-  };
+export default function CoinPage(props) {
+  const [profile, setProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError] = useState(false);
 
-  getCoinInfo = async () => {
+  const getCoinInfo = async () => {
     try {
-      this.setState({ isLoading: true });
+      setIsLoading(true);
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.props.match.params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
+        `https://api.coingecko.com/api/v3/coins/${props.match.params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
       );
-      this.setState({
-        profile: data,
-        isLoading: false,
-      });
+      setProfile(data);
+      setIsLoading(false);
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.getCoinInfo();
-    }
-  }
+  useState(() => {
+    getCoinInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.match.params.id]);
 
-  componentDidMount() {
-    this.getCoinInfo();
-  }
-
-  render() {
-    const { currencyName } = this.props;
-    const { profile, isLoading } = this.state;
+    const { currencyName } = props;
     const hasCoinProfile = !isLoading && profile;
 
     return (
@@ -69,11 +58,11 @@ export default class CoinPage extends React.Component {
               <SummaryContainer>
                 <CryptoSummary profile={profile} />
                 <CryptoMarketSummary
-                  currencyName={this.props.currencyName}
+                  currencyName={props.currencyName}
                   profile={profile}
                 />
                 <MarketDataSummary
-                  currencyName={this.props.currencyName}
+                  currencyName={props.currencyName}
                   profile={profile}
                 />
               </SummaryContainer>
@@ -82,7 +71,7 @@ export default class CoinPage extends React.Component {
               <CoinPageDescription profile={profile} />
               <CryptoLinks
                 siteLinks={profile.links.blockchain_site}
-                selectedTheme={this.props.selectedTheme}
+                selectedTheme={props.selectedTheme}
               />
             </DescriptionHolder>
             <GraphHolder>
@@ -95,7 +84,7 @@ export default class CoinPage extends React.Component {
                 <CoinPageGraph
                   cryptoName={profile.name.toLowerCase()}
                   currencyName={currencyName}
-                  selectedTheme={this.props.selectedTheme}
+                  selectedTheme={props.selectedTheme}
                 />
               </GraphContainer>
             </GraphHolder>
@@ -103,5 +92,4 @@ export default class CoinPage extends React.Component {
         )}
       </>
     );
-  }
 }

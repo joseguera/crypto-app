@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
-import { roundToNumber } from "util/numberUtil";
+import { roundToNumber, setCurrency } from "util/numberUtil";
 import {
   Icon,
   Symbol,
@@ -18,26 +18,15 @@ import {
 } from "components";
 import LoadingTableRow from "components/loading-animations/LoadingTableRow/LoadingTableRow";
 
-export default class TableContent extends React.Component {
+export default function TableContent(props) {
+  const { isLoading, coins } = props;
+  const hasCoins = !isLoading && coins;
+  const loaders = Array.apply(null, Array(25)).map(function () {});
   
-  currencies = {
-    usd: "$",
-    eur: "€",
-    gbp: "£"
-  }
-
-  setCurrency = (currency) => {
-    return this.currencies[currency]
-  }
-
-  render() {
-    const { isLoading, coins } = this.props;
-    const hasCoins = !isLoading && coins;
-    const loaders = Array.apply(null, Array(25)).map(function () {});
-    return (
-      <>
-        {hasCoins ? (
-          this.props.coins.map((coin) => {
+  return (
+    <>
+      {hasCoins
+        ? props.coins.map((coin) => {
             return (
               <React.Fragment key={coin.name}>
                 <div>{coin.market_cap_rank}</div>
@@ -49,7 +38,10 @@ export default class TableContent extends React.Component {
                     </LinkText>
                   </Link>
                 </div>
-                <div>{this.setCurrency(this.props.currencyName)}{coin.current_price}</div>
+                <div>
+                  {setCurrency(props.currencyName)}
+                  {coin.current_price}
+                </div>
                 <PercentCell>
                   {coin.price_change_percentage_1h_in_currency > 0 ? (
                     <UpArrowGreen />
@@ -90,7 +82,7 @@ export default class TableContent extends React.Component {
                 </PercentCell>
                 <div>
                   <ProgressBarTable
-                    currency={this.props.currencyName}
+                    currency={props.currencyName}
                     values={{
                       first: coin.total_volume,
                       second: coin.market_cap,
@@ -99,7 +91,7 @@ export default class TableContent extends React.Component {
                 </div>
                 <div>
                   <ProgressBarTable
-                    currency={this.props.currencyName}
+                    currency={props.currencyName}
                     values={{
                       first: coin.circulating_supply,
                       second: coin.total_supply,
@@ -111,10 +103,7 @@ export default class TableContent extends React.Component {
               </React.Fragment>
             );
           })
-        ) : (
-          loaders.map((el, index) => <LoadingTableRow key={index} />)
-        )}
-      </>
-    );
-  }
+        : loaders.map((el, index) => <LoadingTableRow key={index} />)}
+    </>
+  );
 }
