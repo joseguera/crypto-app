@@ -1,28 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BarGraph, LineGraph, CryptoDropDown, DateButtons, GraphTitle, SideArrow } from "components";
-import { GraphGrid, GraphCell, DateButtonHolder, GraphHeader, ChartHolder } from "./Graph.styles";
+import {
+  BarGraph,
+  LineGraph,
+  CryptoDropDown,
+  DateButtons,
+  GraphTitle,
+  SideArrow,
+} from "components";
+import {
+  GraphGrid,
+  GraphCell,
+  DateButtonHolder,
+  GraphHeader,
+  ChartHolder,
+} from "./Graph.styles";
 import { timeConverter } from "./../../util/numberUtil";
 
-export default class Graph extends React.Component {
-  state = {
-    cryptoName: "bitcoin",
-    lineDateRange: 1,
-    barDateRange: 1,
-    labels: [],
-    prices: [],
-    volumeLabels: [],
-    volumePrices: [],
-    lineGraph: true,
-    barGraph: false,
-    isLoading: false,
-    hasError: false,
-  };
+export default function Graph(props) {
+  const [cryptoName, setCrypto] = useState("bitcoin");
+  const [lineDateRange, setLineDate] = useState(1);
+  const [barDateRange, setBarDate] = useState(1);
+  const [labels, setLabels] = useState([]);
+  const [prices, setPrices] = useState([]);
+  const [volumeLabels, setVolumeLabels] = useState([]);
+  const [volumePrices, setVolumePrices] = useState([]);
+  const [lineGraph, setLineGraph] = useState(true);
+  const [barGraph, setBarGraph] = useState(false);
+  const [isLoading] = useState(false);
+  const [hasError] = useState(false);
 
-  getLineGraphData = async () => {
+  const getLineGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.state.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.state.lineDateRange}`
+        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${props.currencyName}&days=${lineDateRange}`
       );
       const { labels, prices } = data.prices.reduce(
         (acc, [label, price]) => ({
@@ -31,20 +42,17 @@ export default class Graph extends React.Component {
         }),
         { labels: [], prices: [] }
       );
-      this.setState({
-        labels,
-        prices,
-      });
+      setLabels(labels);
+      setPrices(prices);
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
 
-
-  getBarGraphData = async () => {
+  const getBarGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.state.cryptoName}/market_chart?vs_currency=${this.props.currencyName}&days=${this.state.barDateRange}`
+        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${props.currencyName}&days=${barDateRange}`
       );
 
       const { volumeLabels, volumePrices } = data.total_volumes.reduce(
@@ -54,117 +62,85 @@ export default class Graph extends React.Component {
         }),
         { volumeLabels: [], volumePrices: [] }
       );
-
-      this.setState({
-        volumeLabels,
-        volumePrices
-      });
+      setVolumeLabels(volumeLabels);
+      setVolumePrices(volumePrices);
     } catch (err) {
       console.log("Location Error:", err);
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.currencyName !== prevProps.currencyName) {
-      this.getLineGraphData();
-      this.getBarGraphData();
-    }
-    if (this.state.cryptoName !== prevState.cryptoName) {
-      this.getLineGraphData();
-      this.getBarGraphData();
-    }
-    if (this.state.lineDateRange !== prevState.lineDateRange) {
-      this.getLineGraphData();
-    }
-    if (this.state.barDateRange !== prevState.barDateRange) {
-      this.getBarGraphData();
+  useEffect(() => {
+    getLineGraphData();
+    getBarGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.currencyName, cryptoName, lineDateRange, barDateRange]);
 
-    }
-  }
-
-  componentDidMount() {
-    this.getLineGraphData();
-    this.getBarGraphData();
-  }
-
-  setCryptoName = (cryptoName) => {
-    this.setState({
-      cryptoName,
-    });
+  const setCryptoName = (cryptoName) => {
+    setCrypto(cryptoName);
   };
 
-  setLineDateRange = (dateRange) => {
-    this.setState({
-      lineDateRange: dateRange,
-    });
+  const setLineDateRange = (dateRange) => {
+    setLineDate(dateRange);
   };
 
-  setBarDateRange = (dateRange) => {
-    this.setState({
-      barDateRange: dateRange,
-    });
+  const setBarDateRange = (dateRange) => {
+    setBarDate(dateRange);
   };
 
-  switchGraph = () => {
-    const { lineGraph, barGraph } = this.state;
-    this.setState({ 
-      lineGraph: !lineGraph,
-      barGraph: !barGraph
-    })
-  }
+  const switchGraph = () => {
+    setLineGraph(!lineGraph);
+    setBarGraph(!barGraph);
+  };
 
-  hasData = () => this.state.labels.length && this.state.prices.length;
+  const hasData = () => labels.length && prices.length;
 
-  render() {
-    const { isLoading, labels, prices, volumeLabels, volumePrices, lineGraph, barGraph } = this.state;
-    const hasGraph = !isLoading && this.state.labels && this.state.volumeLabels;
-    const lineGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC" : "ETH";
-    const barGraphTitle = this.state.cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
+  const hasGraph = !isLoading && labels && volumeLabels;
+  const lineGraphTitle = cryptoName === "bitcoin" ? "BTC" : "ETH";
+  const barGraphTitle = cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
-    const showLineGraph = (lineGraph) ? "visible" : "not-visible";
-    const showBarGraph = (barGraph) ? "visible" : "not-visible";
+  const showLineGraph = lineGraph ? "visible" : "not-visible";
+  const showBarGraph = barGraph ? "visible" : "not-visible";
 
-    return (
-      <>
-        {isLoading && <div>Loading...</div>}
-        {hasGraph && this.hasData() && (
-          <>
-            <CryptoDropDown setCryptoName={this.setCryptoName} />
-            <GraphGrid>
-              <SideArrow direction="left" switchGraph={this.switchGraph}/>
-              <GraphCell className={showLineGraph}>
-                <GraphHeader>
-                  <GraphTitle
-                    cryptoName={lineGraphTitle}
-                    currencyName={this.props.currencyName}
-                  />
-                  <DateButtonHolder>
-                    <DateButtons setDateRange={this.setLineDateRange} />
-                  </DateButtonHolder>
-                </GraphHeader>
-                <ChartHolder>
-                  <LineGraph labels={labels} prices={prices} />
-                </ChartHolder>
-              </GraphCell>
-              <GraphCell className={showBarGraph}>
-                <GraphHeader>
-                  <GraphTitle
-                    cryptoName={barGraphTitle}
-                    currencyName={this.props.currencyName}
-                  />
-                  <DateButtonHolder>
-                    <DateButtons setDateRange={this.setBarDateRange} />
-                  </DateButtonHolder>
-                </GraphHeader>
-                <ChartHolder>
-                  <BarGraph labels={volumeLabels} prices={volumePrices} />
-                </ChartHolder>
-              </GraphCell>
-              <SideArrow direction="right" switchGraph={this.switchGraph} />
-            </GraphGrid>
-          </>
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {isLoading && <div>Loading...</div>}
+      {hasGraph && hasData() && (
+        <>
+          <CryptoDropDown setCryptoName={setCryptoName} />
+          <GraphGrid>
+            <SideArrow direction="left" switchGraph={switchGraph} />
+            <GraphCell className={showLineGraph}>
+              <GraphHeader>
+                <GraphTitle
+                  cryptoName={lineGraphTitle}
+                  currencyName={props.currencyName}
+                />
+                <DateButtonHolder>
+                  <DateButtons setDateRange={setLineDateRange} />
+                </DateButtonHolder>
+              </GraphHeader>
+              <ChartHolder>
+                <LineGraph labels={labels} prices={prices} />
+              </ChartHolder>
+            </GraphCell>
+            <GraphCell className={showBarGraph}>
+              <GraphHeader>
+                <GraphTitle
+                  cryptoName={barGraphTitle}
+                  currencyName={props.currencyName}
+                />
+                <DateButtonHolder>
+                  <DateButtons setDateRange={setBarDateRange} />
+                </DateButtonHolder>
+              </GraphHeader>
+              <ChartHolder>
+                <BarGraph labels={volumeLabels} prices={volumePrices} />
+              </ChartHolder>
+            </GraphCell>
+            <SideArrow direction="right" switchGraph={switchGraph} />
+          </GraphGrid>
+        </>
+      )}
+    </>
+  );
 }

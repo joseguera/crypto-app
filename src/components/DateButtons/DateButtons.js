@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { DateHolder, DateButton, StyledButton, ButtonText } from "./DateButtons.styles";
 
-export default class DateButtons extends React.Component {
-  state = {
-    dateRanges : {
-      daily: { title: "1d", range: 1 },
-      weekly: { title: "1w", range: 7 },
-      monthly: { title: "1m", range: 30 },
-      quarter: { title: "3m", range: 91 },
-      half: { title: "6m", range: 183 },
-      yearly: { title: "1y", range: 364 }
-    },
-    active: '1d'
-  }
+export default function DateButtons(props) {
+  const [dateRanges] = useState({
+    daily: { title: "1d", range: 1 },
+    weekly: { title: "1w", range: 7 },
+    monthly: { title: "1m", range: 30 },
+    quarter: { title: "3m", range: 91 },
+    half: { title: "6m", range: 183 },
+    yearly: { title: "1y", range: 364 }
+  });
+  const [active, setActiveDate] = useState("1d");
 
-  setActive = (dateTitle, dateRange) => {
-    const { daily, weekly, monthly, quarter, half, yearly } = this.state.dateRanges;
+  const setActive = (dateTitle, dateRange) => {
+    const { daily, weekly, monthly, quarter, half, yearly } = dateRanges;
     let styled;
     if (dateTitle === daily.title) {
       styled = daily.title;
@@ -35,25 +33,20 @@ export default class DateButtons extends React.Component {
     if (dateTitle === yearly.title) {
       styled = yearly.title;
     } 
-    this.setState({
-      active: styled
-    })
-    this.props.setDateRange(dateRange)
+    setActiveDate(styled);
+    props.setDateRange(dateRange);
   }
   
-  render() {
-    const { dateRanges, active } = this.state;
-
     return (
       <DateHolder>
         {Object.values(dateRanges).map((date) => {
           return (
             active === date.title ? (
-              <StyledButton key={date.range} onClick={() => this.setActive(date.title, date.range)}>
+              <StyledButton key={date.range} onClick={() => setActive(date.title, date.range)}>
                 <ButtonText>{date.title}</ButtonText>
               </StyledButton>
             ) : (
-              <DateButton key={date.range} onClick={() => this.setActive(date.title, date.range)}>
+              <DateButton key={date.range} onClick={() => setActive(date.title, date.range)}>
                 <ButtonText>{date.title}</ButtonText>
               </DateButton>
             )
@@ -61,5 +54,4 @@ export default class DateButtons extends React.Component {
         })}
       </DateHolder>
     )
-  }
 }

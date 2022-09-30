@@ -11,7 +11,6 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { GraphCointaner } from "./SmallGraph.styles";
-import { LabelTextStart } from './../ProgressBarTable/ProgressBarTable.styles';
 
 ChartJS.register(
   CategoryScale,

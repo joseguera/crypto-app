@@ -11,8 +11,6 @@ import linkIcon from "../../images/awesome-link.svg";
 const CryptoLinks = (props) => {
   const linkArray = props.siteLinks.filter((link) => link);
   const arrayLength = linkArray.length > 3 ? 3 : linkArray.length;
-//   const spanRef = linkArray.map(() => React.createRef());
-//   const buttonRef = linkArray.map(() => React.createRef());
 
   return (
     <LinkHolder>
