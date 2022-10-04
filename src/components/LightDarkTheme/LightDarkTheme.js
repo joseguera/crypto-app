@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from "react-redux";
+import { change } from "../../features/theme/themeSlice";
 import themeDark from '../../images/theme-switch-dark.svg'
 import { ThemeHolder, ThemeIcon } from './LightDarkTheme.styles';
 
-export default function LightDarkTheme(props) {
-  const [selectedTheme, setSelectedTheme] = useState("light")
+export default function LightDarkTheme() {
+  const dispatch = useDispatch()
 
-  const handleThemeChange = () => {
-    let theme = selectedTheme;
-    (theme === "dark") ? theme = "light" : theme = "dark";
-    setSelectedTheme(theme);
-    props.handleThemeChange(selectedTheme)
-  };
+
+  // const [selectedTheme, setSelectedTheme] = useState(false)
+
+  // const handleThemeChange = () => {
+  //   setSelectedTheme(!selectedTheme);
+  //   console.log(selectedTheme)
+  //   props.handleThemeChange(selectedTheme)
+  // };
 
     return (
-      <ThemeHolder onClick={handleThemeChange}>
+      <ThemeHolder onClick={() => dispatch(change())}>
         <ThemeIcon src={themeDark} alt='light-dark theme'/>
       </ThemeHolder>
     );
