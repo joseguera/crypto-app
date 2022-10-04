@@ -14,31 +14,24 @@ import { MainApp } from "App.styles";
 export default function App() {
   const [currencyName, setCurrency] = useState("usd");
   const theme = useSelector((state) => state.theme.value)
+  const themeColor = (theme) ? light : dark;
 
   const setCurrencyName = (currencyName) => {
     setCurrency(currencyName)
     localStorage.setItem("current-currency", JSON.stringify(currencyName));
   };
 
-  const handleThemeChange = (theme) => {
-    let themeColor; 
-    return (theme) ? themeColor = light : themeColor = dark;
+  useEffect(() => {
     localStorage.setItem("current-theme", JSON.stringify(themeColor));
-  };
+  }, [theme, themeColor]);
 
   useEffect(() => {
     const currentTheme = JSON.parse(localStorage.getItem("current-theme"));
-    if (currentTheme) {
-      // setSelectedTheme(currentTheme);
-    }
     const currentCurrency = JSON.parse(localStorage.getItem("current-currency"));
     if (currentCurrency) {
       setCurrency(currentCurrency);
     }
   }, [])
-
-  const themeColor = (theme) ? light : dark;
-
 
     return (
       <Router>
@@ -48,7 +41,7 @@ export default function App() {
             <NavBar
               setCurrencyName={setCurrencyName}
               currencyName={currencyName}
-              handleThemeChange={handleThemeChange}
+              // handleThemeChange={handleThemeChange}
               // selectedTheme={selectedTheme}
             />
             <Switch>

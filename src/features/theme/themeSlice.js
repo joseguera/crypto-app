@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { light, dark } from "../../components/styles/Theme.styled"
 
 const initialState = {
   value: false,
