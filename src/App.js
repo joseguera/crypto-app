@@ -22,11 +22,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    localStorage.setItem("current-theme", JSON.stringify(themeColor));
-  }, [theme, themeColor]);
-
-  useEffect(() => {
-    const currentTheme = JSON.parse(localStorage.getItem("current-theme"));
     const currentCurrency = JSON.parse(localStorage.getItem("current-currency"));
     if (currentCurrency) {
       setCurrency(currentCurrency);
@@ -41,8 +36,6 @@ export default function App() {
             <NavBar
               setCurrencyName={setCurrencyName}
               currencyName={currencyName}
-              // handleThemeChange={handleThemeChange}
-              // selectedTheme={selectedTheme}
             />
             <Switch>
               <Route
