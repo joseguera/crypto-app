@@ -4,9 +4,9 @@ import { MainDiv, Overview } from "./Home.styles";
 const Home = (props) => {
   return (
     <MainDiv>
-      <Graph currencyName={props.currencyName} />
+      <Graph />
       <Overview><h2>Overview</h2></Overview>
-      <CoinTable currencyName={props.currencyName} />
+      <CoinTable />
     </MainDiv>
   );
 };

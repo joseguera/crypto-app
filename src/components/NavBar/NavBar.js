@@ -8,13 +8,13 @@ const NavBar = (props) => {
     <NavBarContainer>
       <NavBarDiv>
         <NavDiv>
-          <NavBarButtons selectedTheme={props.selectedTheme} />
-          <NavBarUtils setCurrencyName={props.setCurrencyName} handleThemeChange={props.handleThemeChange} />
+          <NavBarButtons />
+          <NavBarUtils />
         </NavDiv>
       </NavBarDiv>
     </NavBarContainer>
     <NavBarDiv>    
-      <CoinNavSummary currencyName={props.currencyName} />
+      <CoinNavSummary />
     </NavBarDiv>
     
     </>

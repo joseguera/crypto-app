@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeCurrency } from "../../features/currency/currencySlice";
 import { DownArrow, UpArrowGreen } from "components";
 import {
   DropDown,
@@ -15,29 +17,15 @@ import {
 } from "./CurrencyDropDown.styles";
 
 export default function CurrencyDropDown(props) {
-  const [currencyName, setCurrency] = useState("USD");
+  const currency = useSelector((state) => state.currency.value)
+  const currencyName = currency.toUpperCase();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
-  const setCurrencyName = (value) => {
-    setCurrency(value);
-    props.setCurrencyName(value);
-  };
 
   const container = useRef(null);
 
   const handleDropDownClick = () => {
     setOpen(!open);
-  };
-
-  const handleSelection = (value) => {
-    const currencyName = value.toLowerCase();
-    setCurrency(value);
-    setOpen(!open);
-    props.setCurrencyName(currencyName);
-    localStorage.setItem(
-      "selected-currency",
-      JSON.stringify(currencyName.toUpperCase())
-    );
   };
 
   const handleClickOutside = (event) => {
@@ -48,12 +36,6 @@ export default function CurrencyDropDown(props) {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    const currentCurrency = JSON.parse(
-      localStorage.getItem("selected-currency")
-    );
-    if (currentCurrency) {
-      setCurrency(currentCurrency);
-    }
     document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
@@ -89,23 +71,23 @@ export default function CurrencyDropDown(props) {
           {open && (
             <DropDownList>
               <CurrencyOptions>
-                {currencies.map((currency) => {
+                {currencies.map((curr) => {
                   return (
                     <CurrencyItemHolder
-                      onClick={() => handleSelection(currency.name)}
-                      key={currency.name}
+                      onClick={() => dispatch(changeCurrency(curr.name.toLowerCase()))}
+                      key={curr.name}
                     >
                       <CurrencyItem>
                         <Symbol>
                           <CurrencySymbol>
-                            {setCurrencySymbol(currency.name)}
+                            {setCurrencySymbol(curr.name)}
                           </CurrencySymbol>
                         </Symbol>
                         <CurrencyNameHolder>
-                          {currencyName === currency.name ? (
-                            <Selected>{currency.name}</Selected>
+                          {currency === curr.name ? (
+                            <Selected>{curr.name}</Selected>
                           ) : (
-                            <Currency>{currency.name}</Currency>
+                            <Currency>{curr.name}</Currency>
                           )}
                         </CurrencyNameHolder>
                       </CurrencyItem>

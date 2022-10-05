@@ -1,13 +1,12 @@
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 import { TooltipHolder, CopyIcon } from "./ToolTip.styles";
 import copyIconDark from "../../images/feather-copy-dark.svg";
 import copyIconLight from "../../images/feather-copy-light.svg";
 
 export default function ToolTip(props) {
-  const copyIconColor =
-    props.selectedTheme.name === "dark-theme"
-      ? copyIconDark
-      : copyIconLight;
+  const themeColor = useSelector((state) => state.theme.value);
+  const copyIconColor = themeColor ? copyIconLight : copyIconDark;
 
   const buttonRef = useRef(null);
   const spanRef = useRef(null);

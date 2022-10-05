@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import * as theme from "../styles/Theme.styled";
 import {
@@ -71,16 +72,18 @@ export const options = {
 };
 
 export default function CoinPageGraph(props) {
+  const currency = useSelector((state) => state.currency.value)
+  const themeColor = useSelector((state) => state.theme.value);
   const [dateRange, setDateRange] = useState(1);
   const [labels, setLabels] = useState([]);
   const [prices, setPrices] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [hasError] = useState(false);
 
   const getGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${props.cryptoName}/market_chart?vs_currency=${props.currencyName}&days=${dateRange}`
+        `https://api.coingecko.com/api/v3/coins/${props.cryptoName}/market_chart?vs_currency=${currency}&days=${dateRange}`
       );
       const { labels, prices } = data.prices.reduce(
         (acc, [label, price]) => ({
@@ -97,8 +100,8 @@ export default function CoinPageGraph(props) {
   };
 
   const formatData = (price, label) => {
-    let backgroundColor = (props.selectedTheme.name === "dark-theme") ? theme.dark.colors.appBackground : theme.light.colors.appBackground;
-    let borderColor = (props.selectedTheme.name === "dark-theme") ? theme.dark.colors.lineGraphBorder : theme.light.colors.lineGraphBorder;
+    let backgroundColor = (themeColor) ? theme.light.colors.appBackground : theme.dark.colors.appBackground;
+    let borderColor = (themeColor) ? theme.light.colors.lineGraphBorder : theme.dark.colors.lineGraphBorder ;
 
     return {
       labels: label,
@@ -125,7 +128,7 @@ export default function CoinPageGraph(props) {
   useEffect(() => {
     getGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.currencyName, props.cryptoName, dateRange]);
+  }, [currency, props.cryptoName, dateRange]);
 
     const graphData = formatData(prices, labels);
     const hasGraph = !isLoading && prices;

@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { roundToNumber, setCurrency } from "util/numberUtil";
 import {
@@ -19,6 +19,7 @@ import {
 import LoadingTableRow from "components/loading-animations/LoadingTableRow/LoadingTableRow";
 
 export default function TableContent(props) {
+  const currency = useSelector((state) => state.currency.value);
   const { isLoading, coins } = props;
   const hasCoins = !isLoading && coins;
   const loaders = Array.apply(null, Array(25)).map(function () {});
@@ -39,7 +40,7 @@ export default function TableContent(props) {
                   </Link>
                 </div>
                 <div>
-                  {setCurrency(props.currencyName)}
+                  {setCurrency(currency)}
                   {coin.current_price}
                 </div>
                 <PercentCell>
@@ -82,7 +83,6 @@ export default function TableContent(props) {
                 </PercentCell>
                 <div>
                   <ProgressBarTable
-                    currency={props.currencyName}
                     values={{
                       first: coin.total_volume,
                       second: coin.market_cap,
@@ -91,7 +91,6 @@ export default function TableContent(props) {
                 </div>
                 <div>
                   <ProgressBarTable
-                    currency={props.currencyName}
                     values={{
                       first: coin.circulating_supply,
                       second: coin.total_supply,

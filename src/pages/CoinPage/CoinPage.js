@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import {
   CryptoSummary,
@@ -21,6 +22,7 @@ import {
 } from "./CoinPage.styles";
 
 export default function CoinPage(props) {
+  const currency = useSelector((state) => state.currency.value);
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
@@ -43,7 +45,6 @@ export default function CoinPage(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
-    const { currencyName } = props;
     const hasCoinProfile = !isLoading && profile;
 
     return (
@@ -58,11 +59,9 @@ export default function CoinPage(props) {
               <SummaryContainer>
                 <CryptoSummary profile={profile} />
                 <CryptoMarketSummary
-                  currencyName={props.currencyName}
                   profile={profile}
                 />
                 <MarketDataSummary
-                  currencyName={props.currencyName}
                   profile={profile}
                 />
               </SummaryContainer>
@@ -77,13 +76,11 @@ export default function CoinPage(props) {
             <GraphHolder>
               <CryptoExchange
                 cryptoName={profile.symbol}
-                currencyName={currencyName}
-                currentPrice={profile.market_data.current_price[currencyName]}
+                currentPrice={profile.market_data.current_price[currency]}
               />
               <GraphContainer>
                 <CoinPageGraph
                   cryptoName={profile.name.toLowerCase()}
-                  currencyName={currencyName}
                   selectedTheme={props.selectedTheme}
                 />
               </GraphContainer>

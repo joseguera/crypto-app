@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import { ProgressBarNav, UpArrowGreen, DownArrowRed } from 'components';
 import { formatCurrency, roundToNumber, setCurrency } from "../../util/numberUtil";
@@ -7,6 +8,7 @@ import bitcoin from "../../images/bitcoin.webp"
 import { SummaryHolder, CoinsExchange, TotalMarketCapHolder, TotalVolumeHolder, IconHolder, Icon, ProgressBarVol, VolumeDot } from "./CoinNavSummary.styles";
 
 export default function CoinNavSummary(props) {
+  const currency = useSelector((state) => state.currency.value);
   const [market, setMarket] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -26,8 +28,7 @@ export default function CoinNavSummary(props) {
     getMarketData();
   }, []);
 
-    const { currencyName } = props;
-    const hasMarketData = !isLoading && market;
+  const hasMarketData = !isLoading && market;
 
     return (
       <>
@@ -38,12 +39,12 @@ export default function CoinNavSummary(props) {
             <CoinsExchange>Exchange {market.data.markets}</CoinsExchange>
             <TotalMarketCapHolder>
               <div>&#x25CF;</div> 
-              <div>{setCurrency(props.currencyName)}{formatCurrency(market.data.total_market_cap[currencyName])}</div>
+              <div>{setCurrency(currency)}{formatCurrency(market.data.total_market_cap[currency])}</div>
               {(market.data.market_cap_change_percentage_24h_usd < 0) ? <DownArrowRed /> : <UpArrowGreen />}
             </TotalMarketCapHolder>
             <TotalVolumeHolder>
               <VolumeDot>&#x25CF;</VolumeDot> 
-              <div>{setCurrency(props.currencyName)}{formatCurrency(market.data.total_volume[currencyName])}</div>
+              <div>{setCurrency(currency)}{formatCurrency(market.data.total_volume[currency])}</div>
               <ProgressBarVol>
                 <ProgressBarNav />
               </ProgressBarVol>
