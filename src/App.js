@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import {
   light,
@@ -12,25 +13,15 @@ import { MainApp } from "App.styles";
 
 export default function App() {
   const [currencyName, setCurrency] = useState("usd");
-  const [selectedTheme, setSelectedTheme] = useState(dark);
+  const theme = useSelector((state) => state.theme.value)
+  const themeColor = (theme) ? light : dark;
 
   const setCurrencyName = (currencyName) => {
     setCurrency(currencyName)
     localStorage.setItem("current-currency", JSON.stringify(currencyName));
   };
 
-  const handleThemeChange = (theme) => {
-    let themeColor; 
-    (theme === "dark") ? themeColor = dark : themeColor = light;
-    setSelectedTheme(themeColor);
-    localStorage.setItem("current-theme", JSON.stringify(themeColor));
-  };
-
   useEffect(() => {
-    const currentTheme = JSON.parse(localStorage.getItem("current-theme"));
-    if (currentTheme) {
-      setSelectedTheme(currentTheme);
-    }
     const currentCurrency = JSON.parse(localStorage.getItem("current-currency"));
     if (currentCurrency) {
       setCurrency(currentCurrency);
@@ -39,14 +30,12 @@ export default function App() {
 
     return (
       <Router>
-        <ThemeProvider theme={selectedTheme}>
+        <ThemeProvider theme={themeColor}>
           <GlobalStyles />
           <MainApp>
             <NavBar
               setCurrencyName={setCurrencyName}
               currencyName={currencyName}
-              handleThemeChange={handleThemeChange}
-              selectedTheme={selectedTheme}
             />
             <Switch>
               <Route
@@ -57,7 +46,7 @@ export default function App() {
               <Route path="/portfolio" component={Portfolio} />
               <Route
                 path="/coin/:id"
-                render={(props) => <CoinPage {...props} currencyName={currencyName} selectedTheme={selectedTheme} />}
+                render={(props) => <CoinPage {...props} currencyName={currencyName} />}
               />
             </Switch>
             <Footer />

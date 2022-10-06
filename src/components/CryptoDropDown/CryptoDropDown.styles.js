@@ -39,7 +39,6 @@ export const Arrow = styled.div`
 export const DropDownList = styled.div`
   position: absolute;
   top: 180px;
-  left: 75.96px;
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.buttonFill};
@@ -56,7 +55,7 @@ export const DropDownList = styled.div`
     left: 75.96px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    left: 75.96px;
+    left: 113.96px;
   }
 `;
 
