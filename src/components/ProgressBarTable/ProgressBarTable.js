@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import {
   ProgressBarHolder,
   ProgressBarContainer,
@@ -10,6 +11,7 @@ import {
 import { formatCurrency } from "util/numberUtil";
 
 const ProgressBarTable = (props) => {
+  const currency = useSelector((state) => state.currency.value);
   const percentChange = (props.values.first * 100) / props.values.second;
   const percentStyle = {
     width: percentChange === Infinity ? "100%" : percentChange,
@@ -32,13 +34,13 @@ const ProgressBarTable = (props) => {
       <ProgressBarHolder>
         <ProgressBarLabel>
           <LabelTextStart>
-            &#x25CF; {setCurrencySymbol(props.currency)}
+            &#x25CF; {setCurrencySymbol(currency)}
             {formatCurrency(props.values.first)}
           </LabelTextStart>
           <LabelTextEnd>
             {props.values.second === null
               ? "∞"
-              : `● ${setCurrencySymbol(props.currency)}${formatCurrency(
+              : `● ${setCurrencySymbol(currency)}${formatCurrency(
                   props.values.second
                 )}`}
           </LabelTextEnd>

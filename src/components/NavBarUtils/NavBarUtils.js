@@ -5,8 +5,8 @@ const NavBarUtils = (props) => {
   return (
     <UtilContainer>
       <SearchBar />
-      <CurrencyDropDown setCurrencyName={props.setCurrencyName} />
-      <LightDarkTheme handleThemeChange={props.handleThemeChange} />
+      <CurrencyDropDown />
+      <LightDarkTheme />
     </UtilContainer>
   );
 };

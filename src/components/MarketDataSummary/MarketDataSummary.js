@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import { ProgressBar } from "components";
 import {
     DataSummaryHolder,
@@ -15,7 +16,8 @@ import {
 import { roundToNumber, formatCurrency, setCurrency } from "util/numberUtil";
 
 const MarketDataSummary = (props) => {
-    const { currencyName, profile } = props;
+    const currency = useSelector((state) => state.currency.value);
+    const { profile } = props;
     return (
         <DataSummaryHolder>
         <DataSummaryContainer>
@@ -25,13 +27,13 @@ const MarketDataSummary = (props) => {
                 <Item>
                 <ItemTitle>Market Cap:</ItemTitle>
                 <div>
-                    {setCurrency(currencyName)}
-                    {formatCurrency(profile.market_data.market_cap[currencyName])}
+                    {setCurrency(currency)}
+                    {formatCurrency(profile.market_data.market_cap[currency])}
                 </div>
                 <ItemTitle>
                     {roundToNumber(
                     profile.market_data.market_cap_change_percentage_24h_in_currency[
-                        currencyName
+                        currency
                     ],
                     2
                     )}
@@ -44,10 +46,10 @@ const MarketDataSummary = (props) => {
                 <Item>
                 <ItemTitle>Fully Diluted Valuation: </ItemTitle>
                 <div>
-                    {setCurrency(currencyName)}
-                    {profile.market_data.fully_diluted_valuation[currencyName]
+                    {setCurrency(currency)}
+                    {profile.market_data.fully_diluted_valuation[currency]
                     ? formatCurrency(
-                        profile.market_data.fully_diluted_valuation[currencyName]
+                        profile.market_data.fully_diluted_valuation[currency]
                         )
                     : "0.00"}
                 </div>
@@ -58,8 +60,8 @@ const MarketDataSummary = (props) => {
                 <Item>
                 <ItemTitle>Volume 24h:</ItemTitle>
                 <div>
-                    {setCurrency(currencyName)}
-                    {formatCurrency(profile.market_data.total_volume[currencyName])}
+                    {setCurrency(currency)}
+                    {formatCurrency(profile.market_data.total_volume[currency])}
                 </div>
                 </Item>
             </DataItem>
@@ -69,8 +71,8 @@ const MarketDataSummary = (props) => {
                 <ItemTitle>Volume / Market:</ItemTitle>{" "}
                 <div>
                     {roundToNumber(
-                    profile.market_data.total_volume[currencyName] /
-                        profile.market_data.market_cap[currencyName],
+                    profile.market_data.total_volume[currency] /
+                        profile.market_data.market_cap[currency],
                     4
                     )}
                 </div>
@@ -83,8 +85,8 @@ const MarketDataSummary = (props) => {
                 <Item>
                 <ItemTitle>Total Volume:</ItemTitle>
                 <div>
-                    {setCurrency(currencyName)}
-                    {formatCurrency(profile.market_data.total_volume[currencyName])}
+                    {setCurrency(currency)}
+                    {formatCurrency(profile.market_data.total_volume[currency])}
                 </div>
                 </Item>
             </DataItem>
@@ -113,7 +115,7 @@ const MarketDataSummary = (props) => {
             <ProgressBar
                 priceChange24hPercent={
                 profile.market_data.price_change_percentage_24h_in_currency[
-                    currencyName
+                    currency
                 ]
                 }
             />

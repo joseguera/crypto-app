@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import { UpArrowGreen, DownArrowRed } from "components";
 import {
   MarketSummary,
@@ -30,7 +31,8 @@ import {
 import stackIcon from "../../images/layer-group.svg";
 
 const CryptoMarketSummary = (props) => {
-  const { currencyName, profile } = props;
+  const currency = useSelector((state) => state.currency.value);
+  const { profile } = props;
   
   const getPercentChange = (percent) => {
     const percentChange = percent ? roundToNumber(percent, 2) : 0;
@@ -56,11 +58,11 @@ const CryptoMarketSummary = (props) => {
     const profit = formatCurrency(profitPercent);
     return profit < 0 ? (
       <ProfitLoss>
-        {setCurrency(currencyName)}({Math.abs(profit)})
+        {setCurrency(currency)}({Math.abs(profit)})
       </ProfitLoss>
     ) : (
       <ProfitGain>
-        {setCurrency(currencyName)}
+        {setCurrency(currency)}
         {profit}
       </ProfitGain>
     );
@@ -71,13 +73,13 @@ const CryptoMarketSummary = (props) => {
       <MarketHolder>
         <MarketPrice>
           <Price>
-            {setCurrency(currencyName)}
-            {setNotation(profile.market_data.current_price[currencyName])}
+            {setCurrency(currency)}
+            {setNotation(profile.market_data.current_price[currency])}
           </Price>
           <PriceChange>
             {getPercentChange(
               profile.market_data.price_change_percentage_24h_in_currency[
-                currencyName
+                currency
               ]
             )}
           </PriceChange>
@@ -87,9 +89,9 @@ const CryptoMarketSummary = (props) => {
         <Profit>Profit: </Profit>
         {getProfit(
           profile.market_data.price_change_percentage_24h_in_currency[
-            currencyName
+            currency
           ],
-          profile.market_data.current_price[currencyName]
+          profile.market_data.current_price[currency]
         )}
       </ProfitHolder>
       <StackIcon src={stackIcon} alt="stack image" />
@@ -100,12 +102,12 @@ const CryptoMarketSummary = (props) => {
             <DataGroup>
               <DataLabel>All Time High:</DataLabel>
               <Data>
-                {setCurrency(currencyName)}
-                {setNotation(profile.market_data.ath[currencyName])}
+                {setCurrency(currency)}
+                {setNotation(profile.market_data.ath[currency])}
               </Data>
             </DataGroup>
             <span>
-              <Data>{setDate(profile.market_data.ath_date[currencyName])}</Data>
+              <Data>{setDate(profile.market_data.ath_date[currency])}</Data>
             </span>
           </DataValues>
         </DataContainer>
@@ -115,12 +117,12 @@ const CryptoMarketSummary = (props) => {
             <DataGroup>
               <DataLabel>All Time Low:</DataLabel>
               <Data>
-                {setCurrency(currencyName)}
-                {setNotation(profile.market_data.atl[currencyName])}
+                {setCurrency(currency)}
+                {setNotation(profile.market_data.atl[currency])}
               </Data>
             </DataGroup>
             <span>
-              <Data>{setDate(profile.market_data.atl_date[currencyName])}</Data>
+              <Data>{setDate(profile.market_data.atl_date[currency])}</Data>
             </span>
           </DataValues>
         </DataContainer>

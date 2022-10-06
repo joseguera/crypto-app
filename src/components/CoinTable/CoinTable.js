@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import {
   TableFilters,
@@ -9,6 +10,7 @@ import {
 import { TableGrid, TableHeader } from "./CoinTable.styles";
 
 export default function CoinTable(props) {
+  const currency = useSelector((state) => state.currency.value);
   const [coins, setCoins] = useState(null);
   const [category, setActiveCategory] = useState({ name: "", prop: "" });
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +48,7 @@ export default function CoinTable(props) {
     try {
       setIsLoading(true);
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${props.currencyName}${category.prop}&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}${category.prop}&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
       setCoins(data);
       setIsLoading(false);
@@ -86,7 +88,7 @@ export default function CoinTable(props) {
   useEffect(() => {
     getCoins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.currencyName, category]);
+  }, [currency, category]);
 
   return (
     <>
@@ -116,7 +118,6 @@ export default function CoinTable(props) {
         <div>Last 7d</div>
         <TableContent
           coins={coins}
-          currencyName={props.currencyName}
           isLoading={isLoading}
         />
       </TableGrid>

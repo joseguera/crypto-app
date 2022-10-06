@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { formatCurrency, roundToNumber, setCurrency } from "util/numberUtil";
 import {
   ExchangeHolder,
@@ -13,6 +14,7 @@ import {
 import exchangeIcon from "../../images/Icon-awesome-exchange-alt.svg";
 
 export default function CryptoExchange(props) {
+  const currency = useSelector((state) => state.currency.value);
   const [inputValue, setInputValue] = useState(1);
   const [fiatValue, setFiatValue] = useState(props.currentPrice);
 
@@ -53,10 +55,10 @@ export default function CryptoExchange(props) {
       <ExchangeIcon src={exchangeIcon} alt="arrow icon" />
       <ExchangeCurrency>
         <CurrencyName>
-          <CurrencyLabel>{props.currencyName.toUpperCase()}</CurrencyLabel>
+          <CurrencyLabel>{currency.toUpperCase()}</CurrencyLabel>
         </CurrencyName>
         <CurrencyInput>
-          <CurrencySymbol>{setCurrency(props.currencyName)}</CurrencySymbol>
+          <CurrencySymbol>{setCurrency(currency)}</CurrencySymbol>
           <InputField
             onChange={handleFiatChange}
             value={fiatValue}

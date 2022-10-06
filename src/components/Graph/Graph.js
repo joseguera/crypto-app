@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import axios from "axios";
 import {
   BarGraph,
@@ -18,6 +19,7 @@ import {
 import { timeConverter } from "./../../util/numberUtil";
 
 export default function Graph(props) {
+  const currency = useSelector((state) => state.currency.value);
   const [cryptoName, setCrypto] = useState("bitcoin");
   const [lineDateRange, setLineDate] = useState(1);
   const [barDateRange, setBarDate] = useState(1);
@@ -33,7 +35,7 @@ export default function Graph(props) {
   const getLineGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${props.currencyName}&days=${lineDateRange}`
+        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${currency}&days=${lineDateRange}`
       );
       const { labels, prices } = data.prices.reduce(
         (acc, [label, price]) => ({
@@ -52,7 +54,7 @@ export default function Graph(props) {
   const getBarGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${props.currencyName}&days=${barDateRange}`
+        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${currency}&days=${barDateRange}`
       );
 
       const { volumeLabels, volumePrices } = data.total_volumes.reduce(
@@ -73,7 +75,7 @@ export default function Graph(props) {
     getLineGraphData();
     getBarGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.currencyName, cryptoName, lineDateRange, barDateRange]);
+  }, [currency, cryptoName, lineDateRange, barDateRange]);
 
   const setCryptoName = (cryptoName) => {
     setCrypto(cryptoName);
@@ -113,7 +115,6 @@ export default function Graph(props) {
               <GraphHeader>
                 <GraphTitle
                   cryptoName={lineGraphTitle}
-                  currencyName={props.currencyName}
                 />
                 <DateButtonHolder>
                   <DateButtons setDateRange={setLineDateRange} />
@@ -127,7 +128,6 @@ export default function Graph(props) {
               <GraphHeader>
                 <GraphTitle
                   cryptoName={barGraphTitle}
-                  currencyName={props.currencyName}
                 />
                 <DateButtonHolder>
                   <DateButtons setDateRange={setBarDateRange} />
