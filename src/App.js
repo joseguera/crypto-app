@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import {
   light,
@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar, Footer } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
 import { MainApp } from "App.styles";
+import LoadingWheel from "components/loading-animations/LoadingWheel/LoadingWheel";
+
 
 export default function App() {
   const theme = useSelector((state) => state.theme.value)

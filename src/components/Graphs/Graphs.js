@@ -8,6 +8,7 @@ import {
   DateButtons,
   GraphTitle,
   SideArrow,
+  LoadingWheel
 } from "components";
 import {
   GraphGrid,
@@ -15,8 +16,8 @@ import {
   DateButtonHolder,
   GraphHeader,
   ChartHolder,
-} from "./Graph.styles";
-import { timeConverter } from "./../../util/numberUtil";
+} from "./Graphs.styles";
+import { timeConverter } from "../../util/numberUtil";
 
 export default function Graph(props) {
   const currency = useSelector((state) => state.currency.value);
@@ -66,6 +67,7 @@ export default function Graph(props) {
       );
       setVolumeLabels(volumeLabels);
       setVolumePrices(volumePrices);
+      // insert setIsLoading()
     } catch (err) {
       console.log("Location Error:", err);
     }
@@ -97,8 +99,8 @@ export default function Graph(props) {
   const hasData = () => labels.length && prices.length;
 
   const hasGraph = !isLoading && labels && volumeLabels;
-  const lineGraphTitle = cryptoName === "bitcoin" ? "BTC" : "ETH";
-  const barGraphTitle = cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
+  const lineGraphTitle = (cryptoName) === "bitcoin" ? "BTC" : "ETH";
+  const barGraphTitle = (cryptoName) === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
   const showLineGraph = lineGraph ? "visible" : "not-visible";
   const showBarGraph = barGraph ? "visible" : "not-visible";
@@ -113,9 +115,7 @@ export default function Graph(props) {
             <SideArrow direction="left" switchGraph={switchGraph} />
             <GraphCell className={showLineGraph}>
               <GraphHeader>
-                <GraphTitle
-                  cryptoName={lineGraphTitle}
-                />
+                <GraphTitle cryptoName={lineGraphTitle} />
                 <DateButtonHolder>
                   <DateButtons setDateRange={setLineDateRange} />
                 </DateButtonHolder>
@@ -126,15 +126,13 @@ export default function Graph(props) {
             </GraphCell>
             <GraphCell className={showBarGraph}>
               <GraphHeader>
-                <GraphTitle
-                  cryptoName={barGraphTitle}
-                />
+                <GraphTitle cryptoName={barGraphTitle} />
                 <DateButtonHolder>
                   <DateButtons setDateRange={setBarDateRange} />
                 </DateButtonHolder>
               </GraphHeader>
               <ChartHolder>
-                <BarGraph labels={volumeLabels} prices={volumePrices} />
+                {(!isLoading) ? <BarGraph labels={volumeLabels} prices={volumePrices} /> : <LoadingWheel />}
               </ChartHolder>
             </GraphCell>
             <SideArrow direction="right" switchGraph={switchGraph} />

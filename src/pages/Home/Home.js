@@ -1,10 +1,10 @@
-import { CoinTable, Graph } from "components";
+import { CoinTable, Graphs } from "components";
 import { MainDiv, Overview } from "./Home.styles";
 
 const Home = (props) => {
   return (
     <MainDiv>
-      <Graph />
+      <Graphs />
       <Overview><h2>Overview</h2></Overview>
       <CoinTable />
     </MainDiv>
