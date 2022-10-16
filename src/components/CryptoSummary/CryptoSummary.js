@@ -1,15 +1,9 @@
 import React from "react";
+import { CryptoTitleIcon } from "components";
 import {
   CryptoSummaryHolder,
-  CryptoTitle,
-  CryptoContent,
-  CryptoIcon,
-  CryptoImg,
-  CryptoName,
-  CryptoText,
   CryptoSite,
   CryptoLink,
-  Symbol,
   LinkCryptoIcon
 } from "./CryptoSummary.styles";
 import linkIcon from "../../images/awesome-link.svg";
@@ -17,30 +11,7 @@ import linkIcon from "../../images/awesome-link.svg";
 const CryptoSummary = (props) => {
   return (
     <CryptoSummaryHolder>
-      <CryptoTitle>
-        <CryptoContent>
-          <CryptoIcon>
-            <CryptoImg
-              src={props.profile.image.small}
-              alt={props.profile.name}
-            />
-          </CryptoIcon>
-          <CryptoName>
-            <CryptoText>
-              {props.profile.name}
-              {props.profile.name.length > 7 ? (
-                <>
-                  <br />
-                  <br />
-                </>
-              ) : (
-                " "
-              )}
-              <Symbol>({props.profile.symbol})</Symbol>
-            </CryptoText>
-          </CryptoName>
-        </CryptoContent>
-      </CryptoTitle>
+      <CryptoTitleIcon profile={props.profile} />
       <CryptoSite>
         <a
           href={props.profile.links.homepage[0]}
