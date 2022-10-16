@@ -36,6 +36,6 @@ export const light = {
       buttonFill: "#2C2F36",
       barFill: "#F7F7F7",
       shimer1: "#1F2128",
-      shimer2: "#2c2f36"
+      shimer2: "#2C2F36"
     }
   };
