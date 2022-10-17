@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import axios from "axios";
 import {
@@ -40,7 +40,7 @@ export default function CoinPage(props) {
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     getCoinInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);

@@ -5,20 +5,18 @@ import { NavDiv, NavBarDiv, NavBarContainer } from "./NavBar.styles";
 const NavBar = (props) => {
   return (
     <>
-    <NavBarContainer>
+      <NavBarContainer>
+        <NavBarDiv>
+          <NavDiv>
+            <NavBarButtons />
+            <NavBarUtils />
+          </NavDiv>
+        </NavBarDiv>
+      </NavBarContainer>
       <NavBarDiv>
-        <NavDiv>
-          <NavBarButtons />
-          <NavBarUtils />
-        </NavDiv>
+        <CoinNavSummary />
       </NavBarDiv>
-    </NavBarContainer>
-    <NavBarDiv>    
-      <CoinNavSummary />
-    </NavBarDiv>
-    
     </>
-
   );
 };
 
