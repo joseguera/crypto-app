@@ -11,7 +11,7 @@ import linkIcon from "../../images/awesome-link.svg";
 const CryptoSummary = (props) => {
   return (
     <CryptoSummaryHolder>
-      <CryptoTitleIcon profile={props.profile} />
+      <CryptoTitleIcon profile={props.profile} image={props.profile.image.small} />
       <CryptoSite>
         <a
           href={props.profile.links.homepage[0]}

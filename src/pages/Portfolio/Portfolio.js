@@ -63,7 +63,8 @@ const Portfolio = () => {
             </AssetBtnHolder>
             {modal && <PortfolioModal closeModal={openModal} />}
             <CryptoAssetHolder>
-              {/* <CryptoTitleIcon profile={profile} /> */}
+                <CryptoTitleIcon profile={profile[0]} image={profile[0].image}/>
+
               <AssetDetailsHolder>
                 <MarketPriceHolder>
                   <SectionTitle>

@@ -5,7 +5,7 @@ export const DataSummaryHolder = styled.div`
   background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 303px;
-  width: 437px;
+  width: 406px;
 `;
 
 export const DataSummaryContainer = styled.div`

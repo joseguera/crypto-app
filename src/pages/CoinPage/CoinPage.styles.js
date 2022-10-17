@@ -25,12 +25,13 @@ export const SummaryContainer = styled.div`
   display: flex;
   gap: 60px;
   place-items: center;
+  width: 1102px;
 `;
 
 export const DescriptionHolder = styled.div`
   display: grid;
   justify-items: center;
-  width: 1133px;
+  width: 1102px;
   margin-left: 12%;
   margin-right: 10%;
 `;

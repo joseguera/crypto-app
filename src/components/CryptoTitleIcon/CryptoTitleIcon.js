@@ -10,12 +10,13 @@ import {
 } from "./CryptoTitleIcon.styles";
 
 export default function CryptoTitleIcon(props) {
+
     return (
         <CryptoTitle>
             <CryptoContent>
           <CryptoIcon>
             <CryptoImg
-              src={props.profile.image.small}
+              src={props.image}
               alt={props.profile.name}
             />
           </CryptoIcon>
