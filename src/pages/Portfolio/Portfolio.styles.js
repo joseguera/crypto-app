@@ -32,3 +32,12 @@ export const AssetBtnText = styled.div`
   font-weight: bold;
   line-height: 120%;
 `;
+
+export const TitleHolder = styled.div`
+  align-self: flex-start;
+`;
+
+export const Title = styled.h2`
+  font-size: 22px;
+  line-height: 0px;
+`;

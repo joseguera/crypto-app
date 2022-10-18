@@ -6,7 +6,9 @@ import {
   MainDiv,
   AssetBtnHolder,
   AssetBtnText,
-  AssetContainer
+  AssetContainer,
+  TitleHolder,
+  Title
 } from "./Portfolio.styles";
 
 const Portfolio = () => {
@@ -51,6 +53,9 @@ const Portfolio = () => {
             <AssetBtnHolder onClick={() => openModal()}>
               <AssetBtnText>Add Asset</AssetBtnText>
             </AssetBtnHolder>
+            <TitleHolder>
+              <Title>Your Assets</Title>
+            </TitleHolder>
             {modal && <PortfolioModal closeModal={openModal} />}
             {profile.map((asset) => {
               return <CryptoAsset profile={asset} image={asset.image} />

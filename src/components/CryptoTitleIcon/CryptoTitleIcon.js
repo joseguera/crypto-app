@@ -11,8 +11,6 @@ import {
 
 export default function CryptoTitleIcon(props) {
 
-    const img = (props.image === null) ? "none" : "inline";
-
     return (
         <CryptoTitle>
             <CryptoContent>

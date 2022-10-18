@@ -1,6 +1,7 @@
 import React from "react";
 import { CryptoTitleIcon } from "components";
 import {
+  ModalBackground,
   ModalContainer,
   ModalBody,
   TitleHolder,
@@ -10,41 +11,61 @@ import {
   CrossImg,
   ModalUtilities,
   UtilityHolder,
-  Utilities
+  Utilities,
+  FormHolder,
+  Form,
+  Input,
+  Buttons
 } from "./PortfolioModal.styles";
 import cross from "../../images/metro-cross.svg";
+import blank from "../../images/blank.png";
 
 export default function PortfolioModal(props) {
   return (
-    <ModalContainer>
-      <ModalBody>
-        <TitleHolder>
-          <TitleItems>
-            <Title>Select Coins</Title>
-            <Cross onClick={() => props.closeModal()}>
-              <CrossImg src={cross} alt="close x" />
-            </Cross>
-          </TitleItems>
-        </TitleHolder>
-        <ModalUtilities>
-          <UtilityHolder>
-            <CryptoTitleIcon profile={ { name : "Nothing", symbol : "NOT", image: null }  } />
-            <Utilities>
-              <div>
-                <input placeholder="Search..." />
-              </div>
-              <div>
-                <input placeholder="Amount Purchased" />
-              </div>
-              <div>
-                <input placeholder="Date" />
-              </div>
-            </Utilities>
-          </UtilityHolder>
-        </ModalUtilities>
-        <div onClick={() => props.closeModal()}>Close</div>
-        <div>Save and Continue</div>
-      </ModalBody>
-    </ModalContainer>
+    <>
+      <ModalBackground />
+      <ModalContainer>
+        <ModalBody>
+          <TitleHolder>
+            <TitleItems>
+              <Title>Select Coins</Title>
+              <Cross onClick={() => props.closeModal()}>
+                <CrossImg src={cross} alt="close x" />
+              </Cross>
+            </TitleItems>
+          </TitleHolder>
+          <ModalUtilities>
+            <UtilityHolder>
+              <CryptoTitleIcon
+                profile={{ name: "Nothing", symbol: "NOT" }}
+                image={blank}
+                style={{ color: "blue", height: "186px", width: "163px" }}
+              />
+              <Utilities>
+                <FormHolder>
+                  <Form>
+                    <Input placeholder="Search..." />
+                  </Form>
+                </FormHolder>
+                <FormHolder>
+                  <Form>
+                    <Input placeholder="Amount Purchased" />
+                  </Form>
+                </FormHolder>
+                <FormHolder>
+                  <Form>
+                    <Input placeholder="Date" />
+                  </Form>
+                </FormHolder>
+              </Utilities>
+            </UtilityHolder>
+          </ModalUtilities>
+          <Buttons>
+            <div onClick={() => props.closeModal()}>Close</div>
+            <div>Save and Continue</div>
+          </Buttons>
+        </ModalBody>
+      </ModalContainer>
+    </>
   );
 }
