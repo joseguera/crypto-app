@@ -20,24 +20,29 @@ export default function CurrencyDropDown(props) {
   const currency = useSelector((state) => state.currency.value)
   const currencyName = currency.toUpperCase();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-
-  const container = useRef(null);
-
-  const handleDropDownClick = () => {
-    setOpen(!open);
-  };
-
-  const handleClickOutside = (event) => {
-    if (container && !container.current.contains(event.target)) {
-      setOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const container = useRef();
+  useOnClickOutside(container, () => setModalOpen(false));
+  
+function useOnClickOutside(ref, handler) {
+  useEffect(
+    () => {
+      const listener = (event) => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          return;
+        }
+        handler(event);
+      };
+      document.addEventListener("mousedown", listener);
+      document.addEventListener("touchstart", listener);
+      return () => {
+        document.removeEventListener("mousedown", listener);
+        document.removeEventListener("touchstart", listener);
+      };
+    },
+    [ref, handler]
+  );
+}
 
   const setCurrencySymbol = (currency) => {
     if (currency === "USD") {
@@ -60,15 +65,15 @@ export default function CurrencyDropDown(props) {
   return (
     <>
       <DropDown className="container" ref={container}>
-        <DropDownHolder onClick={handleDropDownClick}>
+        <DropDownHolder onClick={() => setModalOpen(true)}>
           <Symbol>
             <CurrencySymbol>{setCurrencySymbol(currencyName)}</CurrencySymbol>
           </Symbol>
           <CurrencyNameHolder>
             <Currency>{currencyName}</Currency>
-            {!open ? <DownArrow /> : <UpArrowGreen />}
+            {!isModalOpen ? <DownArrow /> : <UpArrowGreen />}
           </CurrencyNameHolder>
-          {open && (
+          {isModalOpen && (
             <DropDownList>
               <CurrencyOptions>
                 {currencies.map((curr) => {
@@ -84,7 +89,7 @@ export default function CurrencyDropDown(props) {
                           </CurrencySymbol>
                         </Symbol>
                         <CurrencyNameHolder>
-                          {currency === curr.name ? (
+                          {currency === curr.name.toLowerCase() ? (
                             <Selected>{curr.name}</Selected>
                           ) : (
                             <Currency>{curr.name}</Currency>

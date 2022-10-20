@@ -3,44 +3,46 @@ import { DropDownHolder, DropDown, CryptoTitle, Arrow, DropDownList, ListItem } 
 
 export default function CryptoDropDown(props) {
   const [cryptoName, setCryptoName] = useState("Bitcoin");
-  const [open, setOpen] = useState(false);
-
-  const container = useRef(null);
-
-  const handleDropDownClick = () => {
-    setOpen(!open);
-  };
-
+  const [isModalOpen, setModalOpen] = useState(false);
+  const container = useRef();
+  useOnClickOutside(container, () => setModalOpen(false));
+  
+function useOnClickOutside(ref, handler) {
+  useEffect(
+    () => {
+      const listener = (event) => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          return;
+        }
+        handler(event);
+      };
+      document.addEventListener("mousedown", listener);
+      document.addEventListener("touchstart", listener);
+      return () => {
+        document.removeEventListener("mousedown", listener);
+        document.removeEventListener("touchstart", listener);
+      };
+    },
+    [ref, handler]
+  );
+}
+  
   const handleSelection = (value) => {
     const cryptoName= value.toLowerCase();
     setCryptoName(value);
-    setOpen(!open);
+    setModalOpen(!isModalOpen);
     props.setCryptoName(cryptoName);
   };
-
-  const handleClickOutside = (event) => {
-    if (
-      container &&
-      !container.current.contains(event.target)
-    ) {
-      setOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
     return (
       <>
         <div className="container" ref={container}>
           <DropDownHolder>
-            <DropDown onClick={handleDropDownClick}>
+            <DropDown onClick={() => setModalOpen(true)}>
               <CryptoTitle>{cryptoName}&nbsp;Overview</CryptoTitle>
-              {!open ? <Arrow /> : <Arrow style={{ "transform": "rotateX(180deg)" }} />}
+              {!isModalOpen ? <Arrow /> : <Arrow style={{ "transform": "rotateX(180deg)" }} />}
             </DropDown>
-            {open && (
+            {isModalOpen && (
               <DropDownList>
                 <ListItem id="Bitcoin" onClick={(e) => handleSelection(e.target.id)}>Bitcoin</ListItem>
                 <ListItem id="Ethereum" onClick={(e) => handleSelection(e.target.id)}>Ethereum</ListItem>
