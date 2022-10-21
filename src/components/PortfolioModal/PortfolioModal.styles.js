@@ -20,7 +20,7 @@ export const ModalContainer = styled.div`
   background: ${({ theme }) => theme.colors.buttonFill};
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
   width: 870px;
-  height: 403px;
+  height: 425px;
   border-radius: 10px;
   color: ${({ theme }) => theme.colors.text};
   z-index: 11;
@@ -120,7 +120,28 @@ export const Input = styled.input`
 
 export const Buttons = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 25px;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 24px;
+  .button {
+    height: 48px;
+    width: 235px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    line-height: 0%;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close-button {
+    color: ${({ theme }) => theme.colors.portfolioText};
+    background: ${({ theme }) => theme.colors.portfolioBackground};
+  }
+  .save-button {
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.portfolioButton};
+  }
 `;

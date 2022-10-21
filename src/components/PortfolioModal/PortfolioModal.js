@@ -1,5 +1,5 @@
 import React from "react";
-import { CryptoTitleIcon } from "components";
+import { CryptoTitleIcon, SearchBar } from "components";
 import {
   ModalBackground,
   ModalContainer,
@@ -39,13 +39,10 @@ export default function PortfolioModal(props) {
               <CryptoTitleIcon
                 profile={{ name: "Nothing", symbol: "NOT" }}
                 image={blank}
-                style={{ color: "blue", height: "186px", width: "163px" }}
               />
               <Utilities>
                 <FormHolder>
-                  <Form>
-                    <Input placeholder="Search..." />
-                  </Form>
+                  <SearchBar />
                 </FormHolder>
                 <FormHolder>
                   <Form>
@@ -61,8 +58,8 @@ export default function PortfolioModal(props) {
             </UtilityHolder>
           </ModalUtilities>
           <Buttons>
-            <div onClick={() => props.closeModal()}>Close</div>
-            <div>Save and Continue</div>
+            <div className="button close-button" onClick={() => props.closeModal()}>Close</div>
+            <div className="button save-button">Save and Continue</div>
           </Buttons>
         </ModalBody>
       </ModalContainer>
