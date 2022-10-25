@@ -19,13 +19,11 @@ export default function CryptoTitleIcon(props) {
         <CryptoName>
           <CryptoText>
             {props.profile.name}
-            {props.profile.name.length > 7 ? (
+            {props.profile.name.length > 7 && (
               <>
                 <br />
                 <br />
               </>
-            ) : (
-              " "
             )}
             <Symbol>({props.profile.symbol})</Symbol>
           </CryptoText>
