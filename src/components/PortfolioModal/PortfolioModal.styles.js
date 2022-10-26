@@ -92,7 +92,7 @@ export const FormHolder = styled.form`
   align-items: center;
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
   width: 408px;
   height: 50px;
   border-radius: 10px;

@@ -39,6 +39,7 @@ export const CryptoName = styled.span`
 export const CryptoText = styled.p`
   font-size: 20px;
   line-height: 100%;
+  margin-bottom: 0px;
 `;
 
 export const Symbol = styled.span`

@@ -45,7 +45,6 @@ const Portfolio = () => {
 
   return (
     <>
-      {console.log(profile)}
       {isLoading && <div>Loading...</div>}
       {hasCoinProfile && (
         <MainDiv>
@@ -58,7 +57,7 @@ const Portfolio = () => {
             </TitleHolder>
             {modal && <PortfolioModal closeModal={openModal} />}
             {profile.map((asset) => {
-              return <CryptoAsset profile={asset} image={asset.image} />
+              return <CryptoAsset key={asset.id} profile={asset} image={asset.image} />
             })}
           </AssetContainer>
         </MainDiv>
