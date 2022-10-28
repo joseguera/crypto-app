@@ -25,7 +25,7 @@ export default function CryptoTitleIcon(props) {
                 <br />
               </>
             )}
-            <Symbol>({props.profile.symbol})</Symbol>
+            <Symbol>{props.profile.symbol.length !== 0 && `(${props.profile.symbol})`}</Symbol>
           </CryptoText>
         </CryptoName>
       </CryptoContent>
