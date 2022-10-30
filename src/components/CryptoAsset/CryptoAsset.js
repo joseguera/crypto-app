@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { CryptoTitleIcon } from "components";
 import {
     CryptoAssetHolder,
@@ -12,11 +13,14 @@ import {
     Label,
     Field
 } from "./CryptoAsset.styles";
+import { setCurrency } from './../../util/numberUtil';
 
 export default function CryptoAsset(props) {
+  const currency = useSelector((state) => state.currency.value);
+
   return (
     <CryptoAssetHolder>
-      <CryptoTitleIcon profile={props.profile} image={props.profile.image} />
+      <CryptoTitleIcon profile={props.profile} image={props.image} />
       <AssetDetailsHolder>
         <MarketPriceHolder>
           <SectionTitle>
@@ -25,7 +29,7 @@ export default function CryptoAsset(props) {
           <SectionContent>
             <DataPoint>
               <Label>Current price:</Label>
-              <Field></Field>
+              <Field>{setCurrency(currency)}{props.profile.currentPrice}</Field>
               <DataPoint>
                 <Label>Price change 24h:</Label>
                 <Field></Field>
@@ -52,7 +56,7 @@ export default function CryptoAsset(props) {
             </DataPoint>
             <DataPoint>
               <Label>Amount Value:</Label>
-              <Field></Field>
+              <Field>{setCurrency(currency)}{props.profile.total}</Field>
             </DataPoint>
             <DataPoint>
               <Label>Amount Price Change Since Purchase:</Label>

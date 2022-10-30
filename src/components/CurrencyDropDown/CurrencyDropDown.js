@@ -44,6 +44,10 @@ function useOnClickOutside(ref, handler) {
   );
 }
 
+const handleSelection = () => {
+  setModalOpen(!isModalOpen);
+};
+
   const setCurrencySymbol = (currency) => {
     if (currency === "USD") {
       return "$";
@@ -65,7 +69,7 @@ function useOnClickOutside(ref, handler) {
   return (
     <>
       <DropDown className="container" ref={container}>
-        <DropDownHolder onClick={() => setModalOpen(true)}>
+        <DropDownHolder onClick={() => setModalOpen(!isModalOpen)}>
           <Symbol>
             <CurrencySymbol>{setCurrencySymbol(currencyName)}</CurrencySymbol>
           </Symbol>
@@ -75,7 +79,7 @@ function useOnClickOutside(ref, handler) {
           </CurrencyNameHolder>
           {isModalOpen && (
             <DropDownList>
-              <CurrencyOptions>
+              <CurrencyOptions onClick={() => handleSelection()}>
                 {currencies.map((curr) => {
                   return (
                     <CurrencyItemHolder

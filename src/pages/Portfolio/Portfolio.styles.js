@@ -13,7 +13,6 @@ export const AssetContainer = styled.div`
   gap: 35px;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 `;
 
 export const AssetBtnHolder = styled.div`
@@ -25,6 +24,7 @@ export const AssetBtnHolder = styled.div`
   border-radius: 10px;
   color: ${({ theme }) => theme.colors.text};
   background: #06d554;
+  cursor: pointer;
 `;
 
 export const AssetBtnText = styled.div`
