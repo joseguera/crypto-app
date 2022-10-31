@@ -18,7 +18,8 @@ export const light = {
       shimer2: "#F7F7F7",
       portfolioText: "#2C2F36",
       portfolioButton: "#1AD761",
-      portfolioBackground: "#FFFFFF"
+      portfolioBackground: "#FFFFFF",
+      datePicker: "0%"
     },
   };
   
@@ -42,6 +43,7 @@ export const light = {
       shimer2: "#2C2F36",
       portfolioText: "#1AD761",
       portfolioButton: "#1AD761",
-      portfolioBackground: "#FFFFFF"
+      portfolioBackground: "#FFFFFF",
+      datePicker: "100%"
     }
   };

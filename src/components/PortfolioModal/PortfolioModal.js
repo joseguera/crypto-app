@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CryptoTitleIcon, PortfolioSearchBar, CryptoAmountInput } from "components";
+import { CryptoTitleIcon, PortfolioSearchBar, CryptoAmountInput, CryptoDateInput } from "components";
 import {
   ModalBackground,
   ModalContainer,
@@ -13,8 +13,6 @@ import {
   UtilityHolder,
   Utilities,
   FormHolder,
-  Form,
-  Input,
   Buttons
 } from "./PortfolioModal.styles";
 import cross from "../../images/metro-cross.svg";
@@ -55,9 +53,7 @@ export default function PortfolioModal(props) {
                   <CryptoAmountInput />
                 </FormHolder>
                 <FormHolder>
-                  <Form>
-                    <Input placeholder="Date" />
-                  </Form>
+                  <CryptoDateInput />
                 </FormHolder>
               </Utilities>
             </UtilityHolder>
