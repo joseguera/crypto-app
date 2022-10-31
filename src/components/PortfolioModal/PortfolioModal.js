@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CryptoTitleIcon, PortfolioSearchBar } from "components";
+import { CryptoTitleIcon, PortfolioSearchBar, CryptoAmountInput } from "components";
 import {
   ModalBackground,
   ModalContainer,
@@ -52,9 +52,7 @@ export default function PortfolioModal(props) {
                   <PortfolioSearchBar handleSelection={handleSelection} />
                 </FormHolder>
                 <FormHolder>
-                  <Form>
-                    <Input placeholder="Amount Purchased" />
-                  </Form>
+                  <CryptoAmountInput />
                 </FormHolder>
                 <FormHolder>
                   <Form>

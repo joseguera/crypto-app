@@ -35,11 +35,11 @@ export default function PortfolioSearchBar(props) {
     setOpen(!open);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const value = inputValue;
-  //   setInputValue(value);
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const value = inputValue;
+    setInputValue(value);
+  };
 
   const cryptoContainer = useRef(null);
 
