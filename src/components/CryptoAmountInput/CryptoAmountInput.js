@@ -11,6 +11,7 @@ export default function CryptoAmountInput(props) {
   const handleChange = (e) => {
     const input = (typeof parseFloat(e.target.value) === "number") && e.target.value;
     setInputValue(input);
+    props.setAmount(input)
   };
 
   return (

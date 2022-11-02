@@ -47,10 +47,10 @@ export default function PortfolioSearchBar(props) {
     setOpen(!open);
   };
 
-  const handleSelection = (name, symbol, thumbnail) => {
+  const handleSelection = (id, name, symbol, thumbnail) => {
     setInputValue(name);
     setOpen(!open);
-    props.handleSelection(name, symbol, thumbnail);
+    props.handleSelection(id, name, symbol, thumbnail);
   };
 
   const handleClickOutside = (event) => {
@@ -99,7 +99,7 @@ export default function PortfolioSearchBar(props) {
                   <ListItem
                     id={cryptoItem.id}
                     key={cryptoItem.id}
-                    onClick={() => handleSelection(cryptoItem.name, cryptoItem.symbol, cryptoItem.thumb)}
+                    onClick={() => handleSelection(cryptoItem.id, cryptoItem.name, cryptoItem.symbol, cryptoItem.thumb)}
                   >
                     <SubOne>
                       <div>

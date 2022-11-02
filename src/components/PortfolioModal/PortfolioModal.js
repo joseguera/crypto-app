@@ -19,11 +19,32 @@ import cross from "../../images/metro-cross.svg";
 import blank from "../../images/blank.png";
 
 export default function PortfolioModal(props) {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const year = String(today.getFullYear());
+  const date = `${day}-${month}-${year}`;
+  const todaysDate = `${year}-${month}-${day}`;
 
-  const [cryptoIcon, setCryptoIcon] = useState({ name: "", symbol: "", thumbnail: blank });
+  const [cryptoIcon, setCryptoIcon] = useState({ id: "", name: "", symbol: "", thumbnail: blank });
+  const [portfolioTransaction, setPortfolioTransaction] = useState({ id: "", date: date, amount: 0 });
 
-  const handleSelection = (name, symbol, thumbnail) => {
-    setCryptoIcon({ name, symbol, thumbnail })
+  const handleSelection = (id, name, symbol, thumbnail) => {
+    setCryptoIcon({ id, name, symbol, thumbnail })
+    setPortfolioTransaction({...portfolioTransaction, id });
+  }
+
+  const setAmount = (amount) => {
+    setPortfolioTransaction({...portfolioTransaction, amount })
+  }
+
+  const setDate = (date) => {
+    setPortfolioTransaction({...portfolioTransaction, date });
+  }
+
+  const handleSubmit = () => {
+    const { id, date, amount } = portfolioTransaction;
+    props.handleSubmit(id, date, amount)
   }
 
   return (
@@ -50,17 +71,17 @@ export default function PortfolioModal(props) {
                   <PortfolioSearchBar handleSelection={handleSelection} />
                 </FormHolder>
                 <FormHolder>
-                  <CryptoAmountInput />
+                  <CryptoAmountInput setAmount={setAmount} />
                 </FormHolder>
                 <FormHolder>
-                  <CryptoDateInput />
+                  <CryptoDateInput setDate={setDate} todaysDate={todaysDate} />
                 </FormHolder>
               </Utilities>
             </UtilityHolder>
           </ModalUtilities>
           <Buttons>
             <div className="button close-button" onClick={() => props.closeModal()}>Close</div>
-            <div className="button save-button">Save and Continue</div>
+            <div className="button save-button" onClick={handleSubmit}>Save and Continue</div>
           </Buttons>
         </ModalBody>
       </ModalContainer>

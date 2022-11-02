@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { SearchBarStyle, InputType } from "./CryptoDateInput.styles";
 
 export default function CryptoDateInput(props) {
-//   const today = new Date();
-  const today = new Date();
-  const day = String(today.getDate()).padStart(2, "0");
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const year = String(today.getFullYear());
-  const todaysDate = `${year}-${month}-${day}`;
 
-  const [inputValue, setInputValue] = useState(todaysDate);
+  const [inputValue, setInputValue] = useState(props.todaysDate);
   const [hasError] = useState(false);
+
+  const datePicker = (e) => {
+    const date = e.target.value;
+    const cryptoDate = date.split("-")
+    const newDate = `${cryptoDate[2]}-${cryptoDate[1]}-${cryptoDate[0]}`;
+    setInputValue(date);
+    props.setDate(newDate)
+  }
 
   return (
     <div className="container">
       <SearchBarStyle>
         <InputType
+          onChange={(e) => datePicker(e)}
           placeholder="Date"
           type="date"
           name="purchase-date"
