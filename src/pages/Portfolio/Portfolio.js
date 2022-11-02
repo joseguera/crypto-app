@@ -67,8 +67,7 @@ const Portfolio = () => {
 
   const handleSubmit = (id, date, amount) => {
     setPortfolio([...portfolio, { id, date, amount }]);
-    // setModal(!modal)
-    console.log(portfolio);
+    setModal(!modal)
   };
 
   const openModal = (e) => {
