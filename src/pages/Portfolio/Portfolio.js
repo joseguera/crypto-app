@@ -91,7 +91,6 @@ const Portfolio = () => {
 
   return (
     <>
-      {console.log(portfolio)}
       {isLoading && <div>Loading...</div>}
       {hasCoinProfile && (
         <MainDiv>
