@@ -66,7 +66,8 @@ const Portfolio = () => {
   }
 
   const handleSubmit = (id, date, amount) => {
-    setPortfolio([...portfolio, { id, date, amount }]);
+    const newPortfolio = portfolio;
+    setPortfolio([...newPortfolio, { id, date, amount }]);
     setModal(!modal)
   };
 
