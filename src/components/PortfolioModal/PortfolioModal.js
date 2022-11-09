@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { CryptoTitleIcon, PortfolioSearchBar, CryptoAmountInput, CryptoDateInput } from "components";
 import {
   ModalBackground,
@@ -17,6 +18,7 @@ import {
 } from "./PortfolioModal.styles";
 import cross from "../../images/metro-cross.svg";
 import blank from "../../images/blank.png";
+import { updatePortfolio } from "features/portfolio/portfolioSlice";
 
 export default function PortfolioModal(props) {
   const today = new Date();
@@ -28,6 +30,7 @@ export default function PortfolioModal(props) {
 
   const [cryptoIcon, setCryptoIcon] = useState({ id: "", name: "", symbol: "", thumbnail: blank });
   const [portfolioTransaction, setPortfolioTransaction] = useState({ id: "", date: date, amount: 0 });
+  const dispatch = useDispatch();
 
   const handleSelection = (id, name, symbol, thumbnail) => {
     setCryptoIcon({ id, name, symbol, thumbnail })
@@ -81,7 +84,7 @@ export default function PortfolioModal(props) {
           </ModalUtilities>
           <Buttons>
             <div className="button close-button" onClick={() => props.closeModal()}>Close</div>
-            <div className="button save-button" onClick={handleSubmit}>Save and Continue</div>
+            <div className="button save-button" onClick={() => {dispatch(updatePortfolio(portfolioTransaction)); props.closeModal()}}>Save and Continue</div>
           </Buttons>
         </ModalBody>
       </ModalContainer>

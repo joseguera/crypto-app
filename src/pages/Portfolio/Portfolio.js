@@ -13,10 +13,7 @@ import {
 const Portfolio = () => {
   const [modal, setModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
-  const [portfolio, setPortfolio] = useState([
-    { id: "bitcoin", date: "02-02-2022", amount: 2.6 },
-    { id: "ethereum", date: "02-02-2022", amount: 1 },
-  ]);
+  const portfolio = useSelector((state) => state.portfolio.value)
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
@@ -65,12 +62,6 @@ const Portfolio = () => {
     }
   }
 
-  const handleSubmit = (id, date, amount) => {
-    const newPortfolio = portfolio;
-    setPortfolio([...newPortfolio, { id, date, amount }]);
-    setModal(!modal)
-  };
-
   const openModal = (e) => {
     setModal(!modal);
   };
@@ -78,7 +69,7 @@ const Portfolio = () => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [portfolio, currency]);
+  }, [profile, portfolio, currency]);
 
   let min = 1;
   let max = 100;
@@ -104,7 +95,6 @@ const Portfolio = () => {
             {modal && (
               <PortfolioModal
                 closeModal={openModal}
-                handleSubmit={handleSubmit}
               />
             )}
             {profile.map((pro) => {
@@ -120,3 +110,8 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+
+
+
+
+// dispatch(updatePortfolio(portfolioTransaction)
