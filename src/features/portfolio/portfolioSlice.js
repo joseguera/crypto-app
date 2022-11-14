@@ -20,3 +20,4 @@ export const portfolioSlice = createSlice({
 export const { updatePortfolio } = portfolioSlice.actions;
 
 export default portfolioSlice.reducer;
+

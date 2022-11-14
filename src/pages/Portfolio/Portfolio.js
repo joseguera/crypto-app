@@ -14,6 +14,7 @@ const Portfolio = () => {
   const [modal, setModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
   const portfolio = useSelector((state) => state.portfolio.value);
+
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
@@ -69,7 +70,7 @@ const Portfolio = () => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [portfolio, currency]);
+  }, [profile, portfolio, currency]);
 
   let min = 1;
   let max = 100;
@@ -114,3 +115,8 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+
+
+
+
+// dispatch(updatePortfolio(portfolioTransaction)

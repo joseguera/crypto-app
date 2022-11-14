@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
     portfolio: portfolioReducer
 });
 
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
