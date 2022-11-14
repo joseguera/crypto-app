@@ -13,10 +13,7 @@ import {
 const Portfolio = () => {
   const [modal, setModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
-  const [portfolio, setPortfolio] = useState([
-    { id: "bitcoin", date: "02-02-2022", amount: 2.6 },
-    { id: "ethereum", date: "02-02-2022", amount: 1 },
-  ]);
+  const portfolio = useSelector((state) => state.portfolio.value);
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
@@ -65,12 +62,6 @@ const Portfolio = () => {
     }
   }
 
-  const handleSubmit = (id, date, amount) => {
-    const newPortfolio = portfolio;
-    setPortfolio([...newPortfolio, { id, date, amount }]);
-    setModal(!modal)
-  };
-
   const openModal = (e) => {
     setModal(!modal);
   };
@@ -91,7 +82,6 @@ const Portfolio = () => {
 
   return (
     <>
-      {console.log(portfolio)}
       {isLoading && <div>Loading...</div>}
       {hasCoinProfile && (
         <MainDiv>
@@ -105,12 +95,15 @@ const Portfolio = () => {
             {modal && (
               <PortfolioModal
                 closeModal={openModal}
-                handleSubmit={handleSubmit}
               />
             )}
             {profile.map((pro) => {
               return (
-                <CryptoAsset key={`${pro.id}${keyNumber}`} profile={pro} image={pro.image} />
+                <CryptoAsset
+                  key={`${pro.id}${keyNumber}`}
+                  profile={pro}
+                  image={pro.image}
+                />
               );
             })}
           </AssetContainer>
