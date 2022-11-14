@@ -35,12 +35,6 @@ export default function PortfolioSearchBar(props) {
     setOpen(!open);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const value = inputValue;
-    setInputValue(value);
-  };
-
   const cryptoContainer = useRef(null);
 
   const handleSearchDropDown = () => {
@@ -50,7 +44,7 @@ export default function PortfolioSearchBar(props) {
   const handleSelection = (id, name, symbol, thumbnail) => {
     setInputValue(name);
     setOpen(!open);
-    props.handleSelection(id, name, symbol, thumbnail);
+    props.setCryptocurrency(id, name, symbol, thumbnail);
   };
 
   const handleClickOutside = (event) => {

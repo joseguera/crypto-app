@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
     theme: themeReducer,
     currency: currencyReducer,
     portfolio: portfolioReducer
-})
+});
+
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

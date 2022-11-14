@@ -13,7 +13,8 @@ import {
 const Portfolio = () => {
   const [modal, setModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
-  const portfolio = useSelector((state) => state.portfolio.value)
+  const portfolio = useSelector((state) => state.portfolio.value);
+
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
@@ -99,7 +100,11 @@ const Portfolio = () => {
             )}
             {profile.map((pro) => {
               return (
-                <CryptoAsset key={`${pro.id}${keyNumber}`} profile={pro} image={pro.image} />
+                <CryptoAsset
+                  key={`${pro.id}${keyNumber}`}
+                  profile={pro}
+                  image={pro.image}
+                />
               );
             })}
           </AssetContainer>

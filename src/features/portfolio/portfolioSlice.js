@@ -12,7 +12,7 @@ export const portfolioSlice = createSlice({
   initialState,
   reducers: {
     updatePortfolio: (state, action) => {
-      state.value = [...state.value, action.payload]
+      state.value = [...state.value, action.payload];
     },
   },
 });
@@ -20,3 +20,4 @@ export const portfolioSlice = createSlice({
 export const { updatePortfolio } = portfolioSlice.actions;
 
 export default portfolioSlice.reducer;
+

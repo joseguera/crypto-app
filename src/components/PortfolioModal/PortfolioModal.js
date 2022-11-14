@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updatePortfolio } from "../../features/portfolio/portfolioSlice";
+
 import { CryptoTitleIcon, PortfolioSearchBar, CryptoAmountInput, CryptoDateInput } from "components";
 import {
   ModalBackground,
@@ -27,12 +29,13 @@ export default function PortfolioModal(props) {
   const year = String(today.getFullYear());
   const date = `${day}-${month}-${year}`;
   const todaysDate = `${year}-${month}-${day}`;
+  const dispatch = useDispatch();
 
   const [cryptoIcon, setCryptoIcon] = useState({ id: "", name: "", symbol: "", thumbnail: blank });
   const [portfolioTransaction, setPortfolioTransaction] = useState({ id: "", date: date, amount: 0 });
   const dispatch = useDispatch();
 
-  const handleSelection = (id, name, symbol, thumbnail) => {
+  const setCryptocurrency = (id, name, symbol, thumbnail) => {
     setCryptoIcon({ id, name, symbol, thumbnail })
     setPortfolioTransaction({...portfolioTransaction, id });
   }
@@ -43,11 +46,6 @@ export default function PortfolioModal(props) {
 
   const setDate = (date) => {
     setPortfolioTransaction({...portfolioTransaction, date });
-  }
-
-  const handleSubmit = () => {
-    const { id, date, amount } = portfolioTransaction;
-    props.handleSubmit(id, date, amount)
   }
 
   return (
@@ -71,7 +69,7 @@ export default function PortfolioModal(props) {
               />
               <Utilities>
                 <FormHolder>
-                  <PortfolioSearchBar handleSelection={handleSelection} />
+                  <PortfolioSearchBar setCryptocurrency={setCryptocurrency} />
                 </FormHolder>
                 <FormHolder>
                   <CryptoAmountInput setAmount={setAmount} />
