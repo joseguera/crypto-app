@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updatePortfolio } from "../../features/portfolio/portfolioSlice";
 
-import { CryptoTitleIcon, PortfolioSearchBar, CryptoAmountInput, CryptoDateInput } from "components";
+import {
+  CryptoTitleIcon,
+  PortfolioSearchBar,
+  CryptoAmountInput,
+  CryptoDateInput,
+} from "components";
 import {
   ModalBackground,
   ModalContainer,
@@ -16,11 +21,11 @@ import {
   UtilityHolder,
   Utilities,
   FormHolder,
-  Buttons
+  Buttons,
 } from "./PortfolioModal.styles";
 import cross from "../../images/metro-cross.svg";
-import blank from "../../images/blank.png";
-import { updatePortfolio } from "features/portfolio/portfolioSlice";
+import blankDark from "../../images/blank_dark.png";
+import blankLight from "../../images/blank_light.png";
 
 export default function PortfolioModal(props) {
   const today = new Date();
@@ -31,22 +36,33 @@ export default function PortfolioModal(props) {
   const todaysDate = `${year}-${month}-${day}`;
   const dispatch = useDispatch();
 
-  const [cryptoIcon, setCryptoIcon] = useState({ id: "", name: "", symbol: "", thumbnail: blank });
-  const [portfolioTransaction, setPortfolioTransaction] = useState({ id: "", date: date, amount: 0 });
-  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.value);
+  const blank = (theme) ? blankLight : blankDark; 
+
+  const [cryptoIcon, setCryptoIcon] = useState({
+    id: "",
+    name: "",
+    symbol: "",
+    thumbnail: blank,
+  });
+  const [portfolioTransaction, setPortfolioTransaction] = useState({
+    id: "",
+    date: date,
+    amount: 0,
+  });
 
   const setCryptocurrency = (id, name, symbol, thumbnail) => {
-    setCryptoIcon({ id, name, symbol, thumbnail })
-    setPortfolioTransaction({...portfolioTransaction, id });
-  }
+    setCryptoIcon({ id, name, symbol, thumbnail });
+    setPortfolioTransaction({ ...portfolioTransaction, id });
+  };
 
   const setAmount = (amount) => {
-    setPortfolioTransaction({...portfolioTransaction, amount })
-  }
+    setPortfolioTransaction({ ...portfolioTransaction, amount });
+  };
 
   const setDate = (date) => {
-    setPortfolioTransaction({...portfolioTransaction, date });
-  }
+    setPortfolioTransaction({ ...portfolioTransaction, date });
+  };
 
   return (
     <>
@@ -81,8 +97,21 @@ export default function PortfolioModal(props) {
             </UtilityHolder>
           </ModalUtilities>
           <Buttons>
-            <div className="button close-button" onClick={() => props.closeModal()}>Close</div>
-            <div className="button save-button" onClick={() => {dispatch(updatePortfolio(portfolioTransaction)); props.closeModal()}}>Save and Continue</div>
+            <div
+              className="button close-button"
+              onClick={() => props.closeModal()}
+            >
+              Close
+            </div>
+            <div
+              className="button save-button"
+              onClick={() => {
+                dispatch(updatePortfolio(portfolioTransaction));
+                props.closeModal();
+              }}
+            >
+              Save and Continue
+            </div>
           </Buttons>
         </ModalBody>
       </ModalContainer>
