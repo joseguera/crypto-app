@@ -68,16 +68,16 @@ const SmallGraph = (props) => {
   let graphData = [];
   let graphIndex = [];
 
-  props.graphData.reduce((acc, curr, idx) => {
+  props.graphData.forEach((curr, idx) => {
     if (idx % 2 === 0 && idx % 3 === 0) {
-      graphData = [...acc, curr];
+      graphData = [...graphData, curr];
     }
     return graphData;
   });
 
-  props.graphData.reduce((acc, curr, idx) => {
+  props.graphData.forEach((curr, idx) => {
     if (idx % 2 === 0 && idx % 3 === 0) {
-      graphIndex = [...acc, idx];
+      graphIndex = [...graphIndex, idx];
     }
     return graphIndex;
   });
