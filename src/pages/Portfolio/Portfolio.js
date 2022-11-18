@@ -21,19 +21,25 @@ const Portfolio = () => {
 
   async function getData() {
     try {
-      const noDuplicates = portfolio.reduce((acc, el) => {
+      console.log("yolo")
+      let noDuplicates = portfolio.reduce((acc, el) => {
         if (acc[el.id]) return acc;
-        return { ...acc, [el.id]: el };
+        return { ...acc, [el.id]: {...el} };
       }, {});
 
       const pricedCoinsObject = await Promise.all(
         Object.keys(noDuplicates).map(async (key) => {
-          const data = await fetch(
-            `https://api.coingecko.com/api/v3/coins/${key}`
-          );
-          const json = await data.json();
-          noDuplicates[key].currentPrice =
-            json.market_data.current_price[currency];
+          try {
+            const data = await fetch(
+              `https://api.coingecko.com/api/v3/coins/${key}`
+            );
+            const json = await data.json();
+            console.log(json);
+            noDuplicates[key].currentPrice =
+              json.market_data.current_price[currency];
+          } catch (err) {
+            console.log(err, noDuplicates[key]);
+          } 
         })
       );
 
@@ -70,7 +76,7 @@ const Portfolio = () => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profile, portfolio, currency]);
+  }, [portfolio, currency]);
 
   let min = 1;
   let max = 100;
