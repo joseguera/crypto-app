@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { roundToNumber, setCurrency } from "util/numberUtil";
 import {
@@ -23,7 +23,7 @@ export default function TableContent(props) {
   const { isLoading, coins } = props;
   const hasCoins = !isLoading && coins;
   const loaders = Array.apply(null, Array(25)).map(function () {});
-  
+
   return (
     <>
       {hasCoins

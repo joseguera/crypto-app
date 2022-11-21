@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Categories } from "components";
 import {
   TableFiltersHolder,
@@ -7,6 +7,19 @@ import {
 } from "./TableFilters.styles";
 
 export default function TableFilters(props) {
+  const [open, setOpen] = useState(false);
+
+  const setCoinsPerPage = () => {
+    setOpen(!open);
+    // props.setCoinsPerPage()
+  };
+
+  const handleSelection = (e) => {
+    console.log(e);
+    setOpen(!open);
+    // props.setCoinsPerPage()
+  };
+
   return (
     <TableFiltersHolder>
       <TableFilterCategories>
