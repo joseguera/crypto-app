@@ -94,7 +94,8 @@ export default function CoinTable(props) {
   };
 
   const showResults = () => {
-    console.log("add 10");
+    const items = itemsPerPage;
+    setItemsPerPage(items + 10)
   };
 
   const coinsLength = coins && coins.length;
