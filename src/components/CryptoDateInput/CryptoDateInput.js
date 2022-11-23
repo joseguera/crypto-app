@@ -10,6 +10,7 @@ export default function CryptoDateInput(props) {
     const date = e.target.value;
     const cryptoDate = date.split("-")
     const newDate = `${cryptoDate[2]}-${cryptoDate[1]}-${cryptoDate[0]}`;
+    console.log(cryptoDate, newDate)
     setInputValue(date);
     props.setDate(newDate)
   }
