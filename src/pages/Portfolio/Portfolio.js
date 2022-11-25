@@ -54,6 +54,8 @@ const Portfolio = () => {
             symbol: json.symbol,
             image: json.image.thumb,
             purchase_date: purchaseDate,
+            market_cap: json.market_data.market_cap[currency],
+            total_volume: json.market_data.total_volume[currency],
             total: coin.amount * json.market_data.current_price[currency],
             previousPrice: json.market_data.current_price[currency],
             currentPrice: noDuplicates[coin.id].currentPrice,
