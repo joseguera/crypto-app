@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
   TableFilters,
   TableContent,
@@ -13,6 +14,7 @@ export default function CoinTable(props) {
   const currency = useSelector((state) => state.currency.value);
   const [coins, setCoins] = useState(null);
   const [category, setActiveCategory] = useState({ name: "", prop: "" });
+  const [itemsPerPage, setItemsPerPage] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
   const [filterSelection, setFilterSelection] = useState({
     marketCapRank: {
@@ -48,7 +50,7 @@ export default function CoinTable(props) {
     try {
       setIsLoading(true);
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}${category.prop}&order=market_cap_desc&per_page=25&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}${category.prop}&order=market_cap_desc&per_page=${itemsPerPage}&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
       setCoins(data);
       setIsLoading(false);
@@ -72,8 +74,14 @@ export default function CoinTable(props) {
   };
 
   const setCategory = (category) => {
-    const prop = (category === "") ? "" : `&category=${category}`
+    const prop = category === "" ? "" : `&category=${category}`;
     setActiveCategory({ name: category, prop });
+  };
+
+  const setCoinsPerPage = (e) => {
+    e.preventDefault();
+    const items = itemsPerPage;
+    itemsPerPage(items + e);
   };
 
   const getFilteredCoins = (list, direction) => {
@@ -85,42 +93,56 @@ export default function CoinTable(props) {
     });
   };
 
+  const showResults = () => {
+    console.log("add 10");
+  };
+
+  const coinsLength = coins && coins.length;
+
   useEffect(() => {
     getCoins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currency, category]);
+  }, [currency, category, itemsPerPage]);
 
   return (
     <>
-      <TableGrid>
-        <TableFilters setCategory={setCategory} category={category.name} />
-        {Object.values(filterSelection).map((filter) => {
-          return filter.upArrow ? (
-            <TableHeader
-              key={filter.id}
-              id={filter.id}
-              onClick={() => setFilterArrowDirection(filter.id)}
-            >
-              {filter.title} {<FilterArrowUp />}
-            </TableHeader>
-          ) : (
-            <TableHeader
-              key={filter.id}
-              id={filter.id}
-              onClick={() => setFilterArrowDirection(filter.id)}
-            >
-              {filter.title} {<FilterArrowDown />}
-            </TableHeader>
-          );
-        })}
-        <div>24h Volume/Market Cap</div>
-        <div>Circulating/Total Supply</div>
-        <div>Last 7d</div>
-        <TableContent
-          coins={coins}
-          isLoading={isLoading}
-        />
-      </TableGrid>
+      <InfiniteScroll
+        dataLength={coinsLength}
+        next={showResults}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+      >
+        <TableGrid>
+          <TableFilters
+            setCategory={setCategory}
+            category={category.name}
+            setCoinsPerPage={setCoinsPerPage}
+          />
+          {Object.values(filterSelection).map((filter) => {
+            return filter.upArrow ? (
+              <TableHeader
+                key={filter.id}
+                id={filter.id}
+                onClick={() => setFilterArrowDirection(filter.id)}
+              >
+                {filter.title} {<FilterArrowUp />}
+              </TableHeader>
+            ) : (
+              <TableHeader
+                key={filter.id}
+                id={filter.id}
+                onClick={() => setFilterArrowDirection(filter.id)}
+              >
+                {filter.title} {<FilterArrowDown />}
+              </TableHeader>
+            );
+          })}
+          <div>24h Volume/Market Cap</div>
+          <div>Circulating/Total Supply</div>
+          <div>Last 7d</div>
+          <TableContent coins={coins} isLoading={isLoading} />
+        </TableGrid>
+      </InfiniteScroll>
     </>
   );
 }

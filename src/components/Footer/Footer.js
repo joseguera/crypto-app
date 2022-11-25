@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   FooterHolder,
   DesktopFooter,
@@ -6,6 +7,7 @@ import {
   ImageLink,
   IconImage,
   MobileIconImage,
+  styledLink,
 } from "./Footer.styles";
 import github from "../../images/github.svg";
 import linkedIn from "../../images/linkedin.svg";
@@ -35,12 +37,12 @@ const Footer = (props) => {
           </ImageLink>
         </DesktopFooter>
         <MobileFooter>
-          <ImageLink>
+          <Link to={`/`} style={styledLink}>
             <MobileIconImage src={overview} alt="Overview" />
-          </ImageLink>
-          <ImageLink>
+          </Link>
+          <Link to={`/portfolio`} style={styledLink}>
             <MobileIconImage src={portfolio} alt="Portfolio" />
-          </ImageLink>
+          </Link>
           <ImageLink>
             <MobileIconImage src={summary} alt="Summary" />
           </ImageLink>

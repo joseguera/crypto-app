@@ -92,3 +92,7 @@ export const MobileIconImage = styled.img`
     display: none;
   }
 `;
+
+export const styledLink = {
+  textDecoration: "none",
+};
