@@ -4,7 +4,7 @@ import {
   CryptoTitleIcon,
   UpArrowGreen,
   DownArrowRed,
-  ProgressBarTable,
+  ProgressBarNav,
 } from "components";
 import {
   roundToNumber,
@@ -38,6 +38,12 @@ export default function CryptoAsset(props) {
     0
   );
 
+  const max_supply = props.profile.max_supply === null ? 1 : props.profile.max_supply;
+
+  const circSupplyvsMaxSupply = (props.profile.circulating_supply * 100) / max_supply;
+
+  console.log(props.profile.circulating_supply, props.profile.max_supply)
+
   return (
     <CryptoAssetHolder>
       <CryptoTitleIcon profile={props.profile} image={props.image} />
@@ -68,17 +74,14 @@ export default function CryptoAsset(props) {
                   {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}
                   %
                 </Field>
-                <ProgressBarTable
-                  values={{
-                    first: props.profile.total_volume,
-                    second: props.profile.market_cap,
-                  }}
+                <ProgressBarNav
+                  percentPortfolio={marketCapvsTotalVolume}
                 />
               </DataPoint>
               <DataPoint>
                 <Label>Circ Supply vs Max Supply:</Label>
                 <Field>
-                  {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}
+                  {circSupplyvsMaxSupply}
                 </Field>
               </DataPoint>
             </DataPoint>

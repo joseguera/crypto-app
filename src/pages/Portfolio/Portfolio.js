@@ -32,8 +32,14 @@ const Portfolio = () => {
               `https://api.coingecko.com/api/v3/coins/${key}`
             );
             const json = await data.json();
+            console.log(json.market_data.circulating_supply)
+            console.log(json.market_data.max_supply)
             noDuplicates[key].currentPrice =
               json.market_data.current_price[currency];
+            noDuplicates.circulating_supply =
+              json.market_data.circulating_supply;
+            noDuplicates.max_supply =
+              json.market_data.max_supply;
           } catch (err) {
             console.log(err, noDuplicates[key]);
           } 
@@ -59,6 +65,8 @@ const Portfolio = () => {
             total: coin.amount * json.market_data.current_price[currency],
             previousPrice: json.market_data.current_price[currency],
             currentPrice: noDuplicates[coin.id].currentPrice,
+            circulating_supply: noDuplicates.circulating_supply,
+            max_supply: noDuplicates.max_supply,
             isBigger:
               json.market_data.current_price[currency] >
               noDuplicates[coin.id].currentPrice,
