@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: [
-    { id: "bitcoin", date: "02-02-2022", amount: 2.6 },
-    { id: "ethereum", date: "02-02-2022", amount: 1 }
+    { id: "bitcoin", date: "12-12-2018", amount: 12 },
+    { id: "ethereum", date: "12-12-2018", amount: 12 }
   ]
 };
 

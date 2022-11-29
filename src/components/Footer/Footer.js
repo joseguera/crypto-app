@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FooterHolder,
@@ -7,16 +7,25 @@ import {
   ImageLink,
   IconImage,
   MobileIconImage,
-  styledLink,
 } from "./Footer.styles";
 import github from "../../images/github.svg";
 import linkedIn from "../../images/linkedin.svg";
 import overview from "../../images/mobile/overview-light-mobile.svg";
+import overviewSelected from "../../images/mobile/overview-green-mobile.svg";
 import portfolio from "../../images/mobile/portfolio-light-mobile.svg";
+import portfolioSelected from "../../images/mobile/portfolio-green-mobile.svg";
 import summary from "../../images/mobile/summary-light-mobile.svg";
+import summarySelected from "../../images/mobile/summary-green-mobile.svg";
 import search from "../../images/mobile/search-light-mobile.svg";
+import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
 const Footer = (props) => {
+  const [active, setActive] = useState(false);
+
+  const selected = () => {
+    setActive(!active);
+  }
+
   return (
     <>
       <FooterHolder>
@@ -37,17 +46,17 @@ const Footer = (props) => {
           </ImageLink>
         </DesktopFooter>
         <MobileFooter>
-          <Link to={`/`} style={styledLink}>
-            <MobileIconImage src={overview} alt="Overview" />
+          <Link to="/">
+            <MobileIconImage onClick={selected} src={active ? overviewSelected : overview} alt="Overview" />
           </Link>
-          <Link to={`/portfolio`} style={styledLink}>
-            <MobileIconImage src={portfolio} alt="Portfolio" />
+          <Link to="/portfolio">
+            <MobileIconImage onClick={selected} src={active ? portfolioSelected : portfolio} alt="Portfolio" />
           </Link>
           <ImageLink>
-            <MobileIconImage src={summary} alt="Summary" />
+            <MobileIconImage onClick={selected} src={active ? summarySelected : summary} alt="Summary" />
           </ImageLink>
           <ImageLink>
-            <MobileIconImage src={search} alt="Search" />
+            <MobileIconImage onClick={selected} src={active ? searchSelected : search} alt="Search" />
           </ImageLink>
         </MobileFooter>
       </FooterHolder>

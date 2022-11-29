@@ -1,22 +1,47 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { CryptoTitleIcon } from "components";
 import {
-    CryptoAssetHolder,
-    AssetDetailsHolder,
-    MarketPriceHolder,
-    YourCoinHolder,
-    SectionTitle,
-    Title,
-    SectionContent,
-    DataPoint,
-    Label,
-    Field
+  CryptoTitleIcon,
+  UpArrowGreen,
+  DownArrowRed,
+  ProgressBarNav,
+} from "components";
+import {
+  roundToNumber,
+  setCurrency,
+  formatCurrency,
+  relativeChange,
+} from "util/numberUtil";
+import {
+  CryptoAssetHolder,
+  AssetDetailsHolder,
+  MarketPriceHolder,
+  YourCoinHolder,
+  SectionTitle,
+  Title,
+  SectionContent,
+  DataPoint,
+  Label,
+  Field,
+  PercentChange,
 } from "./CryptoAsset.styles";
-import { setCurrency } from './../../util/numberUtil';
 
 export default function CryptoAsset(props) {
   const currency = useSelector((state) => state.currency.value);
+  const priceChange24h = relativeChange(
+    props.profile.previousPrice,
+    props.profile.currentPrice
+  );
+
+  const marketCapvsTotalVolume = roundToNumber(
+    (props.profile.totalVolume * 100) / props.profile.marketCap,
+    0
+  );
+
+  const maxSupply = props.profile.maxSupply ? props.profile.maxSupply : -1;
+
+  const circSupplyvsMaxSupply =
+    (props.profile.circulatingSupply * 100) / maxSupply;
 
   return (
     <CryptoAssetHolder>
@@ -29,18 +54,34 @@ export default function CryptoAsset(props) {
           <SectionContent>
             <DataPoint>
               <Label>Current price:</Label>
-              <Field>{setCurrency(currency)}{props.profile.currentPrice}</Field>
+              <Field>
+                {setCurrency(currency)}
+                {formatCurrency(roundToNumber(props.profile.currentPrice, 2))}
+              </Field>
               <DataPoint>
                 <Label>Price change 24h:</Label>
-                <Field></Field>
+                <PercentChange>
+                  {priceChange24h > 0 ? <UpArrowGreen /> : <DownArrowRed />}
+                  <div className={priceChange24h > 0 ? "gain" : "loss"}>
+                    {roundToNumber(priceChange24h, 2)}%
+                  </div>
+                </PercentChange>
               </DataPoint>
               <DataPoint>
                 <Label>Market Cap vs Volume:</Label>
-                <Field></Field>
+                <Field>
+                  {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}
+                  %
+                </Field>
+                <ProgressBarNav percentPortfolio={marketCapvsTotalVolume} />
               </DataPoint>
               <DataPoint>
                 <Label>Circ Supply vs Max Supply:</Label>
-                <Field></Field>
+                <Field>
+                  {circSupplyvsMaxSupply >= 0
+                    ? `${roundToNumber(circSupplyvsMaxSupply, 0)}%`
+                    : "∞"}
+                </Field>
               </DataPoint>
             </DataPoint>
           </SectionContent>
@@ -52,19 +93,28 @@ export default function CryptoAsset(props) {
           <SectionContent>
             <DataPoint>
               <Label>Coin Amount:</Label>
-              <Field></Field>
+              <Field>{props.profile.coinAmount}</Field>
             </DataPoint>
             <DataPoint>
               <Label>Amount Value:</Label>
-              <Field>{setCurrency(currency)}{props.profile.total}</Field>
+              <Field>
+                {setCurrency(currency)}
+                {formatCurrency(roundToNumber(props.profile.total, 2))}
+              </Field>
             </DataPoint>
             <DataPoint>
               <Label>Amount Price Change Since Purchase:</Label>
-              <Field></Field>
+              <PercentChange>
+                {props.profile.priceChange > 0 ? <UpArrowGreen /> : <DownArrowRed />}
+                <div className={props.profile.priceChange > 0 ? "gain" : "loss"}>
+                  {setCurrency(currency)}
+                  {formatCurrency(roundToNumber(props.profile.priceChange, 2))}
+                </div>
+              </PercentChange>
             </DataPoint>
             <DataPoint>
               <Label>Purchase Date:</Label>
-              <Field></Field>
+              <Field>{props.profile.purchase_date}</Field>
             </DataPoint>
           </SectionContent>
         </YourCoinHolder>

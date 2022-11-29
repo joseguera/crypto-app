@@ -14,14 +14,12 @@ const Portfolio = () => {
   const [modal, setModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
   const portfolio = useSelector((state) => state.portfolio.value);
-
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
 
   async function getData() {
     try {
-      console.log("yolo")
       let noDuplicates = portfolio.reduce((acc, el) => {
         if (acc[el.id]) return acc;
         return { ...acc, [el.id]: {...el} };
@@ -34,9 +32,10 @@ const Portfolio = () => {
               `https://api.coingecko.com/api/v3/coins/${key}`
             );
             const json = await data.json();
-            console.log(json);
             noDuplicates[key].currentPrice =
               json.market_data.current_price[currency];
+            noDuplicates[key].circulatingSupply = json.market_data.circulating_supply;
+            noDuplicates[key].maxSupply = json.market_data.max_supply;
           } catch (err) {
             console.log(err, noDuplicates[key]);
           } 
@@ -48,15 +47,24 @@ const Portfolio = () => {
           const data = await fetch(
             `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${coin.date}`
           );
+          const date = coin.date.split("-");
+          const purchaseDate = `${date[1]}-${date[0]}-${date[2]}`
           const json = await data.json();
           return {
             id: json.id,
             name: json.name,
             symbol: json.symbol,
             image: json.image.thumb,
+            purchase_date: purchaseDate,
+            coinAmount: coin.amount,
+            marketCap: json.market_data.market_cap[currency],
+            totalVolume: json.market_data.total_volume[currency],
             total: coin.amount * json.market_data.current_price[currency],
             previousPrice: json.market_data.current_price[currency],
             currentPrice: noDuplicates[coin.id].currentPrice,
+            priceChange: (noDuplicates[coin.id].currentPrice - json.market_data.current_price[currency]) * coin.amount,
+            circulatingSupply: noDuplicates[coin.id].circulatingSupply,
+            maxSupply: noDuplicates[coin.id].maxSupply,
             isBigger:
               json.market_data.current_price[currency] >
               noDuplicates[coin.id].currentPrice,

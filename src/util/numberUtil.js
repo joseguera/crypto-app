@@ -19,6 +19,10 @@ export const timeConverter = (t) => {
   });
 };
 
+export const relativeChange = (initialValue, finalValue) => {
+  return (finalValue - initialValue) / initialValue;
+}
+
 export const UnixConverter = (t) => {
   return dayjs
     .unix(t)

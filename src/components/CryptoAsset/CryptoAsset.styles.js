@@ -33,6 +33,7 @@ export const Title = styled.p`
 
 export const SectionContent = styled.div`
   background: ${({ theme }) => theme.colors.background};
+  font-size: 15px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -40,6 +41,12 @@ export const SectionContent = styled.div`
   padding-right: 45px;
   padding-left: 45px;
   gap: 45px;
+  .gain {
+    color: #1AD761;
+  }
+  .loss {
+    color: #FE1040
+  }
 `;
 
 export const DataPoint = styled.div`
@@ -54,7 +61,16 @@ export const Label = styled.p`
   line-height: 100%;
 `;
 
-export const Field = styled.p`
+export const Field = styled.div`
   color: rgb(0, 255, 95);
   font-size: 15px;
+  .neg-field
 `;
+
+export const PercentChange = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`;
+
