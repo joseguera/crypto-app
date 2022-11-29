@@ -34,15 +34,14 @@ export default function CryptoAsset(props) {
   );
 
   const marketCapvsTotalVolume = roundToNumber(
-    (props.profile.total_volume * 100) / props.profile.market_cap,
+    (props.profile.totalVolume * 100) / props.profile.marketCap,
     0
   );
 
-  const max_supply = props.profile.max_supply === null ? 1 : props.profile.max_supply;
+  const maxSupply = props.profile.maxSupply ? props.profile.maxSupply : -1;
 
-  const circSupplyvsMaxSupply = (props.profile.circulating_supply * 100) / max_supply;
-
-  console.log(props.profile.circulating_supply, props.profile.max_supply)
+  const circSupplyvsMaxSupply =
+    (props.profile.circulatingSupply * 100) / maxSupply;
 
   return (
     <CryptoAssetHolder>
@@ -74,14 +73,14 @@ export default function CryptoAsset(props) {
                   {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}
                   %
                 </Field>
-                <ProgressBarNav
-                  percentPortfolio={marketCapvsTotalVolume}
-                />
+                <ProgressBarNav percentPortfolio={marketCapvsTotalVolume} />
               </DataPoint>
               <DataPoint>
                 <Label>Circ Supply vs Max Supply:</Label>
                 <Field>
-                  {circSupplyvsMaxSupply}
+                  {circSupplyvsMaxSupply >= 0
+                    ? `${roundToNumber(circSupplyvsMaxSupply, 0)}%`
+                    : "∞"}
                 </Field>
               </DataPoint>
             </DataPoint>
@@ -94,7 +93,7 @@ export default function CryptoAsset(props) {
           <SectionContent>
             <DataPoint>
               <Label>Coin Amount:</Label>
-              <Field></Field>
+              <Field>{props.profile.coinAmount}</Field>
             </DataPoint>
             <DataPoint>
               <Label>Amount Value:</Label>
@@ -105,7 +104,13 @@ export default function CryptoAsset(props) {
             </DataPoint>
             <DataPoint>
               <Label>Amount Price Change Since Purchase:</Label>
-              <Field></Field>
+              <PercentChange>
+                {props.profile.priceChange > 0 ? <UpArrowGreen /> : <DownArrowRed />}
+                <div className={props.profile.priceChange > 0 ? "gain" : "loss"}>
+                  {setCurrency(currency)}
+                  {formatCurrency(roundToNumber(props.profile.priceChange, 2))}
+                </div>
+              </PercentChange>
             </DataPoint>
             <DataPoint>
               <Label>Purchase Date:</Label>
