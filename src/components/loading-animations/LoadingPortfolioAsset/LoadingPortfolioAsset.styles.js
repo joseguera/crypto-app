@@ -12,43 +12,41 @@ const shimmer = keyframes`
 export const Wrapper = styled.div`
     background: ${({ theme }) => theme.colors.background};
     border-radius: 10px;
-    height: 70px;
-    width: 100%;
-    display: grid;
-    justify-items: stretch;
+    display: flex;
+    gap: 24px;
+    width: 1296px;
+    height: 250px;
     align-items: center;
-    column-gap: 5px;
-    row-gap: 10px;
-    grid-column: 1 / 10;
-    grid-template-areas:
-        'main main main main main main main main main';
+    justify-content: center;
+    margin: 0 auto;
 `;
 
 const InnerWrapper = styled.div`
     border-radius: 10px;
-    height: 16px;
-    width: 100%;
     background: linear-gradient(to right, ${({ theme }) => theme.colors.shimer1} 4%, ${({ theme }) => theme.colors.shimer2} 25%, ${({ theme }) => theme.colors.shimer1} 36%);
     background-size: 1000px;
     animation: ${shimmer} 2s infinite;
 `;
 
-export const RankSkeleton = styled(InnerWrapper)`
-  width: 44px;
+export const IconSkeleton = styled(InnerWrapper)`
+  border-radius: 10px;
+  height: 220px;
+  width: 190px;
 `;
 
-export const NameSkeleton = styled(InnerWrapper)`
-  width: 275px;
+export const AssetHolderSkeleton = styled.div`
+  display: flex;
+  flex-direction: column;  
 `;
 
-export const PriceSkeleton = styled(InnerWrapper)`
-  width: 83px;
+export const AssetSkeleton = styled(InnerWrapper)`
+  height: 59px;
+  width: 1050px;
 `;
 
-export const PercentSkeleton = styled(InnerWrapper)`
-  width: 216px;
+export const AssetGap = styled.div`
+  height: 50px;
+  width: 1050px;
 `;
 
-export const GraphSkeleton = styled(InnerWrapper)`
-  width: 115px;
-`;
+
