@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { PortfolioModal, CryptoAsset } from "components";
+import { PortfolioModal, CryptoAsset, LoadingPortfolioAsset } from "components";
 import {
   MainDiv,
   AssetBtnHolder,
@@ -22,7 +22,7 @@ const Portfolio = () => {
     try {
       let noDuplicates = portfolio.reduce((acc, el) => {
         if (acc[el.id]) return acc;
-        return { ...acc, [el.id]: {...el} };
+        return { ...acc, [el.id]: { ...el } };
       }, {});
 
       const pricedCoinsObject = await Promise.all(
@@ -34,11 +34,12 @@ const Portfolio = () => {
             const json = await data.json();
             noDuplicates[key].currentPrice =
               json.market_data.current_price[currency];
-            noDuplicates[key].circulatingSupply = json.market_data.circulating_supply;
+            noDuplicates[key].circulatingSupply =
+              json.market_data.circulating_supply;
             noDuplicates[key].maxSupply = json.market_data.max_supply;
           } catch (err) {
             console.log(err, noDuplicates[key]);
-          } 
+          }
         })
       );
 
@@ -48,7 +49,7 @@ const Portfolio = () => {
             `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${coin.date}`
           );
           const date = coin.date.split("-");
-          const purchaseDate = `${date[1]}-${date[0]}-${date[2]}`
+          const purchaseDate = `${date[1]}-${date[0]}-${date[2]}`;
           const json = await data.json();
           return {
             id: json.id,
@@ -62,7 +63,10 @@ const Portfolio = () => {
             total: coin.amount * json.market_data.current_price[currency],
             previousPrice: json.market_data.current_price[currency],
             currentPrice: noDuplicates[coin.id].currentPrice,
-            priceChange: (noDuplicates[coin.id].currentPrice - json.market_data.current_price[currency]) * coin.amount,
+            priceChange:
+              (noDuplicates[coin.id].currentPrice -
+                json.market_data.current_price[currency]) *
+              coin.amount,
             circulatingSupply: noDuplicates[coin.id].circulatingSupply,
             maxSupply: noDuplicates[coin.id].maxSupply,
             isBigger:
@@ -98,39 +102,34 @@ const Portfolio = () => {
   return (
     <>
       {isLoading && <div>Loading...</div>}
-      {hasCoinProfile && (
-        <MainDiv>
-          <AssetContainer>
-            <AssetBtnHolder onClick={() => openModal()}>
-              <AssetBtnText>Add Asset</AssetBtnText>
-            </AssetBtnHolder>
-            <TitleHolder>
-              <Title>Your Assets</Title>
-            </TitleHolder>
-            {modal && (
-              <PortfolioModal
-                closeModal={openModal}
-              />
-            )}
-            {profile.map((pro) => {
-              return (
-                <CryptoAsset
-                  key={`${pro.id}${keyNumber}`}
-                  profile={pro}
-                  image={pro.image}
-                />
-              );
-            })}
-          </AssetContainer>
-        </MainDiv>
-      )}
+      <MainDiv>
+        <AssetContainer>
+          <AssetBtnHolder onClick={() => openModal()}>
+            <AssetBtnText>Add Asset</AssetBtnText>
+          </AssetBtnHolder>
+          <TitleHolder>
+            <Title>Your Assets</Title>
+          </TitleHolder>
+          {hasCoinProfile ? (
+            <>
+              {modal && <PortfolioModal closeModal={openModal} />}
+              {profile.map((pro) => {
+                return (
+                  <CryptoAsset
+                    key={`${pro.id}${keyNumber}`}
+                    profile={pro}
+                    image={pro.image}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <LoadingPortfolioAsset />
+          )}
+        </AssetContainer>
+      </MainDiv>
     </>
   );
 };
 
 export default Portfolio;
-
-
-
-
-// dispatch(updatePortfolio(portfolioTransaction)

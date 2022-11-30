@@ -58,31 +58,30 @@ export default function CryptoAsset(props) {
                 {setCurrency(currency)}
                 {formatCurrency(roundToNumber(props.profile.currentPrice, 2))}
               </Field>
-              <DataPoint>
-                <Label>Price change 24h:</Label>
-                <PercentChange>
-                  {priceChange24h > 0 ? <UpArrowGreen /> : <DownArrowRed />}
-                  <div className={priceChange24h > 0 ? "gain" : "loss"}>
-                    {roundToNumber(priceChange24h, 2)}%
-                  </div>
-                </PercentChange>
               </DataPoint>
               <DataPoint>
-                <Label>Market Cap vs Volume:</Label>
-                <Field>
-                  {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}
-                  %
-                </Field>
-                <ProgressBarNav percentPortfolio={marketCapvsTotalVolume} />
+              <Label>Price change 24h:</Label>
+              <PercentChange>
+                {priceChange24h > 0 ? <UpArrowGreen /> : <DownArrowRed />}
+                <div className={priceChange24h > 0 ? "gain" : "loss"}>
+                  {roundToNumber(priceChange24h, 2)}%
+                </div>
+              </PercentChange>
               </DataPoint>
               <DataPoint>
-                <Label>Circ Supply vs Max Supply:</Label>
-                <Field>
-                  {circSupplyvsMaxSupply >= 0
-                    ? `${roundToNumber(circSupplyvsMaxSupply, 0)}%`
-                    : "∞"}
-                </Field>
+              <Label>Market Cap vs Volume:</Label>
+              <Field>
+                {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}%
+              </Field>
+              <ProgressBarNav percentPortfolio={`${marketCapvsTotalVolume}%`} />
               </DataPoint>
+              <DataPoint>
+              <Label>Circ Supply vs Max Supply:</Label>
+              <Field>
+                {circSupplyvsMaxSupply >= 0
+                  ? `${roundToNumber(circSupplyvsMaxSupply, 0)}%`
+                  : "∞"}
+              </Field>
             </DataPoint>
           </SectionContent>
         </MarketPriceHolder>
@@ -105,8 +104,14 @@ export default function CryptoAsset(props) {
             <DataPoint>
               <Label>Amount Price Change Since Purchase:</Label>
               <PercentChange>
-                {props.profile.priceChange > 0 ? <UpArrowGreen /> : <DownArrowRed />}
-                <div className={props.profile.priceChange > 0 ? "gain" : "loss"}>
+                {props.profile.priceChange > 0 ? (
+                  <UpArrowGreen />
+                ) : (
+                  <DownArrowRed />
+                )}
+                <div
+                  className={props.profile.priceChange > 0 ? "gain" : "loss"}
+                >
                   {setCurrency(currency)}
                   {formatCurrency(roundToNumber(props.profile.priceChange, 2))}
                 </div>
