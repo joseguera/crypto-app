@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   BarGraph,
@@ -8,7 +8,7 @@ import {
   DateButtons,
   GraphTitle,
   SideArrow,
-  LoadingWheel
+  LoadingWheel,
 } from "components";
 import {
   GraphGrid,
@@ -99,46 +99,51 @@ export default function Graph(props) {
   const hasData = () => labels.length && prices.length;
 
   const hasGraph = !isLoading && labels && volumeLabels;
-  const lineGraphTitle = (cryptoName) === "bitcoin" ? "BTC" : "ETH";
-  const barGraphTitle = (cryptoName) === "bitcoin" ? "BTC Volume" : "ETH Volume";
+  const lineGraphTitle = cryptoName === "bitcoin" ? "BTC" : "ETH";
+  const barGraphTitle = cryptoName === "bitcoin" ? "BTC Volume" : "ETH Volume";
 
   const showLineGraph = lineGraph ? "visible" : "not-visible";
   const showBarGraph = barGraph ? "visible" : "not-visible";
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
-      {hasGraph && hasData() && (
-        <>
-          <CryptoDropDown setCryptoName={setCryptoName} />
-          <GraphGrid>
-            <SideArrow direction="left" switchGraph={switchGraph} />
-            <GraphCell className={showLineGraph}>
-              <GraphHeader>
-                <GraphTitle cryptoName={lineGraphTitle} />
-                <DateButtonHolder>
-                  <DateButtons setDateRange={setLineDateRange} />
-                </DateButtonHolder>
-              </GraphHeader>
-              <ChartHolder>
+      <>
+        <CryptoDropDown setCryptoName={setCryptoName} />
+        <GraphGrid>
+          <SideArrow direction="left" switchGraph={switchGraph} />
+          <GraphCell className={showLineGraph}>
+            <GraphHeader>
+              <GraphTitle cryptoName={lineGraphTitle} />
+              <DateButtonHolder>
+                <DateButtons setDateRange={setLineDateRange} />
+              </DateButtonHolder>
+            </GraphHeader>
+            <ChartHolder>
+              {hasGraph && hasData() ? (
                 <LineGraph labels={labels} prices={prices} />
-              </ChartHolder>
-            </GraphCell>
-            <GraphCell className={showBarGraph}>
-              <GraphHeader>
-                <GraphTitle cryptoName={barGraphTitle} />
-                <DateButtonHolder>
-                  <DateButtons setDateRange={setBarDateRange} />
-                </DateButtonHolder>
-              </GraphHeader>
-              <ChartHolder>
-                {(!isLoading) ? <BarGraph labels={volumeLabels} prices={volumePrices} /> : <LoadingWheel />}
-              </ChartHolder>
-            </GraphCell>
-            <SideArrow direction="right" switchGraph={switchGraph} />
-          </GraphGrid>
-        </>
-      )}
+              ) : (
+                <LoadingWheel />
+              )}
+            </ChartHolder>
+          </GraphCell>
+          <GraphCell className={showBarGraph}>
+            <GraphHeader>
+              <GraphTitle cryptoName={barGraphTitle} />
+              <DateButtonHolder>
+                <DateButtons setDateRange={setBarDateRange} />
+              </DateButtonHolder>
+            </GraphHeader>
+            <ChartHolder>
+              {hasGraph && hasData() ? (
+                <BarGraph labels={volumeLabels} prices={volumePrices} />
+              ) : (
+                <LoadingWheel />
+              )}
+            </ChartHolder>
+          </GraphCell>
+          <SideArrow direction="right" switchGraph={switchGraph} />
+        </GraphGrid>
+      </>
     </>
   );
 }
