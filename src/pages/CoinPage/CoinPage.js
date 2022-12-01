@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   CryptoSummary,
@@ -9,6 +9,7 @@ import {
   CryptoLinks,
   CryptoExchange,
   CoinPageGraph,
+  LoadingCoinPage,
 } from "components";
 import {
   CoinPageMain,
@@ -45,48 +46,57 @@ export default function CoinPage(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
-    const hasCoinProfile = !isLoading && profile;
+  const hasCoinProfile = !isLoading && profile;
 
-    return (
-      <>
-        {isLoading && <div>Loading...</div>}
-        {hasCoinProfile && (
-          <CoinPageMain>
-            <SummaryHolder>
-              <PageTitle>
-                <PageText>Your Summary</PageText>
-              </PageTitle>
-              <SummaryContainer>
-                <CryptoSummary profile={profile} />
-                <CryptoMarketSummary
-                  profile={profile}
-                />
-                <MarketDataSummary
-                  profile={profile}
-                />
-              </SummaryContainer>
-            </SummaryHolder>
-            <DescriptionHolder>
-              <CoinPageDescription profile={profile} />
-              <CryptoLinks
-                siteLinks={profile.links.blockchain_site}
-                selectedTheme={props.selectedTheme}
-              />
-            </DescriptionHolder>
-            <GraphHolder>
-              <CryptoExchange
-                cryptoName={profile.symbol}
-                currentPrice={profile.market_data.current_price[currency]}
-              />
-              <GraphContainer>
-                <CoinPageGraph
-                  cryptoName={profile.name.toLowerCase()}
+  return (
+    <>
+      {hasCoinProfile && (
+        <CoinPageMain>
+          <SummaryHolder>
+            <PageTitle>
+              <PageText>Your Summary</PageText>
+            </PageTitle>
+            <SummaryContainer>
+              {hasCoinProfile ? (
+                <>
+                  <CryptoSummary profile={profile} />
+                  <CryptoMarketSummary profile={profile} />
+                  <MarketDataSummary profile={profile} />
+                </>
+              ) : (
+                <LoadingCoinPage />
+              )}
+            </SummaryContainer>
+          </SummaryHolder>
+          <DescriptionHolder>
+            {hasCoinProfile && (
+              <>
+                <CoinPageDescription profile={profile} />
+                <CryptoLinks
+                  siteLinks={profile.links.blockchain_site}
                   selectedTheme={props.selectedTheme}
                 />
-              </GraphContainer>
-            </GraphHolder>
-          </CoinPageMain>
-        )}
-      </>
-    );
+              </>
+            )}
+          </DescriptionHolder>
+          <GraphHolder>
+            {hasCoinProfile && (
+              <>
+                <CryptoExchange
+                  cryptoName={profile.symbol}
+                  currentPrice={profile.market_data.current_price[currency]}
+                />
+                <GraphContainer>
+                  <CoinPageGraph
+                    cryptoName={profile.name.toLowerCase()}
+                    selectedTheme={props.selectedTheme}
+                  />
+                </GraphContainer>
+              </>
+            )}
+          </GraphHolder>
+        </CoinPageMain>
+      )}
+    </>
+  );
 }
