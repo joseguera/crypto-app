@@ -7,7 +7,7 @@ export const SummaryHolder = styled.div`
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
-  width: 60%;
+  width: 774.6px;
   background: ${({ theme }) => theme.colors.background};
   height: 50px;
   border-bottom-left-radius: 10px;

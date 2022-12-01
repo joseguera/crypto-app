@@ -7,7 +7,7 @@ import {
   AssetGap,
 } from "./LoadingPortfolioAsset.styles";
 
-const LoadingTableRow = (props) => {
+const LoadingPortfolioAsset = (props) => {
   return (
     <>
       <Wrapper>
@@ -32,4 +32,4 @@ const LoadingTableRow = (props) => {
   );
 };
 
-export default LoadingTableRow;
+export default LoadingPortfolioAsset;
