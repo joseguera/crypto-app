@@ -6,7 +6,7 @@ import {
   TableFilters,
   TableContent,
   FilterArrowDown,
-  FilterArrowUp,
+  FilterArrowUp
 } from "components";
 import { TableGrid, TableHeader } from "./CoinTable.styles";
 
@@ -95,7 +95,7 @@ export default function CoinTable(props) {
 
   const showResults = () => {
     const items = itemsPerPage;
-    setItemsPerPage(items + 10)
+    setItemsPerPage(items + 25)
   };
 
   const coinsLength = coins && coins.length;

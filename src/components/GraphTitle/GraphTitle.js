@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import axios from "axios";
 import dayjs from "dayjs";
 import { formatCurrency, setCurrency } from "util/numberUtil";
+import { LoadingGraphTitle } from "components";
 import { ChartTitle, TitleText, TitleAmount } from "./GraphTitle.styles";
 
 export default function GraphTitle(props) {
@@ -48,17 +49,20 @@ export default function GraphTitle(props) {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
-      {hasMarketData && (
-        <ChartTitle>
-          <TitleText>{props.cryptoName}</TitleText>
-          <TitleAmount>
-            {setCurrency(currency)}
-            {formatCurrency(price, 2)}
-          </TitleAmount>
-          <TitleText>{timeConverter(lastUpdated)}</TitleText>
-        </ChartTitle>
-      )}
+      <ChartTitle>
+        {hasMarketData ? (
+          <>
+            <TitleText>{props.cryptoName}</TitleText>
+            <TitleAmount>
+              {setCurrency(currency)}
+              {formatCurrency(price, 2)}
+            </TitleAmount>
+            <TitleText>{timeConverter(lastUpdated)}</TitleText>
+          </>
+        ) : (
+          <LoadingGraphTitle />
+        )}
+      </ChartTitle>
     </>
   );
 }
