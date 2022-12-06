@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -23,44 +23,54 @@ ChartJS.register(
   Legend
 );
 
-export const barOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-  scales: {
-    yAxis: {
-      axis: "y",
-      display: false,
-    },
-    xAxis: {
-      axis: "x",
-      grid: {
-        display: false,
-        drawTicks: false,
-        borderWidth: 0,
-      },
-      ticks: {
-        maxRotation: 0,
-        minRotation: 0,
-        autoSkip: true,
-        maxTicksLimit: 7,
-        padding: 10,
-        align: "start",
-      },
-    },
-  },
-};
-
 export default function BarGraph(props) {
-  const chartRef = useRef(null);
+  const windowWidth = window.innerWidth;
 
+  const font = (windowWidth > 786) ? 12 : 9;
+  const ticks = (windowWidth > 786) ? 7 : 5;
+
+  const chartRef = useRef(null);
+  const [fontSize, setFontSize] = useState(font);
+  const [ticksLimit, setTicksLimit] = useState(ticks);
+
+  const barOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        display: false,
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      yAxis: {
+        axis: "y",
+        display: false,
+      },
+      xAxis: {
+        axis: "x",
+        grid: {
+          display: false,
+          drawTicks: false,
+          borderWidth: 0,
+        },
+        ticks: {
+          maxRotation: 0,
+          minRotation: 0,
+          autoSkip: true,
+          maxTicksLimit: ticksLimit,
+          padding: 10,
+          align: "start",
+          font: {
+            size: fontSize,
+          }
+        },
+      },
+    },
+  };
+  
   function createDarkGradient(ctx) {
     if (!ctx) {
       return ''

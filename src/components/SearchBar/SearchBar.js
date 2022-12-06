@@ -18,7 +18,6 @@ export default function SearchBar(props) {
   const [cryptoList, setCryptoList] = useState([]);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError] = useState(false);
 
   const getCryptoCurrencies = async () => {
     try {

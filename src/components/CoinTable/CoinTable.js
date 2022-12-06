@@ -44,7 +44,6 @@ export default function CoinTable(props) {
       upArrow: false,
     },
   });
-  const [hasError] = useState(false);
 
   const getCoins = async () => {
     try {

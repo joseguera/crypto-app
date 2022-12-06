@@ -23,63 +23,75 @@ ChartJS.register(
   Legend
 );
 
-export const lineOptions = {
-  responsive: true,
-  elements: {
-    point: {
-      radius: 0,
-    },
-  },
-  plugins: {
-    legend: {
-      position: "top",
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-  scales: {
-    yAxis: {
-      axis: "y",
-      display: false,
-    },
-    xAxis: {
-      axis: "x",
-      grid: {
-        display: false,
-        drawTicks: false,
-        borderWidth: 0,
-      },
-      ticks: {
-        maxRotation: 0,
-        minRotation: 0,
-        autoSkip: true,
-        maxTicksLimit: 7,
-        padding: 10,
-        align: "start",
-      },
-    },
-  },
-};
-
 export default function LineGraph(props) {
 
+  const windowWidth = window.innerWidth;
+
+  const font = (windowWidth > 786) ? 12 : 9;
+  const ticks = (windowWidth > 786) ? 7 : 5;
+
+  // console.log(w)
+
   const initialData = {
-  labels: props.labels,
-  datasets: [
-    {
-      data: props.prices,
-      tension: 0.4,
-      fill: true,
-      backgroundColor: "rgba(75,192,192,0.2)",
-      borderColor: "rgba(75,192,192,1)"
-    }
-  ]
-};
-  const [data, setData] = useState(initialData);
-  const [borderColor, setBorderColor] = useState("rgba(75,192,192,1)")
+    labels: props.labels,
+    datasets: [
+      {
+        data: props.prices,
+        tension: 0.4,
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+      },
+    ],
+  };
   const chartRef = useRef(null);
+
+  const [data, setData] = useState(initialData);
+  const [fontSize, setFontSize] = useState(font);
+  const [ticksLimit, setTicksLimit] = useState(ticks);
+
+  const lineOptions = {
+    responsive: true,
+    elements: {
+      point: {
+        radius: 0,
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top",
+        display: false,
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      yAxis: {
+        axis: "y",
+        display: false,
+      },
+      xAxis: {
+        axis: "x",
+        grid: {
+          display: false,
+          drawTicks: false,
+          borderWidth: 0,
+        },
+        ticks: {
+          maxRotation: 0,
+          minRotation: 0,
+          autoSkip: true,
+          maxTicksLimit: ticksLimit,
+          padding: 10,
+          align: "start",
+          font: {
+            size: fontSize,
+          },
+        },
+      },
+    },
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function getData(cRef) {
@@ -94,10 +106,10 @@ export default function LineGraph(props) {
               backgroundColor: createDarkGradient(chart.ctx),
               borderColor: getBorderColor(),
               fill: {
-                target: "origin"
-              }
-            }
-          ]
+                target: "origin",
+              },
+            },
+          ],
         };
         setData(newData);
       }
@@ -132,7 +144,7 @@ export default function LineGraph(props) {
 
   useEffect(() => {
     getData(chartRef);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.prices, props.labels]);
 
   const lineChart = <Line ref={chartRef} data={data} options={lineOptions} />;

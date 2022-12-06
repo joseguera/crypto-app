@@ -4,7 +4,6 @@ import { SearchBarStyle, InputType } from "./CryptoDateInput.styles";
 export default function CryptoDateInput(props) {
 
   const [inputValue, setInputValue] = useState(props.todaysDate);
-  const [hasError] = useState(false);
 
   const datePicker = (e) => {
     const date = e.target.value;

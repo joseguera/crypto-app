@@ -6,7 +6,6 @@ import {
 
 export default function CryptoAmountInput(props) {
   const [inputValue, setInputValue] = useState("");
-  const [hasError] = useState(false);
 
   const handleChange = (e) => {
     const input = (typeof parseFloat(e.target.value) === "number") && e.target.value;

@@ -29,7 +29,6 @@ export default function CoinNavSummary(props) {
   const currency = useSelector((state) => state.currency.value);
   const [market, setMarket] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
 
   const getMarketData = async () => {
     try {
