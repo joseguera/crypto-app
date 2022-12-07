@@ -8,7 +8,7 @@ export const NavBarDiv = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   @media only screen and ${breakpoint.device.xs} {
-    width: 90%;
+    height: 75px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 90%;

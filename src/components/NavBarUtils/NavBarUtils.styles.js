@@ -6,4 +6,5 @@ export const UtilContainer = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   gap: 27px;
+  margin-right: 29px;
 `;
