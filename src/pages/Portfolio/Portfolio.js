@@ -16,7 +16,6 @@ const Portfolio = () => {
   const portfolio = useSelector((state) => state.portfolio.value);
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError] = useState(false);
 
   async function getData() {
     try {

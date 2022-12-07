@@ -31,7 +31,6 @@ export default function Graph(props) {
   const [lineGraph, setLineGraph] = useState(true);
   const [barGraph, setBarGraph] = useState(false);
   const [isLoading] = useState(false);
-  const [hasError] = useState(false);
 
   const getLineGraphData = async () => {
     try {

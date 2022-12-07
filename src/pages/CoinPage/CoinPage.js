@@ -26,7 +26,6 @@ export default function CoinPage(props) {
   const currency = useSelector((state) => state.currency.value);
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError] = useState(false);
 
   const getCoinInfo = async () => {
     try {

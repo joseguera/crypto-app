@@ -13,7 +13,6 @@ export default function GraphTitle(props) {
   const [totalVolume, setTotalVolume] = useState(0);
   const [lastUpdated, setLastUpdated] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function getMarketData() {

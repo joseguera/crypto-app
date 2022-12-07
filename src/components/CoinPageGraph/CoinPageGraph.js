@@ -78,7 +78,6 @@ export default function CoinPageGraph(props) {
   const [labels, setLabels] = useState([]);
   const [prices, setPrices] = useState([]);
   const [isLoading] = useState(false);
-  const [hasError] = useState(false);
 
   const getGraphData = async () => {
     try {
