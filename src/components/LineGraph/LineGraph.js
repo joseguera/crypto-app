@@ -30,8 +30,6 @@ export default function LineGraph(props) {
   const font = (windowWidth > 786) ? 12 : 9;
   const ticks = (windowWidth > 786) ? 7 : 5;
 
-  // console.log(w)
-
   const initialData = {
     labels: props.labels,
     datasets: [
