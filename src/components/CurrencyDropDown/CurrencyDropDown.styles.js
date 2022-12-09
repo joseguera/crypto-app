@@ -12,7 +12,8 @@ export const DropDown = styled.div`
     height: 36px;
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    height: 50px;
+    width: 108px;
   }
   @media only screen and ${breakpoint.device.lg} {
     height: 50px;
@@ -30,7 +31,9 @@ export const DropDownHolder = styled.div`
     gap: 8px;
   }
   @media only screen and ${breakpoint.device.sm} {
-  
+    height: 50px;
+    width: 108px;
+    gap: 12px;
   }
   @media only screen and ${breakpoint.device.lg} {
     height: 50px;
@@ -80,7 +83,7 @@ export const CurrencyNameHolder = styled.div`
     gap: 4px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    gap: 6px;
   }
   @media only screen and ${breakpoint.device.lg} {
     gap: 6px;
@@ -100,7 +103,9 @@ export const Symbol = styled.div`
     margin-left: 4px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    margin-left: 10px;
+    height: 26px;
+    width: 26px;
   }
   @media only screen and ${breakpoint.device.lg} {
     margin-left: 10px;
@@ -119,7 +124,8 @@ export const CurrencySymbol = styled.p`
     font-weight: 400;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    font-size: 14px;
+    font-weight: 400;
   }
   @media only screen and ${breakpoint.device.lg} {
     font-size: 14px;
@@ -139,7 +145,8 @@ export const Currency = styled.p`
     font-weight: 400;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    font-size: 14px;
+    font-weight: 400;
   }
   @media only screen and ${breakpoint.device.lg} {
     font-size: 14px;
@@ -157,7 +164,8 @@ export const Selected = styled.p`
     font-weight: 400;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    font-size: 14px;
+    font-weight: 400;
   }
   @media only screen and ${breakpoint.device.lg} {
     font-size: 14px;
@@ -173,7 +181,8 @@ export const CurrencyName = styled.p`
     font-weight: 400;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    font-size: 14px;
+    font-weight: 400;
   }
   @media only screen and ${breakpoint.device.lg} {
     font-size: 14px;

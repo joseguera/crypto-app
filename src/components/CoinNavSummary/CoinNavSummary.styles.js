@@ -12,13 +12,14 @@ export const SummaryHolder = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   @media only screen and ${breakpoint.device.xs} {
-
+    background: none;
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 774.6px;
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 
@@ -77,15 +78,42 @@ export const TotalVolumeHolder = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 11px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    font-size: inherit;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: inherit;
+  }
 `;
 
 export const IconHolder = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 11px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    font-size: inherit;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: inherit;
+  }
 `;
 
 export const Icon = styled.img`
-  width: 20px;
   vertical-align: text-bottom;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 14.66px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    height: 20px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    height: 20px;
+    width: 20px;
+  }
 `;

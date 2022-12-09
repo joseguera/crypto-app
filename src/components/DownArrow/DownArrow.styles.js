@@ -16,7 +16,10 @@ export const DownwardArrow = styled.div`
     border-top: 3px solid #06d554;
   }
   @media only screen and ${breakpoint.device.sm} {
-    
+    margin-left: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #06d554;
   }
   @media only screen and ${breakpoint.device.lg} {
     margin-left: 5px;
