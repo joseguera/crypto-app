@@ -1,22 +1,45 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const DropDown = styled.div`
   border: none;
   cursor: pointer;
-  height: 50px;
-  width: 108px;
   position: relative;
   background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 76px;
+    height: 36px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    height: 50px;
+    width: 108px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    height: 50px;
+    width: 108px;
+  }
 `;
 
 export const DropDownHolder = styled.div`
   display: flex;
-  height: 50px;
-  width: 108px;
   place-items: center;
-  gap: 12px;
   border-radius: 10px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 76px;
+    height: 36px;
+    gap: 8px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    height: 50px;
+    width: 108px;
+    gap: 12px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    height: 50px;
+    width: 108px;
+    gap: 12px;
+  }
 `;
 
 export const DropDownList = styled.div`
@@ -56,7 +79,15 @@ export const CurrencyOptions = styled.div`
 export const CurrencyNameHolder = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
+  @media only screen and ${breakpoint.device.xs} {
+    gap: 4px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    gap: 6px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    gap: 6px;
+  }
 `;
 
 export const Symbol = styled.div`
@@ -64,11 +95,23 @@ export const Symbol = styled.div`
   display: grid;
   justify-items: center;
   align-content: center;
-  margin-left: 10px;
-  height: 26px;
-  width: 26px;
   border-radius: 50%;
   background: #191b1f;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 22px;
+    width: 22px;
+    margin-left: 4px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    margin-left: 10px;
+    height: 26px;
+    width: 26px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    margin-left: 10px;
+    height: 26px;
+    width: 26px;
+  }
 `;
 
 export const CurrencySymbol = styled.p`
@@ -76,13 +119,39 @@ export const CurrencySymbol = styled.p`
   font-weight: bold;
   line-height: 0px;
   color: #1AD761;
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 11px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
+
+
 
 export const Currency = styled.p`
   font-size: 14px;
   font-weight: bold;
   line-height: 0px;
   color: ${({ theme }) => theme.colors.text};
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 11px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
 
 export const Selected = styled.p`
@@ -90,9 +159,33 @@ export const Selected = styled.p`
   font-weight: bold;
   line-height: 0px;
   color: #1AD761;
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 11px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
 
 export const CurrencyName = styled.p`
   font-size: 14px;
   font-weight: bold;
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 11px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;

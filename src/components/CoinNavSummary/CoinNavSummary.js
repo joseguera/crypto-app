@@ -75,7 +75,7 @@ export default function CoinNavSummary(props) {
                 {formatCurrency(market.data.total_volume[currency])}
               </div>
               <ProgressBarVol>
-                <ProgressBarNav />
+                <ProgressBarNav percent={`${roundToNumber((market.data.total_volume[currency] * 100) / market.data.total_market_cap[currency], 0)}%`} />
               </ProgressBarVol>
             </TotalVolumeHolder>
             <IconHolder>
