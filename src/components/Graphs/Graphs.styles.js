@@ -49,7 +49,7 @@ export const GraphCell = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   @media only screen and ${breakpoint.device.xs} {
     width: 270px;
-    height: 215px;
+    height: 198px;
     padding: 13px;
   }
   @media only screen and ${breakpoint.device.sm} {
@@ -85,7 +85,7 @@ export const DateButtonHolder = styled.div`
     display: grid;
     position: absolute;
     left: 44px;
-    top: 244px;
+    top: 230px;
     width: fit-content;
   }
   @media only screen and ${breakpoint.device.sm} {
@@ -103,7 +103,7 @@ export const DateButtonHolder = styled.div`
 export const ChartHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     width: 234px;
-    height: 132px;
+    height: 110px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 520px;
