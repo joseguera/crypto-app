@@ -13,6 +13,7 @@ export const SummaryHolder = styled.div`
   border-bottom-right-radius: 10px;
   @media only screen and ${breakpoint.device.xs} {
     background: none;
+    gap: 7px;
   }
   @media only screen and ${breakpoint.device.sm} {
     background: ${({ theme }) => theme.colors.background};

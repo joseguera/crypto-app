@@ -44,21 +44,41 @@ export const DropDownHolder = styled.div`
 
 export const DropDownList = styled.div`
   position: absolute;
-  top: 50px;
-  width: 108px;
   background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
   z-index: 10;
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
   animation: 0.1s ease-in-out 0s 1 normal none running iQQUbp;
   display: grid;
+  @media only screen and ${breakpoint.device.xs} {
+    top: 36px;
+    width: 76px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    top: 50px;
+    width: 108px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    top: 50px;
+    width: 108px;
+  }
 `;
 
 export const CurrencyItemHolder = styled.div`
-  height: 50px;
-  width: 108px;
   display: grid;
   border-radius: 10px;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 36px;
+    width: 76px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    height: 50px;
+    width: 108px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    height: 50px;
+    width: 108px;
+  }
 `;
 
 export const CurrencyItem = styled.div`

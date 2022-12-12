@@ -5,8 +5,16 @@ export const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 25px;
-  width: 1291px;
   margin: 0 auto;
+  @media only screen and ${breakpoint.device.xs} {
+
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1291px;
+  }
 `;
 
 export const Overview = styled.div`

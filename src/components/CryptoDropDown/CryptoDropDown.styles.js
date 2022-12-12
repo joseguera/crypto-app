@@ -6,7 +6,7 @@ export const DropDownHolder = styled.div`
   cursor: pointer;
   width: 200px;
   @media only screen and ${breakpoint.device.xs} {
-    margin-left: 45px;
+    margin-left: 48.5px;
   }
   @media only screen and ${breakpoint.device.sm} {
     margin-left: 0px;
