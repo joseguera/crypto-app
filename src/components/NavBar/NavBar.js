@@ -1,6 +1,6 @@
 import { NavBarButtons, NavBarUtils } from "components";
 import CoinNavSummary from "./../CoinNavSummary/CoinNavSummary";
-import { NavDiv, NavBarDiv, NavBarContainer } from "./NavBar.styles";
+import { NavDiv, NavBarDiv, NavBarCoinDiv, NavBarContainer } from "./NavBar.styles";
 
 const NavBar = (props) => {
   return (
@@ -13,9 +13,9 @@ const NavBar = (props) => {
           </NavDiv>
         </NavBarDiv>
       </NavBarContainer>
-      <NavBarDiv>
+      <NavBarCoinDiv>
         <CoinNavSummary />
-      </NavBarDiv>
+      </NavBarCoinDiv>
     </>
   );
 };

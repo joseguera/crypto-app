@@ -7,7 +7,7 @@ export const MainDiv = styled.div`
   margin-top: 25px;
   margin: 0 auto;
   @media only screen and ${breakpoint.device.xs} {
-
+    
   }
   @media only screen and ${breakpoint.device.sm} {
 
