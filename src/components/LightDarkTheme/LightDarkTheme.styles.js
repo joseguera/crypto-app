@@ -14,6 +14,8 @@ export const ThemeHolder = styled.div`
   }
   @media only screen and ${breakpoint.device.sm} {
     display: grid;
+    width: 50px;
+    height: 50px;
   }
   @media only screen and ${breakpoint.device.lg} {
     display: grid;
@@ -30,7 +32,8 @@ export const ThemeIcon = styled.img`
     height: 10px
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    width: 24px;
+    height: 20px
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 24px;

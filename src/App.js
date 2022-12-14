@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar, Footer } from "components";
 import { Home, Portfolio, CoinPage } from "pages";
 import { MainApp } from "App.styles";
-import LoadingWheel from "components/loading-animations/LoadingWheel/LoadingWheel";
 
 
 export default function App() {

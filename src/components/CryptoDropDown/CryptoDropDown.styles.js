@@ -50,7 +50,7 @@ export const DropDownList = styled.div`
   z-index: 10;
   @media only screen and ${breakpoint.device.xs} {
     left: 48.5px;
-    top: 199px;
+    top: 159px;
   }
   @media only screen and ${breakpoint.device.sm} {
     left: 75.96px;

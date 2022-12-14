@@ -8,13 +8,14 @@ export const NavBarDiv = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   @media only screen and ${breakpoint.device.xs} {
-    background-color: ${({ theme }) => theme.colors.appBackground};
+    background: ${({ theme }) => theme.colors.appBackground};
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 90%;
+    background: none;
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 1291px;
+    background: none;
   }
 `;
 
@@ -25,13 +26,14 @@ export const NavBarCoinDiv = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   @media only screen and ${breakpoint.device.xs} {
-    background-color: ${({ theme }) => theme.colors.lineGraphBorder};
+    background: ${({ theme }) => theme.colors.lineGraphBorder};
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 90%;
+    background: none;
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 1291px;
+    background: none;
   }
 `;
 
@@ -43,7 +45,7 @@ export const NavBarContainer = styled.div`
     background: ${({ theme }) => theme.colors.appBackground};
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
     background: ${({ theme }) => theme.colors.background};

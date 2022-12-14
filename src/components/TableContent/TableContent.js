@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { roundToNumber, setCurrency } from "util/numberUtil";
 import {
+  IconHolder,
   Icon,
-  Symbol,
   LinkText,
+  Text,
+  Symbol,
   styledLink,
   PercentCell,
   TableLine,
@@ -33,10 +35,13 @@ export default function TableContent(props) {
                 <div>{coin.market_cap_rank}</div>
                 <div>
                   <Link to={`/coin/${coin.id}`} style={styledLink}>
-                    <Icon src={coin.image} alt={coin.name} />
-                    <LinkText>
-                      {coin.name} (<Symbol>{coin.symbol}</Symbol>)
-                    </LinkText>
+                    <IconHolder>
+                      <Icon src={coin.image} alt={coin.name} />
+                      <LinkText>
+                        <Text>{coin.name}</Text>
+                        <span className="symbol">{coin.symbol}</span>
+                      </LinkText>
+                    </IconHolder>
                   </Link>
                 </div>
                 <div>

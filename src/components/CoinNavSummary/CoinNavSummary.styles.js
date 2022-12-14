@@ -18,6 +18,7 @@ export const SummaryHolder = styled.div`
   }
   @media only screen and ${breakpoint.device.sm} {
     background: ${({ theme }) => theme.colors.background};
+    width: 556.6px;
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 774.6px;
@@ -31,9 +32,11 @@ export const CoinsExchange = styled.div`
   }
   @media only screen and ${breakpoint.device.sm} {
     display: inline-block;
+    font-size: 11px;
   }
   @media only screen and ${breakpoint.device.lg} {
     display: inline-block;
+    font-size: inherit;
   }
 `;
 
@@ -70,9 +73,12 @@ export const TotalMarketCapHolder = styled.div`
   }
   @media only screen and ${breakpoint.device.sm} {
     display: flex;
+    font-size: 11px;
+
   }
   @media only screen and ${breakpoint.device.lg} {
     display: flex;
+    font-size: inherit;
   }
 `;
 
@@ -84,7 +90,7 @@ export const TotalVolumeHolder = styled.div`
     font-size: 11px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    font-size: inherit;
+    font-size: 11px;
   }
   @media only screen and ${breakpoint.device.lg} {
     font-size: inherit;
@@ -99,7 +105,7 @@ export const IconHolder = styled.div`
     font-size: 11px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    font-size: inherit;
+    font-size: 11px;
   }
   @media only screen and ${breakpoint.device.lg} {
     font-size: inherit;
