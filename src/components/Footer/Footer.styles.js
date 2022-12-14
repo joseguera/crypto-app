@@ -2,10 +2,8 @@ import styled from "styled-components";
 import breakpoint from "../styles/breakpoints";
 
 export const FooterHolder = styled.div`
-  // height: 75px;
   display: flex;
   width: 100%;
-  -webkit-box-align: end;
   align-items: end;
 `;
 

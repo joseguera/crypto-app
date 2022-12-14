@@ -4,10 +4,11 @@ import breakpoint from "components/styles/breakpoints";
 export const GraphGrid = styled.div`
 display: flex;
   @media only screen and ${breakpoint.device.xs} {
-    gap: 10px;
+    gap: 15px;
     flex-direction: row;
     flex-flow: row wrap;
     align-items: center;
+    justify-content: center;
     .visible {
       display: flex;
     }
@@ -43,21 +44,24 @@ display: flex;
 export const GraphCell = styled.div`
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   position: relative;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.background};
   @media only screen and ${breakpoint.device.xs} {
-    width: 265px;
-    height: 215px;
+    width: 270px;
+    height: 198px;
+    padding: 13px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 588px;
     height: 359px;
+    padding: 20px;
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 588px;
     height: 359px;
+    padding: 20px;
+
   }
 `;
 
@@ -80,8 +84,8 @@ export const DateButtonHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     display: grid;
     position: absolute;
-    left: 36px;
-    top: 244px;
+    left: 44px;
+    top: 230px;
     width: fit-content;
   }
   @media only screen and ${breakpoint.device.sm} {
@@ -99,7 +103,7 @@ export const DateButtonHolder = styled.div`
 export const ChartHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     width: 234px;
-    height: 132px;
+    height: 110px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 520px;
