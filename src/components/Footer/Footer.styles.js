@@ -34,8 +34,6 @@ export const DesktopFooter = styled.div`
 
 export const MobileFooter = styled.div`
   height: 75px;
-  justify-content: center;
-  align-items: center;
   background: ${({ theme }) => theme.colors.appBackground};
   width: 100%;
   gap: 25px;
@@ -44,12 +42,12 @@ export const MobileFooter = styled.div`
     left: 0px;
     bottom: 0px;
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
   @media only screen and ${breakpoint.device.sm} {
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    display: flex;
+    position: static;
+    display: none;
   }
   @media only screen and ${breakpoint.device.lg} {
     position: static;
@@ -58,7 +56,6 @@ export const MobileFooter = styled.div`
 `;
 
 export const ImageLink = styled.a`
-  padding-top: 8px;
   &:hover {
     cursor: pointer;
   }

@@ -1,8 +1,18 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const TableFiltersHolder = styled.div`
   grid-column: 1 / 10;
   padding-bottom: 17px;
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: unset;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: unset;
+  }
 `;
 
 export const TableFilterCategories = styled.div`
