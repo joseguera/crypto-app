@@ -11,6 +11,8 @@ import { NavLink } from "react-router-dom";
 
 const NavBarButtons = (props) => {
   const themeColor = useSelector((state) => state.theme.value);
+  const search = useSelector((state) => state.search.value);
+  
   const buttonBackground =
     (themeColor)
       ? theme.light.colors.buttonFill
@@ -20,10 +22,12 @@ const NavBarButtons = (props) => {
       ? theme.light.colors.text
       : theme.dark.colors.text;
 
+  console.log(search)
+
   return (
     <>
       <OverviewContainer>
-        <h2>Overview</h2>
+        {search ? <h2>Close</h2> : <h2>Overview</h2>}
       </OverviewContainer>
       <ButtonContainer>
         <NavLink

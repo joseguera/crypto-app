@@ -8,7 +8,7 @@ import {
 import { GlobalStyles } from "./components/styles/Global";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NavBar, Footer } from "components";
-import { Home, Portfolio, CoinPage } from "pages";
+import { Home, Portfolio, CoinPage, SearchMobile } from "pages";
 import { MainApp } from "App.styles";
 
 
@@ -29,6 +29,7 @@ export default function App() {
                 component={(props) => <Home {...props} />}
               />
               <Route path="/portfolio" component={Portfolio} />
+              <Route path="/search" component={SearchMobile} />
               <Route
                 path="/coin/:id"
                 component={(props) => <CoinPage {...props} />}
