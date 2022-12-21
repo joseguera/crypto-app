@@ -27,7 +27,7 @@ const Footer = (props) => {
 
   const selected = () => {
     setActive(!active);
-  }
+  };
 
   return (
     <>
@@ -50,16 +50,32 @@ const Footer = (props) => {
         </DesktopFooter>
         <MobileFooter>
           <Link to="/">
-            <MobileIconImage onClick={selected} src={active ? overviewSelected : overview} alt="Overview" />
+            <MobileIconImage
+              onClick={selected}
+              src={active ? overviewSelected : overview}
+              alt="Overview"
+            />
           </Link>
           <Link to="/portfolio">
-            <MobileIconImage onClick={selected} src={active ? portfolioSelected : portfolio} alt="Portfolio" />
+            <MobileIconImage
+              onClick={selected}
+              src={active ? portfolioSelected : portfolio}
+              alt="Portfolio"
+            />
           </Link>
           <ImageLink>
-            <MobileIconImage onClick={selected} src={active ? summarySelected : summary} alt="Summary" />
+            <MobileIconImage
+              onClick={selected}
+              src={active ? summarySelected : summary}
+              alt="Summary"
+            />
           </ImageLink>
           <Link to="/search">
-            <MobileIconImage onClick={() => dispatch(openSearch())} src={active ? searchSelected : search} alt="Search" />
+            <MobileIconImage
+              onClick={() => dispatch(openSearch())}
+              src={active ? searchSelected : search}
+              alt="Search"
+            />
           </Link>
         </MobileFooter>
       </FooterHolder>

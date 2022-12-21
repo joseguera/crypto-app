@@ -5,10 +5,10 @@ export const UtilContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
   @media only screen and ${breakpoint.device.xs} {
     margin-right: 47px;
     gap: 15px;
+    align-items: center;
   }
   @media only screen and ${breakpoint.device.sm} {
     margin-right: 47px;

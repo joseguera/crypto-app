@@ -1,19 +1,13 @@
+import React from "react";
 import { SearchBar } from "components";
-import cross from "../../images/metro-cross.svg";
-import { MainDiv, Overview, Cross, CrossImg } from "./SearchMobile.styles";
+import { MainDiv } from "./SearchMobile.styles";
 
-const SearchBarMobile = (props) => {
+const SearchMobile = (props) => {
   return (
     <MainDiv>
-      <Overview>
-        <Cross onClick={() => props.closeModal()}>
-          <CrossImg src={cross} alt="close x" />
-        </Cross>
-        <h2>Close</h2>
-      </Overview>
-      <SearchBar />
+      <SearchBar style={{ display: "flex" }} />
     </MainDiv>
   );
 };
 
-export default SearchBarMobile;
+export default SearchMobile;

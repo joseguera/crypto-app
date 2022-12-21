@@ -49,3 +49,22 @@ export const ButtonText = styled.h2`
   font-weight: 600;
   line-height: 0px;
 `;
+
+export const CloseHolder = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const Cross = styled.div`
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+`;
+
+export const CrossImg = styled.img`
+  width: 15px;
+  height: 15px;
+  filter: invert(${({ theme }) => theme.colors.loopIcon}%);
+`;

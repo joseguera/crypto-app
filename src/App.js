@@ -13,8 +13,11 @@ import { MainApp } from "App.styles";
 
 
 export default function App() {
+  const search = useSelector((state) => state.search.value);
   const theme = useSelector((state) => state.theme.value)
   const themeColor = (theme) ? light : dark;
+  const searchPage = search ? "/search" : "/";
+  const searchComponent = search ? SearchMobile : Home;
 
     return (
       <Router>
@@ -29,7 +32,7 @@ export default function App() {
                 component={(props) => <Home {...props} />}
               />
               <Route path="/portfolio" component={Portfolio} />
-              <Route path="/search" component={SearchMobile} />
+              <Route path={searchPage} component={searchComponent} />
               <Route
                 path="/coin/:id"
                 component={(props) => <CoinPage {...props} />}
