@@ -22,6 +22,7 @@ import search from "../../images/mobile/search-light-mobile.svg";
 import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
 const Footer = (props) => {
+  const [active, setActive] = useState(true)
   const [activeButton, setActiveButton] = useState({
     home: false,
     portfolio: false,
@@ -31,18 +32,20 @@ const Footer = (props) => {
   const dispatch = useDispatch();
 
   const selected = (id) => {
+    let active = {};
     if (id === "home") {
-      setActiveButton({ home: true, ...activeButton })
+      active = { home: true, portfolio: false, summary: false, search: false };
     }
     if (id === "portfolio") {
-      setActiveButton({ home: false, portfolio: true, summary: false, search: false })
+      active = { home: false, portfolio: true, summary: false, search: false };
     }
     if (id === "summary") {
-      setActiveButton({ home: false, portfolio: false, summary: true, search: false })
+      active = { home: false, portfolio: false, summary: true, search: false };
     }
     if (id === "search") {
-      setActiveButton({ home: false, portfolio: false, summary: false, search: true })
+      active = { home: false, portfolio: false, summary: false, search: true };
     }
+    setActiveButton(active)
   };
 
   return (
@@ -68,7 +71,7 @@ const Footer = (props) => {
           <Link to="/">
             <MobileIconImage
               id="home"
-              onClick={(e) => selected(e.id)}
+              onClick={(e) => selected(e.target.id)}
               src={activeButton.home ? overviewSelected : overview}
               alt="Overview"
             />
@@ -76,7 +79,7 @@ const Footer = (props) => {
           <Link to="/portfolio">
             <MobileIconImage
               id="portfolio"
-              onClick={(e) => selected(e.id)}
+              onClick={(e) => selected(e.target.id)}
               src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
@@ -94,7 +97,7 @@ const Footer = (props) => {
               id="search"
               onClick={(e) => {
                 dispatch(openSearch())
-                selected(e.id)
+                selected(e.target.id)
               }}
               src={activeButton.search ? searchSelected : search}
               alt="Search"
