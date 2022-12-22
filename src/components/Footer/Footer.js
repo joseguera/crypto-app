@@ -22,11 +22,27 @@ import search from "../../images/mobile/search-light-mobile.svg";
 import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
 const Footer = (props) => {
-  const [active, setActive] = useState(false);
+  const [activeButton, setActiveButton] = useState({
+    home: false,
+    portfolio: false,
+    summary: false,
+    search: false
+  })
   const dispatch = useDispatch();
 
-  const selected = () => {
-    setActive(!active);
+  const selected = (id) => {
+    if (id === "home") {
+      setActiveButton({ home: true, ...activeButton })
+    }
+    if (id === "portfolio") {
+      setActiveButton({ home: false, portfolio: true, summary: false, search: false })
+    }
+    if (id === "summary") {
+      setActiveButton({ home: false, portfolio: false, summary: true, search: false })
+    }
+    if (id === "search") {
+      setActiveButton({ home: false, portfolio: false, summary: false, search: true })
+    }
   };
 
   return (
@@ -51,29 +67,36 @@ const Footer = (props) => {
         <MobileFooter>
           <Link to="/">
             <MobileIconImage
-              onClick={selected}
-              src={active ? overviewSelected : overview}
+              id="home"
+              onClick={(e) => selected(e.id)}
+              src={activeButton.home ? overviewSelected : overview}
               alt="Overview"
             />
           </Link>
           <Link to="/portfolio">
             <MobileIconImage
-              onClick={selected}
-              src={active ? portfolioSelected : portfolio}
+              id="portfolio"
+              onClick={(e) => selected(e.id)}
+              src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
           </Link>
           <ImageLink>
             <MobileIconImage
-              onClick={selected}
-              src={active ? summarySelected : summary}
+              id="summary"
+              onClick={(e) => selected(e.id)}
+              src={activeButton.summary ? summarySelected : summary}
               alt="Summary"
             />
           </ImageLink>
           <Link to="/search">
             <MobileIconImage
-              onClick={() => dispatch(openSearch())}
-              src={active ? searchSelected : search}
+              id="search"
+              onClick={(e) => {
+                dispatch(openSearch())
+                selected(e.id)
+              }}
+              src={activeButton.search ? searchSelected : search}
               alt="Search"
             />
           </Link>

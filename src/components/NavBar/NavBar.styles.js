@@ -57,8 +57,16 @@ export const NavDiv = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 5px;
   align-items: center;
   height: 75px;
   width: 100%;
+  @media only screen and ${breakpoint.device.xs} {
+    gap: 0px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    gap: 5px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    gap: 5px;
+  }
 `;

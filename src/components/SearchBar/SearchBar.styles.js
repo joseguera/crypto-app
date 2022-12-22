@@ -16,7 +16,8 @@ export const SearchBarStyle = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     ${props => props.search ? `
         display: flex;
-        width: 270px;
+    width: 296px;
+
     `: `display: none`};
   }
   @media only screen and ${breakpoint.device.sm} {
@@ -25,7 +26,6 @@ export const SearchBarStyle = styled.div`
   @media only screen and ${breakpoint.device.lg} {
     display: flex;
   }
-
 `;
 
 export const LoopIcon = styled.img`
@@ -54,7 +54,6 @@ export const InputType = styled.input`
 
 export const DropDownList = styled.div`
   position: absolute;
-  width: 392.5px;
   top: 50px;
   left: 0.02px;
   display: flex;
@@ -66,6 +65,15 @@ export const DropDownList = styled.div`
   gap: 2px;
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
   z-index: 10;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 281.5px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 392.5px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 392.5px;
+  }
 `;
 
 export const ListItem = styled.div`
