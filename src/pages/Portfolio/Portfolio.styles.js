@@ -13,7 +13,7 @@ export const MainDiv = styled.div`
   }
   @media only screen and ${breakpoint.device.lg} {
     margin-top: 74px;
-    // width: 1291px;
+    width: 1291px;
   }
 `;
 

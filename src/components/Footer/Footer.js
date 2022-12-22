@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { openSearch } from "../../features/search/searchSlice";
 import { Link } from "react-router-dom";
 import {
   FooterHolder,
@@ -21,10 +23,11 @@ import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
 const Footer = (props) => {
   const [active, setActive] = useState(false);
+  const dispatch = useDispatch();
 
   const selected = () => {
     setActive(!active);
-  }
+  };
 
   return (
     <>
@@ -47,17 +50,33 @@ const Footer = (props) => {
         </DesktopFooter>
         <MobileFooter>
           <Link to="/">
-            <MobileIconImage onClick={selected} src={active ? overviewSelected : overview} alt="Overview" />
+            <MobileIconImage
+              onClick={selected}
+              src={active ? overviewSelected : overview}
+              alt="Overview"
+            />
           </Link>
           <Link to="/portfolio">
-            <MobileIconImage onClick={selected} src={active ? portfolioSelected : portfolio} alt="Portfolio" />
+            <MobileIconImage
+              onClick={selected}
+              src={active ? portfolioSelected : portfolio}
+              alt="Portfolio"
+            />
           </Link>
           <ImageLink>
-            <MobileIconImage onClick={selected} src={active ? summarySelected : summary} alt="Summary" />
+            <MobileIconImage
+              onClick={selected}
+              src={active ? summarySelected : summary}
+              alt="Summary"
+            />
           </ImageLink>
-          <ImageLink>
-            <MobileIconImage onClick={selected} src={active ? searchSelected : search} alt="Search" />
-          </ImageLink>
+          <Link to="/search">
+            <MobileIconImage
+              onClick={() => dispatch(openSearch())}
+              src={active ? searchSelected : search}
+              alt="Search"
+            />
+          </Link>
         </MobileFooter>
       </FooterHolder>
     </>

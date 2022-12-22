@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import {
+  SearchBar,
   ProgressBarNav,
   UpArrowGreen,
   DownArrowRed,
@@ -27,6 +28,7 @@ import {
 
 export default function CoinNavSummary(props) {
   const currency = useSelector((state) => state.currency.value);
+  const search = useSelector((state) => state.search.value);
   const [market, setMarket] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,54 +51,62 @@ export default function CoinNavSummary(props) {
 
   return (
     <>
-      <SummaryHolder>
-        {hasMarketData ? (
-          <>
-            <CoinsExchange>
-              Coins {market.data.active_cryptocurrencies}
-            </CoinsExchange>
-            <CoinsExchange>Exchange {market.data.markets}</CoinsExchange>
-            <TotalMarketCapHolder>
-              <div>&#x25CF;</div>
-              <div>
-                {setCurrency(currency)}
-                {formatCurrency(market.data.total_market_cap[currency])}
-              </div>
-              {market.data.market_cap_change_percentage_24h_usd < 0 ? (
-                <DownArrowRed />
-              ) : (
-                <UpArrowGreen />
-              )}
-            </TotalMarketCapHolder>
-            <TotalVolumeHolder>
-              <VolumeDot>&#x25CF;</VolumeDot>
-              <div>
-                {setCurrency(currency)}
-                {formatCurrency(market.data.total_volume[currency])}
-              </div>
-              <ProgressBarVol>
-                <ProgressBarNav percent={`${roundToNumber((market.data.total_volume[currency] * 100) / market.data.total_market_cap[currency], 0)}%`} />
-              </ProgressBarVol>
-            </TotalVolumeHolder>
-            <IconHolder>
-              <Icon src={bitcoin} alt="bitcoin-icon" />{" "}
-              {roundToNumber(market.data.market_cap_percentage.btc, 0)}%{" "}
-              <ProgressBarNav
-                percent={`${market.data.market_cap_percentage.btc}%`}
-              />
-            </IconHolder>
-            <IconHolder>
-              <Icon src={ethereum} alt="ethereum-icon" />{" "}
-              {roundToNumber(market.data.market_cap_percentage.eth, 0)}%{" "}
-              <ProgressBarNav
-                percent={`${market.data.market_cap_percentage.eth}%`}
-              />
-            </IconHolder>
-          </>
-        ) : (
-          <LoadingCoinNavSummary />
-        )}
-      </SummaryHolder>
+      {!search && (
+        <SummaryHolder>
+          {hasMarketData ? (
+            <>
+              <CoinsExchange>
+                Coins {market.data.active_cryptocurrencies}
+              </CoinsExchange>
+              <CoinsExchange>Exchange {market.data.markets}</CoinsExchange>
+              <TotalMarketCapHolder>
+                <div>&#x25CF;</div>
+                <div>
+                  {setCurrency(currency)}
+                  {formatCurrency(market.data.total_market_cap[currency])}
+                </div>
+                {market.data.market_cap_change_percentage_24h_usd < 0 ? (
+                  <DownArrowRed />
+                ) : (
+                  <UpArrowGreen />
+                )}
+              </TotalMarketCapHolder>
+              <TotalVolumeHolder>
+                <VolumeDot>&#x25CF;</VolumeDot>
+                <div>
+                  {setCurrency(currency)}
+                  {formatCurrency(market.data.total_volume[currency])}
+                </div>
+                <ProgressBarVol>
+                  <ProgressBarNav
+                    percent={`${roundToNumber(
+                      (market.data.total_volume[currency] * 100) /
+                        market.data.total_market_cap[currency],
+                      0
+                    )}%`}
+                  />
+                </ProgressBarVol>
+              </TotalVolumeHolder>
+              <IconHolder>
+                <Icon src={bitcoin} alt="bitcoin-icon" />{" "}
+                {roundToNumber(market.data.market_cap_percentage.btc, 0)}%{" "}
+                <ProgressBarNav
+                  percent={`${market.data.market_cap_percentage.btc}%`}
+                />
+              </IconHolder>
+              <IconHolder>
+                <Icon src={ethereum} alt="ethereum-icon" />{" "}
+                {roundToNumber(market.data.market_cap_percentage.eth, 0)}%{" "}
+                <ProgressBarNav
+                  percent={`${market.data.market_cap_percentage.eth}%`}
+                />
+              </IconHolder>
+            </>
+          ) : (
+            <LoadingCoinNavSummary />
+          )}
+        </SummaryHolder>
+      )}
     </>
   );
 }

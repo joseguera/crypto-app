@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   SearchBarStyle,
@@ -18,6 +19,7 @@ export default function SearchBar(props) {
   const [cryptoList, setCryptoList] = useState([]);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const search = useSelector((state) => state.search.value);
 
   const getCryptoCurrencies = async () => {
     try {
@@ -35,12 +37,6 @@ export default function SearchBar(props) {
   const handleChange = (e) => {
     setInputValue(e.target.value);
     setOpen(!open);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const value = inputValue;
-    setInputValue(value);
   };
 
   const cryptoContainer = useRef(null);
@@ -78,7 +74,7 @@ export default function SearchBar(props) {
 
   return (
     <div className="container" ref={cryptoContainer}>
-      <SearchBarStyle>
+      <SearchBarStyle search={search} >
         <LoopIcon src={searchIcon} alt="search bar" />
         <InputType
           placeholder="Search..."

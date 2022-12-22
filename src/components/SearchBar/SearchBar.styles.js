@@ -1,17 +1,23 @@
 import styled from "styled-components";
 import breakpoint from "components/styles/breakpoints";
 
+export const SearchBarContainer = styled.div`
+
+`;
+
 export const SearchBarStyle = styled.div`
   width: 408px;
   height: 50px;
   background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
-  display: flex;
   gap: 16px;
   align-items: center;
   position: relative;
   @media only screen and ${breakpoint.device.xs} {
-    display: none;
+    ${props => props.search ? `
+        display: flex;
+        width: 270px;
+    `: `display: none`};
   }
   @media only screen and ${breakpoint.device.sm} {
     display: flex;
@@ -19,6 +25,7 @@ export const SearchBarStyle = styled.div`
   @media only screen and ${breakpoint.device.lg} {
     display: flex;
   }
+
 `;
 
 export const LoopIcon = styled.img`
