@@ -7,7 +7,7 @@ import {
   AssetBtnText,
   AssetContainer,
   TitleHolder,
-  Title,
+  Title
 } from "./Portfolio.styles";
 
 const Portfolio = () => {

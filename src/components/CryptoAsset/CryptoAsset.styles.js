@@ -1,9 +1,20 @@
 import styled from "styled-components";
+import breakpoint from "../styles/breakpoints";
 
 export const CryptoAssetHolder = styled.div`
   display: flex;
   gap: 24px;
   align-items: center;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    flex-direction: row;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    flex-direction: row;
+  }
 `;
 
 export const AssetDetailsHolder = styled.div`
@@ -13,16 +24,43 @@ export const AssetDetailsHolder = styled.div`
 
 export const MarketPriceHolder = styled.div`
   display: grid;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const YourCoinHolder = styled.div`
   display: grid;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const SectionTitle = styled.div`
   display: flex;
   gap: 14px;
-  align-items: center;
+  width: 100%;
+  @media only screen and ${breakpoint.device.xs} {
+    align-items: flex-start;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    align-items: center;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    align-items: center;
+  }
 `;
 
 export const Title = styled.p`
@@ -36,16 +74,33 @@ export const SectionContent = styled.div`
   font-size: 15px;
   border-radius: 10px;
   display: flex;
-  align-items: center;
   justify-content: space-around;
-  padding-right: 45px;
-  padding-left: 45px;
-  gap: 45px;
   .gain {
     color: #1AD761;
   }
   .loss {
     color: #FE1040
+  }
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+    gap: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+    align-items: flex-start;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    flex-direction: row;
+    gap: 45px;
+    padding-right: 45px;
+    padding-left: 45px;
+    align-items: center;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    flex-direction: row;
+    gap: 45px;
+    padding-right: 45px;
+    padding-left: 45px;
+    align-items: center;
   }
 `;
 
