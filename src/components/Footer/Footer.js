@@ -61,7 +61,6 @@ const Footer = (props) => {
 
   return (
     <>
-      {console.log(activeButton)}
       <FooterHolder>
         <DesktopFooter>
           <ImageLink
