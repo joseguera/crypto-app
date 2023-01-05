@@ -62,7 +62,7 @@ export const ImageLink = styled.a`
 `;
 
 export const IconImage = styled.img`
-  filter: invert(${({ theme }) => theme.colors.loopIcon}%);
+  filter: invert(${({ theme }) => theme.colors.themeIcon}%);
   height: 40px;
   @media only screen and ${breakpoint.device.xs} {
     display: none;

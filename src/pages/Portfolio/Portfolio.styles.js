@@ -8,6 +8,7 @@ export const MainDiv = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     margin-top: 25px;
     width: 100%;
+    padding-bottom: 85px;
   }
   @media only screen and ${breakpoint.device.sm} {
     margin-top: 74px;
@@ -24,6 +25,8 @@ export const AssetContainer = styled.div`
     gap: 20px;
     justify-content: center;
     align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
   }
   @media only screen and ${breakpoint.device.sm} {
     gap: 35px;

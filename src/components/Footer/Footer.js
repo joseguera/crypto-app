@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openSearch } from "../../features/search/searchSlice";
 import { Link } from "react-router-dom";
 import {
@@ -12,44 +12,56 @@ import {
 } from "./Footer.styles";
 import github from "../../images/github.svg";
 import linkedIn from "../../images/linkedin.svg";
-import overview from "../../images/mobile/overview-light-mobile.svg";
+import overviewLight from "../../images/mobile/overview-light-mobile.svg";
+import overviewDark from "../../images/mobile/overview-dark-mobile.svg";
 import overviewSelected from "../../images/mobile/overview-green-mobile.svg";
-import portfolio from "../../images/mobile/portfolio-light-mobile.svg";
+import portfolioLight from "../../images/mobile/portfolio-light-mobile.svg";
+import portfolioDark from "../../images/mobile/portfolio-dark-mobile.svg";
 import portfolioSelected from "../../images/mobile/portfolio-green-mobile.svg";
-import summary from "../../images/mobile/summary-light-mobile.svg";
+import summaryLight from "../../images/mobile/summary-light-mobile.svg";
+import summaryDark from "../../images/mobile/summary-dark-mobile.svg";
 import summarySelected from "../../images/mobile/summary-green-mobile.svg";
-import search from "../../images/mobile/search-light-mobile.svg";
+import searchLight from "../../images/mobile/search-light-mobile.svg";
+import searchDark from "../../images/mobile/search-dark-mobile.svg";
 import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
 const Footer = (props) => {
-  const [active, setActive] = useState(true)
   const [activeButton, setActiveButton] = useState({
-    home: false,
+    home: true,
     portfolio: false,
     summary: false,
     search: false
   })
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.value);
+
+  const overview = theme ? overviewDark : overviewLight;
+  const portfolio = theme ? portfolioDark : portfolioLight;
+  const summary = theme ? summaryDark : summaryLight;
+  const search = theme ? searchDark : searchLight;
 
   const selected = (id) => {
-    let active = {};
-    if (id === "home") {
-      active = { home: true, portfolio: false, summary: false, search: false };
-    }
-    if (id === "portfolio") {
-      active = { home: false, portfolio: true, summary: false, search: false };
-    }
-    if (id === "summary") {
-      active = { home: false, portfolio: false, summary: true, search: false };
-    }
-    if (id === "search") {
-      active = { home: false, portfolio: false, summary: false, search: true };
-    }
-    setActiveButton(active)
+    setActiveButton((previousData) => {
+      let selectedButton = {};
+      if (id === "home") {
+        selectedButton = { home: true, previousData: false }
+      }
+      if (id === "portfolio") {
+        selectedButton = { portfolio: true, previousData: false }
+      }
+      if (id === "summary") {
+        selectedButton = { summary: true, previousData: false }
+      }
+      if (id === "search") {
+        selectedButton = { search: true, previousData: false }
+      }
+      return selectedButton;
+    });
   };
 
   return (
     <>
+      {console.log(activeButton)}
       <FooterHolder>
         <DesktopFooter>
           <ImageLink
