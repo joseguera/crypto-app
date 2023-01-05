@@ -12,7 +12,7 @@ import {
   Cross,
   CrossImg
 } from "./NavBarButtons.styles";
-import cross from "../../images/metro-cross-white.svg";
+import cross from "../../images/metro-cross-dark.svg";
 
 const NavBarButtons = (props) => {
   const themeColor = useSelector((state) => state.theme.value);
