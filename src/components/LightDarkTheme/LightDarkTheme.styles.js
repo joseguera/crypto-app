@@ -26,7 +26,7 @@ export const ThemeHolder = styled.div`
 
 export const ThemeIcon = styled.img`
   transform: rotate(90deg);
-  filter: invert(${({ theme }) => theme.colors.loopIcon}%);
+  filter: invert(${({ theme }) => theme.colors.themeIcon}%);
   @media only screen and ${breakpoint.device.xs} {
     width: 12px;
     height: 10px
