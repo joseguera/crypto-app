@@ -10,9 +10,10 @@ import {
   OverviewContainer,
   CloseHolder,
   Cross,
-  CrossImg
+  CrossImg,
 } from "./NavBarButtons.styles";
 import cross from "../../images/metro-cross-dark.svg";
+import { faPersonMilitaryToPerson } from "@fortawesome/free-solid-svg-icons";
 
 const NavBarButtons = (props) => {
   const themeColor = useSelector((state) => state.theme.value);
@@ -29,16 +30,19 @@ const NavBarButtons = (props) => {
   return (
     <>
       <OverviewContainer>
-        {search ? (
+        <h2>{props.paths[`${props.id}`].header}</h2>
+        {/* {search ? (
           <CloseHolder>
-            <Cross onClick={() => dispatch(openSearch())}>
-              <CrossImg src={cross} alt="close x" />
-            </Cross>
-            <h2>Close</h2>
+            <h2>
+              <Cross onClick={() => dispatch(openSearch())}>
+                <CrossImg src={cross} alt="close x" />
+              </Cross>
+              Close
+            </h2>
           </CloseHolder>
         ) : (
           <h2>Overview</h2>
-        )}
+        )} */}
       </OverviewContainer>
       <ButtonContainer>
         <NavLink

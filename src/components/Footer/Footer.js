@@ -41,7 +41,7 @@ const Footer = (props) => {
   const search = theme ? searchDark : searchLight;
 
   const selected = (id) => {
-    setActiveButton((previousData) => {
+    setActiveButton(() => {
       let selectedButton = {};
       if (id === "home") {
         selectedButton = { home: true, previousData: false }
@@ -57,6 +57,7 @@ const Footer = (props) => {
       }
       return selectedButton;
     });
+    props.setHeader(id)
   };
 
   return (
