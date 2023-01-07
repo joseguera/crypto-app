@@ -83,7 +83,7 @@ const Footer = (props) => {
           <Link to="/">
             <MobileIconImage
               id="home"
-              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false)); props.setPagePath(e.target.id)}}
               src={activeButton.home ? overviewSelected : overview}
               alt="Overview"
             />
@@ -91,7 +91,7 @@ const Footer = (props) => {
           <Link to="/portfolio">
             <MobileIconImage
               id="portfolio"
-              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false)); props.setPagePath(e.target.id)}}
               src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />

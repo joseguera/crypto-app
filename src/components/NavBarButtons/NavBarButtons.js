@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { openCloseSearch } from "../../features/search/searchSlice";
 import { NavLink } from "react-router-dom";
 import * as theme from "../styles/Theme.styled";
 import {
@@ -12,7 +13,7 @@ import {
 
 const NavBarButtons = (props) => {
   const themeColor = useSelector((state) => state.theme.value);
-
+  const dispatch = useDispatch();
 
   const buttonBackground = themeColor
     ? theme.light.colors.buttonFill
@@ -24,19 +25,7 @@ const NavBarButtons = (props) => {
   return (
     <>
       <OverviewContainer>
-        <h2>{props.paths[`${props.id}`].header}</h2>
-        {/* {search ? (
-          <CloseHolder>
-            <h2>
-              <Cross onClick={() => dispatch(openSearch())}>
-                <CrossImg src={cross} alt="close x" />
-              </Cross>
-              Close
-            </h2>
-          </CloseHolder>
-        ) : (
-          <h2>Overview</h2>
-        )} */}
+        <h2 onClick={() => dispatch(openCloseSearch(false))}>{props.paths[`${props.id}`].header}</h2>
       </OverviewContainer>
       <ButtonContainer>
         <NavLink

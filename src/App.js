@@ -26,6 +26,12 @@ export default function App() {
     (id !== 'undefined') && setId(id)
   }
 
+  const setPagePath = (id) => {
+    console.log(id)
+  }
+
+  console.log(search)
+
   return (
     <Router>
       <ThemeProvider theme={themeColor}>
@@ -41,7 +47,7 @@ export default function App() {
               component={(props) => <CoinPage {...props} />}
             />
           </Switch>
-          <Footer setHeader={setHeader} />
+          <Footer setHeader={setHeader} setPagePath={setPagePath} />
         </MainApp>
       </ThemeProvider>
     </Router>
