@@ -19,7 +19,7 @@ export default function App() {
     home: { clicked: true, path: "/", header: "Overview" },
     portfolio: { clicked: true, path: "/portfolio", header: "Portfolio" },
     summary: { clicked: true, path: "/coin/:id", header: "Summary" },
-    search: { clicked: true, path: "/search", header: "Close" },
+    search: { clicked: true, path: "/search", header: "✖ Close" },
   });
 
   const setHeader = (id) => {

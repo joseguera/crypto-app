@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openSearch } from "../../features/search/searchSlice";
+import { openCloseSearch } from "../../features/search/searchSlice";
 import { Link } from "react-router-dom";
 import {
   FooterHolder,
@@ -83,7 +83,7 @@ const Footer = (props) => {
           <Link to="/">
             <MobileIconImage
               id="home"
-              onClick={(e) => selected(e.target.id)}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
               src={activeButton.home ? overviewSelected : overview}
               alt="Overview"
             />
@@ -91,7 +91,7 @@ const Footer = (props) => {
           <Link to="/portfolio">
             <MobileIconImage
               id="portfolio"
-              onClick={(e) => selected(e.target.id)}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
               src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
@@ -99,7 +99,6 @@ const Footer = (props) => {
           <ImageLink>
             <MobileIconImage
               id="summary"
-              onClick={(e) => selected(e.id)}
               src={activeButton.summary ? summarySelected : summary}
               alt="Summary"
             />
@@ -108,8 +107,8 @@ const Footer = (props) => {
             <MobileIconImage
               id="search"
               onClick={(e) => {
-                dispatch(openSearch())
                 selected(e.target.id)
+                dispatch(openCloseSearch(true))
               }}
               src={activeButton.search ? searchSelected : search}
               alt="Search"

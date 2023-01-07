@@ -1,24 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { openSearch } from "../../features/search/searchSlice";
 import * as theme from "../styles/Theme.styled";
 import {
   ButtonContainer,
   Button,
   ButtonText,
   OverviewContainer,
-  CloseHolder,
-  Cross,
-  CrossImg,
+
 } from "./NavBarButtons.styles";
-import cross from "../../images/metro-cross-dark.svg";
-import { faPersonMilitaryToPerson } from "@fortawesome/free-solid-svg-icons";
 
 const NavBarButtons = (props) => {
   const themeColor = useSelector((state) => state.theme.value);
-  const search = useSelector((state) => state.search.value);
-  const dispatch = useDispatch();
+
 
   const buttonBackground = themeColor
     ? theme.light.colors.buttonFill
