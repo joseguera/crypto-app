@@ -10,7 +10,7 @@ import {
   Title
 } from "./Portfolio.styles";
 
-const Portfolio = () => {
+const Portfolio = (props) => {
   const [modal, setModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
   const portfolio = useSelector((state) => state.portfolio.value);

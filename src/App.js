@@ -25,12 +25,17 @@ export default function App() {
     (id !== 'undefined') && setId(id)
   }
 
+  const selected = (id) => {
+    setId(id);
+  }
+
+
   return (
     <Router>
       <ThemeProvider theme={themeColor}>
         <GlobalStyles />
         <MainApp>
-          <NavBar paths={paths} id={id} setHeader={setHeader} />
+          <NavBar paths={paths} id={id} setHeader={setHeader} selected={selected} />
           <Switch>
             <Route exact path={paths.home.path} component={(props) => <Home {...props} />} />
             <Route path={paths.portfolio.path} component={Portfolio} />
@@ -40,7 +45,7 @@ export default function App() {
               component={(props) => <CoinPage {...props} />}
             />
           </Switch>
-          <Footer setHeader={setHeader} />
+          <Footer setHeader={setHeader} id={id} />
         </MainApp>
       </ThemeProvider>
     </Router>

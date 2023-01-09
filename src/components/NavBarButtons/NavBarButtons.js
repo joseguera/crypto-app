@@ -28,7 +28,7 @@ const NavBarButtons = (props) => {
       <OverviewContainer>
         <>
           {search ? (
-            <h2 onClick={() => { dispatch(openCloseSearch(false)); props.setHeader(search && 'home') }}>{props.paths[`${props.id}`].header}</h2>
+            <h2 onClick={() => { dispatch(openCloseSearch(false)); props.setHeader(search && 'home'); props.selected(search && 'home') }}>{props.paths[`${props.id}`].header}</h2>
           ) : (
             <h2>{props.paths[`${props.id}`].header}</h2>
           )}

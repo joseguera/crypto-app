@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openCloseSearch } from "../../features/search/searchSlice";
 import { Link } from "react-router-dom";
@@ -40,7 +40,8 @@ const Footer = (props) => {
   const portfolio = theme ? portfolioDark : portfolioLight;
   const summary = theme ? summaryDark : summaryLight;
   const searchIcon = theme ? searchDark : searchLight;
-
+  const idKey = props.id;
+  console.log(idKey)
 
 
   const selected = (id) => {
@@ -62,6 +63,12 @@ const Footer = (props) => {
     });
     props.setHeader(id)
   };
+
+  useEffect(() => {
+    if (idKey === "home") {
+      setActiveButton({ home: true, previousData: false })
+    }
+  }, [idKey])
 
   return (
     <>
@@ -86,8 +93,8 @@ const Footer = (props) => {
           <Link to="/">
             <MobileIconImage
               id="home"
-              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false)); props.setPagePath(e.target.id)}}
-              src={activeButton.home || !search ? overviewSelected : overview}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
+              src={activeButton.home ? overviewSelected : overview}
               alt="Overview"
             />
           </Link>
