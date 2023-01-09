@@ -12,6 +12,7 @@ import {
 } from "./NavBarButtons.styles";
 
 const NavBarButtons = (props) => {
+  const search = useSelector((state) => state.search.value);
   const themeColor = useSelector((state) => state.theme.value);
   const dispatch = useDispatch();
 
@@ -25,15 +26,21 @@ const NavBarButtons = (props) => {
   return (
     <>
       <OverviewContainer>
-        <h2 onClick={() => dispatch(openCloseSearch(false))}>{props.paths[`${props.id}`].header}</h2>
+        <>
+          {search ? (
+            <h2 onClick={() => { dispatch(openCloseSearch(false)); props.setHeader(search && 'home') }}>{props.paths[`${props.id}`].header}</h2>
+          ) : (
+            <h2>{props.paths[`${props.id}`].header}</h2>
+          )}
+        </>
       </OverviewContainer>
       <ButtonContainer>
         <NavLink
           exact
           to="/"
           style={(isActive) => ({
-            background: isActive ? buttonBackground : "",
-            color: isActive ? buttonText : "",
+            background: isActive && buttonBackground,
+            color: isActive && buttonText
           })}
           className="nav-link"
         >
@@ -45,8 +52,8 @@ const NavBarButtons = (props) => {
           to="/portfolio"
           className="nav-link"
           style={(isActive) => ({
-            background: isActive ? buttonBackground : "",
-            color: isActive ? buttonText : "",
+            background: isActive && buttonBackground,
+            color: isActive && buttonText
           })}
         >
           <Button>

@@ -8,7 +8,7 @@ const NavBar = (props) => {
       <NavBarContainer>
         <NavBarDiv>
           <NavDiv>
-            <NavBarButtons paths={props.paths} id={props.id} />
+            <NavBarButtons paths={props.paths} id={props.id} setHeader={props.setHeader} />
             <NavBarUtils />
           </NavDiv>
         </NavBarDiv>

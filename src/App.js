@@ -12,42 +12,35 @@ export default function App() {
   const search = useSelector((state) => state.search.value);
   const theme = useSelector((state) => state.theme.value);
   const themeColor = theme ? light : dark;
-  const searchPage = search && "/search";
   const searchComponent = search ? SearchMobile : Home;
   const [id, setId] = useState("home")
   const [paths, setPaths] = useState({
-    home: { clicked: true, path: "/", header: "Overview" },
-    portfolio: { clicked: true, path: "/portfolio", header: "Portfolio" },
-    summary: { clicked: true, path: "/coin/:id", header: "Summary" },
-    search: { clicked: true, path: "/search", header: "✖ Close" },
+    home: { id: "home", clicked: true, path: "/", header: "Overview" },
+    portfolio: { id: "portfolio", clicked: true, path: "/portfolio", header: "Portfolio" },
+    summary: { id: "summary", clicked: true, path: "/coin/:id", header: "Summary" },
+    search: { id: "search", clicked: true, path: "/search", header: "✖ Close" },
   });
 
   const setHeader = (id) => {
     (id !== 'undefined') && setId(id)
   }
 
-  const setPagePath = (id) => {
-    console.log(id)
-  }
-
-  console.log(search)
-
   return (
     <Router>
       <ThemeProvider theme={themeColor}>
         <GlobalStyles />
         <MainApp>
-          <NavBar paths={paths} id={id} />
+          <NavBar paths={paths} id={id} setHeader={setHeader} />
           <Switch>
             <Route exact path={paths.home.path} component={(props) => <Home {...props} />} />
             <Route path={paths.portfolio.path} component={Portfolio} />
-            <Route path={paths.search.path} component={SearchMobile} />
+            <Route path={paths.search.path} component={searchComponent} />
             <Route
               path={paths.summary.path}
               component={(props) => <CoinPage {...props} />}
             />
           </Switch>
-          <Footer setHeader={setHeader} setPagePath={setPagePath} />
+          <Footer setHeader={setHeader} />
         </MainApp>
       </ThemeProvider>
     </Router>
