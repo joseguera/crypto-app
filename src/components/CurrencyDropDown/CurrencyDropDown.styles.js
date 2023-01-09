@@ -5,19 +5,21 @@ export const DropDown = styled.div`
   border: none;
   cursor: pointer;
   position: relative;
-  background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
   @media only screen and ${breakpoint.device.xs} {
     width: 76px;
     height: 36px;
+    background: ${({ theme }) => theme.colors.lineGraphBorder};
   }
   @media only screen and ${breakpoint.device.sm} {
     height: 50px;
     width: 108px;
+    background: ${({ theme }) => theme.colors.buttonFill};
   }
   @media only screen and ${breakpoint.device.lg} {
     height: 50px;
     width: 108px;
+    background: ${({ theme }) => theme.colors.buttonFill};
   }
 `;
 

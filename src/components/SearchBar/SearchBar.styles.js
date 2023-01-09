@@ -8,7 +8,7 @@ export const SearchBarContainer = styled.div`
 export const SearchBarStyle = styled.div`
   width: 408px;
   height: 50px;
-  background: ${({ theme }) => theme.colors.buttonFill};
+  background: ${({ theme }) => theme.colors.searchBar};
   border-radius: 10px;
   gap: 16px;
   align-items: center;

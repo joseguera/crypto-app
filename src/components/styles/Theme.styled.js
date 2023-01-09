@@ -14,13 +14,16 @@ export const light = {
       lineGraphFill: "#F4F3F1",
       border: "hsl(0, 0%, 87%)",
       buttonFill: "#F7F7F7",
+      searchBar: "#D3D0C9",
       barFill: "#2C2F36",
       shimer1: "#E0DED7",
       shimer2: "#F7F7F7",
       portfolioText: "#2C2F36",
       portfolioButton: "#1AD761",
       portfolioBackground: "#FFFFFF",
-      datePicker: "0%"
+      datePicker: "0%",
+      sideArrow: "#D3D0C9",
+      mobileFooter: "#D3D0C9"
     },
   };
   
@@ -40,12 +43,15 @@ export const light = {
       lineGraphFill: "#1C1E24",
       border: "hsl(0, 0%, 78%)",
       buttonFill: "#2C2F36",
+      searchBar: "#2C2F36",
       barFill: "#F7F7F7",
       shimer1: "#1F2128",
       shimer2: "#2C2F36",
       portfolioText: "#1AD761",
       portfolioButton: "#1AD761",
       portfolioBackground: "#FFFFFF",
-      datePicker: "100%"
+      datePicker: "100%",
+      sideArrow: "#FFFFFF",
+      mobileFooter: "#2C2F36"
     }
   };

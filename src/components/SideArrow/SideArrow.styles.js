@@ -6,7 +6,7 @@ export const NextArrow = styled.div`
   height: 0px;
   border-width: 10px;
   border-style: solid;
-  border-color: transparent rgb(255, 255, 255) transparent transparent;
+  border-color: transparent ${({ theme }) => theme.colors.sideArrow} transparent transparent;
   display: none;
   @media only screen and ${breakpoint.device.xs} {
     display: inline-block;
