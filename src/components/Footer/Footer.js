@@ -41,8 +41,6 @@ const Footer = (props) => {
   const summary = theme ? summaryDark : summaryLight;
   const searchIcon = theme ? searchDark : searchLight;
   const idKey = props.id;
-  console.log(idKey)
-
 
   const selected = (id) => {
     setActiveButton(() => {
