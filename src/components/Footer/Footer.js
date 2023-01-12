@@ -25,7 +25,7 @@ import searchLight from "../../images/mobile/search-light-mobile.svg";
 import searchDark from "../../images/mobile/search-dark-mobile.svg";
 import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
-const Footer = (props) => {
+const Footer = ({ id, setHeader, setPagePath }) => {
   const [activeButton, setActiveButton] = useState({
     home: true,
     portfolio: false,
@@ -40,8 +40,7 @@ const Footer = (props) => {
   const portfolio = theme ? portfolioDark : portfolioLight;
   const summary = theme ? summaryDark : summaryLight;
   const searchIcon = theme ? searchDark : searchLight;
-  const idKey = props.id;
-  console.log(idKey)
+  const idKey = id;
 
 
   const selected = (id) => {
@@ -61,7 +60,7 @@ const Footer = (props) => {
       }
       return selectedButton;
     });
-    props.setHeader(id)
+    setHeader(id)
   };
 
   useEffect(() => {
@@ -101,7 +100,7 @@ const Footer = (props) => {
           <Link to="/portfolio">
             <MobileIconImage
               id="portfolio"
-              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false)); props.setPagePath(e.target.id)}}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
               src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
@@ -113,7 +112,7 @@ const Footer = (props) => {
               alt="Summary"
             />
           </ImageLink>
-          <Link to={search ? "/" : "/search" }>
+          <Link to="/search">
             <MobileIconImage
               id="search"
               onClick={(e) => {
