@@ -8,7 +8,7 @@ export const MainDiv = styled.div`
   margin-top: 25px;
   margin: 0 auto;
   align-items: center;
-  height: 300px;
+  height: 1200px;
 `;
 
 export const SearchBarMobile = styled(SearchBar)`

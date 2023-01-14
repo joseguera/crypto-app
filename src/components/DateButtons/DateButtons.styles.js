@@ -9,18 +9,20 @@ export const DateHolder = styled.div`
   width: 331px;
   height: 43px;
   border-radius: 5px;
-  background: ${({ theme }) => theme.colors.lineGraphBorder};
   @media only screen and ${breakpoint.device.xs} {
     width: 200px;
     height: 32px;
+    background: ${({ theme }) => theme.colors.lineGraphBorder};
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 331px;
     height: 43px;
+    background: ${({ theme }) => theme.colors.appBackground};
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 331px;
     height: 43px;
+    background: ${({ theme }) => theme.colors.appBackground};
   }
 `;
 

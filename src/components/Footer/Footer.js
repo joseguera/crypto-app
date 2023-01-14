@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openSearch } from "../../features/search/searchSlice";
+import { openCloseSearch } from "../../features/search/searchSlice";
 import { Link } from "react-router-dom";
 import {
   FooterHolder,
@@ -25,7 +25,7 @@ import searchLight from "../../images/mobile/search-light-mobile.svg";
 import searchDark from "../../images/mobile/search-dark-mobile.svg";
 import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
-const Footer = (props) => {
+const Footer = ({ id, setHeader, setPagePath }) => {
   const [activeButton, setActiveButton] = useState({
     home: true,
     portfolio: false,
@@ -34,14 +34,16 @@ const Footer = (props) => {
   })
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.value);
+  const search = useSelector((state) => state.search.value);
 
   const overview = theme ? overviewDark : overviewLight;
   const portfolio = theme ? portfolioDark : portfolioLight;
   const summary = theme ? summaryDark : summaryLight;
-  const search = theme ? searchDark : searchLight;
+  const searchIcon = theme ? searchDark : searchLight;
+  const idKey = id;
 
   const selected = (id) => {
-    setActiveButton((previousData) => {
+    setActiveButton(() => {
       let selectedButton = {};
       if (id === "home") {
         selectedButton = { home: true, previousData: false }
@@ -57,7 +59,14 @@ const Footer = (props) => {
       }
       return selectedButton;
     });
+    setHeader(id)
   };
+
+  useEffect(() => {
+    if (idKey === "home") {
+      setActiveButton({ home: true, previousData: false })
+    }
+  }, [idKey])
 
   return (
     <>
@@ -82,7 +91,7 @@ const Footer = (props) => {
           <Link to="/">
             <MobileIconImage
               id="home"
-              onClick={(e) => selected(e.target.id)}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
               src={activeButton.home ? overviewSelected : overview}
               alt="Overview"
             />
@@ -90,7 +99,7 @@ const Footer = (props) => {
           <Link to="/portfolio">
             <MobileIconImage
               id="portfolio"
-              onClick={(e) => selected(e.target.id)}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false)); setPagePath(e.target.id)}}
               src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
@@ -98,19 +107,18 @@ const Footer = (props) => {
           <ImageLink>
             <MobileIconImage
               id="summary"
-              onClick={(e) => selected(e.id)}
               src={activeButton.summary ? summarySelected : summary}
               alt="Summary"
             />
           </ImageLink>
-          <Link to="/search">
+          <Link to={search ? "/" : "/search" }>
             <MobileIconImage
               id="search"
               onClick={(e) => {
-                dispatch(openSearch())
                 selected(e.target.id)
+                dispatch(openCloseSearch(true))
               }}
-              src={activeButton.search ? searchSelected : search}
+              src={search ? searchSelected : searchIcon}
               alt="Search"
             />
           </Link>

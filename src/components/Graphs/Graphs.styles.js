@@ -81,6 +81,7 @@ export const DateButtonHolder = styled.div`
   width: 331px;
   height: 43px;
   border-radius: 10px;
+  z-index: 999;
   @media only screen and ${breakpoint.device.xs} {
     display: grid;
     position: absolute;

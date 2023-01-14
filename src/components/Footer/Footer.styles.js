@@ -34,7 +34,7 @@ export const DesktopFooter = styled.div`
 
 export const MobileFooter = styled.div`
   height: 75px;
-  background: ${({ theme }) => theme.colors.appBackground};
+  background: ${({ theme }) => theme.colors.mobileFooter};
   width: 100%;
   gap: 25px;
   @media only screen and ${breakpoint.device.xs} {

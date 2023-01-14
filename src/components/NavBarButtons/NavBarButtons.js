@@ -1,22 +1,19 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { openCloseSearch } from "../../features/search/searchSlice";
 import { NavLink } from "react-router-dom";
-import { openSearch } from "../../features/search/searchSlice";
 import * as theme from "../styles/Theme.styled";
 import {
   ButtonContainer,
   Button,
   ButtonText,
   OverviewContainer,
-  CloseHolder,
-  Cross,
-  CrossImg
+
 } from "./NavBarButtons.styles";
-import cross from "../../images/metro-cross-dark.svg";
 
 const NavBarButtons = (props) => {
-  const themeColor = useSelector((state) => state.theme.value);
   const search = useSelector((state) => state.search.value);
+  const themeColor = useSelector((state) => state.theme.value);
   const dispatch = useDispatch();
 
   const buttonBackground = themeColor
@@ -29,24 +26,21 @@ const NavBarButtons = (props) => {
   return (
     <>
       <OverviewContainer>
-        {search ? (
-          <CloseHolder>
-            <Cross onClick={() => dispatch(openSearch())}>
-              <CrossImg src={cross} alt="close x" />
-            </Cross>
-            <h2>Close</h2>
-          </CloseHolder>
-        ) : (
-          <h2>Overview</h2>
-        )}
+        <>
+          {search ? (
+            <h2 onClick={() => { dispatch(openCloseSearch(false)); props.setHeader(search && 'home'); props.selected(search && 'home') }}>{props.paths[`${props.id}`].header}</h2>
+          ) : (
+            <h2>{props.paths[`${props.id}`].header}</h2>
+          )}
+        </>
       </OverviewContainer>
       <ButtonContainer>
         <NavLink
           exact
           to="/"
           style={(isActive) => ({
-            background: isActive ? buttonBackground : "",
-            color: isActive ? buttonText : "",
+            background: isActive && buttonBackground,
+            color: isActive && buttonText
           })}
           className="nav-link"
         >
@@ -58,8 +52,8 @@ const NavBarButtons = (props) => {
           to="/portfolio"
           className="nav-link"
           style={(isActive) => ({
-            background: isActive ? buttonBackground : "",
-            color: isActive ? buttonText : "",
+            background: isActive && buttonBackground,
+            color: isActive && buttonText
           })}
         >
           <Button>

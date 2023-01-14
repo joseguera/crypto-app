@@ -8,12 +8,12 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    openSearch: (state) => {
-      state.value = !state.value
+    openCloseSearch: (state, action) => {
+      state.value = action.payload
     },
   },
 });
 
-export const { openSearch } = searchSlice.actions;
+export const { openCloseSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;
