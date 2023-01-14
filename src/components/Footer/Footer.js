@@ -65,7 +65,10 @@ const Footer = ({ id, setHeader, setPagePath }) => {
 
   useEffect(() => {
     if (idKey === "home") {
-      setActiveButton({ home: true, previousData: false })
+      setActiveButton({ home: true, previousData: false });
+    }
+    if (idKey === "summary") {
+      setActiveButton({ summary: true, previousData: false })
     }
   }, [idKey])
 

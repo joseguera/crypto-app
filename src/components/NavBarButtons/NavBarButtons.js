@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { openCloseSearch } from "../../features/search/searchSlice";
 import { NavLink } from "react-router-dom";
@@ -8,7 +9,6 @@ import {
   Button,
   ButtonText,
   OverviewContainer,
-
 } from "./NavBarButtons.styles";
 
 const NavBarButtons = (props) => {
@@ -28,7 +28,17 @@ const NavBarButtons = (props) => {
       <OverviewContainer>
         <>
           {search ? (
-            <h2 onClick={() => { dispatch(openCloseSearch(false)); props.setHeader(search && 'home'); props.selected(search && 'home') }}>{props.paths[`${props.id}`].header}</h2>
+            <Link to="/">
+              <h2
+                onClick={() => {
+                  dispatch(openCloseSearch(false));
+                  props.setHeader(search && "home");
+                  props.selected(search && "home");
+                }}
+              >
+                {props.paths[`${props.id}`].header}
+              </h2>
+            </Link>
           ) : (
             <h2>{props.paths[`${props.id}`].header}</h2>
           )}
@@ -40,7 +50,7 @@ const NavBarButtons = (props) => {
           to="/"
           style={(isActive) => ({
             background: isActive && buttonBackground,
-            color: isActive && buttonText
+            color: isActive && buttonText,
           })}
           className="nav-link"
         >
@@ -53,7 +63,7 @@ const NavBarButtons = (props) => {
           className="nav-link"
           style={(isActive) => ({
             background: isActive && buttonBackground,
-            color: isActive && buttonText
+            color: isActive && buttonText,
           })}
         >
           <Button>
