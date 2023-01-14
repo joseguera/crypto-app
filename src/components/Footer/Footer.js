@@ -42,7 +42,6 @@ const Footer = ({ id, setHeader, setPagePath }) => {
   const searchIcon = theme ? searchDark : searchLight;
   const idKey = id;
 
-
   const selected = (id) => {
     setActiveButton(() => {
       let selectedButton = {};
