@@ -13,31 +13,51 @@ export default function App() {
   const theme = useSelector((state) => state.theme.value);
   const themeColor = theme ? light : dark;
   const searchComponent = search ? SearchMobile : Home;
-  const [id, setId] = useState("home")
+  const [id, setId] = useState("home");
   const [paths, setPaths] = useState({
     home: { id: "home", clicked: true, path: "/", header: "Overview" },
-    portfolio: { id: "portfolio", clicked: true, path: "/portfolio", header: "Portfolio" },
-    summary: { id: "summary", clicked: true, path: "/coin/:id", header: "Summary" },
+    portfolio: {
+      id: "portfolio",
+      clicked: true,
+      path: "/portfolio",
+      header: "Portfolio",
+    },
+    summary: {
+      id: "summary",
+      clicked: true,
+      path: "/coin/:id",
+      header: "Summary",
+    },
     search: { id: "search", clicked: true, path: "/search", header: "✖ Close" },
   });
 
   const setHeader = (id) => {
-    (id !== 'undefined') && setId(id)
-  }
+    id !== "undefined" && setId(id);
+  };
 
   const selected = (id) => {
     setId(id);
-  }
-
+  };
 
   return (
     <Router>
       <ThemeProvider theme={themeColor}>
         <GlobalStyles />
         <MainApp>
-          <NavBar paths={paths} id={id} setHeader={setHeader} selected={selected} />
+          <NavBar
+            paths={paths}
+            id={id}
+            setHeader={setHeader}
+            selected={selected}
+          />
           <Switch>
-            <Route exact path={paths.home.path} component={(props) => <Home {...props} />} />
+            <Route
+              exact
+              path={paths.home.path}
+              component={(props) => (
+                <Home {...props} setHeader={setHeader} selected={selected} />
+              )}
+            />
             <Route path={paths.portfolio.path} component={Portfolio} />
             <Route path={paths.search.path} component={searchComponent} />
             <Route

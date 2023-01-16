@@ -6,7 +6,7 @@ import {
   TableFilters,
   TableContent,
   FilterArrowDown,
-  FilterArrowUp
+  FilterArrowUp,
 } from "components";
 import { TableGrid, TableHeader } from "./CoinTable.styles";
 
@@ -94,7 +94,7 @@ export default function CoinTable(props) {
 
   const showResults = () => {
     const items = itemsPerPage;
-    setItemsPerPage(items + 25)
+    setItemsPerPage(items + 25);
   };
 
   const coinsLength = coins && coins.length;
@@ -140,7 +140,12 @@ export default function CoinTable(props) {
           <div>24h Volume/Market Cap</div>
           <div>Circulating/Total Supply</div>
           <div>Last 7d</div>
-          <TableContent coins={coins} isLoading={isLoading} />
+          <TableContent
+            coins={coins}
+            isLoading={isLoading}
+            setHeader={props.setHeader}
+            selected={props.selected}
+          />
         </TableGrid>
       </InfiniteScroll>
     </>

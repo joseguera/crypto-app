@@ -64,7 +64,10 @@ const Footer = ({ id, setHeader, setPagePath }) => {
 
   useEffect(() => {
     if (idKey === "home") {
-      setActiveButton({ home: true, previousData: false })
+      setActiveButton({ home: true, previousData: false });
+    }
+    if (idKey === "summary") {
+      setActiveButton({ summary: true, previousData: false })
     }
   }, [idKey])
 
@@ -99,7 +102,7 @@ const Footer = ({ id, setHeader, setPagePath }) => {
           <Link to="/portfolio">
             <MobileIconImage
               id="portfolio"
-              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false)); setPagePath(e.target.id)}}
+              onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
               src={activeButton.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
@@ -111,7 +114,7 @@ const Footer = ({ id, setHeader, setPagePath }) => {
               alt="Summary"
             />
           </ImageLink>
-          <Link to={search ? "/" : "/search" }>
+          <Link to="/search">
             <MobileIconImage
               id="search"
               onClick={(e) => {

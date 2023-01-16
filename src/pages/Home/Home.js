@@ -6,7 +6,10 @@ const Home = (props) => {
     <MainDiv>
       <Graphs />
       <Overview><h2>Overview</h2></Overview>
-      <CoinTable />
+      <CoinTable 
+        setHeader={props.setHeader}
+        selected={props.selected}
+      />
     </MainDiv>
   );
 };

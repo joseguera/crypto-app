@@ -35,7 +35,10 @@ export default function TableContent(props) {
                 <div>{coin.market_cap_rank}</div>
                 <div>
                   <Link to={`/coin/${coin.id}`} style={styledLink}>
-                    <IconHolder>
+                    <IconHolder onClick={() => {
+                      props.setHeader("summary");
+                      props.selected("summary");
+                    }}>
                       <Icon src={coin.image} alt={coin.name} />
                       <LinkText>
                         <Text>{coin.name}</Text>
