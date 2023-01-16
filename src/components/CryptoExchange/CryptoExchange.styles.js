@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const ExchangeHolder = styled.div`
   display: flex;
@@ -34,7 +35,6 @@ export const CurrencyLabel = styled.p`
 `;
 
 export const CurrencyInput = styled.div`
-  width: 198px;
   height: 36px;
   background: ${({ theme }) => theme.colors.background};
   border-bottom-right-radius: 10px;
@@ -42,6 +42,15 @@ export const CurrencyInput = styled.div`
   display: flex;
   align-items: center;
   padding-left: 16px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 80px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 198px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 198px;
+  }
 `;
 
 export const CurrencySymbol = styled.div`

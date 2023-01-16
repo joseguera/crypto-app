@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const Description = styled.div`
   justify-self: start;
-  margin-top: 16px;
+  margin-top: 32px;
   margin-bottom: 32px;
 `;
 
@@ -18,8 +19,17 @@ export const DescriptionBody = styled.div`
   display: grid;
   place-items: center;
   margin-bottom: 19px;
-  margin-left: 10%;
-  margin-right: 10%;
+  @media only screen and ${breakpoint.device.xs} {
+    
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 `;
 
 export const DescriptionText = styled.div`

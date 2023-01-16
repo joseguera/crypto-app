@@ -1,14 +1,35 @@
 import styled from "styled-components";
 import NoGraphImage from "../../images/NoGraph.svg";
+import breakpoint from "components/styles/breakpoints";
 
 export const GraphCointaner = styled.div`
-  width: 1519px;
-  height: 220px;
-  margin-left: -16px;
-  .graph-style {
-    width: 1526.8px !important;
-    display: block;
-    height: 230px !important;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 220px;
+    margin-left: -16px;
+    .graph-style {
+      display: block;
+      height: 230px !important;
+    }
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 1519px;
+    height: 220px;
+    margin-left: -16px;
+    .graph-style {
+      width: 1526.8px !important;
+      display: block;
+      height: 230px !important;
+    }
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1519px;
+    height: 220px;
+    margin-left: -16px;
+    .graph-style {
+      width: 1526.8px !important;
+      display: block;
+      height: 230px !important;
+    }
   }
 `;
 
