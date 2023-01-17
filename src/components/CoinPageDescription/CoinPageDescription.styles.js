@@ -5,6 +5,15 @@ export const Description = styled.div`
   justify-self: start;
   margin-top: 32px;
   margin-bottom: 32px;
+  @media only screen and ${breakpoint.device.xs} {
+    align-self: baseline;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const DescriptionTitle = styled.p`
@@ -13,22 +22,23 @@ export const DescriptionTitle = styled.p`
 `;
 
 export const DescriptionBody = styled.div`
-  width: 100%;
   background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   display: grid;
   place-items: center;
   margin-bottom: 19px;
   @media only screen and ${breakpoint.device.xs} {
-    
+    width: 365px;
   }
   @media only screen and ${breakpoint.device.sm} {
     margin-left: 10%;
     margin-right: 10%;
+    width: 100%;
   }
   @media only screen and ${breakpoint.device.lg} {
     margin-left: 10%;
     margin-right: 10%;
+    width: 100%;
   }
 `;
 

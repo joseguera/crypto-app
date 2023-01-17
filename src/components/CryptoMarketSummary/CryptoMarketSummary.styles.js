@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const MarketSummary = styled.div`
   background: ${({ theme }) => theme.colors.background};
@@ -9,6 +10,15 @@ export const MarketSummary = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 365px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const MarketHolder = styled.div`

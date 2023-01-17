@@ -5,6 +5,16 @@ export const ExchangeHolder = styled.div`
   display: flex;
   align-items: center;
   gap: 26px;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 13px;
+    gap: 13px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+  }
 `;
 
 export const ExchangeCurrency = styled.div`
@@ -43,7 +53,7 @@ export const CurrencyInput = styled.div`
   align-items: center;
   padding-left: 16px;
   @media only screen and ${breakpoint.device.xs} {
-    width: 80px;
+    width: 284px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 198px;

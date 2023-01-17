@@ -3,7 +3,6 @@ import breakpoint from "components/styles/breakpoints";
 
 export const CoinPageMain = styled.div`
   @media only screen and ${breakpoint.device.xs} {
-    // display: flex;
     justify-content: center;
   }
   @media only screen and ${breakpoint.device.sm} {
@@ -50,6 +49,7 @@ export const SummaryContainer = styled.div`
   place-items: center;
   @media only screen and ${breakpoint.device.xs} {
     flex-direction: column;
+    gap: 19px;
   }
   @media only screen and ${breakpoint.device.sm} {
     flex-direction: row;
@@ -63,6 +63,9 @@ export const SummaryContainer = styled.div`
 
 export const DescriptionHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   @media only screen and ${breakpoint.device.sm} {
     display: grid;

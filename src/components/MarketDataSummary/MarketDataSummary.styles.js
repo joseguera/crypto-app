@@ -1,11 +1,21 @@
 import styled from "styled-components";
 import plusIcon from "../../images/Iconly-Bulk-Plus.svg";
+import breakpoint from "components/styles/breakpoints";
 
 export const DataSummaryHolder = styled.div`
   background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 303px;
   width: 406px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 365px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const DataSummaryContainer = styled.div`
