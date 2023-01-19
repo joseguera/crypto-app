@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const LinkHolder = styled.div`
   display: flex;
@@ -21,6 +22,14 @@ export const LinkContainer = styled.div`
   padding: 0px 45px;
   border-radius: 10px;
   background: ${({ theme }) => theme.colors.background};
+  @media only screen and ${breakpoint.device.xs} {
+    width: 228px;
+    background: ${({ theme }) => theme.colors.buttonFill};
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+  }
 `;
 
 export const Site = styled.a`

@@ -53,7 +53,7 @@ export const CurrencyInput = styled.div`
   align-items: center;
   padding-left: 16px;
   @media only screen and ${breakpoint.device.xs} {
-    width: 284px;
+    width: 237px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 198px;

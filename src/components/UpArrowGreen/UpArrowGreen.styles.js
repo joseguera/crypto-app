@@ -6,10 +6,10 @@ export const UpwardArrow = styled.div`
   height: 0px;
   border-bottom: 5px solid #06d554;
   @media only screen and ${breakpoint.device.xs} {
-    margin-left: 3px;
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    border-bottom: 3px solid #06d554;
+    margin-left: 5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #06d554;
   }
   @media only screen and ${breakpoint.device.sm} {
     margin-left: 5px;
