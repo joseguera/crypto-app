@@ -23,7 +23,7 @@ export const light = {
       portfolioBackground: "#FFFFFF",
       datePicker: "0%",
       sideArrow: "#D3D0C9",
-      mobileFooter: "#D3D0C9"
+      mobileFooter: "#D3D0C9",
     },
   };
   
@@ -31,7 +31,7 @@ export const light = {
     name: "dark-theme",
     colors: {
       background: "#191B1F",
-      appBackground: "#1F2128",
+      appBackground: "#191B1F",
       footer: "hsl(0, 0%, 93%)",
       text: "#FFFFFF",
       themeIcon: 100,

@@ -144,7 +144,6 @@ export default function CoinTable(props) {
             coins={coins}
             isLoading={isLoading}
             setHeader={props.setHeader}
-            selected={props.selected}
           />
         </TableGrid>
       </InfiniteScroll>

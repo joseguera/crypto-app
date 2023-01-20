@@ -27,9 +27,10 @@ export const DescriptionBody = styled.div`
   border-radius: 10px;
   display: grid;
   place-items: center;
-  margin-bottom: 19px;
+  margin-bottom: 32px;
   @media only screen and ${breakpoint.device.xs} {
     width: 318px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
     margin-left: 10%;

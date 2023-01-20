@@ -9,6 +9,7 @@ export const DataSummaryHolder = styled.div`
   width: 406px;
   @media only screen and ${breakpoint.device.xs} {
     width: 318px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
 

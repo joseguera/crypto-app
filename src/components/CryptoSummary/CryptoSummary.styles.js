@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const CryptoSummaryHolder = styled.div`
   height: 303px;
@@ -57,6 +58,14 @@ export const CryptoSite = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  @media only screen and ${breakpoint.device.xs} {
+    background: ${({ theme }) => theme.colors.mobileFooter};
+
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+  }
 `;
 
 export const CryptoLink = styled.a`

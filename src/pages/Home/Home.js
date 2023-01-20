@@ -8,7 +8,6 @@ const Home = (props) => {
       <Overview><h2>Overview</h2></Overview>
       <CoinTable 
         setHeader={props.setHeader}
-        selected={props.selected}
       />
     </MainDiv>
   );

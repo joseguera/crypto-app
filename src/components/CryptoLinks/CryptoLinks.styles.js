@@ -8,6 +8,13 @@ export const LinkHolder = styled.div`
   justify-content: space-around;
   width: 100%;
   gap: 13px;
+  @media only screen and ${breakpoint.device.xs} {
+    margin-bottom: 32px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+  }
 `;
 
 export const LinkContainer = styled.div`
@@ -24,7 +31,8 @@ export const LinkContainer = styled.div`
   background: ${({ theme }) => theme.colors.background};
   @media only screen and ${breakpoint.device.xs} {
     width: 228px;
-    background: ${({ theme }) => theme.colors.buttonFill};
+    height: 52px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
   }
@@ -48,4 +56,11 @@ export const LinkIcon = styled.img`
   left: 13px;
   bottom: 15px;
   filter: invert(${({ theme }) => theme.colors.loopIcon}%);
+  @media only screen and ${breakpoint.device.xs} {
+    bottom: 21px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+  }
 `;

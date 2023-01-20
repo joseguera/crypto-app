@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openCloseSearch } from "../../features/search/searchSlice";
+import { selectActiveButton } from "../../features/footer/footerSlice";
 import { Link } from "react-router-dom";
 import {
   FooterHolder,
@@ -25,7 +26,7 @@ import searchLight from "../../images/mobile/search-light-mobile.svg";
 import searchDark from "../../images/mobile/search-dark-mobile.svg";
 import searchSelected from "../../images/mobile/search-green-mobile.svg";
 
-const Footer = ({ id, setHeader, setPagePath }) => {
+const Footer = ({ setHeader }) => {
   const [activeButton, setActiveButton] = useState({
     home: true,
     portfolio: false,
@@ -35,41 +36,26 @@ const Footer = ({ id, setHeader, setPagePath }) => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.value);
   const search = useSelector((state) => state.search.value);
-
+  const header = useSelector((state) => state.header.value);
+  const footer = useSelector((state) => state.footer.value);
   const overview = theme ? overviewDark : overviewLight;
   const portfolio = theme ? portfolioDark : portfolioLight;
   const summary = theme ? summaryDark : summaryLight;
   const searchIcon = theme ? searchDark : searchLight;
-  const idKey = id;
 
   const selected = (id) => {
-    setActiveButton(() => {
-      let selectedButton = {};
-      if (id === "home") {
-        selectedButton = { home: true, previousData: false }
-      }
-      if (id === "portfolio") {
-        selectedButton = { portfolio: true, previousData: false }
-      }
-      if (id === "summary") {
-        selectedButton = { summary: true, previousData: false }
-      }
-      if (id === "search") {
-        selectedButton = { search: true, previousData: false }
-      }
-      return selectedButton;
-    });
+    dispatch(selectActiveButton(id))
     setHeader(id)
   };
 
   useEffect(() => {
-    if (idKey === "home") {
-      setActiveButton({ home: true, previousData: false });
+    if (header === "home") {
+      dispatch(selectActiveButton("home"))
     }
-    if (idKey === "summary") {
-      setActiveButton({ summary: true, previousData: false })
+    if (header === "summary") {
+      dispatch(selectActiveButton("summary"))
     }
-  }, [idKey])
+  }, [header, dispatch])
 
   return (
     <>
@@ -95,7 +81,7 @@ const Footer = ({ id, setHeader, setPagePath }) => {
             <MobileIconImage
               id="home"
               onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
-              src={activeButton.home ? overviewSelected : overview}
+              src={footer.home ? overviewSelected : overview}
               alt="Overview"
             />
           </Link>
@@ -103,14 +89,14 @@ const Footer = ({ id, setHeader, setPagePath }) => {
             <MobileIconImage
               id="portfolio"
               onClick={(e) => {selected(e.target.id); dispatch(openCloseSearch(false))}}
-              src={activeButton.portfolio ? portfolioSelected : portfolio}
+              src={footer.portfolio ? portfolioSelected : portfolio}
               alt="Portfolio"
             />
           </Link>
           <ImageLink>
             <MobileIconImage
               id="summary"
-              src={activeButton.summary ? summarySelected : summary}
+              src={footer.summary ? summarySelected : summary}
               alt="Summary"
             />
           </ImageLink>
