@@ -1,30 +1,33 @@
 import styled from "styled-components";
 import breakpoint from "components/styles/breakpoints";
 
-export const SearchBarContainer = styled.div`
-
-`;
+export const SearchBarContainer = styled.div``;
 
 export const SearchBarStyle = styled.div`
   width: 408px;
   height: 50px;
-  background: ${({ theme }) => theme.colors.searchBar};
   border-radius: 10px;
   gap: 16px;
   align-items: center;
   position: relative;
   @media only screen and ${breakpoint.device.xs} {
-    ${props => props.search ? `
+    ${(props) =>
+      props.search
+        ? `
         display: flex;
-    width: 296px;
-
-    `: `display: none`};
+    width: 296px;`
+      : 
+    `display: none`};
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
     display: flex;
+    background: ${({ theme }) => theme.colors.buttonFill};
+
   }
   @media only screen and ${breakpoint.device.lg} {
     display: flex;
+    background: ${({ theme }) => theme.colors.buttonFill};
   }
 `;
 

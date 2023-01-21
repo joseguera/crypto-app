@@ -40,7 +40,7 @@ export const MarketPriceHolder = styled.div`
 export const YourCoinHolder = styled.div`
   display: grid;
   @media only screen and ${breakpoint.device.xs} {
-    width: 100%;
+    width: 318px;
   }
   @media only screen and ${breakpoint.device.sm} {
 
@@ -85,7 +85,6 @@ export const SectionContent = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     flex-direction: column;
     gap: 10px;
-    padding-right: 10px;
     align-items: flex-start;
     background: none;
   }
@@ -115,18 +114,37 @@ export const DataPoint = styled.div`
   width: 100%;
   padding: 0 5px 0 5px;
   border-radius: 10px;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 52px;
+    padding: 0px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const Label = styled.p`
   font-size: 14px;
   font-weight: bold;
   line-height: 100%;
+  @media only screen and ${breakpoint.device.xs} {
+    padding-left: 10px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const Field = styled.div`
-  color: rgb(0, 255, 95);
+  color: #1AD761;
   font-size: 15px;
-  .neg-field
 `;
 
 export const PercentChange = styled.div`
@@ -134,5 +152,14 @@ export const PercentChange = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
+  @media only screen and ${breakpoint.device.xs} {
+    padding-right: 10px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 

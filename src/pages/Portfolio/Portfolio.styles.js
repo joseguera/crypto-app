@@ -49,8 +49,8 @@ export const AssetBtnHolder = styled.div`
   background: #06d554;
   cursor: pointer;
   @media only screen and ${breakpoint.device.xs} {
-    width: 331px;
-    height: 50px;
+    width: 318px;
+    height: 52px;
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 405px;
