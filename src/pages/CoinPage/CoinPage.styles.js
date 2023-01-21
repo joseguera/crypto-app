@@ -34,8 +34,17 @@ export const SummaryHolder = styled.div`
 `;
 
 export const PageTitle = styled.div`
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  @media only screen and ${breakpoint.device.xs} {
+    margin-left: 47px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const PageText = styled.p`

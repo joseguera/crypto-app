@@ -14,6 +14,7 @@ import {
 const NavBarButtons = (props) => {
   const search = useSelector((state) => state.search.value);
   const themeColor = useSelector((state) => state.theme.value);
+  const header = useSelector((state) => state.header.value);
   const dispatch = useDispatch();
 
   const buttonBackground = themeColor
@@ -33,14 +34,13 @@ const NavBarButtons = (props) => {
                 onClick={() => {
                   dispatch(openCloseSearch(false));
                   props.setHeader(search && "home");
-                  props.selected(search && "home");
                 }}
               >
-                {props.paths[`${props.id}`].header}
+                {props.paths[header].header}
               </h2>
             </Link>
           ) : (
-            <h2>{props.paths[`${props.id}`].header}</h2>
+            <h2>{props.paths[header].header}</h2>
           )}
         </>
       </OverviewContainer>

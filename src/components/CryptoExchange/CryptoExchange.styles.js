@@ -8,8 +8,8 @@ export const ExchangeHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     flex-direction: column;
     justify-content: center;
-    margin-top: 13px;
     gap: 13px;
+    margin-bottom: 32px;
   }
   @media only screen and ${breakpoint.device.sm} {
   }
@@ -36,6 +36,13 @@ export const CurrencyName = styled.div`
   display: grid;
   justify-items: center;
   align-content: center;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 52px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+  }
 `;
 
 export const CurrencyLabel = styled.p`
@@ -46,6 +53,7 @@ export const CurrencyLabel = styled.p`
 
 export const CurrencyInput = styled.div`
   height: 36px;
+  width: 198px;
   background: ${({ theme }) => theme.colors.background};
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
@@ -53,13 +61,13 @@ export const CurrencyInput = styled.div`
   align-items: center;
   padding-left: 16px;
   @media only screen and ${breakpoint.device.xs} {
-    width: 284px;
+    width: 237px;
+    height: 52px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 198px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    width: 198px;
   }
 `;
 

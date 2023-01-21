@@ -8,7 +8,8 @@ export const DataSummaryHolder = styled.div`
   height: 303px;
   width: 406px;
   @media only screen and ${breakpoint.device.xs} {
-    width: 365px;
+    width: 318px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
 
@@ -21,6 +22,17 @@ export const DataSummaryHolder = styled.div`
 export const DataSummaryContainer = styled.div`
   margin-left: 38px;
   margin-top: 23px;
+  @media only screen and ${breakpoint.device.xs} {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 23px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+
+  }
 `;
 
 export const MarketDataOne = styled.div`

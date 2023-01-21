@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectActiveButton } from "../../features/footer/footerSlice";
 import { Link } from "react-router-dom";
 import { roundToNumber, setCurrency } from "util/numberUtil";
 import {
@@ -24,6 +25,7 @@ export default function TableContent(props) {
   const currency = useSelector((state) => state.currency.value);
   const { isLoading, coins } = props;
   const hasCoins = !isLoading && coins;
+  const dispatch = useDispatch();
   const loaders = Array.apply(null, Array(25)).map(function () {});
 
   return (
@@ -37,7 +39,7 @@ export default function TableContent(props) {
                   <Link to={`/coin/${coin.id}`} style={styledLink}>
                     <IconHolder onClick={() => {
                       props.setHeader("summary");
-                      props.selected("summary");
+                      dispatch(selectActiveButton("summary"))
                     }}>
                       <Icon src={coin.image} alt={coin.name} />
                       <LinkText>

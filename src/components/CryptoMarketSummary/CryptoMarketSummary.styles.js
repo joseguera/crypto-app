@@ -11,7 +11,8 @@ export const MarketSummary = styled.div`
   justify-content: center;
   align-items: center;
   @media only screen and ${breakpoint.device.xs} {
-    width: 365px;
+    width: 318px;
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
 

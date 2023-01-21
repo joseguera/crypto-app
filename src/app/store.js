@@ -3,6 +3,8 @@ import themeReducer from "../features/theme/themeSlice";
 import currencyReducer from "../features/currency/currencySlice";
 import portfolioReducer from "../features/portfolio/portfolioSlice";
 import searchReducer from "../features/search/searchSlice";
+import headerReducer from "../features/header/headerSlice";
+import footerReducer from "../features/footer/footerSlice";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   currency: currencyReducer,
   portfolio: portfolioReducer,
   search: searchReducer,
+  header: headerReducer,
+  footer: footerReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
