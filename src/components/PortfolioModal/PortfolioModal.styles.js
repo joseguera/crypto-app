@@ -1,8 +1,7 @@
 import styled from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 export const ModalBackground = styled.div`
-  width: 1519px;
-  height: 713px;
   background: black;
   opacity: 0.5;
   position: fixed;
@@ -11,21 +10,48 @@ export const ModalBackground = styled.div`
   z-index: 10;
   animation: 1s ease-out 0s 1 normal none running grDYJ;
   cursor: auto;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+    height: 100%;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 1519px;
+    height: 713px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1519px;
+    height: 713px;
+  }
 `;
 
 export const ModalContainer = styled.div`
   position: fixed;
-  left: 324.5px;
   top: 155px;
   background: ${({ theme }) => theme.colors.buttonFill};
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
-  width: 870px;
-  height: 425px;
   border-radius: 10px;
   color: ${({ theme }) => theme.colors.text};
   z-index: 11;
   animation: 0.5s ease-out 0s 1 normal none running dOuzSV;
   cursor: auto;
+  @media only screen and ${breakpoint.device.xs} {
+    top: 75px;
+    left: 36px;
+    width: 318px;
+    height: 675px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    left: 324.5px;
+    width: 870px;
+    height: 450px;
+    padding-bottom: 18px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    left: 324.5px;
+    width: 870px;
+    height: 450px;
+    padding-bottom: 18px;
+  }
 `;
 
 export const ModalBody = styled.div`
@@ -44,6 +70,15 @@ export const TitleHolder = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 817.5px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 285px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 817.5px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 817.5px;
+  }
 `;
 
 export const TitleItems = styled.div`
@@ -57,6 +92,15 @@ export const Title = styled.h2`
   font-size: 28px;
   line-height: 0%;
   font-weight: bold;
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: inherit;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: inherit;
+  }
 `;
 
 export const Cross = styled.div`
@@ -72,14 +116,22 @@ export const ModalUtilities = styled.div``;
 
 export const UtilityHolder = styled.div`
   display: flex;
-  flex-direction: row;
   gap: 41px;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    flex-direction: row;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    flex-direction: row;
+  }
 `;
 
 export const Utilities = styled.div`
-    display: flex;
-    gap: 39px;
-    flex-direction: column;
+  display: flex;
+  gap: 39px;
+  flex-direction: column;
 `;
 
 export const FormHolder = styled.form`
@@ -124,6 +176,7 @@ export const Buttons = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 24px;
+  flex-direction: row;
   .button {
     height: 48px;
     width: 235px;
@@ -143,5 +196,14 @@ export const Buttons = styled.div`
   .save-button {
     color: ${({ theme }) => theme.colors.text};
     background: ${({ theme }) => theme.colors.portfolioButton};
+  }
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    flex-direction: row;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    flex-direction: row;
   }
 `;

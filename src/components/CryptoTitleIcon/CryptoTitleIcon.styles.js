@@ -2,7 +2,6 @@ import styled from "styled-components";
 import breakpoint from "../styles/breakpoints";
 
 export const CryptoTitle = styled.div`
-  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   display: grid;
   place-items: center;
@@ -13,10 +12,12 @@ export const CryptoTitle = styled.div`
   @media only screen and ${breakpoint.device.sm} {
     height: 236px;
     width: 206px;
+    background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
     height: 236px;
     width: 206px;
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 
@@ -27,7 +28,6 @@ export const CryptoContent = styled.div`
 `;
 
 export const CryptoIcon = styled.div`
-  background: ${({ theme }) => theme.colors.buttonFill};
   border-radius: 10px;
   display: grid;
   place-items: center;
@@ -39,10 +39,12 @@ export const CryptoIcon = styled.div`
   @media only screen and ${breakpoint.device.sm} {
     width: 83px;
     height: 83px;
+    background: ${({ theme }) => theme.colors.buttonFill};
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 83px;
     height: 83px;
+    background: ${({ theme }) => theme.colors.buttonFill};
   }
 `;
 
