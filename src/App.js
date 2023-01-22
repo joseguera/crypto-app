@@ -33,7 +33,7 @@ export default function App() {
   });
 
   const setHeader = (id) => {
-    id !== "undefined" && dispatch(setActiveHeader(id));
+    if (id !== "undefined") dispatch(setActiveHeader(id));
   };
 
   return (
