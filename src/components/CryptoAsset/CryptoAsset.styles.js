@@ -30,10 +30,10 @@ export const MarketPriceHolder = styled.div`
     width: 100%;
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    width: 1060px;
   }
   @media only screen and ${breakpoint.device.lg} {
-
+    width: 1060px;
   }
 `;
 
@@ -43,25 +43,27 @@ export const YourCoinHolder = styled.div`
     width: 318px;
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    width: 1060px;
   }
   @media only screen and ${breakpoint.device.lg} {
-
+    width: 1060px;
   }
 `;
 
 export const SectionTitle = styled.div`
   display: flex;
   gap: 14px;
-  width: 100%;
   @media only screen and ${breakpoint.device.xs} {
     align-items: flex-start;
+    width: 100%;
   }
   @media only screen and ${breakpoint.device.sm} {
     align-items: center;
+    width: 1043px;
   }
   @media only screen and ${breakpoint.device.lg} {
     align-items: center;
+    width: 1043px;
   }
 `;
 
@@ -110,7 +112,6 @@ export const DataPoint = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  background: ${({ theme }) => theme.colors.background};
   width: 100%;
   padding: 0 5px 0 5px;
   border-radius: 10px;
@@ -120,10 +121,10 @@ export const DataPoint = styled.div`
     background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
-
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 
