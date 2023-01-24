@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 const shimmer = keyframes` 
   0% {
@@ -13,12 +14,27 @@ export const Wrapper = styled.div`
     background: ${({ theme }) => theme.colors.background};
     border-radius: 10px;
     display: flex;
-    gap: 24px;
-    width: 1296px;
-    height: 250px;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    @media only screen and ${breakpoint.device.xs} {
+      width: 318px;
+      gap: 0px;
+      flex-direction: column;
+      padding-bottom: 50px;
+    }
+    @media only screen and ${breakpoint.device.sm} {
+      width: 1296px;
+      gap: 24px;
+      flex-direction: row;
+      height: 250px;
+    }
+    @media only screen and ${breakpoint.device.lg} {
+      width: 1296px;
+      gap: 24px;
+      flex-direction: row;
+      height: 250px;
+    }
 `;
 
 const InnerWrapper = styled.div`
@@ -30,8 +46,18 @@ const InnerWrapper = styled.div`
 
 export const IconSkeleton = styled(InnerWrapper)`
   border-radius: 10px;
-  height: 220px;
-  width: 190px;
+  @media only screen and ${breakpoint.device.xs} {
+    height: 109px;
+    width: 116px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    height: 220px;
+    width: 190px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    height: 220px;
+    width: 190px;
+  }
 `;
 
 export const AssetHolderSkeleton = styled.div`
@@ -41,12 +67,30 @@ export const AssetHolderSkeleton = styled.div`
 
 export const AssetSkeleton = styled(InnerWrapper)`
   height: 59px;
-  width: 1050px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 318px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 1050px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1050px;
+  }
 `;
 
 export const AssetGap = styled.div`
-  height: 50px;
-  width: 1050px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 318px;
+    height: 25px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 1050px;
+    height: 50px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1050px;
+    height: 50px;
+  }
 `;
 
 
