@@ -7,7 +7,9 @@ export const CryptoTitle = styled.div`
   place-items: center;
   @media only screen and ${breakpoint.device.xs} {
     padding: 20px 0 20px 0;
-    background: ${({ theme }) => theme.colors.mobileFooter};
+    width: 204px;
+    height: 152px;
+    background: ${({ theme }) => theme.colors.modalIconBackground};
   }
   @media only screen and ${breakpoint.device.sm} {
     height: 236px;
@@ -34,7 +36,7 @@ export const CryptoIcon = styled.div`
   @media only screen and ${breakpoint.device.xs} {
     width: 78px;
     height: 78px;
-    background: ${({ theme }) => theme.colors.background};
+    background: ${({ theme }) => theme.colors.modalFillerIcon};
   }
   @media only screen and ${breakpoint.device.sm} {
     width: 83px;

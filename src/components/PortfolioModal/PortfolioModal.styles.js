@@ -56,12 +56,20 @@ export const ModalContainer = styled.div`
 
 export const ModalBody = styled.div`
   position: relative;
-  padding-top: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 25px;
   justify-content: center;
+  @media only screen and ${breakpoint.device.xs} {
+    padding-top: 25px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    padding-top: 18px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    padding-top: 18px;
+  }
 `;
 
 export const TitleHolder = styled.div`
@@ -119,6 +127,8 @@ export const UtilityHolder = styled.div`
   gap: 41px;
   @media only screen and ${breakpoint.device.xs} {
     flex-direction: column;
+    width: 318px;
+    align-items: center;
   }
   @media only screen and ${breakpoint.device.sm} {
     flex-direction: row;
@@ -130,18 +140,34 @@ export const UtilityHolder = styled.div`
 
 export const Utilities = styled.div`
   display: flex;
-  gap: 39px;
   flex-direction: column;
+  @media only screen and ${breakpoint.device.xs} {
+    gap: 20px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    gap: 39px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    gap: 39px;
+  }
 `;
 
 export const FormHolder = styled.form`
-  width: 406px;
   height: 53px;
   border-radius: 10px;
   background: ${({ theme }) => theme.colors.background};
   display: flex;
   -webkit-box-align: center;
   align-items: center;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 242px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 406px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 406px;
+  }
 `;
 
 export const Form = styled.div`
@@ -160,13 +186,21 @@ export const Input = styled.input`
   background: none;
   border: none;
   height: 16px;
-  width: 100%;
   padding-top: 16px;
   padding-bottom: 16px;
   font-size: 15px;
   color: ${({ theme }) => theme.colors.text};
   &:focus {
     outline: none;
+  }
+  @media only screen and ${breakpoint.device.xs} {
+    width: 242px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 100%;
   }
 `;
 
@@ -199,11 +233,20 @@ export const Buttons = styled.div`
   }
   @media only screen and ${breakpoint.device.xs} {
     flex-direction: column;
+    .button {
+      width: 242px;
+    }
   }
   @media only screen and ${breakpoint.device.sm} {
     flex-direction: row;
+    .button {
+      width: 235px;
+    }
   }
   @media only screen and ${breakpoint.device.lg} {
     flex-direction: row;
+    .button {
+      width: 235px;
+    }
   }
 `;

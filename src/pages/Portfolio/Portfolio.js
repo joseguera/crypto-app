@@ -17,6 +17,8 @@ const Portfolio = (props) => {
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(portfolio)
+
   async function getData() {
     try {
       let noDuplicates = portfolio.reduce((acc, el) => {

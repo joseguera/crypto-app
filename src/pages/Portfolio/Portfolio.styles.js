@@ -5,6 +5,7 @@ export const MainDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  background: ${({ theme }) => theme.colors.appBackground};
   @media only screen and ${breakpoint.device.xs} {
     margin-top: 25px;
     width: 100%;
