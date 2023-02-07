@@ -132,9 +132,11 @@ export const UtilityHolder = styled.div`
   }
   @media only screen and ${breakpoint.device.sm} {
     flex-direction: row;
+    width: 653px;
   }
   @media only screen and ${breakpoint.device.lg} {
     flex-direction: row;
+    width: 653px;
   }
 `;
 
