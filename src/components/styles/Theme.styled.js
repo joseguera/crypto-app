@@ -24,6 +24,8 @@ export const light = {
       datePicker: "0%",
       sideArrow: "#D3D0C9",
       mobileFooter: "#D3D0C9",
+      modalFillerIcon: "#aaaaaa",
+      modalIconBackground: "#D3D0C9"
     },
   };
   
@@ -31,7 +33,7 @@ export const light = {
     name: "dark-theme",
     colors: {
       background: "#191B1F",
-      appBackground: "#191B1F",
+      appBackground: "#1F2128",
       footer: "hsl(0, 0%, 93%)",
       text: "#FFFFFF",
       themeIcon: 100,
@@ -52,6 +54,8 @@ export const light = {
       portfolioBackground: "#FFFFFF",
       datePicker: "100%",
       sideArrow: "#FFFFFF",
-      mobileFooter: "#2C2F36"
+      mobileFooter: "#2C2F36",
+      modalFillerIcon: "#0B0D0F",
+      modalIconBackground: "#191B1F",
     }
   };
