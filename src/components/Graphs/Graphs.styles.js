@@ -81,7 +81,7 @@ export const DateButtonHolder = styled.div`
   width: 331px;
   height: 43px;
   border-radius: 10px;
-  z-index: 999;
+  z-index: 998;
   @media only screen and ${breakpoint.device.xs} {
     display: grid;
     position: absolute;
@@ -103,15 +103,15 @@ export const DateButtonHolder = styled.div`
 
 export const ChartHolder = styled.div`
   @media only screen and ${breakpoint.device.xs} {
-    width: 234px;
+    width: 288px;
     height: 110px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 520px;
+    width: 605px;
     height: 220px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    width: 520px;
+    width: 605px;
     height: 220px;
   }
 `;

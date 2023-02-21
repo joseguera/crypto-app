@@ -22,6 +22,7 @@ export const DateHolder = styled.div`
   @media only screen and ${breakpoint.device.lg} {
     width: 331px;
     height: 43px;
+    gap: 12px;
     background: ${({ theme }) => theme.colors.appBackground};
   }
 `;

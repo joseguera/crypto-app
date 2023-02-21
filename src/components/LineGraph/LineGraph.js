@@ -12,6 +12,8 @@ import {
   Legend,
 } from "chart.js";
 
+import { GraphCointainer } from "./LineGraph.styles";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -145,7 +147,12 @@ export default function LineGraph(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.prices, props.labels]);
 
-  const lineChart = <Line ref={chartRef} data={data} options={lineOptions} />;
+  const lineChart = <Line ref={chartRef} data={data} options={lineOptions} className="graph-style" />;
 
-  return <div className="LineGraph">{lineChart}</div>;
+  return (
+    <GraphCointainer>
+      <div>{lineChart}</div>
+    </GraphCointainer>
+  )
+  
 }

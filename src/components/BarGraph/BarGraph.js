@@ -12,6 +12,8 @@ import {
   Legend,
 } from "chart.js";
 
+import { GraphCointainer } from "./BarGraph.styles"
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -96,7 +98,11 @@ export default function BarGraph(props) {
     ],
   };
 
-  const barChart = <Bar ref={chartRef} data={data} options={barOptions} />;
+  const barChart = <Bar ref={chartRef} data={data} options={barOptions} className="graph-style" />;
 
-  return <div className="BarGraph">{barChart}</div>
+  return (
+    <GraphCointainer>
+      <div>{barChart}</div>
+    </GraphCointainer>
+  )
 }
