@@ -9,15 +9,15 @@ export const CryptoTitle = styled.div`
     padding: 20px 0 20px 0;
     width: 204px;
     height: 152px;
-    background: ${({ theme }) => theme.colors.modalIconBackground};
+    background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
-    height: 236px;
+    height: 195px;
     width: 206px;
     background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
-    height: 236px;
+    height: 195px;
     width: 206px;
     background: ${({ theme }) => theme.colors.background};
   }

@@ -6,7 +6,7 @@ export const DropDown = styled.div`
   cursor: pointer;
   position: relative;
   border-radius: 10px;
-  z-index: 999;
+  z-index: 998;
   @media only screen and ${breakpoint.device.xs} {
     width: 76px;
     height: 36px;

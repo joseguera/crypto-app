@@ -23,8 +23,8 @@ export const TableFilterCategories = styled.div`
   align-items: start;
   gap: 16px;
   justify-content: center;
-  border-bottom: 1px solid #DCDCDC;
-    height: 47px;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+  height: 47px;
 `;
 
 export const CategoryHolder = styled.div`

@@ -102,7 +102,7 @@ export default function CryptoAsset(props) {
               </Field>
             </DataPoint>
             <DataPoint>
-              <Label>Amount Price Change Since Purchase:</Label>
+              <Label>Change Since Purchase:</Label>
               <PercentChange>
                 {props.profile.priceChange > 0 ? (
                   <UpArrowGreen />

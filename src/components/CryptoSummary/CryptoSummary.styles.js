@@ -50,7 +50,6 @@ export const CryptoText = styled.p`
 `;
 
 export const CryptoSite = styled.div`
-  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   width: 100%;
   height: 52px;
@@ -60,11 +59,13 @@ export const CryptoSite = styled.div`
   position: relative;
   @media only screen and ${breakpoint.device.xs} {
     background: ${({ theme }) => theme.colors.mobileFooter};
-
   }
   @media only screen and ${breakpoint.device.sm} {
+    background: ${({ theme }) => theme.colors.background};
+
   }
   @media only screen and ${breakpoint.device.lg} {
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 

@@ -10,10 +10,10 @@ export const Description = styled.div`
     margin-left: 47px;
   }
   @media only screen and ${breakpoint.device.sm} {
-
+    margin-left: 0px;
   }
   @media only screen and ${breakpoint.device.lg} {
-
+    margin-left: 0px;
   }
 `;
 
@@ -23,7 +23,6 @@ export const DescriptionTitle = styled.p`
 `;
 
 export const DescriptionBody = styled.div`
-  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   display: grid;
   place-items: center;
@@ -36,11 +35,13 @@ export const DescriptionBody = styled.div`
     margin-left: 10%;
     margin-right: 10%;
     width: 100%;
+    background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
     margin-left: 10%;
     margin-right: 10%;
     width: 100%;
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 

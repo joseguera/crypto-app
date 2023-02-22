@@ -7,7 +7,7 @@ export const ModalBackground = styled.div`
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 10;
+  z-index: 999;
   animation: 1s ease-out 0s 1 normal none running grDYJ;
   cursor: auto;
   @media only screen and ${breakpoint.device.xs} {
@@ -31,7 +31,7 @@ export const ModalContainer = styled.div`
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
   border-radius: 10px;
   color: ${({ theme }) => theme.colors.text};
-  z-index: 11;
+  z-index: 999;
   animation: 0.5s ease-out 0s 1 normal none running dOuzSV;
   cursor: auto;
   @media only screen and ${breakpoint.device.xs} {

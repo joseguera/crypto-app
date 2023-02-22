@@ -2,7 +2,6 @@ import styled from "styled-components";
 import breakpoint from "components/styles/breakpoints";
 
 export const MarketSummary = styled.div`
-  background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 303px;
   width: 370px;
@@ -15,10 +14,11 @@ export const MarketSummary = styled.div`
     background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
+    background: ${({ theme }) => theme.colors.background};
 
   }
   @media only screen and ${breakpoint.device.lg} {
-
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 

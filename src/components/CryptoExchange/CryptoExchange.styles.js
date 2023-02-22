@@ -12,8 +12,11 @@ export const ExchangeHolder = styled.div`
     margin-bottom: 32px;
   }
   @media only screen and ${breakpoint.device.sm} {
+    flex-direction: row;
   }
   @media only screen and ${breakpoint.device.lg} {
+    flex-direction: row;
+
   }
 `;
 
@@ -54,7 +57,6 @@ export const CurrencyLabel = styled.p`
 export const CurrencyInput = styled.div`
   height: 36px;
   width: 198px;
-  background: ${({ theme }) => theme.colors.background};
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -66,8 +68,10 @@ export const CurrencyInput = styled.div`
     background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
+    background: ${({ theme }) => theme.colors.background};
   }
   @media only screen and ${breakpoint.device.lg} {
+    background: ${({ theme }) => theme.colors.background};
   }
 `;
 

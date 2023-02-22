@@ -109,4 +109,5 @@ export const Text = styled.span`
 export const TableLine = styled.span`
   border-top: 1px solid #dcdcdc;
   grid-column: 1 / 10;
+  opacity: 0.25;
 `;
