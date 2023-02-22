@@ -63,12 +63,12 @@ export const SummaryContainer = styled.div`
   @media only screen and ${breakpoint.device.sm} {
     flex-direction: row;
     width: 1102px;
-    gap: 130px;
+    gap: 60px;
   }
   @media only screen and ${breakpoint.device.lg} {
     flex-direction: row;
     width: 1102px;
-    gap: 130px;
+    gap: 60px;
   }
 `;
 

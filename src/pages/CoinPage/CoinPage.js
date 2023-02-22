@@ -24,7 +24,7 @@ import {
 
 export default function CoinPage(props) {
   const currency = useSelector((state) => state.currency.value);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const getCoinInfo = async () => {
@@ -49,26 +49,22 @@ export default function CoinPage(props) {
 
   return (
     <>
-      {hasCoinProfile && (
-        <CoinPageMain>
-          <SummaryHolder>
-            <PageTitle>
-              <PageText>Your Summary</PageText>
-            </PageTitle>
-            <SummaryContainer>
-              {hasCoinProfile ? (
+      <CoinPageMain>
+        {hasCoinProfile ? (
+          <>
+            <SummaryHolder>
+              <PageTitle>
+                <PageText>Your Summary</PageText>
+              </PageTitle>
+              <SummaryContainer>
                 <>
                   <CryptoSummary profile={profile} />
                   <CryptoMarketSummary profile={profile} />
                   <MarketDataSummary profile={profile} />
                 </>
-              ) : (
-                <LoadingCoinPage />
-              )}
-            </SummaryContainer>
-          </SummaryHolder>
-          <DescriptionHolder>
-            {hasCoinProfile && (
+              </SummaryContainer>
+            </SummaryHolder>
+            <DescriptionHolder>
               <>
                 <CoinPageDescription profile={profile} />
                 <CryptoLinks
@@ -76,10 +72,8 @@ export default function CoinPage(props) {
                   selectedTheme={props.selectedTheme}
                 />
               </>
-            )}
-          </DescriptionHolder>
-          <GraphHolder>
-            {hasCoinProfile && (
+            </DescriptionHolder>
+            <GraphHolder>
               <>
                 <CryptoExchange
                   cryptoName={profile.symbol}
@@ -92,10 +86,19 @@ export default function CoinPage(props) {
                   />
                 </GraphContainer>
               </>
-            )}
-          </GraphHolder>
-        </CoinPageMain>
-      )}
+            </GraphHolder>
+          </>
+        ) : (
+          <SummaryHolder>
+            <PageTitle>
+              <PageText>Your Summary</PageText>
+            </PageTitle>
+            <SummaryContainer>
+              <LoadingCoinPage />
+            </SummaryContainer>
+          </SummaryHolder>
+        )}
+      </CoinPageMain>
     </>
   );
 }

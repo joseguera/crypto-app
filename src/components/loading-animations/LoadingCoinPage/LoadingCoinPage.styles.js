@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import breakpoint from "components/styles/breakpoints";
 
 const shimmer = keyframes` 
   0% {
@@ -15,9 +16,21 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  width: 1102px;
   height: 678px;
   margin: 0 auto;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 300px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 1102px;
+
+
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1102px;
+
+
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -36,12 +49,29 @@ export const DataHolderSkeleton = styled.div`
   border-radius: 10px;
   display: flex;
   gap: 55px;
-  width: 1102px;
-  height: 303px;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  padding-bottom: 88px;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+    width: 300px;
+    padding-top: 15px;
+    padding-bottom: 0px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    flex-direction: row;
+    height: 303px;
+    width: 1102px;
+    padding-bottom: 88px;
+    padding-top: 0px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    flex-direction: row;
+    height: 303px;
+    width: 1102px;
+    padding-bottom: 88px;
+    padding-top: 0px;
+  }
 `;
 
 export const DataOneHolderSkeleton = styled.div`
@@ -64,17 +94,50 @@ export const DataOneBottomSkeleton = styled(InnerWrapper)`
 `;
 
 export const DataTwoSkeleton = styled(InnerWrapper)`
-  width: 370px;
-  height: 293px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 250px;
+    height: 303px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 370px;
+    height: 293px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 370px;
+    height: 293px;
+  }
 `;
 
 export const DataThreeSkeleton = styled(InnerWrapper)`
-  width: 406px;
-  height: 293px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 250px;
+    height: 303px;
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 406px;
+    height: 293px;
+    display: inherit;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 406px;
+    height: 293px;
+    display: inherit;
+  }
 `;
 
 export const DataFourSkeleton = styled(InnerWrapper)`
-  width: 1092px;
-  height: 275px;
   margin: 0 auto;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 318px;
+    height: 275px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 1092px;
+    height: 275px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 1092px;
+    height: 275px;
+  }
 `;

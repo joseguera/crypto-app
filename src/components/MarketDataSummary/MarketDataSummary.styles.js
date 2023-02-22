@@ -6,16 +6,17 @@ export const DataSummaryHolder = styled.div`
   background: ${({ theme }) => theme.colors.background};
   border-radius: 10px;
   height: 303px;
-  width: 406px;
   @media only screen and ${breakpoint.device.xs} {
     width: 318px;
     background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
     background: ${({ theme }) => theme.colors.background};
+    width: 406px;
   }
   @media only screen and ${breakpoint.device.lg} {
     background: ${({ theme }) => theme.colors.background};
+    width: 406px;
   }
 `;
 
@@ -28,10 +29,8 @@ export const DataSummaryContainer = styled.div`
     margin-top: 23px;
   }
   @media only screen and ${breakpoint.device.sm} {
-
   }
   @media only screen and ${breakpoint.device.lg} {
-
   }
 `;
 

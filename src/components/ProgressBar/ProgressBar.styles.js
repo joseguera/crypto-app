@@ -19,8 +19,10 @@ export const ProgressBarHolder = styled.span`
     width: 250px;
   }
   @media only screen and ${breakpoint.device.sm} {
+    width: 365px;
   }
   @media only screen and ${breakpoint.device.lg} {
+    width: 365px;
   }
 `;
 

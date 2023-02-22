@@ -4,7 +4,6 @@ import breakpoint from "components/styles/breakpoints";
 export const MarketSummary = styled.div`
   border-radius: 10px;
   height: 303px;
-  width: 370px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,10 +14,12 @@ export const MarketSummary = styled.div`
   }
   @media only screen and ${breakpoint.device.sm} {
     background: ${({ theme }) => theme.colors.background};
+    width: 370px;
 
   }
   @media only screen and ${breakpoint.device.lg} {
     background: ${({ theme }) => theme.colors.background};
+    width: 370px;
   }
 `;
 
