@@ -1,10 +1,14 @@
 import React from "react";
 import { ProgressBarContainer, ProgressLevel } from "./Bar.styles"
 
-const Bar = (props) => {
+type Props = {
+  percentStyle: Object,
+}
+
+const Bar = ({ percentStyle }: Props) => {
     return (
       <ProgressBarContainer>
-        <ProgressLevel style={props.percentStyle}></ProgressLevel>
+        <ProgressLevel style={percentStyle}></ProgressLevel>
       </ProgressBarContainer>
     );
 }

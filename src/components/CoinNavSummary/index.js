@@ -1,1 +1,1 @@
-export { default } from './CoinNavSummary.js'
+export { default } from './CoinNavSummary.tsx'
