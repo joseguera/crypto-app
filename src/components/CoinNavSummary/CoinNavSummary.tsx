@@ -25,11 +25,16 @@ import {
   VolumeDot,
 } from "./CoinNavSummary.styles";
 
+export interface CoinNavSummaryVars {
+  market: Array<object>,
+  isLoading: boolean
+};
+
 export default function CoinNavSummary(props) {
   const currency = useSelector((state) => state.currency.value);
   const search = useSelector((state) => state.search.value);
-  const [market, setMarket] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [market, setMarket] = useState<CoinNavSummaryVars | null>(null);
+  const [isLoading, setIsLoading] = useState<CoinNavSummaryVars | false>(false);
 
   const getMarketData = async () => {
     try {

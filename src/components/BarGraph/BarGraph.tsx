@@ -25,15 +25,25 @@ ChartJS.register(
   Legend
 );
 
-export default function BarGraph(props) {
+type Props = {
+  labels: Array<string>,
+  prices: Array<number>
+}
+
+export interface BarGraphVars {
+  fontSize: number,
+  tickLimit: number
+};
+
+export default function BarGraph({ labels, prices }: Props) {
   const windowWidth = window.innerWidth;
 
   const font = (windowWidth > 786) ? 12 : 9;
   const ticks = (windowWidth > 786) ? 7 : 5;
 
   const chartRef = useRef(null);
-  const [fontSize, setFontSize] = useState(font);
-  const [ticksLimit, setTicksLimit] = useState(ticks);
+  const [fontSize, setFontSize] = useState<BarGraphVars | null>(font);
+  const [ticksLimit, setTicksLimit] = useState<BarGraphVars | null>(ticks);
 
   const barOptions = {
     responsive: true,
@@ -84,10 +94,10 @@ export default function BarGraph(props) {
   }
 
   const data = {
-    labels: props.labels,
+    labels: labels,
     datasets: [
       {
-        data: props.prices,
+        data: prices,
         tension: 0.4,
         borderColor: "rgba(33, 114, 229, 1)",
         backgroundColor: createDarkGradient(chartRef?.current?.ctx),
