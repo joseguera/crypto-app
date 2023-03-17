@@ -1,1 +1,1 @@
-export { default } from './BarGraph.js'
+export { default } from './BarGraph.tsx'
