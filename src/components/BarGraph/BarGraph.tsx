@@ -35,7 +35,7 @@ export interface BarGraphVars {
   tickLimit: number
 };
 
-export default function BarGraph({ labels, prices }: Props) {
+const BarGraph: React.FunctionComponent<Props> = ({ labels, prices }) => {
   const windowWidth = window.innerWidth;
 
   const font = (windowWidth > 786) ? 12 : 9;
@@ -115,4 +115,6 @@ export default function BarGraph({ labels, prices }: Props) {
       <div>{barChart}</div>
     </GraphCointainer>
   )
-}
+};
+
+export default BarGraph;

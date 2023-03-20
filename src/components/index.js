@@ -26,7 +26,7 @@ export { default as FilterArrowUp } from './FilterArrowUp'
 export { default as FilterArrowDown } from './FilterArrowDown'
 export { default as Bar } from './Bar'
 export { default as LineGraph } from './LineGraph'
-export { default as BarGraph } from './BarGraph'
+export { default as BarGraph } from "./BarGraph"
 export { default as ProgressBarNav } from './ProgressBarNav'
 export { default as ProgressBarTable } from './ProgressBarTable'
 export { default as Footer } from './Footer'

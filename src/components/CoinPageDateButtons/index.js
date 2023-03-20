@@ -1,1 +1,1 @@
-export { default } from './CoinPageDateButtons.js'
+export { default } from './CoinPageDateButtons'

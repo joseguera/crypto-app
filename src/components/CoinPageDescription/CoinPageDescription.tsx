@@ -10,8 +10,11 @@ import {
 } from "./CoinPageDescription.styles";
 import stackIcon from "../../images/layer-group.svg";
 
-const CoinPageDescription = (props) => {
-  const { profile } = props;
+type Props = {
+  coinProfile: string,
+}
+
+const CoinPageDescription: React.FunctionComponent<Props> = ({ coinProfile }) => {
   return (
     <>
       <Description>
@@ -23,7 +26,7 @@ const CoinPageDescription = (props) => {
           <TextHolder>
             <Text
               dangerouslySetInnerHTML={{
-                __html: profile.description.en,
+                __html: coinProfile.description.en,
               }}
             ></Text>
           </TextHolder>
