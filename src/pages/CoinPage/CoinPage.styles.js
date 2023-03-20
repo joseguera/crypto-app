@@ -134,4 +134,4 @@ export const CoinPageGraph = styled.div`
   width: 1519px;
   height: 220px;
 }
-`;
+`
