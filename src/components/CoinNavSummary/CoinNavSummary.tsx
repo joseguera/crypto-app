@@ -30,7 +30,7 @@ export interface CoinNavSummaryVars {
   isLoading: boolean
 };
 
-export default function CoinNavSummary(props) {
+const CoinNavSummary: React.FunctionComponent<Props> = () => {
   const currency = useSelector((state) => state.currency.value);
   const search = useSelector((state) => state.search.value);
   const [market, setMarket] = useState<CoinNavSummaryVars | null>(null);
@@ -114,3 +114,5 @@ export default function CoinNavSummary(props) {
     </>
   );
 }
+
+export default CoinNavSummary;

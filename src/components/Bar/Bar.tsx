@@ -5,7 +5,7 @@ type Props = {
   percentStyle: Object,
 }
 
-const Bar = ({ percentStyle }: Props) => {
+const Bar: React.FunctionComponent<Props> = ({ percentStyle }) => {
     return (
       <ProgressBarContainer>
         <ProgressLevel style={percentStyle}></ProgressLevel>

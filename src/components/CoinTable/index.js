@@ -1,1 +1,1 @@
-export { default } from './CoinTable.js'
+export { default } from './CoinTable'

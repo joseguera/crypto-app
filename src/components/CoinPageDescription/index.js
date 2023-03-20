@@ -1,1 +1,1 @@
-export { default } from './CoinPageDescription.js'
+export { default } from './CoinPageDescription'
