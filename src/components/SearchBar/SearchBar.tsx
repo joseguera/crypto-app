@@ -14,12 +14,21 @@ import {
 import searchIcon from "../../images/Search.svg";
 import { Link } from "react-router-dom";
 
-export default function SearchBar(props) {
-  const [inputValue, setInputValue] = useState("");
-  const [cryptoList, setCryptoList] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const search = useSelector((state) => state.search.value);
+interface CryptoCurrency {
+  id: string;
+  api_symbol: string;
+  thumb: string;
+  name: string;
+  market_cap_rank: number;
+  symbol: string;
+}
+
+const SearchBar: React.FunctionComponent<Props> = () => {
+  const [inputValue, setInputValue] = useState<string>("");
+  const [cryptoList, setCryptoList] = useState<CryptoCurrency[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const search = useSelector((state: any) => state.search.value);
 
   const getCryptoCurrencies = async () => {
     try {
@@ -34,26 +43,27 @@ export default function SearchBar(props) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setOpen(!open);
   };
 
-  const cryptoContainer = useRef(null);
+  const cryptoContainer = useRef<HTMLDivElement>(null);
 
   const handleSearchDropDown = () => {
     setOpen(!open);
   };
 
-  const handleSelection = (value) => {
-    setCryptoList(value);
+  const handleSelection = (value: CryptoCurrency) => {
+    setCryptoList([value]);
     setOpen(!open);
   };
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (
       cryptoContainer &&
-      !cryptoContainer.current.contains(event.target)
+      cryptoContainer.current &&
+      !cryptoContainer.current.contains(event.target as Node)
     ) {
       setOpen(false);
     }
@@ -62,10 +72,12 @@ export default function SearchBar(props) {
   useEffect(() => {
     getCryptoCurrencies();
     document.addEventListener("mousedown", handleClickOutside);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [inputValue, cryptoList]);
 
-  let list;
+  let list: string | JSX.Element;
   if (inputValue.length < 1) {
     list = "Please type in the cryptocurrency to search...";
   } else {
@@ -74,7 +86,7 @@ export default function SearchBar(props) {
 
   return (
     <div className="container" ref={cryptoContainer}>
-      <SearchBarStyle search={search} >
+      <SearchBarStyle search={search}>
         <LoopIcon src={searchIcon} alt="search bar" />
         <InputType
           placeholder="Search..."
@@ -95,7 +107,7 @@ export default function SearchBar(props) {
                 )}
               </ListItem>
             ) : (
-              cryptoList.map((cryptoItem) => {
+              cryptoList.map((cryptoItem: CryptoCurrency) => {
                 return (
                   <Link
                     to={`/coin/${cryptoItem.api_symbol}`}
@@ -104,26 +116,28 @@ export default function SearchBar(props) {
                     <ListItem
                       id={cryptoItem.id}
                       key={cryptoItem.id}
-                      onClick={(e) => handleSelection(e.target.id)}
+                      onClick={() => handleSelection(cryptoItem)}
                     >
-                      <SubOne>
-                        <div>
-                          <img src={cryptoItem.thumb} alt={cryptoItem.id} />
-                        </div>
-                        <div>{cryptoItem.name}</div>
-                        <div>{cryptoItem.market_cap_rank}</div>
-                      </SubOne>
-                      <SubTwo>
-                        <div>{cryptoItem.symbol}</div>
-                      </SubTwo>
-                    </ListItem>
-                  </Link>
-                );
-              })
-            )}
-          </DropDownList>
-        )}
-      </SearchBarStyle>
-    </div>
-  );
+                    <SubOne>
+                      <div>
+                        <img src={cryptoItem.thumb} alt={cryptoItem.id} />
+                      </div>
+                      <div>{cryptoItem.name}</div>
+                      <div>{cryptoItem.market_cap_rank}</div>
+                    </SubOne>
+                    <SubTwo>
+                      <div>{cryptoItem.symbol}</div>
+                    </SubTwo>
+                  </ListItem>
+                </Link>
+              );
+            })
+          )}
+        </DropDownList>
+      )}
+    </SearchBarStyle>
+  </div>
+);
 }
+
+export default SearchBar;
