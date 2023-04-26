@@ -34,7 +34,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
     try {
       setIsLoading(true);
       const { data } = await axios(
-        `https://crypto-app-server.herokuapp.com/coins/${inputValue}`
+        `https://lit-citadel-68010.herokuapp.com/coins/${inputValue}`
       );
       setCryptoList(data);
       setIsLoading(false);
@@ -57,6 +57,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   const handleSelection = (value: CryptoCurrency) => {
     setCryptoList([value]);
     setOpen(!open);
+    setInputValue("")
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -110,6 +111,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
               cryptoList.map((cryptoItem: CryptoCurrency) => {
                 return (
                   <Link
+                    key={cryptoItem.id}
                     to={`/coin/${cryptoItem.api_symbol}`}
                     style={{ width: "100%" }}
                   >

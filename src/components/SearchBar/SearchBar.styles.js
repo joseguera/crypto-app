@@ -67,7 +67,7 @@ export const DropDownList = styled.div`
   place-items: center;
   gap: 2px;
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
-  z-index: 10;
+  z-index: 999;
   @media only screen and ${breakpoint.device.xs} {
     width: 281.5px;
   }
