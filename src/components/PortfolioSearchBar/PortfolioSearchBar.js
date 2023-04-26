@@ -20,7 +20,7 @@ export default function PortfolioSearchBar(props) {
     try {
       setIsLoading(true);
       const { data } = await axios(
-        `https://crypto-app-server.herokuapp.com/coins/${inputValue}`
+        `https://lit-citadel-68010.herokuapp.com/coins/${inputValue}`
       );
       setCryptoList(data);
       setIsLoading(false);
