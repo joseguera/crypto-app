@@ -15,9 +15,9 @@ export const SearchBarStyle = styled.div`
       props.search
         ? `
         display: flex;
-    width: 296px;`
+        width: 296px;`
       : 
-    `display: none`};
+        `display: none`};
     background: ${({ theme }) => theme.colors.mobileFooter};
   }
   @media only screen and ${breakpoint.device.sm} {
