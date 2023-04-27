@@ -92,7 +92,10 @@ export default function PortfolioSearchBar(props) {
                   <ListItem
                     id={cryptoItem.id}
                     key={cryptoItem.id}
-                    onClick={() => handleSelection(cryptoItem.id, cryptoItem.name, cryptoItem.symbol, cryptoItem.thumb)}
+                    onClick={() => {
+                      handleSelection(cryptoItem.id, cryptoItem.name, cryptoItem.symbol, cryptoItem.thumb);
+
+                    }}
                   >
                     <SubOne>
                       <div>

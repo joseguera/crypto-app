@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { openCloseSearch } from "../../features/search/searchSlice";
+import { setActiveHeader } from "../../features/header/headerSlice";
+import { selectActiveButton } from "../../features/footer/footerSlice";
 import {
   SearchBarStyle,
   LoopIcon,
@@ -29,6 +32,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const search = useSelector((state: any) => state.search.value);
+  const dispatch = useDispatch();
 
   const getCryptoCurrencies = async () => {
     try {
@@ -68,6 +72,10 @@ const SearchBar: React.FunctionComponent<Props> = () => {
     ) {
       setOpen(false);
     }
+  };
+
+  const setHeader = (id) => {
+    if (id !== "undefined") dispatch(setActiveHeader(id));
   };
 
   useEffect(() => {
@@ -114,6 +122,11 @@ const SearchBar: React.FunctionComponent<Props> = () => {
                     key={cryptoItem.id}
                     to={`/coin/${cryptoItem.api_symbol}`}
                     style={{ width: "100%" }}
+                    onClick={() => {
+                      setHeader("summary");
+                      dispatch(selectActiveButton("summary"));
+                      dispatch(openCloseSearch(false));
+                    }}
                   >
                     <ListItem
                       id={cryptoItem.id}

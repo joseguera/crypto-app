@@ -2,7 +2,7 @@ import styled from "styled-components";
 import breakpoint from "components/styles/breakpoints";
 
 export const SearchBarStyle = styled.div`
-  width: 406px;
+  display: flex;
   height: 53px;
   border-radius: 10px;
   background: ${({ theme }) => theme.colors.background};
@@ -11,13 +11,13 @@ export const SearchBarStyle = styled.div`
   gap: 16px;
   position: relative;
   @media only screen and ${breakpoint.device.xs} {
-    display: none;
+    width: 226px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    display: flex;
+    width: 406px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    display: flex;
+    width: 406px;
   }
 `;
 
@@ -46,5 +46,3 @@ export const InputType = styled.input`
     outline: none;
   }
 `;
-
-

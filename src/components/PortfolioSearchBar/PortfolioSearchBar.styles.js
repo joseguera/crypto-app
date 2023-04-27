@@ -2,7 +2,8 @@ import styled from "styled-components";
 import breakpoint from "components/styles/breakpoints";
 
 export const SearchBarStyle = styled.div`
-  width: 406px;
+  display: flex;
+
   height: 53px;
   border-radius: 10px;
   background: ${({ theme }) => theme.colors.background};
@@ -11,13 +12,13 @@ export const SearchBarStyle = styled.div`
   gap: 16px;
   position: relative;
   @media only screen and ${breakpoint.device.xs} {
-    display: none;
+    width: 242px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    display: flex;
+    width: 406px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    display: flex;
+    width: 406px;
   }
 `;
 
@@ -49,10 +50,8 @@ export const InputType = styled.input`
 
 export const DropDownList = styled.div`
   position: absolute;
-  width: 392.5px;
   top: 50px;
   left: 0.02px;
-  display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.buttonFill};
   padding: 8px;
@@ -61,6 +60,18 @@ export const DropDownList = styled.div`
   gap: 2px;
   box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
   z-index: 10;
+  @media only screen and ${breakpoint.device.xs} {
+    display: flex;
+    width: 226px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    display: flex;
+    width: 392.5px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: flex;
+    width: 392.5px;
+  }
 `;
 
 export const ListItem = styled.div`
