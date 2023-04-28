@@ -79,12 +79,12 @@ export const DropDownList = styled.div`
   }
 `;
 
-export const ListItem = styled.div`
+export const Button = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 100%;
   padding: 8px;
   border-radius: 5px;
   &:hover {
@@ -93,12 +93,24 @@ export const ListItem = styled.div`
   }
 `;
 
+export const ListItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const SubOne = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 8px;
+`;
+
+export const ThumbNail = styled.div`
+  display: flex;
+  align-self: center;
 `;
 
 export const SubTwo = styled.div`
