@@ -10,8 +10,10 @@ import {
   InputType,
   DropDownList,
   ListItem,
+  Button,
   NoResults,
   SubOne,
+  ThumbNail,
   SubTwo,
 } from "./SearchBar.styles";
 import searchIcon from "../../images/Search.svg";
@@ -118,15 +120,17 @@ const SearchBar: React.FunctionComponent<Props> = () => {
             ) : (
               cryptoList.map((cryptoItem: CryptoCurrency) => {
                 return (
+                  <Button
+                    onClick={() => {
+                    setHeader("summary");
+                    dispatch(selectActiveButton("summary"));
+                    dispatch(openCloseSearch(false));
+                  }}
+                  >
                   <Link
                     key={cryptoItem.id}
                     to={`/coin/${cryptoItem.api_symbol}`}
                     style={{ width: "100%" }}
-                    onClick={() => {
-                      setHeader("summary");
-                      dispatch(selectActiveButton("summary"));
-                      dispatch(openCloseSearch(false));
-                    }}
                   >
                     <ListItem
                       id={cryptoItem.id}
@@ -134,9 +138,9 @@ const SearchBar: React.FunctionComponent<Props> = () => {
                       onClick={() => handleSelection(cryptoItem)}
                     >
                     <SubOne>
-                      <div>
+                      <ThumbNail>
                         <img src={cryptoItem.thumb} alt={cryptoItem.id} />
-                      </div>
+                      </ThumbNail>
                       <div>{cryptoItem.name}</div>
                       <div>{cryptoItem.market_cap_rank}</div>
                     </SubOne>
@@ -145,6 +149,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
                     </SubTwo>
                   </ListItem>
                 </Link>
+                  </Button>
               );
             })
           )}

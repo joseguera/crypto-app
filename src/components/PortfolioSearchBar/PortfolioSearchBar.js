@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import {
   SearchBarStyle,
   InputType,
   DropDownList,
+  Button,
   ListItem,
   NoResults,
   SubOne,
+  ThumbNail,
   SubTwo,
 } from "./PortfolioSearchBar.styles";
 
@@ -89,25 +92,29 @@ export default function PortfolioSearchBar(props) {
             ) : (
               cryptoList.map((cryptoItem) => {
                 return (
-                  <ListItem
-                    id={cryptoItem.id}
-                    key={cryptoItem.id}
+                  <Button
                     onClick={() => {
-                      handleSelection(cryptoItem.id, cryptoItem.name, cryptoItem.symbol, cryptoItem.thumb);
-
+                      handleSelection(
+                        cryptoItem.id,
+                        cryptoItem.name,
+                        cryptoItem.symbol,
+                        cryptoItem.thumb
+                      );
                     }}
                   >
-                    <SubOne>
-                      <div>
-                        <img src={cryptoItem.thumb} alt={cryptoItem.id} />
-                      </div>
-                      <div>{cryptoItem.name}</div>
-                      <div>{cryptoItem.market_cap_rank}</div>
-                    </SubOne>
-                    <SubTwo>
-                      <div>{cryptoItem.symbol}</div>
-                    </SubTwo>
-                  </ListItem>
+                    <ListItem id={cryptoItem.id} key={cryptoItem.id}>
+                      <SubOne>
+                        <ThumbNail>
+                          <img src={cryptoItem.thumb} alt={cryptoItem.id} />
+                        </ThumbNail>
+                        <div>{cryptoItem.name}</div>
+                        <div>{cryptoItem.market_cap_rank}</div>
+                      </SubOne>
+                      <SubTwo>
+                        <div>{cryptoItem.symbol}</div>
+                      </SubTwo>
+                    </ListItem>
+                  </Button>
                 );
               })
             )}
