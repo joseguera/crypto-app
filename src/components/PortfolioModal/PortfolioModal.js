@@ -27,7 +27,7 @@ import cross from "../../images/metro-cross.svg";
 import blankDark from "../../images/blank_dark.png";
 import blankLight from "../../images/blank_light.png";
 
-export default function PortfolioModal(props) {
+export default function PortfolioModal({ openModal }) {
   const today = new Date();
   const day = String(today.getDate()).padStart(2, "0");
   const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -72,7 +72,7 @@ export default function PortfolioModal(props) {
           <TitleHolder>
             <TitleItems>
               <Title>Select Coins</Title>
-              <Cross onClick={() => props.closeModal()}>
+              <Cross onClick={() => openModal()}>
                 <CrossImg src={cross} alt="close x" />
               </Cross>
             </TitleItems>
@@ -99,7 +99,7 @@ export default function PortfolioModal(props) {
           <Buttons>
             <div
               className="button close-button"
-              onClick={() => props.closeModal()}
+              onClick={() => openModal()}
             >
               Close
             </div>
@@ -107,7 +107,7 @@ export default function PortfolioModal(props) {
               className="button save-button"
               onClick={() => {
                 dispatch(updatePortfolio(portfolioTransaction));
-                props.closeModal();
+                openModal();
               }}
             >
               Save and Continue

@@ -35,7 +35,7 @@ export default function Graph(props) {
   const getLineGraphData = async () => {
     try {
       const { data } = await axios(
-        `https://api.allorigins.win/raw?url=https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${currency}&days=${lineDateRange}`
+        `https://api.coingecko.com/api/v3/coins/${cryptoName}/market_chart?vs_currency=${currency}&days=${lineDateRange}`
       );
       const { labels, prices } = data.prices.reduce(
         (acc, [label, price]) => ({
