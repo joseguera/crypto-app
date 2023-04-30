@@ -114,7 +114,7 @@ const Portfolio = (props) => {
           </AssetBtnHolder>
           <TitleHolder>
             <Title>Your Assets</Title>
-            <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} />
+            {/* <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} /> */}
           </TitleHolder>
           {hasCoinProfile ? (
             <>
