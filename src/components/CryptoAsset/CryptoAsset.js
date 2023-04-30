@@ -45,7 +45,7 @@ export default function CryptoAsset(props) {
 
   return (
     <CryptoAssetHolder>
-      <CryptoTitleIcon profile={props.profile} image={props.image} />
+      <CryptoTitleIcon profile={props.profile} image={props.image} openModal={props.openModal} openDeleteModal={props.openDeleteModal} />
       <AssetDetailsHolder>
         <MarketPriceHolder>
           <SectionTitle>
