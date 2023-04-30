@@ -30,7 +30,7 @@ export default function CryptoTitleIcon({ image, profile, openModal, openDeleteM
             <Symbol>{profile.symbol.length !== 0 && ` (${profile.symbol})`}</Symbol>
             </CryptoText>
         </CryptoName>
-            <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} />
+            {/* <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} /> */}
       </CryptoContent>
     </CryptoTitle>
   );
