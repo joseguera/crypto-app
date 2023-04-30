@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { PortfolioModal, CryptoAsset, LoadingPortfolioAsset } from "components";
+import { PortfolioModal, CryptoAsset, LoadingPortfolioAsset, PortfolioEditBar, PortfolioAssetDeleteModal } from "components";
 import {
   MainDiv,
   AssetBtnHolder,
@@ -12,6 +12,7 @@ import {
 
 const Portfolio = (props) => {
   const [modal, setModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const currency = useSelector((state) => state.currency.value);
   const portfolio = useSelector((state) => state.portfolio.value);
   const [profile, setProfile] = useState();
@@ -44,6 +45,7 @@ const Portfolio = (props) => {
 
       const newPortfolio = await Promise.all(
         portfolio.map(async (coin) => {
+          console.log(coin)
           const data = await fetch(
             `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${coin.date}`
           );
@@ -80,8 +82,12 @@ const Portfolio = (props) => {
     }
   }
 
-  const openModal = (e) => {
+  const openModal = () => {
     setModal(!modal);
+  };
+
+  const openDeleteModal = () => {
+    setDeleteModal(!deleteModal);
   };
 
   useEffect(() => {
@@ -108,10 +114,12 @@ const Portfolio = (props) => {
           </AssetBtnHolder>
           <TitleHolder>
             <Title>Your Assets</Title>
+            <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} />
           </TitleHolder>
           {hasCoinProfile ? (
             <>
-              {modal && <PortfolioModal closeModal={openModal} />}
+              {deleteModal && <PortfolioAssetDeleteModal openDeleteModal={openDeleteModal} />}
+              {modal && <PortfolioModal openModal={openModal} />}
               {profile.map((pro) => {
                 return (
                   <CryptoAsset
