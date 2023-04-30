@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import {  } from "./PortfolioEditBar.styles";
+import { ButtonContainer } from "./PortfolioEditBar.styles";
 
 export default function PortfolioEditBar({ openModal, openDeleteModal }) {
 
@@ -16,7 +16,7 @@ export default function PortfolioEditBar({ openModal, openDeleteModal }) {
     }
 
   return (
-    <div>
+    <ButtonContainer>
         {/* Re-directs user to PortfolioModal component */}
         <button onClick={() => handleEdit()}>
             <FontAwesomeIcon icon={faPencil} />
@@ -26,6 +26,6 @@ export default function PortfolioEditBar({ openModal, openDeleteModal }) {
         <button onClick={() => handleDelete()}>
             <FontAwesomeIcon icon={faTrashCan} />
         </button>
-    </div>
+    </ButtonContainer>
   )
 }

@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { PortfolioModal, CryptoAsset, LoadingPortfolioAsset, PortfolioEditBar, PortfolioAssetDeleteModal } from "components";
+import {
+  PortfolioModal,
+  CryptoAsset,
+  LoadingPortfolioAsset,
+  PortfolioEditBar,
+  PortfolioAssetDeleteModal,
+} from "components";
 import {
   MainDiv,
   AssetBtnHolder,
   AssetBtnText,
   AssetContainer,
   TitleHolder,
-  Title
+  Title,
 } from "./Portfolio.styles";
 
 const Portfolio = (props) => {
@@ -45,7 +51,6 @@ const Portfolio = (props) => {
 
       const newPortfolio = await Promise.all(
         portfolio.map(async (coin) => {
-          console.log(coin)
           const data = await fetch(
             `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${coin.date}`
           );
@@ -114,18 +119,27 @@ const Portfolio = (props) => {
           </AssetBtnHolder>
           <TitleHolder>
             <Title>Your Assets</Title>
-            {/* <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} /> */}
           </TitleHolder>
           {hasCoinProfile ? (
             <>
-              {deleteModal && <PortfolioAssetDeleteModal openDeleteModal={openDeleteModal} />}
-              {modal && <PortfolioModal openModal={openModal} />}
+              {deleteModal && (
+                <PortfolioAssetDeleteModal
+                  openDeleteModal={openDeleteModal}
+                  profile={profile}
+                />
+              )}
+              {modal && (
+                <PortfolioModal openModal={openModal} profile={profile} />
+              )}
+
               {profile.map((pro) => {
                 return (
                   <CryptoAsset
                     key={`${pro.id}${keyNumber}`}
                     profile={pro}
                     image={pro.image}
+                    openModal={openModal}
+                    openDeleteModal={openDeleteModal}
                   />
                 );
               })}

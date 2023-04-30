@@ -27,7 +27,7 @@ import cross from "../../images/metro-cross.svg";
 import blankDark from "../../images/blank_dark.png";
 import blankLight from "../../images/blank_light.png";
 
-export default function PortfolioModal({ openModal }) {
+export default function PortfolioModal({ openModal, portfolio }) {
   const today = new Date();
   const day = String(today.getDate()).padStart(2, "0");
   const month = String(today.getMonth() + 1).padStart(2, "0");

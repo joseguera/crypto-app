@@ -17,6 +17,7 @@ import {
   Title,
   Cross,
   CrossImg,
+  AssetPreview,
   ModalUtilities,
   UtilityHolder,
   Utilities,
@@ -27,7 +28,11 @@ import cross from "../../images/metro-cross.svg";
 import blankDark from "../../images/blank_dark.png";
 import blankLight from "../../images/blank_light.png";
 
-export default function PortfolioAssetDeleteModal({ openDeleteModal }) {
+export default function PortfolioAssetDeleteModal({
+  openDeleteModal,
+  profile,
+  cryptoIndex
+}) {
   // const today = new Date();
   // const day = String(today.getDate()).padStart(2, "0");
   // const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -64,6 +69,7 @@ export default function PortfolioAssetDeleteModal({ openDeleteModal }) {
   //   setPortfolioTransaction({ ...portfolioTransaction, date });
   // };
 
+
   return (
     <>
       <ModalBackground />
@@ -77,7 +83,6 @@ export default function PortfolioAssetDeleteModal({ openDeleteModal }) {
               </Cross>
             </TitleItems>
           </TitleHolder>
-
 
           {/* <ModalUtilities>
             <UtilityHolder>
@@ -99,8 +104,6 @@ export default function PortfolioAssetDeleteModal({ openDeleteModal }) {
             </UtilityHolder>
           </ModalUtilities> */}
 
-
-          
           {/* <div>
             <img src={cryptoIcon.thumbnail} alt="crypto icon" />
             <div>{cryptoIcon.name}</div>
@@ -109,6 +112,11 @@ export default function PortfolioAssetDeleteModal({ openDeleteModal }) {
           <p>
             Are you sure you want to permanently remove this portfolio asset?
           </p>
+          <AssetPreview>
+            <img src={profile[0].image} alt={profile[0].id} />
+            <div>{profile[0].name}</div>
+            <div>{profile[0].symbol.toUpperCase()}</div>
+          </AssetPreview>
           <Buttons>
             <div
               className="button close-button"

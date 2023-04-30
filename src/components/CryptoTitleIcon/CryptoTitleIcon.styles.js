@@ -55,7 +55,9 @@ export const CryptoImg = styled.img`
   width: 35px;
 `;
 
-export const CryptoName = styled.span`
+export const CryptoName = styled.div`
+  display: flex;
+  justify-content: center;
   width: 150px;
   text-align: center;
   overflow-wrap: break-word;

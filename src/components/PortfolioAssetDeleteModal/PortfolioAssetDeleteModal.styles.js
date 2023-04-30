@@ -120,6 +120,18 @@ export const CrossImg = styled.img`
   height: 31px;
 `;
 
+export const AssetPreview = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 5px;
+  width: 400px;
+  height: 48px;
+  border-radius: 10px;
+`;
+
 export const ModalUtilities = styled.div``;
 
 export const UtilityHolder = styled.div`
