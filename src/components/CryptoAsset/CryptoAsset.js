@@ -13,6 +13,7 @@ import {
   relativeChange,
 } from "util/numberUtil";
 import {
+  CryptoAssetOverlay,
   CryptoAssetHolder,
   AssetDetailsHolder,
   MarketPriceHolder,
