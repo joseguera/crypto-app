@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { PortfolioEditBar } from "components";
 import {
   CryptoTitle,
@@ -11,8 +11,16 @@ import {
 } from "./CryptoTitleIcon.styles";
 
 export default function CryptoTitleIcon({ image, profile, openModal, openDeleteModal, getCurrentCoin }) {
+  const [showEdit, setShowEdit] = useState(false);
+  function editAsset() {
+    setShowEdit(true);
+  }
+
+  function leaveAsset() {
+    setShowEdit(false);
+  }
   return (
-    <CryptoTitle>
+    <CryptoTitle onMouseOver={() => editAsset()} onMouseOut={() => leaveAsset()}>
       <CryptoContent>
         <CryptoIcon>
           <CryptoImg src={image} alt={profile.name} />
@@ -30,7 +38,8 @@ export default function CryptoTitleIcon({ image, profile, openModal, openDeleteM
             <Symbol>{profile.symbol.length !== 0 && ` (${profile.symbol})`}</Symbol>
             </CryptoText>
         </CryptoName>
-            {/* <PortfolioEditBar profile={profile} openModal={openModal} openDeleteModal={openDeleteModal} getCurrentCoin={getCurrentCoin} /> */}
+            {/* PortfolioEditBar is only displayed when the CryptoTileIcon component is not inside the PortfolioModal */}
+            {/* {openModal && <PortfolioEditBar profile={profile} openModal={openModal} openDeleteModal={openDeleteModal} getCurrentCoin={getCurrentCoin} showEdit={showEdit} />} */}
       </CryptoContent>
     </CryptoTitle>
   );
