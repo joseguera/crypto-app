@@ -19,6 +19,7 @@ import {
 const Portfolio = (props) => {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [currentCoin, setCurrentCoin] = useState({});
   const currency = useSelector((state) => state.currency.value);
   const portfolio = useSelector((state) => state.portfolio.value);
   const [profile, setProfile] = useState();
@@ -95,6 +96,10 @@ const Portfolio = (props) => {
     setDeleteModal(!deleteModal);
   };
 
+  const getCurrentCoin = (coin) => {
+    setCurrentCoin(coin)
+  };
+
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -125,7 +130,7 @@ const Portfolio = (props) => {
               {deleteModal && (
                 <PortfolioAssetDeleteModal
                   openDeleteModal={openDeleteModal}
-                  profile={profile}
+                  currentCoin={currentCoin}
                 />
               )}
               {modal && (
@@ -140,6 +145,7 @@ const Portfolio = (props) => {
                     image={pro.image}
                     openModal={openModal}
                     openDeleteModal={openDeleteModal}
+                    getCurrentCoin={getCurrentCoin}
                   />
                 );
               })}

@@ -93,6 +93,7 @@ export default function PortfolioSearchBar(props) {
               cryptoList.map((cryptoItem) => {
                 return (
                   <Button
+                    key={cryptoItem.id}
                     onClick={() => {
                       handleSelection(
                         cryptoItem.id,

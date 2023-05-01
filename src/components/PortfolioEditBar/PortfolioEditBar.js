@@ -3,15 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { ButtonContainer } from "./PortfolioEditBar.styles";
 
-export default function PortfolioEditBar({ openModal, openDeleteModal }) {
-
-    // create a mini nav bar with 'Edit' and 'Delete' button icons
+export default function PortfolioEditBar({ openModal, openDeleteModal, getCurrentCoin, profile }) {
 
     function handleEdit() {
         openModal();
     }
 
     function handleDelete() {
+        getCurrentCoin(profile);
         openDeleteModal();
     }
 
