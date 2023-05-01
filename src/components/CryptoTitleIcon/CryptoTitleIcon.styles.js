@@ -67,6 +67,7 @@ export const CryptoName = styled.div`
 export const CryptoText = styled.p`
   font-size: 20px;
   line-height: 100%;
+  margin-top: 10px;
   margin-bottom: 0px;
   @media only screen and ${breakpoint.device.xs} {
     font-size: 16px;

@@ -10,7 +10,7 @@ import {
   Symbol,
 } from "./CryptoTitleIcon.styles";
 
-export default function CryptoTitleIcon({ image, profile, openModal, openDeleteModal }) {
+export default function CryptoTitleIcon({ image, profile, openModal, openDeleteModal, getCurrentCoin }) {
   return (
     <CryptoTitle>
       <CryptoContent>
@@ -30,7 +30,7 @@ export default function CryptoTitleIcon({ image, profile, openModal, openDeleteM
             <Symbol>{profile.symbol.length !== 0 && ` (${profile.symbol})`}</Symbol>
             </CryptoText>
         </CryptoName>
-            {/* <PortfolioEditBar openModal={openModal} openDeleteModal={openDeleteModal} /> */}
+            <PortfolioEditBar profile={profile} openModal={openModal} openDeleteModal={openDeleteModal} getCurrentCoin={getCurrentCoin} />
       </CryptoContent>
     </CryptoTitle>
   );

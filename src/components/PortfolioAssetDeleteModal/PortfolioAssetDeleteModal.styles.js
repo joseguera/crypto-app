@@ -25,6 +25,7 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContainer = styled.div`
+  height: fit-content;
   position: fixed;
   top: 155px;
   background: ${({ theme }) => theme.colors.buttonFill};
@@ -38,18 +39,15 @@ export const ModalContainer = styled.div`
     top: 75px;
     left: 36px;
     width: 318px;
-    height: 675px;
   }
   @media only screen and ${breakpoint.device.sm} {
     left: 324.5px;
     width: 870px;
-    height: 450px;
     padding-bottom: 18px;
   }
   @media only screen and ${breakpoint.device.lg} {
     left: 324.5px;
     width: 870px;
-    height: 450px;
     padding-bottom: 18px;
   }
 `;
