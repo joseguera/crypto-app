@@ -8,16 +8,11 @@ export default function PortfolioEditBar({
   openDeleteModal,
   getCurrentCoin,
   profile,
+  showEdit
 }) {
-  const [showEdit, setShowEdit] = useState(false);
 
-  function editAsset() {
-    setShowEdit(true);
-  }
 
-  function leaveAsset() {
-    setShowEdit(false);
-  }
+
 
   function handleEdit() {
     openModal();
@@ -29,7 +24,7 @@ export default function PortfolioEditBar({
   }
 
   return (
-    <ButtonContainer onMouseOver={() => editAsset()} onMouseOut={() => leaveAsset()}>
+    <ButtonContainer>
       {showEdit ? (
         <>
           {/* Re-directs user to PortfolioModal component */}
