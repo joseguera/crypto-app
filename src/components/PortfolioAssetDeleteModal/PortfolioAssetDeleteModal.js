@@ -16,6 +16,7 @@ import cross from "../../images/metro-cross.svg";
 export default function PortfolioAssetDeleteModal({
   openDeleteModal,
   currentCoin,
+  deleteAsset
 }) {
   return (
     <>
@@ -50,6 +51,7 @@ export default function PortfolioAssetDeleteModal({
               onClick={() => {
                 // dispatch(updatePortfolio(portfolioTransaction));
                 openDeleteModal();
+                deleteAsset(currentCoin)
               }}
             >
               Yes, delete asset

@@ -39,7 +39,7 @@ export default function CryptoTitleIcon({ image, profile, openModal, openDeleteM
             </CryptoText>
         </CryptoName>
             {/* PortfolioEditBar is only displayed when the CryptoTileIcon component is not inside the PortfolioModal */}
-            {/* {openModal && <PortfolioEditBar profile={profile} openModal={openModal} openDeleteModal={openDeleteModal} getCurrentCoin={getCurrentCoin} showEdit={showEdit} />} */}
+            {openModal && <PortfolioEditBar profile={profile} openModal={openModal} openDeleteModal={openDeleteModal} getCurrentCoin={getCurrentCoin} showEdit={showEdit} />}
       </CryptoContent>
     </CryptoTitle>
   );

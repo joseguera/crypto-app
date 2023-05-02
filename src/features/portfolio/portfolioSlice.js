@@ -14,10 +14,13 @@ export const portfolioSlice = createSlice({
     updatePortfolio: (state, action) => {
       state.value = [...state.value, action.payload];
     },
+    deletePortfolioAsset: (state, action) => {
+      state.value = state.value.filter((item) => item.id !== action.payload.id)
+    },
   },
 });
 
-export const { updatePortfolio } = portfolioSlice.actions;
+export const { updatePortfolio, deletePortfolioAsset } = portfolioSlice.actions;
 
 export default portfolioSlice.reducer;
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deletePortfolioAsset } from "../../features/portfolio/portfolioSlice";
 import {
   PortfolioModal,
   CryptoAsset,
   LoadingPortfolioAsset,
-  PortfolioEditBar,
   PortfolioAssetDeleteModal,
 } from "components";
 import {
@@ -17,6 +17,7 @@ import {
 } from "./Portfolio.styles";
 
 const Portfolio = (props) => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentCoin, setCurrentCoin] = useState({});
@@ -100,6 +101,14 @@ const Portfolio = (props) => {
     setCurrentCoin(coin)
   };
 
+  const editAsset = (assetArray) => {
+    // implement edit
+  }
+
+  const deleteAsset = (asset) => {
+    dispatch(deletePortfolioAsset(asset));
+  }
+
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,6 +122,8 @@ const Portfolio = (props) => {
   const keyNumber = Math.trunc(randomNum);
 
   const hasCoinProfile = !isLoading && profile;
+
+  console.log(portfolio)
 
   return (
     <>
@@ -131,6 +142,7 @@ const Portfolio = (props) => {
                 <PortfolioAssetDeleteModal
                   openDeleteModal={openDeleteModal}
                   currentCoin={currentCoin}
+                  deleteAsset={deleteAsset}
                 />
               )}
               {modal && (
