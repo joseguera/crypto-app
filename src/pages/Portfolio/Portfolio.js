@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deletePortfolioAsset } from "../../features/portfolio/portfolioSlice";
+import { useSelector } from "react-redux";
 import {
   PortfolioModal,
   CryptoAsset,
@@ -17,7 +16,6 @@ import {
 } from "./Portfolio.styles";
 
 const Portfolio = (props) => {
-  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [currentCoin, setCurrentCoin] = useState({});
@@ -98,16 +96,12 @@ const Portfolio = (props) => {
   };
 
   const getCurrentCoin = (coin) => {
-    setCurrentCoin(coin)
+    setCurrentCoin(coin);
   };
 
   const editAsset = (assetArray) => {
     // implement edit
-  }
-
-  const deleteAsset = (asset) => {
-    dispatch(deletePortfolioAsset(asset));
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -123,7 +117,7 @@ const Portfolio = (props) => {
 
   const hasCoinProfile = !isLoading && profile;
 
-  console.log(portfolio)
+  console.log(portfolio);
 
   return (
     <>
@@ -142,14 +136,18 @@ const Portfolio = (props) => {
                 <PortfolioAssetDeleteModal
                   openDeleteModal={openDeleteModal}
                   currentCoin={currentCoin}
-                  deleteAsset={deleteAsset}
                 />
               )}
               {modal && (
                 <PortfolioModal openModal={openModal} profile={profile} />
               )}
-
-              {profile.map((pro) => {
+              {profile.length === 0 ? (
+              <div>
+                No assets to display. Click 'Add Asset' to start building
+                your Portfolio.
+              </div>
+              ) : (
+              profile.map((pro) => {
                 return (
                   <CryptoAsset
                     key={`${pro.id}${keyNumber}`}
@@ -160,7 +158,8 @@ const Portfolio = (props) => {
                     getCurrentCoin={getCurrentCoin}
                   />
                 );
-              })}
+              })
+              )}
             </>
           ) : (
             <LoadingPortfolioAsset />

@@ -46,7 +46,13 @@ export default function CryptoAsset(props) {
 
   return (
     <CryptoAssetHolder>
-      <CryptoTitleIcon profile={props.profile} image={props.image} openModal={props.openModal} openDeleteModal={props.openDeleteModal} getCurrentCoin={props.getCurrentCoin} />
+      <CryptoTitleIcon
+        profile={props.profile}
+        image={props.image}
+        openModal={props.openModal}
+        openDeleteModal={props.openDeleteModal}
+        getCurrentCoin={props.getCurrentCoin}
+      />
       <AssetDetailsHolder>
         <MarketPriceHolder>
           <SectionTitle>
@@ -59,8 +65,8 @@ export default function CryptoAsset(props) {
                 {setCurrency(currency)}
                 {formatCurrency(roundToNumber(props.profile.currentPrice, 2))}
               </Field>
-              </DataPoint>
-              <DataPoint>
+            </DataPoint>
+            <DataPoint>
               <Label>Price change 24h:</Label>
               <PercentChange>
                 {priceChange24h > 0 ? <UpArrowGreen /> : <DownArrowRed />}
@@ -68,15 +74,15 @@ export default function CryptoAsset(props) {
                   {roundToNumber(priceChange24h, 2)}%
                 </div>
               </PercentChange>
-              </DataPoint>
-              <DataPoint>
+            </DataPoint>
+            <DataPoint>
               <Label>Market Cap vs Volume:</Label>
               <Field>
                 {isNaN(marketCapvsTotalVolume) ? "∞" : marketCapvsTotalVolume}%
               </Field>
               <ProgressBarNav percentPortfolio={`${marketCapvsTotalVolume}%`} />
-              </DataPoint>
-              <DataPoint>
+            </DataPoint>
+            <DataPoint>
               <Label>Circ Supply vs Max Supply:</Label>
               <Field>
                 {circSupplyvsMaxSupply >= 0

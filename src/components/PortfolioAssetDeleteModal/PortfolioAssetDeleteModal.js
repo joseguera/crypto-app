@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deletePortfolioAsset } from "../../features/portfolio/portfolioSlice";
 
 import {
   ModalBackground,
@@ -18,6 +20,8 @@ export default function PortfolioAssetDeleteModal({
   currentCoin,
   deleteAsset
 }) {
+  const dispatch = useDispatch();
+
   return (
     <>
       <ModalBackground />
@@ -51,7 +55,7 @@ export default function PortfolioAssetDeleteModal({
               onClick={() => {
                 // dispatch(updatePortfolio(portfolioTransaction));
                 openDeleteModal();
-                deleteAsset(currentCoin)
+                dispatch(deletePortfolioAsset(currentCoin));
               }}
             >
               Yes, delete asset
