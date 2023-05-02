@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { ButtonContainer } from "./PortfolioEditBar.styles";
+import { ButtonContainer, UpdateText, UpdateDate } from "./PortfolioEditBar.styles";
 
 export default function PortfolioEditBar({
   openModal,
@@ -10,9 +10,6 @@ export default function PortfolioEditBar({
   profile,
   showEdit
 }) {
-
-
-
 
   function handleEdit() {
     openModal();
@@ -39,7 +36,7 @@ export default function PortfolioEditBar({
         </>
       ) : (
         <div>
-          Updated: <span>{profile.purchase_date}</span>
+          <UpdateText>Updated: <UpdateDate>{profile.purchase_date}</UpdateDate></UpdateText>
         </div>
       )}
     </ButtonContainer>

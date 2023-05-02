@@ -5,6 +5,9 @@ export const CryptoTitle = styled.div`
   border-radius: 10px;
   display: grid;
   place-items: center;
+  &:hover {
+    cursor: pointer;
+  }
   @media only screen and ${breakpoint.device.xs} {
     padding: 20px 0 20px 0;
     width: 204px;
