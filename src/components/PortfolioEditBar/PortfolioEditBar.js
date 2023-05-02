@@ -25,9 +25,9 @@ export default function PortfolioEditBar({
       {showEdit ? (
         <>
           {/* Re-directs user to PortfolioModal component */}
-          <button onClick={() => handleEdit()}>
+          {/* <button onClick={() => handleEdit()}>
             <FontAwesomeIcon icon={faPencil} />
-          </button>
+          </button> */}
 
           {/* Re-directs user to DeletePortfolioAssetModal component */}
           <button onClick={() => handleDelete()}>
