@@ -120,44 +120,44 @@ const SearchBar: React.FunctionComponent<Props> = () => {
             ) : (
               cryptoList.map((cryptoItem: CryptoCurrency) => {
                 return (
-                  <Button
-                    onClick={() => {
-                    setHeader("summary");
-                    dispatch(selectActiveButton("summary"));
-                    dispatch(openCloseSearch(false));
-                  }}
-                  >
                   <Link
                     key={cryptoItem.id}
                     to={`/coin/${cryptoItem.api_symbol}`}
                     style={{ width: "100%" }}
                   >
-                    <ListItem
-                      id={cryptoItem.id}
-                      key={cryptoItem.id}
-                      onClick={() => handleSelection(cryptoItem)}
+                    <Button
+                      onClick={() => {
+                        setHeader("summary");
+                        dispatch(selectActiveButton("summary"));
+                        dispatch(openCloseSearch(false));
+                      }}
                     >
-                    <SubOne>
-                      <ThumbNail>
-                        <img src={cryptoItem.thumb} alt={cryptoItem.id} />
-                      </ThumbNail>
-                      <div>{cryptoItem.name}</div>
-                      <div>{cryptoItem.market_cap_rank}</div>
-                    </SubOne>
-                    <SubTwo>
-                      <div>{cryptoItem.symbol}</div>
-                    </SubTwo>
-                  </ListItem>
-                </Link>
-                  </Button>
-              );
-            })
-          )}
-        </DropDownList>
-      )}
-    </SearchBarStyle>
-  </div>
-);
+                      <ListItem
+                        id={cryptoItem.id}
+                        key={cryptoItem.id}
+                        onClick={() => handleSelection(cryptoItem)}
+                      >
+                        <SubOne>
+                          <ThumbNail>
+                            <img src={cryptoItem.thumb} alt={cryptoItem.id} />
+                          </ThumbNail>
+                          <div>{cryptoItem.name}</div>
+                          <div>{cryptoItem.market_cap_rank}</div>
+                        </SubOne>
+                        <SubTwo>
+                          <div>{cryptoItem.symbol}</div>
+                        </SubTwo>
+                      </ListItem>
+                    </Button>
+                  </Link>
+                );
+              })
+            )}
+          </DropDownList>
+        )}
+      </SearchBarStyle>
+    </div>
+  );
 }
 
 export default SearchBar;
