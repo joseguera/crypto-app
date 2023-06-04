@@ -1,2 +1,2 @@
-export { default } from './ProgressBarTable.js'
+export { default } from './ProgressBarTable.tsx'
 

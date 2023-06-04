@@ -10,9 +10,14 @@ import {
 } from "./ProgressBarTable.styles";
 import { formatCurrency } from "util/numberUtil";
 
-const ProgressBarTable = (props) => {
+interface PBProps {
+  values: number;
+
+}
+
+const ProgressBarTable: React.FunctionComponent<PBProps> = () => {
   const currency = useSelector((state) => state.currency.value);
-  const percentChange = (props.values.first * 100) / props.values.second;
+  const percentChange = (values.first * 100) / values.second;
   const percentStyle = {
     width: percentChange === Infinity ? "100%" : percentChange,
   };
@@ -35,13 +40,13 @@ const ProgressBarTable = (props) => {
         <ProgressBarLabel>
           <LabelTextStart>
             &#x25CF; {setCurrencySymbol(currency)}
-            {formatCurrency(props.values.first)}
+            {formatCurrency(values.first)}
           </LabelTextStart>
           <LabelTextEnd>
-            {props.values.second === null
+            {values.second === null
               ? "∞"
               : `● ${setCurrencySymbol(currency)}${formatCurrency(
-                  props.values.second
+                  values.second
                 )}`}
           </LabelTextEnd>
         </ProgressBarLabel>
