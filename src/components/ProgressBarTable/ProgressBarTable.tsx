@@ -11,8 +11,7 @@ import {
 import { formatCurrency } from "util/numberUtil";
 
 interface PBProps {
-  values: number;
-
+  values: number
 }
 
 const ProgressBarTable: React.FunctionComponent<PBProps> = () => {
