@@ -14,7 +14,7 @@ interface PBProps {
   values: number
 }
 
-const ProgressBarTable: React.FunctionComponent<PBProps> = () => {
+const ProgressBarTable: React.FunctionComponent<PBProps> = ({ values }) => {
   const currency = useSelector((state) => state.currency.value);
   const percentChange = (values.first * 100) / values.second;
   const percentStyle = {
