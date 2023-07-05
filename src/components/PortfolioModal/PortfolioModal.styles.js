@@ -36,7 +36,6 @@ export const ModalContainer = styled.div`
   cursor: auto;
   @media only screen and ${breakpoint.device.xs} {
     top: 75px;
-    left: 36px;
     width: 318px;
     height: 675px;
   }

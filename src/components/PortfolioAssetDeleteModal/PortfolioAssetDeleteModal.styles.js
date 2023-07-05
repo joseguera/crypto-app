@@ -10,17 +10,16 @@ export const ModalBackground = styled.div`
   z-index: 999;
   animation: 1s ease-out 0s 1 normal none running grDYJ;
   cursor: auto;
+  width: 100%;
+  height: 100%;
   @media only screen and ${breakpoint.device.xs} {
-    width: 100%;
-    height: 100%;
+    
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 1519px;
-    height: 713px;
+    
   }
   @media only screen and ${breakpoint.device.lg} {
-    width: 1519px;
-    height: 713px;
+    
   }
 `;
 
@@ -37,16 +36,13 @@ export const ModalContainer = styled.div`
   cursor: auto;
   @media only screen and ${breakpoint.device.xs} {
     top: 75px;
-    left: 36px;
     width: 318px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    left: 324.5px;
     width: 870px;
     padding-bottom: 18px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    left: 324.5px;
     width: 870px;
     padding-bottom: 18px;
   }
@@ -61,6 +57,24 @@ export const ModalBody = styled.div`
   justify-content: center;
   @media only screen and ${breakpoint.device.xs} {
     padding-top: 25px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    padding-top: 18px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    padding-top: 18px;
+  }
+`;
+
+export const ModalText = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  @media only screen and ${breakpoint.device.xs} {
+    text-align: center;
   }
   @media only screen and ${breakpoint.device.sm} {
     padding-top: 18px;
@@ -125,9 +139,17 @@ export const AssetPreview = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.background};
   padding: 5px;
-  width: 400px;
   height: 48px;
   border-radius: 10px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 235px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+    width: 475px;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 475px;
+  }
 `;
 
 export const ModalUtilities = styled.div``;
