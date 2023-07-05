@@ -9,6 +9,7 @@ import {
   TitleHolder,
   TitleItems,
   Title,
+  ModalText,
   Cross,
   CrossImg,
   AssetPreview, Buttons
@@ -35,9 +36,9 @@ export default function PortfolioAssetDeleteModal({
               </Cross>
             </TitleItems>
           </TitleHolder>
-          <p>
+          <ModalText>
             Are you sure you want to permanently remove this portfolio asset?
-          </p>
+          </ModalText>
           <AssetPreview>
             <img src={currentCoin.image} alt={currentCoin.id} />
             <div>{currentCoin.name}</div>
