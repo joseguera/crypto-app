@@ -15,12 +15,12 @@ export const ModalBackground = styled.div`
     height: 100%;
   }
   @media only screen and ${breakpoint.device.sm} {
-    width: 1519px;
-    height: 713px;
+    width: 100%;
+    height: 100%;
   }
   @media only screen and ${breakpoint.device.lg} {
-    width: 1519px;
-    height: 713px;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -40,13 +40,11 @@ export const ModalContainer = styled.div`
     height: 675px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    left: 324.5px;
     width: 870px;
     height: 450px;
     padding-bottom: 18px;
   }
   @media only screen and ${breakpoint.device.lg} {
-    left: 324.5px;
     width: 870px;
     height: 450px;
     padding-bottom: 18px;
