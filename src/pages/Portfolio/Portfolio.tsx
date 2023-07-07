@@ -15,13 +15,31 @@ import {
   Title,
 } from "./Portfolio.styles";
 
-const Portfolio = (props) => {
-  const [modal, setModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+interface CurrentCoin {
+  circulatingSupply: number;
+  coinAmount: number;
+  currentPrice: number;
+  id: string;
+  image: string;
+  isBigger: boolean;
+  marketCap: number;
+  maxSupply: number;
+  name: string;
+  previousPrice: number;
+  priceChange: number
+  purchase_date: string;
+  symbol: string
+  total: number;
+  totalVolume: number;
+}
+
+const Portfolio: React.FunctionComponent<Props> = () => {
+  const [modal, setModal] = useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
   const [currentCoin, setCurrentCoin] = useState({});
   const currency = useSelector((state) => state.currency.value);
   const portfolio = useSelector((state) => state.portfolio.value);
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   async function getData() {
@@ -95,7 +113,7 @@ const Portfolio = (props) => {
     setDeleteModal(!deleteModal);
   };
 
-  const getCurrentCoin = (coin) => {
+  const getCurrentCoin = (coin: CurrentCoin) => {
     setCurrentCoin(coin);
   };
 
@@ -108,16 +126,14 @@ const Portfolio = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [portfolio, currency]);
 
-  let min = 1;
-  let max = 100;
+  let min: number = 1;
+  let max: number = 100;
 
-  const randomNum = Math.random() * (max - min) + min;
+  const randomNum: number = Math.random() * (max - min) + min;
 
-  const keyNumber = Math.trunc(randomNum);
+  const keyNumber: number = Math.trunc(randomNum);
 
-  const hasCoinProfile = !isLoading && profile;
-
-  console.log(portfolio);
+  const hasCoinProfile: boolean = !isLoading && profile;
 
   return (
     <>
@@ -142,23 +158,23 @@ const Portfolio = (props) => {
                 <PortfolioModal openModal={openModal} profile={profile} />
               )}
               {profile.length === 0 ? (
-              <div>
-                No assets to display. Click 'Add Asset' to start building
-                your Portfolio.
-              </div>
+                <div>
+                  No assets to display. Click 'Add Asset' to start building
+                  your Portfolio.
+                </div>
               ) : (
-              profile.map((pro) => {
-                return (
-                  <CryptoAsset
-                    key={`${pro.id}${keyNumber}`}
-                    profile={pro}
-                    image={pro.image}
-                    openModal={openModal}
-                    openDeleteModal={openDeleteModal}
-                    getCurrentCoin={getCurrentCoin}
-                  />
-                );
-              })
+                profile.map((pro) => {
+                  return (
+                    <CryptoAsset
+                      key={`${pro.id}${keyNumber}`}
+                      profile={pro}
+                      image={pro.image}
+                      openModal={openModal}
+                      openDeleteModal={openDeleteModal}
+                      getCurrentCoin={getCurrentCoin}
+                    />
+                  );
+                })
               )}
             </>
           ) : (
