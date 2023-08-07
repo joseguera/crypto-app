@@ -82,7 +82,7 @@ export const DropDownList = styled.div`
 export const Button = styled.button`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   padding: 8px;
@@ -98,6 +98,7 @@ export const ListItem = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 `;
 
 export const SubOne = styled.div`

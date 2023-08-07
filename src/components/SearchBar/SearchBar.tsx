@@ -31,7 +31,7 @@ interface CryptoCurrency {
 
 const SearchBar: React.FunctionComponent<Props> = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [cryptoList, setCryptoList] = useState<CryptoCurrency[]>([]);
+  const [cryptoList, setCryptoList] = useState<CryptoCurrency[]>(searchCoins.coins);
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const search = useSelector((state: any) => state.search.value);
@@ -40,6 +40,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setOpen(!open);
+    coinFinder();
   };
 
   const cryptoContainer = useRef<HTMLDivElement>(null);
@@ -71,23 +72,26 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   ////////////////////////////////////////////////////////
   /////////////// TESTING AREA ///////////////////////////
 
-  const arrayOfCats = ["cat", "catamaran", "catastrophe", "bat"]
+  const coinFinder = () => {
+    const searchCats = cryptoList.filter((cat) => cat.id.includes(inputValue.toLowerCase())).sort()
 
-  const searchCats = searchCoins.coins.filter((cat) => cat.id.includes(inputValue.toLowerCase())).sort()
-
-  function compare( a, b ) {
-    if ( a.id < b.id ){
-      return -1;
+    function compare( a, b ) {
+      if ( a.id < b.id ){
+        return -1;
+      }
+      if ( a.id > b.id ){
+        return 1;
+      }
+      return 0;
     }
-    if ( a.id > b.id ){
-      return 1;
-    }
-    return 0;
+    
+    let coins = searchCats.sort(compare);
+    console.log(coins);
+    setCryptoList(coins);
   }
-  
-  searchCats.sort( compare );
 
-  console.log(searchCats);
+
+
 
   ////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////
@@ -118,8 +122,8 @@ const SearchBar: React.FunctionComponent<Props> = () => {
         />
         {open && (
           <DropDownList>
-            {searchCoins.coins.length !== 0 ? (
-              cryptoList?.map((cryptoItem: CryptoCurrency) => {
+            {cryptoList.length !== 0 ? (
+              cryptoList.slice(0, 10).map((cryptoItem: CryptoCurrency) => {
                 return (
                   <Link
                     key={cryptoItem.id}
