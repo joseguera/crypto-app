@@ -37,21 +37,6 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   const search = useSelector((state: any) => state.search.value);
   const dispatch = useDispatch();
 
-  const getCryptoCurrencies = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await axios(
-        // `https://lit-citadel-68010.herokuapp.com/coins/${inputValue}
-        `https://api.coingecko.com/api/v3/search?query=${inputValue}`
-      );
-      console.log(data.coins)
-      setCryptoList(data.coins);
-      setIsLoading(false);
-    } catch (err) {
-      console.log("Location Error:", err);
-    }
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setOpen(!open);
@@ -83,8 +68,31 @@ const SearchBar: React.FunctionComponent<Props> = () => {
     if (id !== "undefined") dispatch(setActiveHeader(id));
   };
 
+  ////////////////////////////////////////////////////////
+  /////////////// TESTING AREA ///////////////////////////
+
+  const arrayOfCats = ["cat", "catamaran", "catastrophe", "bat"]
+
+  const searchCats = searchCoins.coins.filter((cat) => cat.id.includes(inputValue.toLowerCase())).sort()
+
+  function compare( a, b ) {
+    if ( a.id < b.id ){
+      return -1;
+    }
+    if ( a.id > b.id ){
+      return 1;
+    }
+    return 0;
+  }
+  
+  searchCats.sort( compare );
+
+  console.log(searchCats);
+
+  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+
   useEffect(() => {
-    getCryptoCurrencies();
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
