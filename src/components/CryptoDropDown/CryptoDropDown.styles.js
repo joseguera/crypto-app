@@ -53,10 +53,10 @@ export const DropDownList = styled.div`
     top: 159px;
   }
   @media only screen and ${breakpoint.device.sm} {
-    left: 75.96px;
+    left: 0;
   }
   @media only screen and ${breakpoint.device.lg} {
-    left: 113.96px;
+    left: 494.96px;
   }
 `;
 

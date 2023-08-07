@@ -49,9 +49,16 @@ export const CurrencyName = styled.div`
 `;
 
 export const CurrencyLabel = styled.p`
-  font-size: 17px;
   line-height: 120%;
   font-weight: 600;
+  @media only screen and ${breakpoint.device.xs} {
+    font-size: 14px;
+  }
+  @media only screen and ${breakpoint.device.sm} {
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    font-size: 17px;
+  }
 `;
 
 export const CurrencyInput = styled.div`
