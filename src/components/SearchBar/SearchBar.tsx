@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { openCloseSearch } from "../../features/search/searchSlice";
@@ -16,8 +17,8 @@ import {
   ThumbNail,
   SubTwo,
 } from "./SearchBar.styles";
+import searchCoins from "../../util/searchCoins";
 import searchIcon from "../../images/Search.svg";
-import { Link } from "react-router-dom";
 
 interface CryptoCurrency {
   id: string;
@@ -40,9 +41,11 @@ const SearchBar: React.FunctionComponent<Props> = () => {
     try {
       setIsLoading(true);
       const { data } = await axios(
-        `https://lit-citadel-68010.herokuapp.com/coins/${inputValue}`
+        // `https://lit-citadel-68010.herokuapp.com/coins/${inputValue}
+        `https://api.coingecko.com/api/v3/search?query=${inputValue}`
       );
-      setCryptoList(data);
+      console.log(data.coins)
+      setCryptoList(data.coins);
       setIsLoading(false);
     } catch (err) {
       console.log("Location Error:", err);
@@ -107,18 +110,8 @@ const SearchBar: React.FunctionComponent<Props> = () => {
         />
         {open && (
           <DropDownList>
-            {cryptoList.length === 0 ? (
-              <ListItem>
-                {inputValue.length > 0 && cryptoList.length === 0 ? (
-                  <NoResults key={0}>
-                    Not found. Please try searching another term
-                  </NoResults>
-                ) : (
-                  <span key={0}>{list}</span>
-                )}
-              </ListItem>
-            ) : (
-              cryptoList.map((cryptoItem: CryptoCurrency) => {
+            {searchCoins.coins.length !== 0 ? (
+              cryptoList?.map((cryptoItem: CryptoCurrency) => {
                 return (
                   <Link
                     key={cryptoItem.id}
@@ -152,6 +145,17 @@ const SearchBar: React.FunctionComponent<Props> = () => {
                   </Link>
                 );
               })
+            ) : (
+              <ListItem>
+                {inputValue.length > 0 && cryptoList.length === 0 ? (
+                  <NoResults key={0}>
+                    Not found. Please try searching another term
+                  </NoResults>
+                ) : (
+                  <span key={0}>{list}</span>
+                )}
+              </ListItem>
+
             )}
           </DropDownList>
         )}
