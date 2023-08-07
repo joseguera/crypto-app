@@ -39,7 +39,7 @@ export const LoopIcon = styled.img`
 `;
 
 export const InputType = styled.input`
-  font-size: 14px;
+  font-size: 16px;
   color: ${({ theme }) => theme.colors.text};
   background: none;
   width: 100%;
