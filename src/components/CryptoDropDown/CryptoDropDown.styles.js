@@ -56,7 +56,7 @@ export const DropDownList = styled.div`
     left: 0;
   }
   @media only screen and ${breakpoint.device.lg} {
-    left: 494.96px;
+    left: 115px;
   }
 `;
 
